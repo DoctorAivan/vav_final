@@ -83,41 +83,56 @@
 	src: local('Flama_Bold'), url("fonts/Flama_Bold.otf") format("truetype");
 }
 
+@font-face
+{
+	font-family: "Santral_Book";
+	src: local('Santral_Book'), url("fonts/Santral-Book.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_SemiBold";
+	src: local('Santral_SemiBold'), url("fonts/Santral-SemiBold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_Bold";
+	src: local('Santral_Bold'), url("fonts/Santral-Bold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_ExtraBold";
+	src: local('Santral_ExtraBold'), url("fonts/Santral-ExtraBold.ttf") format("truetype");
+}
+
 :root
 {
 	--color-card-a : #ffffff;
 	--color-card-b : #e3e3e3;
 
 	--color-white : #ffffff;
-	--color-black : #250940;
+	--color-black : #151515;
 
-	--colog-gray-a : #444;
-	--colog-gray-b : #111;
+	--color-gray-a : #e8e8e8;
+	--color-gray-b : #e8e8e8;
+	--color-gray-c : #e0e0e0;
 
-	--colog-purple-a : #431b66;
-	--colog-purple-b : #250940;
+	--color-blue-a : #223f77;
+	--color-blue-b : #1e2e52;
 
-	--colog-result-a : #522d72;
-	--colog-result-b : #361c4f;
+	--color-result-a : #522d72;
+	--color-result-b : #361c4f;
 
-	--color-voted-blue-a : #237ee4;
-	--color-voted-blue-b : #682fae;
-	--color-voted-blue-animation-a : #682fae99;
-	--color-voted-blue-animation-b : #237ee499;
-	--color-voted-blue-animation-c : #237ee400;
-
-	--color-voted-red-a : #f1020b;
-	--color-voted-red-b : #b6185d;
+	--color-voted-red-a : #FF1A6A;
+	--color-voted-red-b : #e40251;
 	--color-voted-red-animation-a : #b6185d99;
 	--color-voted-red-animation-b : #f1020b35;
 	--color-voted-red-animation-c : #f1020b25;
 
 	--candidate-width : 340px;
-	--candidate-height-totem : 57px;
+	--candidate-height-totem : 56px;
 	--candidate-height-floating : 56px;
 	--candidate-list-limit : 5;
 	--candidate-margin : 0px;
-
 
 	--candidate-voted-size : 2.1rem;
 	--candidate-voted-size-spacing : 0.15rem;
@@ -140,11 +155,7 @@ body
 	left: 0px;
 	width: 1920px;
 	height: 1080px;
-/*
-	background: url("http://10.3.75.100/cronometro_debates/libs/bg.png") no-repeat;
-	background: url("http://10.3.84.59/vav_plebiscito/app.imagenes/bg_cnn_1.jpg") no-repeat;
-*/
-	background: url("http://10.3.84.59/vav_plebiscito/app.imagenes/bg_cnn.jpg") no-repeat;
+	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 	overflow: hidden;
 }
 	#no-cursor
@@ -180,8 +191,9 @@ body
 		left: -473px;
 		width: 473px;
 		height: 912px;
-		background: #24083d;
-		opacity: 0.6;
+		background: #24083d00;
+		display: none;
+		opacity: 0;
 		transition: height 0.5s ease, left 0.5s ease;
 	}
 
@@ -251,99 +263,61 @@ body
 		width: 100%;
 		background: linear-gradient( 0deg, var(--color-card-a) 30%, var(--color-card-b) 100%);
 	}
-		.tottem .box .border
-		{
-			position: relative;
-			height: 4px;
-			background: linear-gradient( 90deg, var(--color-voted-blue-a) 25%, var(--color-voted-blue-b) 50%, var(--color-voted-red-b) 75%, var(--color-voted-red-a) 100%);
-		}
-
 		.tottem .box .title
 		{
 			z-index: 3;
 			position: relative;
 			display: grid;
 			grid-template-columns: 1fr auto;
-			padding: 11px 18px 11px 17px;
+			padding: 12px 16px 6px 16px;
 			text-transform: uppercase;
-			background: linear-gradient( 25deg, var(--colog-purple-b) 0%, var(--colog-purple-a) 100%);
+			background: linear-gradient( 90deg, var(--color-blue-a) 0%, var(--color-blue-b) 100%);
 		}
-			.tottem .box .title img
-			{
-				margin-right: 12px;
-				height: 14px;
-			}
 			.tottem .box .title h2
 			{
-				color: #ffffff;
-				font-family: 'Flama_Semibold';
-				font-size: 1.2rem;
-				line-height: 1.2rem;
-				letter-spacing: 0.05rem;
-			}
-			.tottem .box .title h3
-			{
-				color: #ffffff;
-				font-family: 'Flama_Regular';
-				font-size: 1.2rem;
-				line-height: 1.2rem;
-				letter-spacing: 0.05rem;
-				word-spacing: 4px;
-				opacity: 0.8;
+				color: var(--color-white);
+				font-family: 'Santral_Bold';
+				font-size: 1.4rem;
+				line-height: 1.4rem;
 			}
 			
 		.tottem .box .header
 		{
 			z-index: 3;
 			position: relative;
-			padding: 11px 0 11px 16px;
+			padding: 12px 0 12px 16px;
 			text-transform: uppercase;
-			background: linear-gradient( 0deg, var(--color-card-a) 0%, var(--color-card-b) 100%);
-			border-bottom: solid 1px #ddd;
+			background: linear-gradient( 0deg, var(--color-blue-a) 0%, var(--color-blue-b) 100%);
 		}
 			.tottem .box .header h2
 			{
-				color: var(--color-black);
-				font-family: 'panton_extraBold';
-				font-size: 1.5rem;
-				line-height: 1.5rem;
+				color: var(--color-gray-a);
+				font-family: 'Santral_Bold';
+				font-size: 1.3rem;
+				line-height: 1.3rem;
 				letter-spacing: 0.03rem;
-				margin: 0 0 2px 0;
+				margin: 0 0 3px 0;
 			}
-				.tottem .box .header h2 span
-				{
-					font-family: 'panton_semiBold';
-				}
-				.tottem .box .header h2 .country
-				{
-					font-family: 'panton_semiBold';
-					margin-left: 10px;
-				}
 			.tottem .box .header h3
 			{
 				position: relative;
 				width: 100%;
-				color: var(--color-black);
-				font-family: 'Flama_Regular';
+				color: var(--color-gray-a);
+				font-family: 'Santral_Book';
 				font-size: 1.1rem;
 				line-height: 1.1rem;
 			}
-				.tottem .box .header h3 span
-				{
-					font-family: 'Flama_Medium';
-					margin-left: 9px;
-					padding: 0 0 0 7px;
-				}
-				.tottem .box .header h3 span::before
-				{
-					content: "";
-					position: absolute;
-					top: 2px;
-					margin-left: -11px;
-					width: 1px;
-					height: 13px;
-					background: #555;
-				}
+			.tottem .box .header h4
+			{
+				display: inline-block;
+				font-family: 'Santral_Bold';
+				font-size: 1rem;
+				line-height: 1rem;
+				margin: 4px 0 0 0;
+				padding: 4px 6px 1px 6px;
+				color: var(--color-blue-a);
+				background: var(--color-gray-a);
+			}
 
 		.tottem .box .columns
 		{
@@ -357,37 +331,36 @@ body
 			.tottem .box .columns .electo
 			{
 				background: linear-gradient( 160deg, #fff 0%, #ffdfe0 100%);
-				border-bottom: solid 1px #f9cacb;
 			}
 			.tottem .box .columns .no-electo
 			{
-				background: linear-gradient( 160deg, #fff 0%, #eee 100%);
-				border-bottom: solid 1px #ddd;
+				background: linear-gradient( 160deg, #fff 0%, #e8e8e8 100%);
 			}
 			.tottem .box .columns .candidato
 			{
 				position: absolute;
 				display: grid;
-				grid-template-columns: 1fr 100px;
+				grid-template-columns: 1fr 84px;
 				width: calc( var(--candidate-width) - 16px);
-				height: calc( var(--candidate-height-totem) - 1px );
+				height: var(--candidate-height-totem);
 				padding: 0 0 0 16px;
-				transition: all 0.75s ease-in-out;
+			/*	transition: all 0.75s ease-in-out; */
 			}
 				.tottem .box .columns .candidato .candidato-detalles
 				{
-					z-index: 5;
+					z-index: 3;
 					position: relative;
 					width: 100%;
 				}
 					.tottem .box .columns .candidato .candidato-detalles h2
 					{
 						width: 100%;
-						color: var(--colog-purple-b);
-						font-family: 'panton_bold';
+						color: #151515;
+						font-family: 'Santral_Bold';
 						font-size: 1rem;
-						word-spacing: 0.075rem;
-						margin: 9px 0 0 0;
+						line-height: 1rem;
+						letter-spacing: -0.035rem;
+						margin: 12px 0 4px 0;
 						display: -webkit-box;
 						-webkit-box-orient: vertical;
 						-webkit-line-clamp: 1;
@@ -395,16 +368,17 @@ body
 					}
 						.tottem .box .columns .candidato .candidato-detalles h2 span
 						{
-							font-family: 'panton_regular';
+							font-family: 'Santral_Book';
 						}
 					.tottem .box .columns .candidato .candidato-detalles h3
 					{
 						width: 100%;
 						height: 20px;
-						color: #25094099;
-						font-family: 'panton_semiBold';
+						color: #151515;
+						font-family: 'Santral_SemiBold';
 						font-size: 0.9rem;
-						word-spacing: 0.075rem;
+						line-height: 1rem;
+						letter-spacing: -0.035rem;
 						display: -webkit-box;
 						-webkit-box-orient: vertical;
 						-webkit-line-clamp: 1;
@@ -412,26 +386,37 @@ body
 					}
 						.tottem .box .columns .candidato .candidato-detalles h3 span
 						{
-							font-family: 'panton_light';
-							margin: 0 2px 0 0;
+							font-family: 'Santral_Book';
 						}
 				.tottem .box .columns .candidato .candidato-votos
 				{
-					z-index: 5;
-					font-family: 'panton_extraBold';
+					z-index: 6;
+					position: relative;
+					font-family: 'Santral_ExtraBold';
 					color: var(--color-voted-red-a);
 					text-align: right;
 					font-size: 1.7rem;
 					line-height: 1.7rem;
-					padding: 15px 16px 0 0;
+					letter-spacing: -0.025rem;
+					padding: 17px 16px 0 0;
+					background: linear-gradient( 160deg, var(--color-gray-b) 0%, var(--color-gray-c) 100%);
 				}
-					.tottem .box .columns .candidato .candidato-votos img
-					{
-						width: 14px;
-						margin: 0 0 0 8px;
-						opacity: 0.7;
+					.tottem .box .columns .candidato .candidato-votos::after {
+						content: " ";
+						position: absolute;
+						top: 0px;
+						display: block;
+						height: var(--candidate-height-totem);
+						width: 100px;
+						margin-left: -102px;
+						background: linear-gradient( 90deg, #cccccc00 0%, #cccccc75 100%);
 					}
-				.tottem .box .columns .candidato .candidato-voto
+				.tottem .box .columns .candidato .candidato-votos-valor
+				{
+					position: relative;
+					z-index: 2;
+				}
+				.tottem .box .columns .candidato .candidato-votos-animacion
 				{
 					z-index: 1;
 					top: 0px;
@@ -439,95 +424,9 @@ body
 					width: 100%;
 					height: 100%;
 					opacity: 0;
-					background: linear-gradient(90deg, var(--color-voted-red-animation-c) 0%, var(--color-voted-red-animation-b) 50%, var(--color-voted-red-animation-a) 100%);
+					background: linear-gradient( 0deg, var(--color-voted-red-b) 0%, var(--color-voted-red-a) 100%);
 				}
 
-/*
-	POSICIONES DE LOS BLOQUES
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
-	.tottem .mesa-unica .columns
-	{
-		height: calc( var(--candidate-height-totem) * 12);
-	}
-	.tottem .mesa-unica .columns .order-1
-	{
-		z-index: 11;
-		top: calc( var(--candidate-height-totem) * 0 );
-		animation: orden-single-1-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-2
-	{
-		z-index: 10;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 1 );
-		animation: orden-single-2-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-3
-	{
-		z-index: 9;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 2 );
-		animation: orden-single-3-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-4
-	{
-		z-index: 8;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 3 );
-		animation: orden-single-4-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-5
-	{
-		z-index: 7;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 4 );
-		animation: orden-single-5-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-6
-	{
-		z-index: 6;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 5 );
-		animation: orden-single-6-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-7
-	{
-		z-index: 5;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 6 );
-		animation: orden-single-7-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-8
-	{
-		z-index: 4;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 7 );
-		animation: orden-single-8-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-9
-	{
-		z-index: 3;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 8 );
-		animation: orden-single-9-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-10
-	{
-		z-index: 2;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 9 );
-		animation: orden-single-10-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-11
-	{
-		z-index: 1;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 10 );
-		animation: orden-single-11-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-12
-	{
-		z-index: 1;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 11 );
-		animation: orden-single-12-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-unica .columns .order-13
-	{
-		z-index: 1;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 12 );
-		animation: orden-single-13-kf 0s ease-out 1 forwards;
-	}
 /*
 
 	CONFIGURACION DE MESAS DOBLE
@@ -598,7 +497,7 @@ body
 			grid-template-columns: 1fr auto;
 			padding: 11px 18px 11px 17px;
 			text-transform: uppercase;
-			background: linear-gradient( 25deg, var(--colog-purple-b) 0%, var(--colog-purple-a) 100%);
+			background: linear-gradient( 25deg, var(--color-blue-b) 0%, var(--color-blue-a) 100%);
 		}
 			.floating .box .title img
 			{
@@ -716,7 +615,7 @@ body
 					.floating .box .columns .candidato .candidato-detalles h2
 					{
 						width: 100%;
-						color: var(--colog-purple-b);
+						color: var(--color-blue-b);
 						font-family: 'panton_bold';
 						font-size: 1rem;
 						word-spacing: 0.075rem;
@@ -774,32 +673,6 @@ body
 					opacity: 0;
 					background: linear-gradient(90deg, var(--color-voted-red-animation-c) 0%, var(--color-voted-red-animation-b) 50%, var(--color-voted-red-animation-a) 100%);
 				}
-
-	.floating .pos-1::after {
-		content: " ";
-		z-index: -1;
-		position: absolute;
-		top: 0px;
-		left: -340px;
-		display: block;
-		background: var(--colog-purple-b);
-		height: 419px;
-		width: calc(var(--candidate-width) * 2);
-		opacity: 0.5;
-	}
-
-	.floating .pos-2::after {
-		content: " ";
-		z-index: -1;
-		position: absolute;
-		top: 0px;
-		left: 0;
-		display: block;
-		background: var(--colog-purple-b);
-		height: 419px;
-		width: calc(var(--candidate-width) * 2);
-		opacity: 0.5;
-	}
 
 /*
 	POSICIONES DE LOS BLOQUES

@@ -4,8 +4,8 @@
 					<i class="fas fa-vote-yea"></i>
 					<h1>VAV</h1>
 					<h2>
-						Voto a Voto : Convención Constitucional 2023<br>
-						<span>Warner Media Discovery - Chile</span>
+						Convención Constitucional 2023<br>
+						<span>Chilevisión - Chile</span>
 					</h2>
 				</div>
 				<div class="header-usuario">

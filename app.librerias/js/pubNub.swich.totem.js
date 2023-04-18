@@ -255,6 +255,7 @@
 			{
 
 			}
+
 		}
 	});
 
@@ -303,12 +304,12 @@
 			}
 			else if( app_modo == 1 )
 			{
-			//	Asignar clase al modo
-				render_mesa_1.classList.remove('tottem');
-				render_mesa_1.classList.add('floating');
+				//	Asignar clase al modo
+				render_mesa_1.classList.remove('floating');
+				render_mesa_1.classList.add('tottem');
 
-				render_mesa_2.classList.remove('tottem');
-				render_mesa_2.classList.add('floating');
+				render_mesa_2.classList.remove('floating');
+				render_mesa_2.classList.add('tottem');
 			}
 
 		//	Validar que exista la Mesa 1
@@ -427,36 +428,17 @@
 			let div_mesa = document.createElement('div');
 			div_mesa.id = 'mesa-' + mesa.id
 
-			let conteo_mesa
-
-			if( app_template === 1 )
-			{
-				if ( app_modo === 1 )
-				{
-					conteo_mesa = 'mesa-doble'
-				}
-				else
-				{
-					conteo_mesa = 'mesa-unica'
-				}
-			}
-			else
-			{
-				conteo_mesa = 'mesa-doble'
-			}
-
 			//	Asignar las clases a la mesa
-			div_mesa.className = `box pos-${posicion} ${conteo_mesa}`
+			div_mesa.className = `box pos-${posicion} mesa-doble`
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="title">
 										<h2>${region.n}</h2>
-										<h3><i class="fas fa-users"></i> ${region.c} ESCAÑOS</h3>
 									</div>
-									<div class="border"></div>
 									<div class="header">
 										<h2>${mesa.comuna}</h2>
-										<h3>${mesa.local} <span>${mesa.numero}</span></h3>
+										<h3>${mesa.local}</h3>
+										<h4>${mesa.numero}</h4>
 									</div>
 									<div class="columns" id="mesa-${mesa.id}-candidatos"></div>`;
 
@@ -475,57 +457,30 @@
         //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
             {
-			//	Marcar candidato electo
-				let marcar_candidato;
-
-			// Validar candidatos marcados
-				if( id_orden <= mesa.cupos )
-				{
-					marcar_candidato = 'electo';
-				}
-				else
-				{
-					marcar_candidato = 'no-electo';
-				}
-
             //	Crear el div contenedor del candidato
                 let objeto = document.createElement('div');
-				objeto.className = `candidato order-${id_orden} ${marcar_candidato}`
+				objeto.className = `candidato order-${id_orden} no-electo`
 
             //	Asignar las propiedades del div
                 objeto.id = 'candidate-' + candidato.objeto
 
-			//	Obtener el primer caracter del nombre
-				let candidato_nombre_letra = candidato.nombres.split('')[0];
-
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-detalles">
-										<h2><span>${candidato.nombres}</span> ${candidato.apellidos}</h2>
-										<h3><span>${candidato.pacto}</span> ${ candidato.ind === 't' ? 'IND-' : '' }${candidato.partido}</h3>
+										<h2>${candidato.nombres} ${candidato.apellidos}</h2>
+										<h3><span>${candidato.pacto} /</span> ${ candidato.ind === 't' ? 'IND-' : '' }${candidato.partido}</h3>
 									</div>
-									<div class="candidato-votos" id="candidato-${candidato.objeto}-votos">
-										${candidato.votos}<img src="/vav_plebiscito/app.imagenes/voto_cnn_negro.png" />
-									</div>
-									<div class="candidato-voto"></div>`
+									<div class="candidato-votos">
+										<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">
+											${candidato.votos}
+										</div>
+										<div class="candidato-votos-animacion"></div>
+									</div>`
 
             //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
-				if( app_template === 1 )
-				{
-					if ( app_modo === 1 )
-					{
-						id_orden <= 5 && id_orden++
-					}
-					else
-					{
-						id_orden <= 12 && id_orden++
-					}
-				}
-				else
-				{
-					id_orden <= 5 && id_orden++
-				}
+			//	Maximo de Candidatos
+				id_orden <= 5 && id_orden++
             });
 
 		//	Asignar posición 2 en pantalla
@@ -556,28 +511,25 @@
 		//	Validar que exista el elemento
 			if( candidato_voto != null )
 			{
+				const candidato_div_voto_valor = document.querySelector( '#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-valor' );
+				candidato_div_voto_valor.classList.add('animar_voto_texto')
+
 			//	Identificar el contenedor del cambio de voto
-				const candidato_div_voto_fondo = document.querySelector( '#candidate-' + id + ' > div.candidato-voto' );
-				candidato_div_voto_fondo.classList.add('animar_voto');
-
-				const candidato_div_voto_imagen = document.querySelector( '#candidate-' + id + ' > div.candidato-votos > img' );
-				candidato_div_voto_imagen.classList.add('animar_voto_icono');
-
-				candidato_voto.classList.add('animar_voto_texto')
+				const candidato_div_voto_animacion = document.querySelector( '#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-animacion' );
+				candidato_div_voto_animacion.classList.add('animar_voto');
 
 			//	Reiniciar animación del voto
 				setTimeout(function()
 				{
-					candidato_div_voto_fondo.classList.remove('animar_voto');
-					candidato_div_voto_imagen.classList.remove('animar_voto_icono');
-					candidato_voto.classList.remove('animar_voto_texto');
+					candidato_div_voto_valor.classList.remove('animar_voto_texto');
+					candidato_div_voto_animacion.classList.remove('animar_voto');
 					
 				}, tiempo_transiciones_adicional);
 
 			//	Actualizar los valores
 				setTimeout(function()
 				{
-					candidato_voto.innerHTML = votos + '<img src="/vav_plebiscito/app.imagenes/voto_cnn_negro.png" />';
+					candidato_div_voto_valor.innerHTML = votos;
 				}, 500);
 
 			//	Validar ID de la Mesa
@@ -607,7 +559,6 @@
 		{
 		//	Mesa Candidatos por cambiar
 			let mesa_candidatos
-			let mesa_cupos
 
 		//	Validar ID de la Mesa
 			if( mesa == mesa_1.id )
@@ -635,39 +586,12 @@
         //	Iterar listado de candidatos
 			mesa_candidatos.forEach(candidato =>
             {
-			//	Marcar candidato electo
-				let marcar_candidato;
-
-			// Validar candidatos marcados
-				if( id_orden <= mesa_cupos )
-				{
-					marcar_candidato = 'electo';
-				}
-				else
-				{
-					marcar_candidato = 'no-electo';
-				}
-
 			//  Get object from DOM
 				let candidato_div = document.querySelector(`#candidate-${candidato.objeto}`);
-				candidato_div.classList = `candidato order-${id_orden} ${marcar_candidato}`;
+				candidato_div.classList = `candidato order-${id_orden} no-electo`;
 
 			//	Validar Posicion de los Objetos
-				if( app_template === 1 )
-				{
-					if ( app_modo === 1 )
-					{
-						id_orden <= 5 && id_orden++
-					}
-					else
-					{
-						id_orden <= 12 && id_orden++
-					}
-				}
-				else
-				{
-					id_orden <= 5 && id_orden++
-				}
+				id_orden <= 5 && id_orden++
 			});
 		},
 
