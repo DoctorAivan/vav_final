@@ -467,7 +467,12 @@
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-detalles">
 										<h2>${candidato.nombres} ${candidato.apellidos}</h2>
-										<h3><span>${candidato.pacto} /</span> ${ candidato.ind === 't' ? 'IND-' : '' }${candidato.partido}</h3>
+										<h3><span>${candidato.pacto} /</span>
+										${ candidato.ind === 't' ?
+										candidato.partido_id == 99 ? '' : 'IND-'
+										:
+										''
+										}${candidato.partido}</h3>
 									</div>
 									<div class="candidato-votos">
 										<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">
