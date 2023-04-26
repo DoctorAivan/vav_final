@@ -539,7 +539,7 @@
             switch( mesa_tipo )
             {
                 case 'P':
-                    mesa_tipo_titulo        =   '🟡&nbsp;&nbsp;&nbsp;Plebiscito';
+                    mesa_tipo_titulo        =   '🟡&nbsp;&nbsp;&nbsp;CONSTITUYENTES';
                     mesa_tipo_icono         =   'fa-sticky-note';
                 break;
                 case 'S':

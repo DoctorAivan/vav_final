@@ -140,12 +140,14 @@
 			'detalle'				=>	'Estará visible para el operador',
 			'icono'					=>	'fas fa-eye'
 		),
+		/*
 		'2'							=>	array
 		(
 			'titulo'				=>	'Mesa Cerrada',
 			'detalle'				=>	'Estará oculta para el operador',
 			'icono'					=>	'fas fa-lock'
 		)
+		*/
 	);
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-

@@ -694,7 +694,9 @@
 					render_mesa_1.innerHTML = ''
 
 				}, tiempo_transiciones_adicional );
-			}	
+			}
+
+			mesa_1_historico = 0
 		},
 
 	//	Animar la entrada del bloque
@@ -745,6 +747,8 @@
 
 				}, tiempo_transiciones_adicional );
 			}
+
+			mesa_2_historico = 0
 		},
 
 	//	Obtener los cupos disponibles en la región

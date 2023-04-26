@@ -2,87 +2,87 @@
 {
 	"regiones": [{
 		"i": 3015,
-		"n": "Reg. de Arica y Parinacota",
+		"n": "REG. ARICA Y PARINACOTA",
 		"r": "XV",
 		"c": 2
 	}, {
 		"i": 3001,
-		"n": "Reg. de Tarapacá",
+		"n": "REG. TARAPACÁ",
 		"r": "I",
 		"c": 2
 	}, {
 		"i": 3002,
-		"n": "Reg. de Antofagasta",
+		"n": "REG. ANTOFAGASTA",
 		"r": "II",
 		"c": 3
 	}, {
 		"i": 3003,
-		"n": "Reg. de Atacama",
+		"n": "REG. ATACAMA",
 		"r": "III",
 		"c": 2
 	}, {
 		"i": 3004,
-		"n": "Reg. de Coquimbo",
+		"n": "REG. COQUIMBO",
 		"r": "IV",
 		"c": 3
 	}, {
 		"i": 3005,
-		"n": "Reg. Valparaíso",
+		"n": "REG. VALPARAÍSO",
 		"r": "V",
 		"c": 5
 	}, {
 		"i": 3013,
-		"n": "Reg. Metropolitana",
+		"n": "REG. METROPOLITANA",
 		"r": "RM",
 		"c": 5
 	}, {
 		"i": 3006,
-		"n": "Reg. de O\u2019higgins",
+		"n": "REG. O\u2019HIGGINS",
 		"r": "VI",
 		"c": 3
 	}, {
 		"i": 3007,
-		"n": "Reg. del Maule",
+		"n": "REG. DEL MAULE",
 		"r": "VII",
 		"c": 5
 	}, {
 		"i": 3016,
-		"n": "Reg. del Ñuble",
+		"n": "REG. ÑUBLE",
 		"r": "XVI",
 		"c": 2
 	}, {
 		"i": 3008,
-		"n": "Reg. del Biobío",
+		"n": "REG. DEL BIOBÍO",
 		"r": "VIII",
 		"c": 3
 	}, {
 		"i": 3009,
-		"n": "Reg. de la Araucania",
+		"n": "REG. LA ARAUCANÍA",
 		"r": "IX",
 		"c": 5
 	}, {
 		"i": 3014,
-		"n": "Reg. de Los Rios",
+		"n": "REG. LOS RÍOS",
 		"r": "XIV",
 		"c": 3
 	}, {
 		"i": 3010,
-		"n": "Reg. de Los Lagos",
+		"n": "REG. LOS LAGOS",
 		"r": "X",
 		"c": 3
 	}, {
 		"i": 3011,
-		"n": "Reg. de Aysén",
+		"n": "REG. AYSÉN",
 		"r": "XI",
 		"c": 2
 	}, {
 		"i": 3012,
-		"n": "Reg. de Magallanes",
+		"n": "REG. MAGALLANES",
 		"r": "XII",
 		"c": 2
 	}, {
 		"i": 3017,
-		"n": "Pueblos Indígenas",
+		"n": "P. INDÍGENAS",
 		"r": "PI",
 		"c": 2
 	}],

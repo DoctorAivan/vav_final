@@ -145,7 +145,6 @@ body
 {
 	overflow: hidden;
 	background: transparent;
-	background: #237ee4;
 }
 
 #render
@@ -155,7 +154,9 @@ body
 	left: 0px;
 	width: 1920px;
 	height: 1080px;
+	/*
 	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
+	*/
 	overflow: hidden;
 }
 	#no-cursor
@@ -378,7 +379,7 @@ body
 						font-family: 'Santral_SemiBold';
 						font-size: 0.9rem;
 						line-height: 1rem;
-						letter-spacing: -0.035rem;
+						letter-spacing: -0.05rem;
 						display: -webkit-box;
 						-webkit-box-orient: vertical;
 						-webkit-line-clamp: 1;
