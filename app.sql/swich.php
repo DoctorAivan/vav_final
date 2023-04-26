@@ -158,7 +158,9 @@
 						'genero'					=>	$_MESA_CANDIDATOS->candidato_genero,
 						'votos'						=>	(int) $_MESA_CANDIDATOS->voto_total,
 						'partido'					=>	$_MESA_CANDIDATOS->partido_codigo,
-						'pacto'						=>	$_MESA_CANDIDATOS->pacto_codigo
+						'partido_id'				=>	(int) $_MESA_CANDIDATOS->partido_id,
+						'pacto'						=>	$_MESA_CANDIDATOS->pacto_codigo,
+						'pacto_id'					=>	(int) $_MESA_CANDIDATOS->pacto_id
 					);
 				}
 
