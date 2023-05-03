@@ -1,5 +1,5 @@
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.2'
+	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
 
 //	Mode de la Aplicación
 	let app_modo = 0
@@ -431,12 +431,13 @@
 			//	Asignar las clases a la mesa
 			div_mesa.className = `box pos-${posicion} mesa-doble`
 
+			//	<h2><span>${region.r}</span>${mesa.comuna}</h2>
+
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="title">
-										<h2>${region.n}</h2>
+										<h2><span>${region.r}</span>${mesa.comuna}</h2>
 									</div>
 									<div class="header">
-										<h2>${mesa.comuna}</h2>
 										<h3>${mesa.local}</h3>
 										<h4>${mesa.numero}</h4>
 									</div>
@@ -452,7 +453,7 @@
 			let id_orden = 1;
 
 		//	Ordenar los candidatos por sus votos
-			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : -1)
+			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
 
         //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
@@ -569,7 +570,7 @@
 			if( mesa == mesa_1.id )
 			{
 			//	Ordenar los candidatos por sus votos
-				mesa_1.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : -1)
+				mesa_1.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
 
 			//	Guardar Mesa
 				mesa_candidatos = mesa_1.candidatos;
@@ -578,7 +579,7 @@
 			else
 			{
 			//	Ordenar los candidatos por sus votos
-				mesa_2.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : -1)
+				mesa_2.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
 
 			//	Guardar Mesa
 				mesa_candidatos = mesa_2.candidatos;

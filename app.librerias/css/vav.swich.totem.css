@@ -281,6 +281,14 @@ body
 				font-size: 1.4rem;
 				line-height: 1.4rem;
 			}
+				.tottem .box .title h2 span
+				{
+					color: var(--color-white);
+					font-family: 'Santral_SemiBold';
+					font-size: 1.4rem;
+					line-height: 1.4rem;
+					margin: 0 15px 0 0;
+				}
 			
 		.tottem .box .header
 		{
@@ -366,6 +374,7 @@ body
 						-webkit-box-orient: vertical;
 						-webkit-line-clamp: 1;
 						overflow: hidden;
+						text-transform: uppercase;
 					}
 						.tottem .box .columns .candidato .candidato-detalles h2 span
 						{

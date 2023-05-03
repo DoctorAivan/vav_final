@@ -3,82 +3,82 @@
 	"regiones": [{
 		"i": 3015,
 		"n": "REG. ARICA Y PARINACOTA",
-		"r": "XV",
+		"r": "C1",
 		"c": 2
 	}, {
 		"i": 3001,
 		"n": "REG. TARAPACÁ",
-		"r": "I",
+		"r": "C2",
 		"c": 2
 	}, {
 		"i": 3002,
 		"n": "REG. ANTOFAGASTA",
-		"r": "II",
+		"r": "C3",
 		"c": 3
 	}, {
 		"i": 3003,
 		"n": "REG. ATACAMA",
-		"r": "III",
+		"r": "C4",
 		"c": 2
 	}, {
 		"i": 3004,
 		"n": "REG. COQUIMBO",
-		"r": "IV",
+		"r": "C5",
 		"c": 3
 	}, {
 		"i": 3005,
 		"n": "REG. VALPARAÍSO",
-		"r": "V",
+		"r": "C6",
 		"c": 5
 	}, {
 		"i": 3013,
 		"n": "REG. METROPOLITANA",
-		"r": "RM",
+		"r": "C7",
 		"c": 5
 	}, {
 		"i": 3006,
 		"n": "REG. O\u2019HIGGINS",
-		"r": "VI",
+		"r": "C8",
 		"c": 3
 	}, {
 		"i": 3007,
 		"n": "REG. DEL MAULE",
-		"r": "VII",
+		"r": "C9",
 		"c": 5
 	}, {
 		"i": 3016,
 		"n": "REG. ÑUBLE",
-		"r": "XVI",
+		"r": "C16",
 		"c": 2
 	}, {
 		"i": 3008,
 		"n": "REG. DEL BIOBÍO",
-		"r": "VIII",
+		"r": "C10",
 		"c": 3
 	}, {
 		"i": 3009,
 		"n": "REG. LA ARAUCANÍA",
-		"r": "IX",
+		"r": "C11",
 		"c": 5
 	}, {
 		"i": 3014,
 		"n": "REG. LOS RÍOS",
-		"r": "XIV",
+		"r": "C12",
 		"c": 3
 	}, {
 		"i": 3010,
 		"n": "REG. LOS LAGOS",
-		"r": "X",
+		"r": "C13",
 		"c": 3
 	}, {
 		"i": 3011,
 		"n": "REG. AYSÉN",
-		"r": "XI",
+		"r": "C14",
 		"c": 2
 	}, {
 		"i": 3012,
 		"n": "REG. MAGALLANES",
-		"r": "XII",
+		"r": "C15",
 		"c": 2
 	}, {
 		"i": 3017,
