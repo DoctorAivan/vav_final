@@ -660,7 +660,7 @@
 					render_mesa_2.style.left = mesa_2_cordenadas.template_floating.visible.x;
 					render_mesa_2.style.transform = mesa_2_cordenadas.template_floating.visible.z;
 				}
-			}, tiempo_transiciones_adicional / 2);
+			}, tiempo_transiciones_adicional / 4);
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-
