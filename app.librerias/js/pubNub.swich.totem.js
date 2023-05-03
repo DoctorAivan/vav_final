@@ -435,7 +435,7 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="title">
-										<h2><span>${region.r}</span>${mesa.comuna}</h2>
+										<h2>${mesa.comuna}</h2>
 									</div>
 									<div class="header">
 										<h3>${mesa.local}</h3>
