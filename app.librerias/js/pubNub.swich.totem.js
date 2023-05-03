@@ -538,20 +538,26 @@
 					candidato_div_voto_valor.innerHTML = votos;
 				}, 500);
 
-			//	Validar ID de la Mesa
-				if( mesa == mesa_1.id)
+				if( mesa_1 )
 				{
-					const result = mesa_1.candidatos.find(({ objeto }) => objeto === id);
-					result.votos = votos;
-
-					App.ordenar_votos(mesa);
+					if( mesa == mesa_1.id)
+					{
+						const result = mesa_1.candidatos.find(({ objeto }) => objeto === id);
+						result.votos = votos;
+	
+						App.ordenar_votos(mesa);
+					}
 				}
-				else
-				{
-					const result = mesa_2.candidatos.find(({ objeto }) => objeto === id);
-					result.votos = votos;
 
-					App.ordenar_votos(mesa);
+				if( mesa_2 )
+				{
+					if( mesa == mesa_2.id)
+					{
+						const result = mesa_2.candidatos.find(({ objeto }) => objeto === id);
+						result.votos = votos;
+	
+						App.ordenar_votos(mesa);
+					}
 				}
 			}
 			else
@@ -566,24 +572,30 @@
 		//	Mesa Candidatos por cambiar
 			let mesa_candidatos
 
-		//	Validar ID de la Mesa
-			if( mesa == mesa_1.id )
+			if( mesa_1 )
 			{
-			//	Ordenar los candidatos por sus votos
-				mesa_1.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
-
-			//	Guardar Mesa
-				mesa_candidatos = mesa_1.candidatos;
-				mesa_cupos = mesa_1.cupos;
+				if( mesa == mesa_1.id )
+				{
+				//	Ordenar los candidatos por sus votos
+					mesa_1.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+	
+				//	Guardar Mesa
+					mesa_candidatos = mesa_1.candidatos;
+					mesa_cupos = mesa_1.cupos;
+				}
 			}
-			else
-			{
-			//	Ordenar los candidatos por sus votos
-				mesa_2.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
 
-			//	Guardar Mesa
-				mesa_candidatos = mesa_2.candidatos;
-				mesa_cupos = mesa_2.cupos;
+			if( mesa_2 )
+			{
+				if( mesa == mesa_2.id )
+				{
+				//	Ordenar los candidatos por sus votos
+					mesa_2.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+
+				//	Guardar Mesa
+					mesa_candidatos = mesa_2.candidatos;
+					mesa_cupos = mesa_2.cupos;
+				}
 			}
 
 		//	Orden del candidato
