@@ -71,7 +71,7 @@
 					<input name="mesa_comuna" id="mesa_comuna" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" />
 				</div>
 				<div class="col-2">
-					<h2>Numero de mesa <span>M 25</span></h2>
+					<h2>Numero de mesa <span>MESA 25</span></h2>
 					<input name="mesa_numero" id="mesa_numero" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="M 115" />
 				</div>
 				<div class="col-1">

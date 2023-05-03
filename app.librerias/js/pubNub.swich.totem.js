@@ -581,7 +581,6 @@
 	
 				//	Guardar Mesa
 					mesa_candidatos = mesa_1.candidatos;
-					mesa_cupos = mesa_1.cupos;
 				}
 			}
 
@@ -594,7 +593,6 @@
 
 				//	Guardar Mesa
 					mesa_candidatos = mesa_2.candidatos;
-					mesa_cupos = mesa_2.cupos;
 				}
 			}
 
