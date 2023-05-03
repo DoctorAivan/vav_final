@@ -158,7 +158,6 @@ body
 	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 	*/
 	overflow: hidden;
-	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 }
 	#no-cursor
 	{
@@ -271,7 +270,7 @@ body
 			position: relative;
 			display: grid;
 			grid-template-columns: 1fr auto;
-			padding: 11px 16px 10px 16px;
+			padding: 10px 16px 10px 16px;
 			text-transform: uppercase;
 			background: linear-gradient( 90deg, var(--color-blue-a) 0%, var(--color-blue-b) 100%);
 		}
