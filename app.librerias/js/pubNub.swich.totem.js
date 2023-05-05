@@ -530,6 +530,12 @@
 					//	Actualizar el total de votos
 						mesa_totales_votos -= 1
 					}
+					else
+					{
+					//	Actualizar mesa totales
+						App.totales_actualizar()
+						return
+					}
 				}
 
 			//	Obtener valor del voto
@@ -1106,9 +1112,9 @@
 				//	render_mesa_2.innerHTML = ''
 
 				}, tiempo_transiciones_adicional );
-
-				mesa_2_historico = 0
 			}
+
+			mesa_2_historico = 0
 		},
 
 	//	Obtener los cupos disponibles en la región
