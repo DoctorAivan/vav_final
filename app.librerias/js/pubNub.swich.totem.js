@@ -192,9 +192,13 @@
 					//	Iniciar Animaciones
 						App.init();
 					}, tiempo_transiciones_adicional );
+
+					console.log('switch IF');
 				}
 				else
 				{
+					console.log('switch ELSE');
+
 				//	Reiniciar ID Historicos
 					mesa_1_historico = 0
 					mesa_2_historico = 0
@@ -440,6 +444,8 @@
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()
 		{
+			console.log('> animar_entrada_totales');
+
 		//	Validar mesas antes de desplegar
 			if( app_modo == 1 && mesa_2 != null )
 			{
@@ -472,6 +478,8 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
+			console.log('< animar_salida_totales');
+
 		//	Asignar Posiciones en el eje X
 			render_mesa_totales.style.bottom = mesa_totales_cordenadas.oculta.y;
 			render_mesa_totales.style.left = mesa_totales_cordenadas.oculta.x;
