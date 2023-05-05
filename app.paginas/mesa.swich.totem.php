@@ -40,6 +40,7 @@
 
 			<div id="render-mesa-1" class="tottem transition-on"></div>
 			<div id="render-mesa-2" class="tottem transition-on"></div>
+			<div id="render-mesa-totales" class="tottem transition-on"></div>
 
 			<div id="bg-tottem"></div>
 		</div>

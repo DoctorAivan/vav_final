@@ -752,6 +752,7 @@
             let pubnub       	=
             {
                 'accion'		:	'voto',
+                'accion_voto'   :   accion,
                 'tipo'          :   mesa_tipo,
                 'mesa'          :	mesa_id,
                 'id'            :   voto_id,
@@ -967,7 +968,7 @@
                     consolidados_of.style.opacity = 1
 
                     estado_consolidados_animacion = false
-                }, 2000);
+                }, 1000);
             }
         }
 

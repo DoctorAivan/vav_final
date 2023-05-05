@@ -119,6 +119,9 @@
 	--color-blue-a : #223f77;
 	--color-blue-b : #1e2e52;
 
+	--color-red-a : #FF1A6A;
+	--color-red-b : #e40251;
+
 	--color-result-a : #522d72;
 	--color-result-b : #361c4f;
 
@@ -158,6 +161,7 @@ body
 	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 	*/
 	overflow: hidden;
+	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 }
 	#no-cursor
 	{
@@ -182,6 +186,13 @@ body
 	{
 		z-index: 11;
 		position: absolute;
+	}
+
+	#render-mesa-totales
+	{
+		z-index: 11;
+		position: absolute;
+		left: 1920px;
 	}
 
 	#bg-tottem
@@ -253,6 +264,19 @@ body
 		width: var(--candidate-width);
 	}
 
+	.tottem .totales .title
+	{
+		background: linear-gradient( 90deg, var(--color-red-a) 0%, var(--color-red-b) 100%) !important;
+	}
+	.tottem .totales .header
+	{
+		background: linear-gradient( 0deg, var(--color-red-a) 0%, var(--color-red-b) 100%) !important;
+	}
+		.tottem .totales .header h4
+		{
+			color: var(--color-red-a) !important;
+			background: var(--color-white) !important;
+		}
 /*
 	TOTTEM
 	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -344,6 +368,10 @@ body
 			.tottem .box .columns .no-electo
 			{
 				background: linear-gradient( 160deg, #fff 0%, #e8e8e8 100%);
+			}
+			.tottem .totales .columns .candidato
+			{
+				grid-template-columns: 1fr 105px !important;
 			}
 			.tottem .box .columns .candidato
 			{
@@ -482,7 +510,7 @@ body
 		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 5 );
 		animation: orden-6-kf 0s ease-out 1 forwards;
 	}
-/*
+/*	
 	FLOATING
 	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 */

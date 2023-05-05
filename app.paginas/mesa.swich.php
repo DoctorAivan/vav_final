@@ -225,10 +225,9 @@
 							</div>
 						</div>
 
-						<noscript>
-
 						<div class="swich-r-box swich-nav box-shadow">
 							<div class="swich-consolidados">
+								<noscript>
 								<div>
 									<div class="swich-consolidados-titulo">Mostrar total de Mesas</div>
 									<div class="swich-consolidados-items">
@@ -236,8 +235,9 @@
 										<div id="consolidados-posicion-r" class="item of" onclick="posicionConsolidados('r');">VISIBLE</div>
 									</div>
 								</div>
+								</noscript>
 								<div>
-									<div class="swich-consolidados-titulo">Resultado Parcial CNN</div>
+									<div class="swich-consolidados-titulo">Consolidados R. Metropolitana</div>
 									<div class="swich-consolidados-items">
 										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i> &nbsp;&nbsp;OCULTO</div>
 										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i> &nbsp;&nbsp;VISIBLE</div>
@@ -245,8 +245,6 @@
 								</div>
 							</div>
 						</div>
-
-						</noscript>
 
 					</section>
 				</section>

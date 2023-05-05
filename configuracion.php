@@ -157,7 +157,10 @@
 //	CONFIGURACION PARA PUBNUB
 
 //	Monitoreo de Mesas
-	$_PUBNUB_PUB_MESAS					=	"pub-c-84c5e706-2ab3-4d0b-890b-6f99ecd92b24";
-	$_PUBNUB_SUS_MESAS					=	"sub-c-573f9a64-62f3-11ea-8216-b6c21e45eadc";
+	#$_PUBNUB_PUB_MESAS					=	"pub-c-84c5e706-2ab3-4d0b-890b-6f99ecd92b24";
+	#$_PUBNUB_SUS_MESAS					=	"sub-c-573f9a64-62f3-11ea-8216-b6c21e45eadc";
+
+	$_PUBNUB_PUB_MESAS					=	"pub-c-8b5c6d4e-d082-4615-a3a6-788949653edf";
+	$_PUBNUB_SUS_MESAS					=	"sub-c-f7873e1d-1a48-4553-be89-86e9a189d093";
 
 ?>

@@ -203,112 +203,96 @@
 	//	Obtener Mesas Consolidadas
 		case "swichMesasTotales"					:
 		{
+		//	Obtener Mesas almacenadas en el Swich
+			$QUERY									=	"
+				
+				SELECT
+					COUNT( mesa.mesa_id )
+
+				FROM
+					mesa
+				
+				WHERE
+					mesa.mesa_tipo = 'P' AND
+					mesa.mesa_estado IN(1,2) AND
+					mesa.mesa_zona = 3013
+
+			";
+
+		//	Ejecutar Query
+			$QUERY_TOTAL_MESAS						=	pg_query($CONF_DB_CONNECT, $QUERY);
+			$_TOTAL_MESAS							=	pg_fetch_object($QUERY_TOTAL_MESAS);
+
 		//	Obtener la información de las Mesas almacenadas en el Swich
 			$QUERY									=	"
 		
-				SELECT * FROM swich_mesas_total( 'P' );
+				SELECT
+					sum(voto.voto_total) as votos_total,
+					candidato.candidato_id,
+					candidato.candidato_nombres,
+					candidato.candidato_apellidos,
+					candidato.candidato_independiente,
+					partido.partido_codigo,
+					partido.partido_id,
+					pacto.pacto_nombre,
+					pacto.pacto_id
+
+				FROM
+					mesa,
+					voto,
+					candidato,
+					partido,
+					pacto
+
+				WHERE
+					mesa.mesa_tipo = 'P' AND
+					mesa.mesa_zona = 3013 AND
+					mesa.mesa_estado IN(1,2) AND
+					voto.mesa_id = mesa.mesa_id AND
+					candidato.candidato_id = voto.candidato_id AND
+					partido.partido_id = candidato.partido_id AND
+					pacto.pacto_id = candidato.pacto_id
+							
+				group by
+					candidato.candidato_id,
+					candidato.candidato_apellidos,
+					partido.partido_codigo,
+					partido.partido_id,
+					pacto.pacto_nombre,
+					pacto.pacto_id
+				
+				ORDER BY
+					votos_total DESC;
 		
 			";
 			
 		//	Ejecutar Query
 			$QUERY_MESAS							=	pg_query($CONF_DB_CONNECT, $QUERY);
 
-		//	Obtener la información de las Mesas almacenadas en el Swich
-			$QUERY									=	"
-		
-				SELECT COUNT(mesa_id) FROM mesa WHERE mesa_tipo = 'P' AND mesa_estado = 1
-		
-			";
-			
-		//	Ejecutar Query
-			$QUERY_MESAS_TOTALES					=	pg_query($CONF_DB_CONNECT, $QUERY);
-			$_MESAS_TOTALES							=	pg_fetch_object($QUERY_MESAS_TOTALES);
-
-		//	Listado de Candidatos
-			$_CANDIDATOS['mesas']					=	(int) $_MESAS_TOTALES->count;
-
 		//	Listado de Candidatos
 			$_CANDIDATOS['candidatos']				=	array();
-
-			$votos_totales = 0;
+			$_CANDIDATOS['votos']					=	(int) 0;
+			$_CANDIDATOS['mesas']					=	(int) $_TOTAL_MESAS->count;
 
 		//	Generar listado
-			while($_MESA							=	pg_fetch_object($QUERY_MESAS))
+			while($_MESA_CANDIDATOS					=	pg_fetch_object($QUERY_MESAS))
 			{
-				$porcentaje							=	str_replace( "." , "," , $_MESA->round );
-
-			//	Definir Orden de los candidatos
-				if( $_MESA->candidato_id == 16163631 )
-				{
-					$orden = 1;
-				}
-				else if( $_MESA->candidato_id == 7477226 )
-				{
-					$orden = 2;
-				}
-				else if( $_MESA->candidato_id == 8653179 )
-				{
-					$orden = 3;
-				}
-				else if( $_MESA->candidato_id == 10273010 )
-				{
-					$orden = 4;
-				}
-				else if( $_MESA->candidato_id == 6195038 )
-				{
-					$orden = 5;
-				}
-				else if( $_MESA->candidato_id == 13436389 )
-				{
-					$orden = 6;
-				}
-				else if( $_MESA->candidato_id == 6872197 )
-				{
-					$orden = 7;
-				}
-
 			//	Asignar información del candidato
 				$_CANDIDATOS['candidatos'][]		=	array	
 				(
-					'id'							=>	(int) $_MESA->candidato_id,
-					'orden'							=>	$orden,
-					'nombres'						=>	$_MESA->candidato_nombres,
-					'apellidos'						=>	$_MESA->candidato_apellidos,
-					'votos'							=>	(int) $_MESA->votos_total,
-					'votos_p'						=>	puntos($_MESA->votos_total),
-					'porcentaje'					=>	$porcentaje,
-					'partido'						=>	$_MESA->partido_codigo
+					'id'							=>	(int) $_MESA_CANDIDATOS->candidato_id,
+					'nombres'						=>	strtolower($_MESA_CANDIDATOS->candidato_nombres),
+					'apellidos'						=>	strtolower($_MESA_CANDIDATOS->candidato_apellidos),
+					'ind'							=>	$_MESA_CANDIDATOS->candidato_independiente,
+					'votos'							=>	(int) $_MESA_CANDIDATOS->votos_total,
+					'partido'						=>	$_MESA_CANDIDATOS->partido_codigo,
+					'partido_id'					=>	(int) $_MESA_CANDIDATOS->partido_id,
+					'pacto'							=>	$_MESA_CANDIDATOS->pacto_nombre,
+					'pacto_id'						=>	(int) $_MESA_CANDIDATOS->pacto_id
 				);
 
-				$votos_totales = $votos_totales + $_MESA->votos_total;
+				$_CANDIDATOS['votos'] += $_MESA_CANDIDATOS->votos_total;
 			}
-
-		//	Listado de Candidatos
-			$_CANDIDATOS['totales']					=	puntos($votos_totales);
-			
-		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-
-		//	Obtener la información de las Mesas almacenadas en el Swich
-			$QUERY									=	"
-		
-				SELECT * FROM swich_mesas_total_actuales();
-		
-			";
-			
-		//	Ejecutar Query
-			$QUERY_MESAS_ACTUALES					=	pg_query($CONF_DB_CONNECT, $QUERY);
-
-		//	Generar listado
-			while($_MESAS_ACTUALES					=	pg_fetch_object($QUERY_MESAS_ACTUALES))
-			{
-				//	Asignar información del candidato
-				$_CANDIDATOS['actuales'][]			=	array	
-				(
-					'id'							=>	(int) $_MESAS_ACTUALES->mesa,
-				);
-			}
-
-		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 		//	Encodear Resultados
 			$_JSON									=	json_encode($_CANDIDATOS);

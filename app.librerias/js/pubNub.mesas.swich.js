@@ -535,7 +535,7 @@
 			}
 
 		//	Validar modo actual
-			if( swich_modo != swich_modo_anterior || swich_mesas == 0 )
+			if( swich_modo == 1 && swich_mesas == 2 && estado_consolidados == 'on' )
 			{
 			//	Desactivar consolidados
 				estadoConsolidadosActual('of');
