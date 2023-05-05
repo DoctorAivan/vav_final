@@ -252,7 +252,7 @@
 					candidato.candidato_id = voto.candidato_id AND
 					partido.partido_id = candidato.partido_id AND
 					pacto.pacto_id = candidato.pacto_id
-							
+
 				group by
 					candidato.candidato_id,
 					candidato.candidato_apellidos,

@@ -444,11 +444,11 @@
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()
 		{
-			console.log('> animar_entrada_totales');
-
 		//	Validar mesas antes de desplegar
 			if( app_modo == 1 && mesa_2 != null )
 			{
+				mesa_totales_estado = true;
+
 			//	Quitar la Mesa 2
 				App.animar_salida_mesa_2();
 
@@ -459,8 +459,6 @@
 					render_mesa_totales.style.bottom = mesa_totales_cordenadas.visible.y;
 					render_mesa_totales.style.left = mesa_totales_cordenadas.visible.x;
 					render_mesa_totales.style.transform = mesa_totales_cordenadas.visible.z;
-
-					mesa_totales_estado = true;
 
 				}, tiempo_transiciones_adicional );
 			}
@@ -478,8 +476,6 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
-			console.log('< animar_salida_totales');
-
 		//	Asignar Posiciones en el eje X
 			render_mesa_totales.style.bottom = mesa_totales_cordenadas.oculta.y;
 			render_mesa_totales.style.left = mesa_totales_cordenadas.oculta.x;
@@ -689,7 +685,14 @@
 				//	Asignar Cupos por región
 					mesa_2.cupos = App.obtener_cupos(mesa_2.zona_id);
 
+					console.log('mesa_2_historico' , mesa_2_historico);
+					console.log('mesa_2.id' , mesa_2.id);
+					console.log('app_template_historico.id' , app_template_historico);
+					console.log('app_template' , app_template);
+					console.log('-	-	-	-	-	-	-');
+
 				//	Validar Rendereo de la mesa con Historicos
+				//	if( mesa_2_historico != mesa_2.id || app_template_historico != app_template )
 					if( mesa_2_historico != mesa_2.id || app_template_historico != app_template )
 					{
 					//	Obtener los candidatos de la mesa
@@ -717,6 +720,12 @@
 
 					//	Dibujar la mesa en el DOM		
 						App.draw( 2 , mesa_2 );
+
+						console.log('IF init - mesa 2');
+					}
+					else
+					{
+						console.log('ELSE init - mesa 2');
 					}
 				}
 			}
@@ -1122,7 +1131,10 @@
 				}, tiempo_transiciones_adicional );
 			}
 
-			mesa_2_historico = 0
+			if( mesa_totales_estado != true && mesa_id == null )
+			{
+				mesa_2_historico = 0
+			}
 		},
 
 	//	Obtener los cupos disponibles en la región

@@ -12,6 +12,9 @@
 	var swich_modo_anterior = 0;
 	var swich_mesas_anterior = 0;
 
+	let swich_mesa_1_historico = 0
+	let swich_mesa_2_historico = 0
+
 //	Iniciar al Cargar
 	$(function()
 	{
@@ -535,7 +538,7 @@
 			}
 
 		//	Validar modo actual
-			if( swich_modo == 1 && swich_mesas == 2 && estado_consolidados == 'on' )
+			if( swich_modo == 1 && swich_mesas == 2 && estado_consolidados == 'on' && swich_mesa_2_historico != swich_mesa_2  )
 			{
 			//	Desactivar consolidados
 				estadoConsolidadosActual('of');
@@ -543,6 +546,12 @@
 			//	Almacenar modo actual
 				swich_modo_anterior = swich_modo;
 			}
+
+			console.log( swich_mesa_2_historico , swich_mesa_2 );
+
+		//	Almacenar Mesas en historico
+			swich_mesa_1_historico		=	swich_mesa_1;
+			swich_mesa_2_historico		=	swich_mesa_2;
 		});
 	}
 
