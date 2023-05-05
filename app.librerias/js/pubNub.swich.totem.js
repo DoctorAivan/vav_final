@@ -175,7 +175,7 @@
 				{
 				//	Validar que la mesa 1 sea distinta a la actual
 				//	if( switch_mesa_1 != switch_mesa_1_anterior || app_template != datoPubNub.template )
-					if( switch_mesa_1 != switch_mesa_1_anterior )
+					if( switch_mesa_1 != switch_mesa_1_anterior || datoPubNub.template == 0 )
 					{
 						App.animar_salida_mesa_1( datoPubNub.template , datoPubNub.modo , datoPubNub.mesa_1 )
 					}
