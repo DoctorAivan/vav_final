@@ -521,11 +521,15 @@
 			//	Restar un voto
 				else if( accion == 'r' )
 				{
-				//	Actualizar el voto en el listado
-					candidato_obj.votos -= 1
+				//	Validar que el voto no sea cero
+					if( voto != 0 )
+					{
+					//	Actualizar el voto en el listado
+						candidato_obj.votos -= 1
 
-				//	Actualizar el total de votos
-					mesa_totales_votos -= 1
+					//	Actualizar el total de votos
+						mesa_totales_votos -= 1
+					}
 				}
 
 			//	Obtener valor del voto
@@ -1104,7 +1108,7 @@
 				}, tiempo_transiciones_adicional );
 			}
 
-			mesa_2_historico = 0
+		//	mesa_2_historico = 0
 		},
 
 	//	Obtener los cupos disponibles en la región
