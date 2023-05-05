@@ -174,7 +174,8 @@
 				if( app_modo == datoPubNub.modo )
 				{
 				//	Validar que la mesa 1 sea distinta a la actual
-					if( switch_mesa_1 != switch_mesa_1_anterior || app_template != datoPubNub.template )
+				//	if( switch_mesa_1 != switch_mesa_1_anterior || app_template != datoPubNub.template )
+					if( switch_mesa_1 != switch_mesa_1_anterior )
 					{
 						App.animar_salida_mesa_1( datoPubNub.template , datoPubNub.modo , datoPubNub.mesa_1 )
 					}
@@ -384,7 +385,7 @@
 										<h2>REG. METROPOLITANA</h2>
 									</div>
 									<div class="header">
-										<h3>RESULTADOS CONSOLIDADOS</h3>
+										<h3>CONSOLIDADOS VOTO A VOTO</h3>
 										<h4 id="mesa-totales-detalles"><b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS</h4>
 									</div>
 									<div class="columns" id="mesa-0-candidatos"></div>`;
@@ -439,8 +440,6 @@
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()
 		{
-			console.log('animar_entrada_totales');
-
 		//	Validar mesas antes de desplegar
 			if( app_modo == 1 && mesa_2 != null )
 			{
@@ -473,8 +472,6 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
-			console.log('animar_salida_totales');
-
 		//	Asignar Posiciones en el eje X
 			render_mesa_totales.style.bottom = mesa_totales_cordenadas.oculta.y;
 			render_mesa_totales.style.left = mesa_totales_cordenadas.oculta.x;
@@ -536,7 +533,7 @@
 				mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
 
 			//	Actualizar votos en el DOM
-				const candidato_voto = document.querySelector('#candidate-' + candidato);
+				const candidato_voto = document.getElementById('candidate-' + candidato);
 
 			//	Validar que exista el elemento
 				if( candidato_voto != null )
@@ -584,7 +581,7 @@
 				candidato_div.classList = `candidato order-${id_orden} no-electo`;
 
 				//	Obtener valor del voto
-				const candidato_voto_valor = document.getElementById( `candidato-${candidato.id}-votos` );
+				const candidato_voto_valor = document.getElementById(`candidato-${candidato.id}-votos`);
 				candidato_voto_valor.innerHTML = App.numero(candidato.votos);
 
 				id_orden <= 5 && id_orden++
@@ -753,8 +750,6 @@
 			//	Asignar las clases a la mesa
 			div_mesa.className = `box pos-${posicion} mesa-doble`
 
-			//	<h2><span>${region.r}</span>${mesa.comuna}</h2>
-
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="title">
 										<h2>${mesa.comuna}</h2>
@@ -834,16 +829,16 @@
 		voto : function( id , mesa, candidato, votos )
 		{
 		//	Actualizar votos en el DOM
-			const candidato_voto = document.querySelector('#candidate-' + id + ' > div.candidato-votos');
+			const candidato_voto = document.getElementById(`candidate-${id}`);
 
 		//	Validar que exista el elemento
 			if( candidato_voto != null )
 			{
-				const candidato_div_voto_valor = document.querySelector( '#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-valor' );
+				const candidato_div_voto_valor = document.querySelector('#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-valor');
 				candidato_div_voto_valor.classList.add('animar_voto_texto')
 
 			//	Identificar el contenedor del cambio de voto
-				const candidato_div_voto_animacion = document.querySelector( '#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-animacion' );
+				const candidato_div_voto_animacion = document.querySelector('#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-animacion');
 				candidato_div_voto_animacion.classList.add('animar_voto');
 
 			//	Reiniciar animación del voto
@@ -894,6 +889,7 @@
 		//	Mesa Candidatos por cambiar
 			let mesa_candidatos
 
+		//	Validar si existe mesa 1
 			if( mesa_1 )
 			{
 				if( mesa == mesa_1.id )
@@ -906,6 +902,7 @@
 				}
 			}
 
+		//	Validar si existe mesa 1
 			if( mesa_2 )
 			{
 				if( mesa == mesa_2.id )
@@ -925,7 +922,7 @@
 			mesa_candidatos.forEach(candidato =>
             {
 			//  Get object from DOM
-				let candidato_div = document.querySelector(`#candidate-${candidato.objeto}`);
+				let candidato_div = document.getElementById(`candidate-${candidato.objeto}`);
 				candidato_div.classList = `candidato order-${id_orden} no-electo`;
 
 			//	Validar Posicion de los Objetos
