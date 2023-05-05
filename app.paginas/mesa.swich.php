@@ -204,7 +204,9 @@
 						<div class="swich-r-box swich-nav box-shadow">
 							<div class="swich-mesas" id="swich-opcion-modo">
 								<h2>Template</h2>
-								<div onclick="swichModo(0);" id="swich-opcion-modo-0" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Modo Tótem</h2><p>Desplegada a la izquierda</p>"><i class="fas fa-window-restore"></i></div>
+								<noscript>
+									<div onclick="swichModo(0);" id="swich-opcion-modo-0" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Modo Tótem</h2><p>Desplegada a la izquierda</p>"><i class="fas fa-window-restore"></i></div>
+								</noscript>
 								<div onclick="swichModo(1);" id="swich-opcion-modo-1" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Modo Flotante</h2><p>Desplegada en el centro</p>"><i class="fas fa-window-maximize"></i></div>
 							</div>
 							<div class="swich-separador"></div>
