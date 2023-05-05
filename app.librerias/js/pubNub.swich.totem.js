@@ -381,7 +381,7 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="title">
-										<h2>R. METROPOLITANA</h2>
+										<h2>REG. METROPOLITANA</h2>
 									</div>
 									<div class="header">
 										<h3>RESULTADOS CONSOLIDADOS</h3>
@@ -1128,6 +1128,7 @@
 		{
 			return new Intl.NumberFormat('en-DE').format(valor);
 		}
+
 	}
 
 //	Iniciar las Zonas
