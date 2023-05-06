@@ -446,10 +446,11 @@
                                         <input id="candidato_apellidos_${candidato.candidato_id}" type="text" autocomplete="off" class="candidato-apellidos box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_apellidos}"></input>
                                         <div class="candidato-nombre-guardar" onclick="mesa_candidato_nombre(${candidato.candidato_id});"><i class="fas fa-check-circle"></i></div>
                                     </div>
-                                    <div class="candidato-votos"><input id="voto-${candidato.voto_id}" type="text" autocomplete="off" class="numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${candidato.voto_total}" /></div>
+                                    <div class="candidato-votos"><input candidato="${candidato.candidato_id}" id="voto-${candidato.voto_id}" type="text" autocomplete="off" class="mesa_valor_numerico numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${candidato.voto_total}" /></div>
                                     <div class="candidato-guardar"><i class="fas fa-check-circle tipsy-s" title="Guardar Voto" onclick="mesa_votos(${candidato.voto_id},'g',${candidato.candidato_id});"></i></div>
                                     <div class="candidato-sumar"><i class="fas fa-plus-circle tipsy-s" title="Sumar un Voto" onclick="mesa_votos(${candidato.voto_id},'s',${candidato.candidato_id});"></i></div>
                                     <div class="candidato-restar"><i class="fas fa-minus-circle tipsy-s" title="Restar un Voto" onclick="mesa_votos(${candidato.voto_id},'r',${candidato.candidato_id});"></i></div>
+                                    <div id="candidato_voto_bloqueado_${candidato.candidato_id}" class="candidato-bloqueado"></div>
                                 </div>`;
 
             /*
@@ -472,6 +473,13 @@
 
             //  Agregar al objeto de autocompletar
                 mesa_candidatos.push( { i: candidato.voto_id , n: candidato.candidato_nombre } );
+            });
+
+        //  Estado acciones votacion
+            $('.mesa_valor_numerico').keyup(function (event)
+            {
+                const candidato_id = $(this).attr('candidato')
+                estado_votos_candidato( candidato_id , 'off' );
             });
 
         //	Recalcular Posición Funcionalidad Livebox
@@ -507,6 +515,22 @@
                 }
             });
         });
+    }
+
+//  Estado de los botones de votacion
+    function estado_votos_candidato( candidato , estado )
+    {
+        if( estado == 'on')
+        {
+            const candidato_voto_bloqueado = document.getElementById('candidato_voto_bloqueado_' + candidato)
+            candidato_voto_bloqueado.style.display = 'none'
+        }
+        
+        if(estado == 'off')
+        {
+            const candidato_voto_bloqueado = document.getElementById('candidato_voto_bloqueado_' + candidato)
+            candidato_voto_bloqueado.style.display = 'block'
+        }
     }
 
 //  Guardar detalles de una Mesa
@@ -695,6 +719,9 @@
 		if( accion == "g" )
 		{
             var resultado	=	valor;
+
+        //  Estado de los botones de votacion
+            estado_votos_candidato( candidato , 'on' );
 		}
 
 	//	Sumar Votos

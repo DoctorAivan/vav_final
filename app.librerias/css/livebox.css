@@ -399,6 +399,16 @@
 				text-align: center;
 				color: var(--color-bg-boton-eliminar);
 			}
+			.livebox .candidato .candidato-bloqueado
+			{
+				position: absolute;
+				width: 120px;
+				height: 100%;
+				right: 0px;
+				background: var(--color-bg-box-a);
+				opacity: 0.8;
+				display: none;
+			}
 			
 	.livebox-bg
 	{
