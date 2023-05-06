@@ -540,11 +540,14 @@
 		//	Validar modo actual
 			if( swich_modo == 1 && swich_mesas == 2 && estado_consolidados == 'on' && swich_mesa_2_historico != swich_mesa_2  )
 			{
-			//	Desactivar consolidados
-				estadoConsolidadosActual('of');
+				if( swich_mesa_2 != undefined )
+				{
+				//	Desactivar consolidados
+					estadoConsolidadosActual('of');
 
-			//	Almacenar modo actual
-				swich_modo_anterior = swich_modo;
+				//	Almacenar modo actual
+					swich_modo_anterior = swich_modo;
+				}
 			}
 
 			console.log( swich_mesa_2_historico , swich_mesa_2 );

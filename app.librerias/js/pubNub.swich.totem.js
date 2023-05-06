@@ -1119,14 +1119,23 @@
 			}
 			else
 			{
+				console.log('#	#	#	#	#	#')
+				console.log('animar_salida_mesa_2' , switch_mesa_2);
+				console.log('#	#	#	#	#	#')
+
 			//	Limpiar mesa
 				setTimeout(function()
 				{
-				//	Limpiar el Objeto
-				//	mesa_2 = null
+					if( switch_mesa_2 == null )
+					{
+					//	Limpiar el Objeto
+						mesa_2 = null
 
-				//	Limpiar el DOM
-				//	render_mesa_2.innerHTML = ''
+					//	Limpiar el DOM
+						render_mesa_2.innerHTML = ''
+
+						console.log('MESA 2 VACIADA');
+					}
 
 				}, tiempo_transiciones_adicional );
 			}
