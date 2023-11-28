@@ -78,7 +78,7 @@
 	RewriteRule 	^usuarios/([0-9]+)																/vav_final/usuario.php?&p=$1															[L]
 	RewriteRule 	^usuarios/																		/vav_final/usuario.php?&p=0															[L]
 
-	RewriteRule 	^reboot/																		/vav_final/reboot.php																	[L]
+	RewriteRule 	^reboot-data/																	/vav_final/reboot.php																	[L]
 
 #	JSON
 	RewriteRule 	^json/diccionario/																/vav_final/app.sql/json.php?f=diccionario												[L]

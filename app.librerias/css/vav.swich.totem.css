@@ -3,6 +3,9 @@
 	margin: 0px;
 	padding: 0px;
 	border: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 @font-face
@@ -106,42 +109,35 @@
 
 :root
 {
-	--color-card-a : #ffffff;
-	--color-card-b : #e3e3e3;
-
 	--color-white : #ffffff;
-	--color-black : #151515;
+	--color-black : #1c1c1c;
 
-	--color-gray-a : #e8e8e8;
-	--color-gray-b : #e8e8e8;
-	--color-gray-c : #e0e0e0;
+	--color-blue-a : #56b3f0;
+	--color-blue-b : #428dd3;
 
-	--color-blue-a : #223f77;
-	--color-blue-b : #1e2e52;
+	--color-red-a : #e55080;
+	--color-red-b : #cb3469;
 
-	--color-red-a : #FF1A6A;
-	--color-red-b : #e40251;
+	--color-voted-blue-a : #078dfc;
+	--color-voted-blue-b : #078dfc;
+	--color-voted-blue-animation-a : #ffffff20;
+	--color-voted-blue-animation-b : #ffffffeb;
+	--color-voted-blue-shadow : #078dfc;
 
-	--color-result-a : #522d72;
-	--color-result-b : #361c4f;
+	--color-voted-red-a : #fd387f;
+	--color-voted-red-b : #fd387f;
+	--color-voted-red-animation-a : #ffffff20;
+	--color-voted-red-animation-b : #ffffffeb;
+	--color-voted-red-shadow : #fd387f;
 
-	--color-voted-red-a : #FF1A6A;
-	--color-voted-red-b : #e40251;
-	--color-voted-red-animation-a : #b6185d99;
-	--color-voted-red-animation-b : #f1020b35;
-	--color-voted-red-animation-c : #f1020b25;
+	--color-header-background-a : #ffffff;
+	--color-header-background-b : #ededed;
 
-	--candidate-width : 340px;
-	--candidate-height-totem : 56px;
-	--candidate-height-floating : 56px;
-	--candidate-list-limit : 5;
-	--candidate-margin : 0px;
+	--color-totals-background-a : #1a2b50;
+	--color-totals-background-b : #1a346b;
 
-	--candidate-voted-size : 2.1rem;
-	--candidate-voted-size-spacing : 0.15rem;
-
-	--candidate-percentage-size : 1.2rem;
-	--candidate-percentage-size-spacing : 0.1rem;
+	--candidate-width-respaldo : 340px;
+	--candidate-width : 800px;
 }
 
 body
@@ -160,6 +156,7 @@ body
 	/*
 	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 	*/
+	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 	overflow: hidden;
 }
 	#no-cursor
@@ -168,7 +165,6 @@ body
 		position: absolute;
 		width: 1920px;
 		height: 1080px;
-
 		display: none;
 	}
 	#render-mesa-1
@@ -181,31 +177,11 @@ body
 		z-index: 9;
 		position: absolute;
 	}
-	#render-totales
-	{
-		z-index: 11;
-		position: absolute;
-	}
-
 	#render-mesa-totales
 	{
 		z-index: 11;
 		position: absolute;
 		left: 1920px;
-	}
-
-	#bg-tottem
-	{
-		z-index: 1;
-		position: absolute;
-		bottom: 168px;
-		left: -473px;
-		width: 473px;
-		height: 912px;
-		background: #24083d00;
-		display: none;
-		opacity: 0;
-		transition: height 0.5s ease, left 0.5s ease;
 	}
 
 	.animar_voto
@@ -263,19 +239,25 @@ body
 		width: var(--candidate-width);
 	}
 
-	.tottem .totales .title
-	{
-		background: linear-gradient( 90deg, var(--color-red-a) 0%, var(--color-red-b) 100%) !important;
-	}
 	.tottem .totales .header
 	{
-		background: linear-gradient( 0deg, var(--color-red-a) 0%, var(--color-red-b) 100%) !important;
+		position: inherit;
+		z-index: 1;
+		color: var(--color-white) !important;
+		background: linear-gradient( 0deg, var(--color-totals-background-a) 0%, var(--color-totals-background-b) 100%) !important;
 	}
 		.tottem .totales .header h4
 		{
-			color: var(--color-red-a) !important;
+			color: var(--color-totals-background-a) !important;
 			background: var(--color-white) !important;
 		}
+		.tottem .totales .columns .candidato .candidato-votos .candidato-votos-valor
+		{
+			font-size: 3.2rem !important;
+			line-height: 3.2rem !important;
+			letter-spacing: -0.25rem !important;
+		}
+
 /*
 	TOTTEM
 	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -285,70 +267,40 @@ body
 		position: relative;
 		overflow: hidden;
 		width: 100%;
-		background: linear-gradient( 0deg, var(--color-card-a) 30%, var(--color-card-b) 100%);
+		display: grid;
+		grid-template-columns: 1fr 420px;
 	}
-		.tottem .box .title
-		{
-			z-index: 3;
-			position: relative;
-			display: grid;
-			grid-template-columns: 1fr auto;
-			padding: 10px 16px 10px 16px;
-			text-transform: uppercase;
-			background: linear-gradient( 90deg, var(--color-blue-a) 0%, var(--color-blue-b) 100%);
-		}
-			.tottem .box .title h2
-			{
-				color: var(--color-white);
-				font-family: 'Santral_Bold';
-				font-size: 1.4rem;
-				line-height: 1.4rem;
-			}
-				.tottem .box .title h2 span
-				{
-					color: var(--color-white);
-					font-family: 'Santral_SemiBold';
-					font-size: 1.4rem;
-					line-height: 1.4rem;
-					margin: 0 15px 0 0;
-				}
-			
 		.tottem .box .header
 		{
 			z-index: 3;
 			position: relative;
-			padding: 12px 0 12px 16px;
+			padding: 15px 0 15px 16px;
 			text-transform: uppercase;
-			background: linear-gradient( 0deg, var(--color-blue-a) 0%, var(--color-blue-b) 100%);
+			color: var(--color-black);
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% );
 		}
 			.tottem .box .header h2
 			{
-				color: var(--color-gray-a);
-				font-family: 'Santral_Bold';
-				font-size: 1.3rem;
-				line-height: 1.3rem;
-				letter-spacing: 0.03rem;
-				margin: 0 0 3px 0;
+				font-family: 'Santral_Extrabold';
+				font-size: 1.7rem;
+				line-height: 1.7rem;
 			}
 			.tottem .box .header h3
 			{
-				position: relative;
-				width: 100%;
-				color: var(--color-gray-a);
-				font-family: 'Santral_Book';
-				font-size: 1.1rem;
-				line-height: 1.1rem;
+				font-family: 'Santral_SemiBold';
+				font-size: 1.2rem;
+				line-height: 1.2rem;
+				margin: 4px 0 5px 0;
 			}
 			.tottem .box .header h4
 			{
 				display: inline-block;
-				font-family: 'Santral_Bold';
-				font-size: 1rem;
-				line-height: 1rem;
-				margin: 5px 0 0 0;
-				padding: 4px 6px 3px 6px;
-				color: var(--color-blue-a);
-				background: var(--color-gray-a);
+				font-family: 'Santral_SemiBold';
+				font-size: 1.2rem;
+				line-height: 1.2rem;
+				padding: 5px 8px 4px 8px;
+				color: var(--color-white);
+				background: var(--color-black);
 			}
 
 		.tottem .box .columns
@@ -356,103 +308,63 @@ body
 			z-index: 1;
 			position: relative;
 			display: grid;
-			grid-template-columns: 1fr;
+			grid-template-columns: 1fr 1fr;
 			overflow: hidden;
-			background: #d5d5d5;
 		}
-			.tottem .box .columns .electo
-			{
-				background: linear-gradient( 160deg, #fff 0%, #ffdfe0 100%);
-			}
-			.tottem .box .columns .no-electo
-			{
-				background: linear-gradient( 160deg, #fff 0%, #e8e8e8 100%);
-			}
-			.tottem .totales .columns .candidato
-			{
-				grid-template-columns: 1fr 105px !important;
-			}
 			.tottem .box .columns .candidato
 			{
-				position: absolute;
+				position: relative;
 				display: grid;
-				grid-template-columns: 1fr 84px;
-				width: calc( var(--candidate-width) - 16px);
-				height: var(--candidate-height-totem);
-				padding: 0 0 0 16px;
-			/*	transition: all 0.75s ease-in-out; */
+				grid-template-columns: 1fr;
+				width: 100%;
+				color: var(--color-white);
 			}
-				.tottem .box .columns .candidato .candidato-detalles
+				.tottem .box .columns .candidato .candidato-nombre
 				{
-					z-index: 3;
-					position: relative;
 					width: 100%;
-				}
-					.tottem .box .columns .candidato .candidato-detalles h2
-					{
-						width: 100%;
-						color: #151515;
-						font-family: 'Santral_Bold';
-						font-size: 1rem;
-						line-height: 1rem;
-						letter-spacing: -0.035rem;
-						margin: 10px 0 4px 0;
-						display: -webkit-box;
-						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 1;
-						overflow: hidden;
-						text-transform: uppercase;
-					}
-						.tottem .box .columns .candidato .candidato-detalles h2 span
-						{
-							font-family: 'Santral_Book';
-						}
-					.tottem .box .columns .candidato .candidato-detalles h3
-					{
-						width: 100%;
-						height: 20px;
-						color: #151515;
-						font-family: 'Santral_SemiBold';
-						font-size: 0.9rem;
-						line-height: 1rem;
-						letter-spacing: -0.05rem;
-						display: -webkit-box;
-						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 1;
-						overflow: hidden;
-					}
-						.tottem .box .columns .candidato .candidato-detalles h3 span
-						{
-							font-family: 'Santral_Book';
-						}
-				.tottem .box .columns .candidato .candidato-votos
-				{
 					z-index: 6;
-					position: relative;
-					font-family: 'Santral_ExtraBold';
-					color: var(--color-voted-red-a);
-					text-align: right;
+					font-family: 'Santral_Bold';
 					font-size: 1.7rem;
 					line-height: 1.7rem;
-					letter-spacing: -0.025rem;
-					padding: 15px 16px 0 0;
-					background: linear-gradient( 160deg, var(--color-gray-b) 0%, var(--color-gray-c) 100%);
+					text-align: center;
+					display: -webkit-box;
+					letter-spacing: -1px;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 1;
+					overflow: hidden;
+					text-transform: uppercase;
+					padding: 15px 0 0 0;
 				}
-					.tottem .box .columns .candidato .candidato-votos::after {
-						content: " ";
-						position: absolute;
-						top: 0px;
-						display: block;
-						height: var(--candidate-height-totem);
-						width: 100px;
-						margin-left: -102px;
-						background: linear-gradient( 90deg, #cccccc00 0%, #cccccc75 100%);
-					}
-				.tottem .box .columns .candidato .candidato-votos-valor
+				.tottem .box .columns .candidato .candidato-votos
 				{
 					position: relative;
-					z-index: 2;
+					text-align: center;
+					padding: 5px 0 0 0;
+					display: grid;
+					grid-gap: 10px;
+					grid-template-columns: auto auto;
+					justify-content: center;
 				}
+					.tottem .box .columns .candidato .candidato-votos .candidato-votos-valor
+					{
+						position: relative;
+						z-index: 6;
+						font-family: 'Santral_Extrabold';
+						font-size: 3.6rem;
+						line-height: 3.6rem;
+						letter-spacing: 0rem;
+					}
+                    .tottem .box .columns .candidato .candidato-votos .candidato-votos-icono
+                    {
+                        position: relative;
+                        z-index: 3;
+                        margin: 13px 0 0 0;
+                    }
+						.tottem .box .columns .candidato .candidato-votos .candidato-votos-icono img
+						{
+							content:url("/vav_final/app.imagenes/voto_icono_blanco.png");
+							height: 14px;
+						}
 				.tottem .box .columns .candidato .candidato-votos-animacion
 				{
 					z-index: 1;
@@ -461,324 +373,42 @@ body
 					width: 100%;
 					height: 100%;
 					opacity: 0;
-					background: linear-gradient( 0deg, var(--color-voted-red-b) 0%, var(--color-voted-red-a) 100%);
 				}
 
-/*
-
-	CONFIGURACION DE MESAS DOBLE
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
-	.tottem .mesa-doble .columns
-	{
-		height: calc( var(--candidate-height-totem) * 5);
-	}
-	.tottem .mesa-doble .columns .order-1
-	{
-		z-index: 6;
-		top: calc( var(--candidate-height-totem) * 0 );
-		animation: orden-1-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-doble .columns .order-2
-	{
-		z-index: 5;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 1 );
-		animation: orden-2-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-doble .columns .order-3
-	{
-		z-index: 4;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 2 );
-		animation: orden-3-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-doble .columns .order-4
-	{
-		z-index: 3;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 3 );
-		animation: orden-4-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-doble .columns .order-5
-	{
-		z-index: 2;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 4 );
-		animation: orden-5-kf 0s ease-out 1 forwards;
-	}
-	.tottem .mesa-doble .columns .order-6
-	{
-		z-index: 1;
-		top: calc( ( var(--candidate-height-totem) + var(--candidate-margin) ) * 5 );
-		animation: orden-6-kf 0s ease-out 1 forwards;
-	}
-/*	
-	FLOATING
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
-	.floating .box
-	{
-		position: relative;
-		width: 100%;
-		background: linear-gradient( 0deg, var(--color-card-a) 30%, var(--color-card-b) 100%);
-	}
-		.floating .box .border
-		{
-			position: relative;
-			height: 4px;
-			background: linear-gradient( 90deg, var(--color-voted-blue-a) 25%, var(--color-voted-blue-b) 50%, var(--color-voted-red-b) 75%, var(--color-voted-red-a) 100%);
-		}
-		
-		.floating .box .title
-		{
-			z-index: 3;
-			position: relative;
-			display: grid;
-			grid-template-columns: 1fr auto;
-			padding: 11px 18px 11px 17px;
-			text-transform: uppercase;
-			background: linear-gradient( 25deg, var(--color-blue-b) 0%, var(--color-blue-a) 100%);
-		}
-			.floating .box .title img
-			{
-				margin-right: 12px;
-				height: 14px;
-			}
-			.floating .box .title h2
-			{
-				color: #ffffff;
-				font-family: 'Flama_Semibold';
-				font-size: 1.2rem;
-				line-height: 1.2rem;
-				letter-spacing: 0.05rem;
-			}
-			.floating .box .title h3
-			{
-				color: #ffffff;
-				font-family: 'Flama_Medium';
-				font-size: 1.2rem;
-				line-height: 1.2rem;
-				letter-spacing: 0.05rem;
-				word-spacing: 4px;
-				opacity: 0.8;
-			}
-			
-		.floating .box .header
-		{
-			z-index: 3;
-			position: relative;
-			padding: 11px 0 11px 16px;
-			text-transform: uppercase;
-			background: linear-gradient( 0deg, var(--color-card-a) 0%, var(--color-card-b) 100%);
-			border-bottom: solid 1px #ddd;
-		}
-			.floating .box .header h2
-			{
-				color: var(--color-black);
-				font-family: 'panton_extraBold';
-				font-size: 1.5rem;
-				line-height: 1.5rem;
-				letter-spacing: 0.03rem;
-				margin: 0 0 2px 0;
-			}
-				.floating .box .header h2 span
+				.tottem .box .columns .a-favor
 				{
-					font-family: 'panton_semiBold';
+					background: linear-gradient( 160deg, var(--color-voted-red-a) 0%, var(--color-voted-red-b) 100%);
 				}
-				.floating .box .header h2 .country
+				.tottem .box .columns .a-favor .candidato-nombre
 				{
-					font-family: 'panton_semiBold';
-					margin-left: 10px;
+					text-shadow: 1px 1px 10px var(--color-voted-red-shadow);
 				}
-			.floating .box .header h3
-			{
-				position: relative;
-				width: 100%;
-				color: var(--color-black);
-				font-family: 'Flama_Regular';
-				font-size: 1.1rem;
-				line-height: 1.1rem;
-			}
-				.floating .box .header h3 span
+				.tottem .box .columns .a-favor .candidato-votos-valor
 				{
-					font-family: 'Flama_Medium';
-					margin-left: 9px;
-					padding: 0 0 0 7px;
+					text-shadow: 1px 1px 10px var(--color-voted-red-shadow);
 				}
-				.floating .box .header h3 span::before
+				.tottem .box .columns .a-favor .candidato-votos-animacion
 				{
-					content: "";
-					position: absolute;
-					top: 2px;
-					margin-left: -11px;
-					width: 1px;
-					height: 13px;
-					background: #555;
+					background: linear-gradient( 135deg, var(--color-voted-red-animation-a) 20%, var(--color-voted-red-animation-b) 100%);
 				}
 
-		.floating .box .columns
-		{
-			z-index: 1;
-			position: relative;
-			display: grid;
-			grid-template-columns: 1fr;
-			height: calc( var(--candidate-height-floating) * var(--candidate-list-limit));
-			overflow: hidden;
-			background: #d5d5d5;
-		}
-			.floating .box .columns .electo
-			{
-				background: linear-gradient( 160deg, #fff 0%, #ffdfe0 100%);
-				border-bottom: solid 1px #f9cacb;
-			}
-			.floating .box .columns .no-electo
-			{
-				background: linear-gradient( 160deg, #fff 0%, #eee 100%);
-				border-bottom: solid 1px #ddd;
-			}
-			.floating .box .columns .candidato
-			{
-				position: absolute;
-				display: grid;
-				grid-template-columns: 1fr 100px;
-				width: calc( var(--candidate-width) - 16px);
-				height: var(--candidate-height-floating);
-				padding: 0 0 0 16px;
-				transition: all 0.75s ease-in-out;
-			}
-				.floating .box .columns .candidato .candidato-detalles
+				.tottem .box .columns .en-contra
 				{
-					z-index: 5;
-					position: relative;
-					width: 100%;
+					background: linear-gradient( 160deg, var(--color-voted-blue-a) 0%, var(--color-voted-blue-b) 100%);
 				}
-					.floating .box .columns .candidato .candidato-detalles h2
-					{
-						width: 100%;
-						color: var(--color-blue-b);
-						font-family: 'panton_bold';
-						font-size: 1rem;
-						word-spacing: 0.075rem;
-						margin: 9px 0 0 0;
-						display: -webkit-box;
-						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 1;
-						overflow: hidden;
-					}
-						.floating .box .columns .candidato .candidato-detalles h2 span
-						{
-							font-family: 'panton_regular';
-						}
-					.floating .box .columns .candidato .candidato-detalles h3
-					{
-						width: 100%;
-						height: 20px;
-						color: #25094099;
-						font-family: 'panton_semiBold';
-						font-size: 0.9rem;
-						word-spacing: 0.075rem;
-						display: -webkit-box;
-						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 1;
-						overflow: hidden;
-					}
-						.floating .box .columns .candidato .candidato-detalles h3 span
-						{
-							font-family: 'panton_light';
-							margin: 0 2px 0 0;
-						}
-				.floating .box .columns .candidato .candidato-votos
+				.tottem .box .columns .en-contra .candidato-nombre
 				{
-					z-index: 5;
-					font-family: 'panton_extraBold';
-					color: var(--color-voted-red-a);
-					text-align: right;
-					font-size: 1.7rem;
-					line-height: 1.7rem;
-					padding: 15px 16px 0 0;
+					text-shadow: 1px 1px 10px var(--color-voted-blue-shadow);
 				}
-					.floating .box .columns .candidato .candidato-votos img
-					{
-						width: 14px;
-						margin: 0 0 0 8px;
-						opacity: 0.7;
-					}
-				.floating .box .columns .candidato .candidato-voto
+				.tottem .box .columns .en-contra .candidato-votos-valor
 				{
-					z-index: 1;
-					top: 0px;
-					position: absolute;
-					width: 100%;
-					height: 100%;
-					opacity: 0;
-					background: linear-gradient(90deg, var(--color-voted-red-animation-c) 0%, var(--color-voted-red-animation-b) 50%, var(--color-voted-red-animation-a) 100%);
+					text-shadow: 1px 1px 10px var(--color-voted-blue-shadow);
+				}
+				.tottem .box .columns .en-contra .candidato-votos-animacion
+				{
+					background: linear-gradient( 135deg, var(--color-voted-blue-animation-a) 20%, var(--color-voted-blue-animation-b) 100%);
 				}
 
-/*
-	POSICIONES DE LOS BLOQUES
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
-	.floating .box .columns .order-1
-	{
-		z-index: 7;
-		top: calc( var(--candidate-height-floating) * 0 );
-		animation: orden-1-kf 0s ease-out 1 forwards;
-	}
-	.floating .box .columns .order-2
-	{
-		z-index: 6;
-		top: calc( ( var(--candidate-height-floating) + var(--candidate-margin) ) * 1 );
-		animation: orden-2-kf 0s ease-out 1 forwards;
-	}
-	.floating .box .columns .order-3
-	{
-		z-index: 5;
-		top: calc( ( var(--candidate-height-floating) + var(--candidate-margin) ) * 2 );
-		animation: orden-3-kf 0s ease-out 1 forwards;
-	}
-	.floating .box .columns .order-4
-	{
-		z-index: 4;
-		top: calc( ( var(--candidate-height-floating) + var(--candidate-margin) ) * 3 );
-		animation: orden-4-kf 0s ease-out 1 forwards;
-	}
-	.floating .box .columns .order-5
-	{
-		z-index: 3;
-		top: calc( ( var(--candidate-height-floating) + var(--candidate-margin) ) * 4 );
-		animation: orden-5-kf 0s ease-out 1 forwards;
-	}
-	.floating .box .columns .order-6
-	{
-		z-index: 2;
-		top: calc( ( var(--candidate-height-floating) + var(--candidate-margin) ) * 5 );
-		animation: orden-6-kf 0s ease-out 1 forwards;
-	}
-	.floating .box .columns .order-7
-	{
-		z-index: 1;
-		top: calc( ( var(--candidate-height-floating) + var(--candidate-margin) ) * 6 );
-		animation: orden-7-kf 0s ease-out 1 forwards;
-	}
-
-	@keyframes orden-1-kf { 1% { z-index: 7 } }
-	@keyframes orden-2-kf { 1% { z-index: 6 } }
-	@keyframes orden-3-kf { 1% { z-index: 5 } }
-	@keyframes orden-4-kf { 1% { z-index: 4 } }
-	@keyframes orden-5-kf { 1% { z-index: 3 } }
-	@keyframes orden-6-kf { 1% { z-index: 2 } }
-	@keyframes orden-7-kf { 1% { z-index: 1 } }
-
-	@keyframes orden-single-1-kf { 1% { z-index: 13 } }
-	@keyframes orden-single-2-kf { 1% { z-index: 12 } }
-	@keyframes orden-single-3-kf { 1% { z-index: 11 } }
-	@keyframes orden-single-4-kf { 1% { z-index: 10 } }
-	@keyframes orden-single-5-kf { 1% { z-index: 9 } }
-	@keyframes orden-single-6-kf { 1% { z-index: 8 } }
-	@keyframes orden-single-7-kf { 1% { z-index: 7 } }
-	@keyframes orden-single-8-kf { 1% { z-index: 6 } }
-	@keyframes orden-single-9-kf { 1% { z-index: 5 } }
-	@keyframes orden-single-10-kf { 1% { z-index: 4 } }
-	@keyframes orden-single-11-kf { 1% { z-index: 3 } }
-	@keyframes orden-single-12-kf { 1% { z-index: 2 } }
-	@keyframes orden-single-13-kf { 1% { z-index: 1 } }
 
 /*
 	ANIMACIONES
@@ -812,15 +442,15 @@ body
 	}
 	@keyframes keyframe_voto_texto
 	{
-		0% { color: #ff0000; }
-		45% { color: #ffffff; }
-		55% { color: #ffffff; }
-		100% { color: #ff0000; }
+		0% {  }
+		45% { color: var(--color-white); }
+		55% { color: var(--color-white); }
+		100% {  }
 	}
 	@keyframes keyframe_voto_icono
 	{
 		0% { filter: invert(0) }
-		45% { filter: invert(1) }
-		55% { filter: invert(1) }
+		45% { filter: invert(0) }
+		55% { filter: invert(0) }
 		100% { filter: invert(0) }
 	}

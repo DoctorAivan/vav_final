@@ -11,8 +11,8 @@
 					<h2>Selecciona el tipo de votación <span>Obligatorio</span></h2>
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="mesa-tipo">
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('P');" id="mesa-tipo-P">🟡&nbsp;&nbsp;&nbsp;Constituyentes</div>
-					<div class="box-shadow-light off" id="mesa-tipo-S">🔴&nbsp;&nbsp;&nbsp;Presidente</div>
+					<div class="box-shadow-light" onclick="mesa_nueva_tipo('P');" id="mesa-tipo-P">🟡&nbsp;&nbsp;&nbsp;PLEBISCITO</div>
+					<div class="box-shadow-light off" id="mesa-tipo-S">🔴&nbsp;&nbsp;&nbsp;PRESIDENTE</div>
 				</div>
 			</article>
 			<article class="formulario bg-1">
@@ -82,11 +82,13 @@
 					<input name="mesa_numero" id="mesa_numero" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="M 115" />
 				</div>
 				<div class="col-1">
-					<h2>Local de votación <span>Maximo 25 Caracteres</span></h2>
+					<h2>Local de votación <span id="mesa_local_largo"><b>25 Caracteres</b> disponibles</span></h2>
 					<input name="mesa_local" id="mesa_local" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" maxlength="25" />
 				</div>
 			</article>
 			<article class="formulario candidatos bg-1">
+
+				<noscript>
 
 				<div class="col-1" style="border-top:solid 1px #454757; padding:10px 0 0 var(--padding-box);">
 					<div class="tags-input">
@@ -97,8 +99,10 @@
 					</div>
 				</div>
 
+				</noscript>
+
 				<div class="candidato titulo" style="padding: 0 0 0 var(--padding-box);">
-					<div class="candidato-titulo">Nombre en pantalla</div>
+					<div class="candidato-titulo">Opciones</div>
 					<div class="candidato-titulo">Votos</div>
 					<div class="candidato-titulo"></div>
 					<div class="candidato-titulo"></div>
@@ -107,9 +111,7 @@
 				<noscript>
 					<div class="candidatos-listado-titulo"><i class="fas fa-circle candidatos-lista-b"></i> UNIDAD CONSTITUYENTE <i class="fas fa-chevron-down"></i></div>
 				</noscript>
-					<div class="candidatos-listado-lista" id="candidatos-lista">
-					
-					</div>
+					<div class="candidatos-listado-lista" id="candidatos-lista"></div>
 				</div>
 			</article>
 			<footer onselectstart="return false">

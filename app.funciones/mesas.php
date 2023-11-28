@@ -24,7 +24,7 @@
     {
         if( $icono == 'P' )
         {
-            return '🟡&nbsp;&nbsp;&nbsp;CONSTITUYENTES';
+            return '🟡&nbsp;&nbsp;&nbsp;PLEBISCITO';
         }
         else if( $icono == 'S' )
         {

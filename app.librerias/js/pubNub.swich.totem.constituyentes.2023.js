@@ -1,8 +1,8 @@
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
+const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
 
 //	Mode de la Aplicación
-	let app_modo = 1
+	let app_modo = 0
 
 //	Template de Mesas
 	let app_template = 0
@@ -40,6 +40,9 @@
 //	Render de la aplicación en el DOM
 	const render = document.getElementById("render")
 
+//	Render Fondo de Tottem
+	const bg_tottem = document.getElementById("bg-tottem")
+
 //	Render de las mesas en el DOM
 	const render_mesa_1 = document.getElementById("render-mesa-1")
 	const render_mesa_2 = document.getElementById("render-mesa-2")
@@ -56,23 +59,27 @@
 				'x' : '133px',
 				'y' : '195px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(0deg)'
 			},
 			'oculta' : {
-				'x' : '-800px',
+				'x' : '-340px',
 				'y' : '195px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(112deg)'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '85px',
+				'x' : '133px',
 				'y' : '195px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(0deg)'
 			},
 			'oculta' : {
-				'x' : '-800px',
+				'x' : '-340px',
 				'y' : '195px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(112deg)'
 			}
 		}
 	}
@@ -84,23 +91,27 @@
 				'x' : '133px',
 				'y' : '610px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(0deg)'
 			},
 			'oculta' : {
 				'x' : '-340px',
 				'y' : '610px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(112deg)'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1035px',
+				'x' : '1446px',
 				'y' : '195px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(0deg)'
 			},
 			'oculta' : {
 				'x' : '1920px',
 				'y' : '195px',
 				'z' : 'unset'
+			//	'z' : 'rotateY(-90deg)'
 			}
 		}
 	}
@@ -108,7 +119,7 @@
 //	Cordenadas de la Mesa Totales
 	const mesa_totales_cordenadas = {
 		'visible' : {
-			'x' : '1035px',
+			'x' : '1446px',
 			'y' : '195px',
 			'z' : 'unset'
 		},
@@ -116,6 +127,20 @@
 			'x' : '1920px',
 			'y' : '195px',
 			'z' : 'unset'
+		}
+	}
+	
+//	Cordenadas del fondo de Tottem
+	const bg_tottem_cordenadas = {
+		'mesas_0' : {
+			'h' : '0px'
+		},
+		'mesas_1' : {
+		//	'h' : '439px'
+			'h' : '912px'
+		},
+		'mesas_2' : {
+			'h' : '912px'
 		}
 	}
 
@@ -136,8 +161,6 @@
 		//	Obtener Accion desde PubNub
 			let accion				=	datoPubNub.accion;
 
-			console.log(datoPubNub);
-
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 		//	Accion : Cambio de switch
@@ -151,6 +174,7 @@
 				if( app_modo == datoPubNub.modo )
 				{
 				//	Validar que la mesa 1 sea distinta a la actual
+				//	if( switch_mesa_1 != switch_mesa_1_anterior || app_template != datoPubNub.template )
 					if( switch_mesa_1 != switch_mesa_1_anterior || datoPubNub.template == 0 )
 					{
 						App.animar_salida_mesa_1( datoPubNub.template , datoPubNub.modo , datoPubNub.mesa_1 )
@@ -168,9 +192,13 @@
 					//	Iniciar Animaciones
 						App.init();
 					}, tiempo_transiciones_adicional );
+
+					console.log('switch IF');
 				}
 				else
 				{
+					console.log('switch ELSE');
+
 				//	Reiniciar ID Historicos
 					mesa_1_historico = 0
 					mesa_2_historico = 0
@@ -192,6 +220,43 @@
 
 			//	Almacenar el Template actual
 				app_template = datoPubNub.template
+
+			// Validar el template
+				if( datoPubNub.template == 0 )
+				{
+				//	Mesa totales en la Escena
+					setTimeout(function()
+					{
+						bg_tottem.style.left = '-473px';
+					}, tiempo_transiciones );
+				}
+				else if( datoPubNub.template == 1 )
+				{
+				//	Mesa totales en la Escena
+					setTimeout(function()
+					{
+						bg_tottem.style.left = '0px';
+						bg_tottem.style.height = bg_tottem_cordenadas.mesas_1.h;
+					}, tiempo_transiciones );
+				}
+				else if( datoPubNub.template == 2 )
+				{
+				//	Mesa totales en la Escena
+					setTimeout(function()
+					{
+						bg_tottem.style.left = '0px';
+						bg_tottem.style.height = bg_tottem_cordenadas.mesas_2.h;
+					}, tiempo_transiciones );
+				}
+
+				if( datoPubNub.modo == 1 )
+				{
+				//	Mesa totales en la Escena
+					setTimeout(function()
+					{
+						bg_tottem.style.left = '-473px';
+					}, tiempo_transiciones );
+				}
 			}
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -225,11 +290,13 @@
 				if( estado == 'on' )
 				{
 					mesa_totales_estado = true
+
 					App.totales();
 				}
 				else
 				{
 					mesa_totales_estado = false
+					
 					App.animar_salida_totales()
 				}
 			}
@@ -293,17 +360,12 @@
 		//	Almacenar listado de candidatos para gestionar actualizacion
 			mesa_totales_candidatos = api.candidatos
 
+		//	Dibujar la mesa en el DOM
+			App.ordenar_votos_totales();
+
 		//	Obtener valor del voto
 			const mesa_totales_detalles = document.getElementById('mesa-totales-detalles');
 			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
-
-		//	Iterar listado de candidatos
-			mesa_totales_candidatos.forEach(candidato =>
-			{
-			//	Obtener valor del voto
-				const candidato_voto_valor = document.querySelector('#candidate-' + candidato.id + ' > div.candidato-votos > div.candidato-votos-valor');
-				candidato_voto_valor.innerHTML = App.numero(candidato.votos);
-			});
 		},
 
 	//	Dibujar la mesa en el DOM
@@ -319,12 +381,14 @@
 			let div_mesa = document.createElement('div');
 			div_mesa.id = 'mesa-0'
 
-		//	Asignar las clases a la mesa
-			div_mesa.className = `box totales`
+			//	Asignar las clases a la mesa
+			div_mesa.className = `box totales mesa-doble`
 
 		//	Crear elementos en el DIV
-			div_mesa.innerHTML =   `<div class="header">
+			div_mesa.innerHTML =   `<div class="title">
 										<h2>REG. METROPOLITANA</h2>
+									</div>
+									<div class="header">
 										<h3>CONSOLIDADOS VOTO A VOTO</h3>
 										<h4 id="mesa-totales-detalles"><b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS</h4>
 									</div>
@@ -336,26 +400,44 @@
 		//	Render de los candidatos en la mesa
 			const render_candidatos = document.getElementById('mesa-0-candidatos');
 
+		//	Indice del orden
+			let id_orden = 1;
+
+		//	Ordenar los candidatos por sus votos
+			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+
         //	Recorrer el listado de candidatos
 			mesa_totales_candidatos.forEach(candidato =>
             {
-			//	Crear el div contenedor del candidato
-				let objeto = document.createElement('div');
-				objeto.className = `candidato ${App.asignar_estilo(candidato.nombres)}`
+            //	Crear el div contenedor del candidato
+                let objeto = document.createElement('div');
+				objeto.className = `candidato order-${id_orden} no-electo`
 
-			//	Asignar las propiedades del div
-				objeto.id = 'candidate-' + candidato.id
+            //	Asignar las propiedades del div
+                objeto.id = 'candidate-' + candidato.id
 
 			//	Asignar los elementos al div
-				objeto.innerHTML = `<div class="candidato-nombre">${candidato.nombres}</div>
-									<div class="candidato-votos" id="candidato-${candidato.id}-votos">
-										<div class="candidato-votos-icono"><img src="" /></div>
-										<div class="candidato-votos-valor">${App.numero(candidato.votos)}</div>
+				objeto.innerHTML = `<div class="candidato-detalles">
+										<h2>${candidato.nombres} ${candidato.apellidos}</h2>
+										<h3><span>${candidato.pacto} /</span>
+										${ candidato.ind === 't' ?
+										candidato.partido_id == 99 ? '' : 'IND-'
+										:
+										''
+										}${candidato.partido}</h3>
 									</div>
-									<div class="candidato-votos-animacion"></div>`
+									<div class="candidato-votos">
+										<div id="candidato-${candidato.id}-votos" class="candidato-votos-valor">
+											${App.numero(candidato.votos)}
+										</div>
+										<div class="candidato-votos-animacion"></div>
+									</div>`
 
             //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
+
+			//	Limitar el orden de los candidatos
+				id_orden <= 5 && id_orden++
             });
 		},
 
@@ -401,7 +483,7 @@
 
 			mesa_totales_estado = false;
 
-		//	Corrección para el Bug del salto
+			//	Corrección para el Bug del salto
 			setTimeout(function()
 			{
 			//	Validar mesas antes de desplegar
@@ -470,21 +552,18 @@
 			//	Validar que exista el elemento
 				if( candidato_voto != null )
 				{
-					const candidato_div_voto_valor = document.querySelector('#candidate-' + candidato + ' > div.candidato-votos > div.candidato-votos-valor');
+					const candidato_div_voto_valor = document.querySelector( '#candidate-' + candidato + ' > div.candidato-votos > div.candidato-votos-valor' );
 					candidato_div_voto_valor.classList.add('animar_voto_texto')
 	
-					const candidato_div_voto_animacion = document.querySelector('#candidate-' + candidato + ' > div.candidato-votos-animacion');
+				//	Identificar el contenedor del cambio de voto
+					const candidato_div_voto_animacion = document.querySelector( '#candidate-' + candidato + ' > div.candidato-votos > div.candidato-votos-animacion' );
 					candidato_div_voto_animacion.classList.add('animar_voto');
-	
-					const candidato_div_voto_icono = document.querySelector('#candidate-' + candidato + ' > div.candidato-votos > div.candidato-votos-icono');
-					candidato_div_voto_icono.classList.add('animar_voto_icono');
 	
 				//	Reiniciar animación del voto
 					setTimeout(function()
 					{
 						candidato_div_voto_valor.classList.remove('animar_voto_texto');
 						candidato_div_voto_animacion.classList.remove('animar_voto');
-						candidato_div_voto_icono.classList.remove('animar_voto_icono');
 						
 					}, tiempo_transiciones_adicional);
 	
@@ -493,8 +572,34 @@
 					{
 						candidato_div_voto_valor.innerHTML = App.numero(candidato_obj.votos);
 					}, 500);
+
+					App.ordenar_votos_totales();
 				}
 			}
+		},
+
+	//	Ordenar Votos de los candidatos
+		ordenar_votos_totales : function ()
+		{
+		//	Ordenar los candidatos por sus votos
+			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+
+		//	Orden del candidato
+			let id_orden = 1;
+
+		//	Iterar listado de candidatos
+			mesa_totales_candidatos.forEach(candidato =>
+			{
+			//  Get object from DOM
+				const candidato_div = document.getElementById(`candidate-${candidato.id}`);
+				candidato_div.classList = `candidato order-${id_orden} no-electo`;
+
+				//	Obtener valor del voto
+				const candidato_voto_valor = document.getElementById(`candidato-${candidato.id}-votos`);
+				candidato_voto_valor.innerHTML = App.numero(candidato.votos);
+
+				id_orden <= 5 && id_orden++
+			});
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-
@@ -532,7 +637,7 @@
 			}
 			else if( app_modo == 1 )
 			{
-			//	Asignar clase al modo
+				//	Asignar clase al modo
 				render_mesa_1.classList.remove('floating');
 				render_mesa_1.classList.add('tottem');
 
@@ -545,6 +650,9 @@
 			{
 			//	Obtener la primera mesa
 				mesa_1 = api[switch_mesa_1];
+
+			//	Asignar Cupos por región
+				mesa_1.cupos = App.obtener_cupos(mesa_1.zona_id);
 
 				//	Validar Rendereo de la mesa con Historicos
 				if( mesa_1_historico != mesa_1.id || app_template_historico != app_template )
@@ -574,7 +682,17 @@
 				//	Obtener la primera mesa
 					mesa_2 = api[switch_mesa_2];
 
+				//	Asignar Cupos por región
+					mesa_2.cupos = App.obtener_cupos(mesa_2.zona_id);
+
+					console.log('mesa_2_historico' , mesa_2_historico);
+					console.log('mesa_2.id' , mesa_2.id);
+					console.log('app_template_historico.id' , app_template_historico);
+					console.log('app_template' , app_template);
+					console.log('-	-	-	-	-	-	-');
+
 				//	Validar Rendereo de la mesa con Historicos
+				//	if( mesa_2_historico != mesa_2.id || app_template_historico != app_template )
 					if( mesa_2_historico != mesa_2.id || app_template_historico != app_template )
 					{
 					//	Obtener los candidatos de la mesa
@@ -602,6 +720,12 @@
 
 					//	Dibujar la mesa en el DOM		
 						App.draw( 2 , mesa_2 );
+
+						console.log('IF init - mesa 2');
+					}
+					else
+					{
+						console.log('ELSE init - mesa 2');
 					}
 				}
 			}
@@ -637,6 +761,9 @@
 	//	Dibujar la mesa en el DOM
 		draw : function( posicion , mesa )
 		{
+		//	Obtener información de la Región
+		//	const region = objeto_regiones.find(({ i }) => i === Number(mesa.zona_id));
+
         //  DIV render en el DOM
             const render	=	document.getElementById('render-mesa-' + posicion );
 
@@ -647,12 +774,14 @@
 			let div_mesa = document.createElement('div');
 			div_mesa.id = 'mesa-' + mesa.id
 
-		//	Asignar las clases a la mesa
-			div_mesa.className = `box pos-${posicion}`
+			//	Asignar las clases a la mesa
+			div_mesa.className = `box pos-${posicion} mesa-doble`
 
 		//	Crear elementos en el DIV
-			div_mesa.innerHTML =   `<div class="header">
+			div_mesa.innerHTML =   `<div class="title">
 										<h2>${mesa.comuna}</h2>
+									</div>
+									<div class="header">
 										<h3>${mesa.local}</h3>
 										<h4>${mesa.numero}</h4>
 									</div>
@@ -664,26 +793,44 @@
 		//	Render de los candidatos en la mesa
 			const render_candidatos = document.getElementById('mesa-' + mesa.id + '-candidatos');
 
+		//	Indice del orden
+			let id_orden = 1;
+
+		//	Ordenar los candidatos por sus votos
+			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+
         //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
             {
             //	Crear el div contenedor del candidato
                 let objeto = document.createElement('div');
-				objeto.className = `candidato ${App.asignar_estilo(candidato.nombres)}`
+				objeto.className = `candidato order-${id_orden} no-electo`
 
             //	Asignar las propiedades del div
                 objeto.id = 'candidate-' + candidato.objeto
 
 			//	Asignar los elementos al div
-				objeto.innerHTML = `<div class="candidato-nombre">${candidato.nombres}</div>
-									<div class="candidato-votos" id="candidato-${candidato.objeto}-votos">
-										<div class="candidato-votos-icono"><img src="" /></div>
-										<div class="candidato-votos-valor">${candidato.votos}</div>
+				objeto.innerHTML = `<div class="candidato-detalles">
+										<h2>${candidato.nombres} ${candidato.apellidos}</h2>
+										<h3><span>${candidato.pacto} /</span>
+										${ candidato.ind === 't' ?
+										candidato.partido_id == 99 ? '' : 'IND-'
+										:
+										''
+										}${candidato.partido}</h3>
 									</div>
-									<div class="candidato-votos-animacion"></div>`
+									<div class="candidato-votos">
+										<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">
+											${candidato.votos}
+										</div>
+										<div class="candidato-votos-animacion"></div>
+									</div>`
 
             //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
+
+			//	Maximo de Candidatos
+				id_orden <= 5 && id_orden++
             });
 
 		//	Asignar posición 2 en pantalla
@@ -717,18 +864,15 @@
 				const candidato_div_voto_valor = document.querySelector('#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-valor');
 				candidato_div_voto_valor.classList.add('animar_voto_texto')
 
-				const candidato_div_voto_animacion = document.querySelector('#candidate-' + id + ' > div.candidato-votos-animacion');
+			//	Identificar el contenedor del cambio de voto
+				const candidato_div_voto_animacion = document.querySelector('#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-animacion');
 				candidato_div_voto_animacion.classList.add('animar_voto');
-
-				const candidato_div_voto_icono = document.querySelector('#candidate-' + id + ' > div.candidato-votos > div.candidato-votos-icono');
-				candidato_div_voto_icono.classList.add('animar_voto_icono');
 
 			//	Reiniciar animación del voto
 				setTimeout(function()
 				{
 					candidato_div_voto_valor.classList.remove('animar_voto_texto');
 					candidato_div_voto_animacion.classList.remove('animar_voto');
-					candidato_div_voto_icono.classList.remove('animar_voto_icono');
 					
 				}, tiempo_transiciones_adicional);
 
@@ -744,6 +888,8 @@
 					{
 						const result = mesa_1.candidatos.find(({ objeto }) => objeto === id);
 						result.votos = votos;
+	
+						App.ordenar_votos(mesa);
 					}
 				}
 
@@ -753,6 +899,8 @@
 					{
 						const result = mesa_2.candidatos.find(({ objeto }) => objeto === id);
 						result.votos = votos;
+	
+						App.ordenar_votos(mesa);
 					}
 				}
 			}
@@ -760,6 +908,53 @@
 			{
 				console.log('NO RENDER');
 			}
+		},
+
+	//	Ordenar Votos de los candidatos
+		ordenar_votos : function (mesa)
+		{
+		//	Mesa Candidatos por cambiar
+			let mesa_candidatos
+
+		//	Validar si existe mesa 1
+			if( mesa_1 )
+			{
+				if( mesa == mesa_1.id )
+				{
+				//	Ordenar los candidatos por sus votos
+					mesa_1.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+	
+				//	Guardar Mesa
+					mesa_candidatos = mesa_1.candidatos;
+				}
+			}
+
+		//	Validar si existe mesa 1
+			if( mesa_2 )
+			{
+				if( mesa == mesa_2.id )
+				{
+				//	Ordenar los candidatos por sus votos
+					mesa_2.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.objeto > b.objeto) ? 1 : -1) : -1 )
+
+				//	Guardar Mesa
+					mesa_candidatos = mesa_2.candidatos;
+				}
+			}
+
+		//	Orden del candidato
+			let id_orden = 1;
+
+        //	Iterar listado de candidatos
+			mesa_candidatos.forEach(candidato =>
+            {
+			//  Get object from DOM
+				let candidato_div = document.getElementById(`candidate-${candidato.objeto}`);
+				candidato_div.classList = `candidato order-${id_orden} no-electo`;
+
+			//	Validar Posicion de los Objetos
+				id_orden <= 5 && id_orden++
+			});
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-
@@ -814,7 +1009,7 @@
 				{
 					render_mesa_2.classList.add('transition-on')
 
-				//	Template Totem
+					//	Template Totem
 					if( app_modo == 0 )
 					{
 					//	Asignar Posiciones en el eje X
@@ -924,6 +1119,10 @@
 			}
 			else
 			{
+				console.log('#	#	#	#	#	#')
+				console.log('animar_salida_mesa_2' , switch_mesa_2);
+				console.log('#	#	#	#	#	#')
+
 			//	Limpiar mesa
 				setTimeout(function()
 				{
@@ -934,6 +1133,8 @@
 
 					//	Limpiar el DOM
 						render_mesa_2.innerHTML = ''
+
+						console.log('MESA 2 VACIADA');
 					}
 
 				}, tiempo_transiciones_adicional );
@@ -945,19 +1146,25 @@
 			}
 		},
 
-//			-			-			-			-			-			-			-			-			-			-			-
+	//	Obtener los cupos disponibles en la región
+		obtener_cupos : function ( id )
+		{
+		//	Obtener información de la Región
+			const region = objeto_regiones.find(({ i }) => i === Number(id));
+			
+		//	Cupos de los candidatos por región
+			const cupos_region = region.c;
+
+		//	Retornar los cupos
+			return cupos_region
+		},
 
 	//	Agregar miles a los numeros
 		numero : function( valor )
 		{
 			return new Intl.NumberFormat('en-DE').format(valor);
-		},
-
-	//	Asignar clase segun tipo de electo
-		asignar_estilo : function( key )
-		{
-			return key.toLowerCase().replace(' ','-')
 		}
+
 	}
 
 //	Iniciar las Zonas

@@ -4,8 +4,8 @@
 					<i class="fas fa-vote-yea"></i>
 					<h1>VAV</h1>
 					<h2>
-						Convención Constitucional 2023<br>
-						<span>Chilevisión - Chile</span>
+						<?php echo $_APP_TITLE; ?><br>
+						<span><?php echo $_APP_DESCRIPTION; ?></span>
 					</h2>
 				</div>
 				<div class="header-usuario">

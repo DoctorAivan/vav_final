@@ -35,6 +35,11 @@
     $CONF_DB_CONNECT					=	pg_connect($CONF_DB_BUILD);
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+//	CONFIGURACIONES DEL SITIO
+	$_APP_TITLE							=	"Plebiscito 2023";
+	$_APP_DESCRIPTION					=	"Chilevisión - Chile";
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DE LOS DIRECTORIOS
 
 	$_APP								=	"/vav_final";
@@ -59,8 +64,8 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	INFORMACION DE LA APLICACION
 
-//	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.2.3";
+	$_CONF_VERSION						=	"?alpha.".time();
+//	$_CONF_VERSION						=	"?version.2.4";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES
