@@ -65,18 +65,18 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '85px',
-				'y' : '195px',
+				'x' : '80px',
+				'y' : '183px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-800px',
-				'y' : '195px',
+				'x' : '-750px',
+				'y' : '183px',
 				'z' : 'unset'
 			}
 		}
 	}
-
+	
 //	Cordenadas de la Mesa 2
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
@@ -93,13 +93,13 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1145px',
-				'y' : '195px',
+				'x' : '1170px',
+				'y' : '183px',
 				'z' : 'unset'
 			},
 			'oculta' : {
 				'x' : '1920px',
-				'y' : '195px',
+				'y' : '183px',
 				'z' : 'unset'
 			}
 		}
@@ -108,17 +108,17 @@
 //	Cordenadas de la Mesa Totales
 	const mesa_totales_cordenadas = {
 		'visible' : {
-			'x' : '1355px',
-			'y' : '195px',
+			'x' : '1360px',
+			'y' : '183px',
 			'z' : 'unset'
 		},
 		'oculta' : {
 			'x' : '1920px',
-			'y' : '195px',
+			'y' : '183px',
 			'z' : 'unset'
 		}
 	}
-
+	
 //	Titulo Mesa Conteo
 	const mesa_titulo = 'VOTO A VOTO'
 

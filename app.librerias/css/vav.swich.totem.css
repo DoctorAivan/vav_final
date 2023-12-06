@@ -142,7 +142,7 @@
 
 	--candidate-width-respaldo : 340px;
 	--candidate-width-r : 800px;
-	--candidate-width : 690px;
+	--candidate-width : 670px;
 
 	--resultados : 490px;
 }
@@ -163,7 +163,7 @@ body
 	/*
 	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
 	*/
-	background: url("/vav_final/app.imagenes/bg.jpg") no-repeat;
+	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
 	overflow: hidden;
 }
 	#no-cursor
@@ -333,7 +333,7 @@ body
 		overflow: hidden;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 1fr 380px;
+		grid-template-columns: 1fr 360px;
 	}
 		.tottem .box .header
 		{
