@@ -123,21 +123,28 @@
 	--color-voted-blue-animation-a : #ffffff20;
 	--color-voted-blue-animation-b : #ffffffeb;
 	--color-voted-blue-shadow : #078dfc;
+	--color-voted-totals-blue-animation-a : #078dfc10;
+	--color-voted-totals-blue-animation-b : #078dfc80;
 
 	--color-voted-red-a : #fd387f;
 	--color-voted-red-b : #fd387f;
 	--color-voted-red-animation-a : #ffffff20;
 	--color-voted-red-animation-b : #ffffffeb;
 	--color-voted-red-shadow : #fd387f;
+	--color-voted-totals-red-animation-a : #fd387f10;
+	--color-voted-totals-red-animation-b : #fd387f80;
 
 	--color-header-background-a : #ffffff;
-	--color-header-background-b : #ededed;
+	--color-header-background-b : #f2f2f2;
 
 	--color-totals-background-a : #1a2b50;
 	--color-totals-background-b : #1a346b;
 
 	--candidate-width-respaldo : 340px;
-	--candidate-width : 800px;
+	--candidate-width-r : 800px;
+	--candidate-width : 690px;
+
+	--resultados : 490px;
 }
 
 body
@@ -182,6 +189,7 @@ body
 		z-index: 11;
 		position: absolute;
 		left: 1920px;
+		width: 480px !important;
 	}
 
 	.animar_voto
@@ -239,24 +247,81 @@ body
 		width: var(--candidate-width);
 	}
 
+
+	.tottem .totales
+	{
+		grid-template-columns: 1fr !important;
+	}
 	.tottem .totales .header
 	{
 		position: inherit;
 		z-index: 1;
 		color: var(--color-white) !important;
+		padding: 15px 15px 15px 15px !important;
+		height: auto !important;
+		text-align: center;
 		background: linear-gradient( 0deg, var(--color-totals-background-a) 0%, var(--color-totals-background-b) 100%) !important;
 	}
+		.tottem .totales .header h2
+		{
+			font-family: 'Santral_Extrabold';
+			font-size: 2rem !important;
+			line-height: 2rem !important;
+			padding: 0 0 3px 0;
+		}
 		.tottem .totales .header h4
 		{
-			color: var(--color-totals-background-a) !important;
+			display: block !important;
 			background: var(--color-white) !important;
+			color: var(--color-totals-background-a) !important;
+			font-size: 1.3rem !important;
+			line-height: 1.3rem !important;
+			padding: 7px 0 2px 0 !important;
 		}
-		.tottem .totales .columns .candidato .candidato-votos .candidato-votos-valor
+
+		.tottem .totales .columns .a-favor
 		{
-			font-size: 3.2rem !important;
-			line-height: 3.2rem !important;
-			letter-spacing: -0.25rem !important;
+			color: var(--color-voted-red-a) !important;
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% ) !important;
 		}
+			.tottem .totales .columns .a-favor .candidato-nombre
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .a-favor .candidato-votos-valor
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .a-favor .candidato-votos .candidato-votos-icono img
+			{
+				content:url("/vav_final/app.imagenes/voto_icono_rojo.png") !important;
+			}
+			.tottem .totales .columns .a-favor .candidato-votos-animacion
+			{
+				background: linear-gradient( 135deg, var(--color-voted-totals-red-animation-a) 20%, var(--color-voted-totals-red-animation-b) 100%) !important;
+			}
+
+		.tottem .totales .columns .en-contra
+		{
+			color: var(--color-voted-blue-a) !important;
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% ) !important;
+		}
+			.tottem .totales .columns .en-contra .candidato-nombre
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .en-contra .candidato-votos-valor
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .en-contra .candidato-votos .candidato-votos-icono img
+			{
+				content:url("/vav_final/app.imagenes/voto_icono_azul.png") !important;
+			}
+			.tottem .totales .columns .en-contra .candidato-votos-animacion
+			{
+				background: linear-gradient( 135deg, var(--color-voted-totals-blue-animation-a) 20%, var(--color-voted-totals-blue-animation-b) 100%) !important;
+			}
 
 /*
 	TOTTEM
@@ -268,7 +333,7 @@ body
 		overflow: hidden;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 1fr 420px;
+		grid-template-columns: 1fr 380px;
 	}
 		.tottem .box .header
 		{
@@ -278,18 +343,19 @@ body
 			text-transform: uppercase;
 			color: var(--color-black);
 			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% );
+			height: 112px;
 		}
 			.tottem .box .header h2
 			{
 				font-family: 'Santral_Extrabold';
-				font-size: 1.7rem;
-				line-height: 1.7rem;
+				font-size: 1.6rem;
+				line-height: 1.6rem;
 			}
 			.tottem .box .header h3
 			{
-				font-family: 'Santral_SemiBold';
-				font-size: 1.2rem;
-				line-height: 1.2rem;
+				font-family: 'ATC_rg';
+				font-size: 1.4rem;
+				line-height: 1.4rem;
 				margin: 4px 0 5px 0;
 			}
 			.tottem .box .header h4
@@ -310,6 +376,7 @@ body
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			overflow: hidden;
+			height: 112px;
 		}
 			.tottem .box .columns .candidato
 			{
@@ -324,8 +391,8 @@ body
 					width: 100%;
 					z-index: 6;
 					font-family: 'Santral_Bold';
-					font-size: 1.7rem;
-					line-height: 1.7rem;
+					font-size: 1.6rem;
+					line-height: 1.6rem;
 					text-align: center;
 					display: -webkit-box;
 					letter-spacing: -1px;
@@ -339,9 +406,9 @@ body
 				{
 					position: relative;
 					text-align: center;
-					padding: 5px 0 0 0;
+					padding: 3px 0 0 0;
 					display: grid;
-					grid-gap: 10px;
+					grid-gap: 5px;
 					grid-template-columns: auto auto;
 					justify-content: center;
 				}
@@ -350,9 +417,10 @@ body
 						position: relative;
 						z-index: 6;
 						font-family: 'Santral_Extrabold';
-						font-size: 3.6rem;
-						line-height: 3.6rem;
-						letter-spacing: 0rem;
+						font-size: 3.9rem;
+						line-height: 3.9rem;
+						letter-spacing: -0.25rem;
+						padding: 0 5px 0 0;
 					}
                     .tottem .box .columns .candidato .candidato-votos .candidato-votos-icono
                     {

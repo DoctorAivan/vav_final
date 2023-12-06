@@ -93,7 +93,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1035px',
+				'x' : '1145px',
 				'y' : '195px',
 				'z' : 'unset'
 			},
@@ -108,7 +108,7 @@
 //	Cordenadas de la Mesa Totales
 	const mesa_totales_cordenadas = {
 		'visible' : {
-			'x' : '1035px',
+			'x' : '1355px',
 			'y' : '195px',
 			'z' : 'unset'
 		},
@@ -135,8 +135,6 @@
 
 		//	Obtener Accion desde PubNub
 			let accion				=	datoPubNub.accion;
-
-			console.log(datoPubNub);
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -324,8 +322,7 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
-										<h2>REG. METROPOLITANA</h2>
-										<h3>CONSOLIDADOS VOTO A VOTO</h3>
+										<h2>CONSOLIDADO</h2>
 										<h4 id="mesa-totales-detalles"><b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS</h4>
 									</div>
 									<div class="columns" id="mesa-0-candidatos"></div>`;
@@ -335,6 +332,8 @@
 
 		//	Render de los candidatos en la mesa
 			const render_candidatos = document.getElementById('mesa-0-candidatos');
+
+			mesa_totales_candidatos.sort((a, b) => (a.id > b.id) ? 1 : -1)
 
         //	Recorrer el listado de candidatos
 			mesa_totales_candidatos.forEach(candidato =>
@@ -471,21 +470,13 @@
 				if( candidato_voto != null )
 				{
 					const candidato_div_voto_valor = document.querySelector('#candidate-' + candidato + ' > div.candidato-votos > div.candidato-votos-valor');
-					candidato_div_voto_valor.classList.add('animar_voto_texto')
-	
 					const candidato_div_voto_animacion = document.querySelector('#candidate-' + candidato + ' > div.candidato-votos-animacion');
 					candidato_div_voto_animacion.classList.add('animar_voto');
-	
-					const candidato_div_voto_icono = document.querySelector('#candidate-' + candidato + ' > div.candidato-votos > div.candidato-votos-icono');
-					candidato_div_voto_icono.classList.add('animar_voto_icono');
 	
 				//	Reiniciar animación del voto
 					setTimeout(function()
 					{
-						candidato_div_voto_valor.classList.remove('animar_voto_texto');
 						candidato_div_voto_animacion.classList.remove('animar_voto');
-						candidato_div_voto_icono.classList.remove('animar_voto_icono');
-						
 					}, tiempo_transiciones_adicional);
 	
 				//	Actualizar los valores
@@ -755,10 +746,6 @@
 						result.votos = votos;
 					}
 				}
-			}
-			else
-			{
-				console.log('NO RENDER');
 			}
 		},
 
