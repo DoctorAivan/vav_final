@@ -174,14 +174,14 @@
 					<section class="swich-r-cnt cols x2" id="mesas-swich">
 						<div class="swich-r-box box-shadow" id="swich-mesa-1">
 							<div class="swich-r-box-opciones" onclick="vaciarEspacio(1);">
-								<h2>MESA 1</h2>
+								<h2>MESA IZQUIERDA</h2>
 								<h3><i class="fas fa-times-circle"></i></h3>
 							</div>
 							<div class="swich-espacio cols x1 relacionados" id="mesa-1"></div>
 						</div>
 						<div class="swich-r-box box-shadow" id="swich-mesa-2">
 							<div class="swich-r-box-opciones" onclick="vaciarEspacio(2);">
-								<h2>MESA 2</h2>
+								<h2>MESA DERECHA</h2>
 								<h3><i class="fas fa-times-circle"></i></h3>
 							</div>
 							<div class="swich-espacio cols x1 relacionados" id="mesa-2"></div>
@@ -204,10 +204,14 @@
 						<div class="swich-r-box swich-nav box-shadow">
 							<div class="swich-mesas" id="swich-opcion-modo">
 								<h2>Template</h2>
-								<noscript>
-									<div onclick="swichModo(0);" id="swich-opcion-modo-0" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Modo Tótem</h2><p>Desplegada a la izquierda</p>"><i class="fas fa-window-restore"></i></div>
-								</noscript>
-								<div onclick="swichModo(1);" id="swich-opcion-modo-1" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Modo Flotante</h2><p>Desplegada en el centro</p>"><i class="fas fa-window-maximize"></i></div>
+								<div onclick="swichModo(0);" id="swich-opcion-modo-0" class="bordes-radius box-shadow-light of tipsy-top"
+								title="<h2>Modo Tótem</h2><p>Dos Mesas, consolidado a la Izquierda</p>">
+									<i class="fas fa-window-restore"></i>
+								</div>
+								<div onclick="swichModo(1);" id="swich-opcion-modo-1" class="bordes-radius box-shadow-light of tipsy-top"
+								title="<h2>Modo Flotante</h2><p>Una Mesa, consolidado a la Derecha</p>">
+									<i class="fas fa-window-maximize"></i>
+								</div>
 							</div>
 							<div class="swich-separador"></div>
 							<div class="swich-mesas" id="swich-opcion-mesas">

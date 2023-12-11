@@ -333,7 +333,7 @@ body
 		overflow: hidden;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 1fr 360px;
+		grid-template-columns: 1fr 380px;
 	}
 		.tottem .box .header
 		{

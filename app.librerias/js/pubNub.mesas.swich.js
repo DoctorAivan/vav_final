@@ -550,7 +550,14 @@
 				}
 			}
 
-			console.log( swich_mesa_2_historico , swich_mesa_2 );
+			if( swich_modo != swich_modo_anterior )
+			{
+				//	Desactivar consolidados
+				estadoConsolidadosActual('of');
+
+				//	Almacenar modo actual
+				swich_modo_anterior = swich_modo;
+			}
 
 		//	Almacenar Mesas en historico
 			swich_mesa_1_historico		=	swich_mesa_1;

@@ -2,7 +2,7 @@
 	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
 
 //	Mode de la Aplicación
-	let app_modo = 0
+	let app_modo = 1
 
 //	Template de Mesas
 	let app_template = 0
@@ -107,29 +107,15 @@
 
 //	Cordenadas de la Mesa Totales
 	const mesa_totales_cordenadas = {
-		'template_tottem' : {
-			'visible' : {
-				'x' : '80px',
-				'y' : '310px',
-				'z' : 'unset'
-			},
-			'oculta' : {
-				'x' : '-570px',
-				'y' : '310px',
-				'z' : 'unset'
-			}
+		'visible' : {
+			'x' : '1360px',
+			'y' : '183px',
+			'z' : 'unset'
 		},
-		'template_floating' : {
-			'visible' : {
-				'x' : '1360px',
-				'y' : '183px',
-				'z' : 'unset'
-			},
-			'oculta' : {
-				'x' : '1920px',
-				'y' : '183px',
-				'z' : 'unset'
-			}
+		'oculta' : {
+			'x' : '1920px',
+			'y' : '183px',
+			'z' : 'unset'
 		}
 	}
 	
@@ -149,8 +135,6 @@
 
 		//	Obtener Accion desde PubNub
 			let accion				=	datoPubNub.accion;
-
-			console.log( datoPubNub );
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -185,8 +169,6 @@
 				}
 				else
 				{
-					App.animar_salida_totales()
-
 				//	Reiniciar ID Historicos
 					mesa_1_historico = 0
 					mesa_2_historico = 0
@@ -377,10 +359,8 @@
 		},
 
 	//	Animar la entrada del bloque
-		animar_entrada_totales : function()	
+		animar_entrada_totales : function()
 		{
-			render_mesa_totales.classList.add('transition-on')
-
 		//	Validar mesas antes de desplegar
 			if( app_modo == 1 && mesa_2 != null )
 			{
@@ -393,18 +373,18 @@
 				setTimeout(function()
 				{
 				//	Asignar Posiciones en el eje X
-					render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
-					render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
-					render_mesa_totales.style.transform = mesa_totales_cordenadas.template_floating.visible.z;
+					render_mesa_totales.style.bottom = mesa_totales_cordenadas.visible.y;
+					render_mesa_totales.style.left = mesa_totales_cordenadas.visible.x;
+					render_mesa_totales.style.transform = mesa_totales_cordenadas.visible.z;
 
 				}, tiempo_transiciones_adicional );
 			}
 			else
 			{
 			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
-				render_mesa_totales.style.transform = mesa_totales_cordenadas.template_tottem.visible.z;
+				render_mesa_totales.style.bottom = mesa_totales_cordenadas.visible.y;
+				render_mesa_totales.style.left = mesa_totales_cordenadas.visible.x;
+				render_mesa_totales.style.transform = mesa_totales_cordenadas.visible.z;
 
 				mesa_totales_estado = true;
 			}
@@ -413,40 +393,10 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
-			if( app_modo == 0 )
-			{
-			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
-				render_mesa_totales.style.transform = mesa_totales_cordenadas.template_tottem.oculta.z;
-			}
-			else
-			{
-			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
-				render_mesa_totales.style.transform = mesa_totales_cordenadas.template_floating.oculta.z;
-			}
-
-			//	Corrección para el Bug del salto
-			setTimeout(function()
-			{
-				render_mesa_totales.classList.remove('transition-on')
-
-				if( app_modo == 0 )
-				{
-				//	Asignar Posiciones en el eje X
-					render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
-					render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
-				}
-				else
-				{
-				//	Asignar Posiciones en el eje X
-					render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
-					render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
-				}
-
-			}, tiempo_transiciones );
+		//	Asignar Posiciones en el eje X
+			render_mesa_totales.style.bottom = mesa_totales_cordenadas.oculta.y;
+			render_mesa_totales.style.left = mesa_totales_cordenadas.oculta.x;
+			render_mesa_totales.style.transform = mesa_totales_cordenadas.oculta.z;
 
 			mesa_totales_estado = false;
 
