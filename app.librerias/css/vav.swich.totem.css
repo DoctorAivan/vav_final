@@ -339,7 +339,7 @@ body
 		{
 			z-index: 3;
 			position: relative;
-			padding: 15px 0 15px 16px;
+			padding: 13px 0 13px 16px;
 			text-transform: uppercase;
 			color: var(--color-black);
 			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% );
@@ -400,13 +400,13 @@ body
 					-webkit-line-clamp: 1;
 					overflow: hidden;
 					text-transform: uppercase;
-					padding: 12px 0 0 0;
+					padding: 13px 0 0 0;
 				}
 				.tottem .box .columns .candidato .candidato-votos
 				{
 					position: relative;
 					text-align: center;
-					margin: -1px 0 0 0;
+					margin: -3px 0 0 0;
 					padding: 0 0 0 0;
 					display: grid;
 					grid-gap: 5px;
