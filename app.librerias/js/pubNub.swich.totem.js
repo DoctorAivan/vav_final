@@ -382,7 +382,7 @@
 			render_mesa_totales.classList.add('transition-on')
 
 		//	Validar mesas antes de desplegar
-			if( app_modo == 1 && mesa_2 != null )
+			if( app_modo == 1 )
 			{
 				mesa_totales_estado = true;
 
