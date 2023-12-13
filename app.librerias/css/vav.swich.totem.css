@@ -356,7 +356,7 @@ body
 				font-family: 'ATC_rg';
 				font-size: 1.4rem;
 				line-height: 1.4rem;
-				margin: 4px 0 5px 0;
+				margin: 4px 0 4px 0;
 			}
 			.tottem .box .header h4
 			{
@@ -400,12 +400,13 @@ body
 					-webkit-line-clamp: 1;
 					overflow: hidden;
 					text-transform: uppercase;
-					padding: 15px 0 0 0;
+					padding: 12px 0 0 0;
 				}
 				.tottem .box .columns .candidato .candidato-votos
 				{
 					position: relative;
 					text-align: center;
+					margin: -1px 0 0 0;
 					padding: 0 0 0 0;
 					display: grid;
 					grid-gap: 5px;
