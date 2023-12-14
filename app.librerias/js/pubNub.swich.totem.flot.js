@@ -322,7 +322,7 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
-										<h2>CONSOLIDADO</h2>
+										<h2>CONSOLIDADO CHV</h2>
 										<h4 id="mesa-totales-detalles"><b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS</h4>
 									</div>
 									<div class="columns" id="mesa-0-candidatos"></div>`;

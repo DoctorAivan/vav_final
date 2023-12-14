@@ -2,7 +2,7 @@
 	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
 
 //	Mode de la Aplicación
-	let app_modo = 0
+	let app_modo = 1
 
 //	Template de Mesas
 	let app_template = 0
@@ -53,7 +53,7 @@
 	const mesa_1_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '80px',
+				'x' : '70px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -65,7 +65,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '80px',
+				'x' : '70px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -81,7 +81,7 @@
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1170px',
+				'x' : '1180px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -93,7 +93,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1170px',
+				'x' : '1180px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -109,19 +109,19 @@
 	const mesa_totales_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '80px',
+				'x' : '1370px',
 				'y' : '310px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-570px',
+				'x' : '1920px',
 				'y' : '310px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1360px',
+				'x' : '1370px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -340,7 +340,7 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
-										<h2>CONSOLIDADO</h2>
+										<h2>CONSOLIDADO CHV</h2>
 										<h4 id="mesa-totales-detalles"><b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS</h4>
 									</div>
 									<div class="columns" id="mesa-0-candidatos"></div>`;
@@ -384,8 +384,6 @@
 		//	Validar mesas antes de desplegar
 			if( app_modo == 1 )
 			{
-				mesa_totales_estado = true;
-
 			//	Quitar la Mesa 2
 				App.animar_salida_mesa_2();
 
@@ -398,9 +396,16 @@
 					render_mesa_totales.style.transform = mesa_totales_cordenadas.template_floating.visible.z;
 
 				}, tiempo_transiciones_adicional );
+
+				mesa_totales_estado = true;
 			}
 			else
 			{
+				if(mesa_2 != null && app_template == 2)
+				{
+
+				}
+
 			//	Asignar Posiciones en el eje X
 				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
 				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
