@@ -53,24 +53,24 @@
 	const mesa_1_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '70px',
+				'x' : '50px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-750px',
+				'x' : '-670px',
 				'y' : '183px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '70px',
+				'x' : '50px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-750px',
+				'x' : '-670px',
 				'y' : '183px',
 				'z' : 'unset'
 			}
@@ -81,7 +81,7 @@
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1180px',
+				'x' : '1200px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -93,7 +93,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1180px',
+				'x' : '1200px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -109,7 +109,7 @@
 	const mesa_totales_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1370px',
+				'x' : '1390px',
 				'y' : '310px',
 				'z' : 'unset'
 			},
@@ -121,7 +121,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1370px',
+				'x' : '1390px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -401,9 +401,13 @@
 			}
 			else
 			{
-				if(mesa_2 != null && app_template == 2)
+				if(mesa_2 == null || app_template == 1)
 				{
-
+					console.log('CONSOLIDADO ABAJO');
+				}
+				else
+				{
+					console.log('CONSOLIDADO ARRIBA');
 				}
 
 			//	Asignar Posiciones en el eje X
