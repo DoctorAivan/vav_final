@@ -53,7 +53,7 @@
 	const mesa_1_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '50px',
+				'x' : '35px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -65,7 +65,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '50px',
+				'x' : '35px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -81,7 +81,7 @@
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1200px',
+				'x' : '1215px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -93,7 +93,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1200px',
+				'x' : '1215px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
@@ -109,7 +109,7 @@
 	const mesa_totales_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1390px',
+				'x' : '1405px',
 				'y' : '310px',
 				'z' : 'unset'
 			},
@@ -121,7 +121,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1390px',
+				'x' : '1405px',
 				'y' : '183px',
 				'z' : 'unset'
 			},
