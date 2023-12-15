@@ -257,7 +257,6 @@
 			//	Actualizar mesa totales
 				App.totales_actualizar()
 			}
-
 		}
 	});
 
@@ -1004,7 +1003,8 @@
 				}, tiempo_transiciones_adicional );
 			}
 
-			if( mesa_totales_estado != true && mesa_id == null )
+		//	if( mesa_totales_estado != true && mesa_id == null )
+			if( mesa_id == null )
 			{
 				mesa_2_historico = 0
 			}
