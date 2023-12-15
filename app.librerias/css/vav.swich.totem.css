@@ -123,19 +123,19 @@
 	--color-voted-blue-animation-a : #ffffff20;
 	--color-voted-blue-animation-b : #ffffffeb;
 	--color-voted-blue-shadow : #078dfc;
-	--color-voted-totals-blue-animation-a : #078dfc10;
-	--color-voted-totals-blue-animation-b : #078dfc80;
+	--color-voted-totals-blue-animation-a : #078dfc00;
+	--color-voted-totals-blue-animation-b : #078dfc60;
 
 	--color-voted-red-a : #fd387f;
 	--color-voted-red-b : #fd387f;
 	--color-voted-red-animation-a : #ffffff20;
 	--color-voted-red-animation-b : #ffffffeb;
 	--color-voted-red-shadow : #fd387f;
-	--color-voted-totals-red-animation-a : #fd387f10;
-	--color-voted-totals-red-animation-b : #fd387f80;
+	--color-voted-totals-red-animation-a : #fd387f00;
+	--color-voted-totals-red-animation-b : #fd387f60;
 
 	--color-header-background-a : #ffffff;
-	--color-header-background-b : #f2f2f2;
+	--color-header-background-b : #eeeeee;
 
 	--color-totals-background-a : #1a2b50;
 	--color-totals-background-b : #1a346b;
@@ -187,47 +187,8 @@ body
 	{
 		z-index: 11;
 		position: absolute;
-		left: 1920px;
-		width: 480px !important;
-	}
-
-	.animar_voto
-	{
-		animation: keyframe_voto 1s ease 1 forwards;
-	}
-	.animar_voto_texto
-	{
-		animation: keyframe_voto_texto 1s ease 1 forwards;
-	}
-	.animar_voto_icono
-	{
-		animation: keyframe_voto_icono 1s ease 1 forwards;
-	}
-
-	.letters_in
-	{
-		animation: keyframe_letter_in 1.5s ease-out 1 forwards;
-	}
-	.letters_zoom_in
-	{
-		animation: keyframe_letter_zoom_in 1.5s ease-out 1 forwards;
-	}
-	.arrow_zoom_in
-	{
-		animation: keyframe_arrow_zoom_in 1.5s ease-out 1 forwards;
-	}
-
-	.transition
-	{
-		transition: all 0.75s ease-in-out;
-	}
-	.transition-on
-	{
-		transition: left 0.75s ease, right 0.75s ease, transform 0.75s ease, bottom 0.75s ease;
-	}
-	.transition-of
-	{
-		transition: all 0s ease;
+		left: 0px;
+		width: 100%;
 	}
 
 	.tottem
@@ -238,7 +199,7 @@ body
 	.floating
 	{
 		position: absolute;
-		width: var(--candidate-width);
+		width: 100%;
 	}
 	.totals
 	{
@@ -251,31 +212,36 @@ body
 	{
 		grid-template-columns: 1fr !important;
 	}
-	.tottem .totales .header
-	{
-		position: inherit;
-		z-index: 1;
-		color: var(--color-white) !important;
-		padding: 15px 15px 15px 15px !important;
-		height: auto !important;
-		text-align: center;
-		background: linear-gradient( 0deg, var(--color-totals-background-a) 0%, var(--color-totals-background-b) 100%) !important;
-	}
-		.tottem .totales .header h2
+		.tottem .totales .header
 		{
-			font-family: 'Santral_Extrabold';
-			font-size: 2rem !important;
-			line-height: 2rem !important;
-			padding: 0 0 3px 0;
+			position: inherit;
+			z-index: 1;
+			color: var(--color-white) !important;
+			padding: 15px 15px 15px 15px !important;
+			height: auto !important;
+			text-align: center;
+			background: linear-gradient( 0deg, var(--color-totals-background-a) 0%, var(--color-totals-background-b) 100%) !important;
 		}
-		.tottem .totales .header h4
+			.tottem .totales .header h2
+			{
+				font-family: 'Santral_Extrabold';
+				font-size: 2rem !important;
+				line-height: 2rem !important;
+				padding: 0 0 3px 0;
+			}
+			.tottem .totales .header h4
+			{
+				display: block !important;
+				background: var(--color-white) !important;
+				color: var(--color-totals-background-a) !important;
+				font-size: 1.3rem !important;
+				line-height: 1.3rem !important;
+				padding: 7px 0 2px 0 !important;
+			}
+
+		.tottem .totales .logo
 		{
-			display: block !important;
-			background: var(--color-white) !important;
-			color: var(--color-totals-background-a) !important;
-			font-size: 1.3rem !important;
-			line-height: 1.3rem !important;
-			padding: 7px 0 2px 0 !important;
+			display: none;
 		}
 
 		.tottem .totales .columns .a-favor
@@ -482,6 +448,45 @@ body
 	ANIMACIONES
 	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 */
+	.animar_voto
+	{
+		animation: keyframe_voto 1s ease 1 forwards;
+	}
+	.animar_voto_texto
+	{
+		animation: keyframe_voto_texto 1s ease 1 forwards;
+	}
+	.animar_voto_icono
+	{
+		animation: keyframe_voto_icono 1s ease 1 forwards;
+	}
+
+	.letters_in
+	{
+		animation: keyframe_letter_in 1.5s ease-out 1 forwards;
+	}
+	.letters_zoom_in
+	{
+		animation: keyframe_letter_zoom_in 1.5s ease-out 1 forwards;
+	}
+	.arrow_zoom_in
+	{
+		animation: keyframe_arrow_zoom_in 1.5s ease-out 1 forwards;
+	}
+
+	.transition
+	{
+		transition: all 0.75s ease-in-out;
+	}
+	.transition-on
+	{
+		transition: left 0.75s ease, right 0.75s ease, transform 0.75s ease, bottom 0.75s ease;
+	}
+	.transition-of
+	{
+		transition: all 0s ease;
+	}
+
 	@keyframes keyframe_letter_in
 	{
 		0% { opacity: 0 }
