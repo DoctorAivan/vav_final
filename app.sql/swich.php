@@ -13,6 +13,7 @@
 	require_once("$_FUNCIONES/filtros.php");
 	require_once("$_FUNCIONES/fechas.php");
 	
+
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 //	Recibir Funcion Requerida
@@ -214,11 +215,17 @@
 				
 				WHERE
 					mesa.mesa_tipo = 'P' AND
+					mesa.mesa_estado IN(1,2)
+
+			";
+			/*
+				WHERE
+					mesa.mesa_tipo = 'P' AND
 					mesa.mesa_estado IN(1,2) AND
 					mesa.mesa_zona = 3013
 
-			";
-
+			*/
+			
 		//	Ejecutar Query
 			$QUERY_TOTAL_MESAS						=	pg_query($CONF_DB_CONNECT, $QUERY);
 			$_TOTAL_MESAS							=	pg_fetch_object($QUERY_TOTAL_MESAS);
@@ -246,7 +253,6 @@
 
 				WHERE
 					mesa.mesa_tipo = 'P' AND
-					mesa.mesa_zona = 3013 AND
 					mesa.mesa_estado IN(1,2) AND
 					voto.mesa_id = mesa.mesa_id AND
 					candidato.candidato_id = voto.candidato_id AND
@@ -265,6 +271,16 @@
 					votos_total DESC;
 		
 			";
+			/*
+				WHERE
+					mesa.mesa_tipo = 'P' AND
+					mesa.mesa_zona = 3013 AND
+					mesa.mesa_estado IN(1,2) AND
+					voto.mesa_id = mesa.mesa_id AND
+					candidato.candidato_id = voto.candidato_id AND
+					partido.partido_id = candidato.partido_id AND
+					pacto.pacto_id = candidato.pacto_id
+			*/
 			
 		//	Ejecutar Query
 			$QUERY_MESAS							=	pg_query($CONF_DB_CONNECT, $QUERY);
