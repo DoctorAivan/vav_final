@@ -250,7 +250,7 @@ body
 				font-family: 'Santral_ExtraBold';
 				font-size: 1.4rem;
 				line-height: 1.4rem;
-				padding: 7px 0 5px 35px;
+				padding: 9px 0 9px 35px;
 				background: linear-gradient( 0deg, #ffffff 0%, #e3e3e3 100%);
 			}
 
@@ -361,7 +361,7 @@ body
 					{
 						position: relative;
 						width: 100%;
-						padding: 10px 0 0 20px;
+						padding: 9px 0 0 20px;
 						background: linear-gradient( 0deg, #00000000 0%, #00000010 100%);
 					}
 						.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor
