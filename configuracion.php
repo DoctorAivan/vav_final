@@ -14,7 +14,7 @@
 
 //	Reportes de errores para la Aplicacion
 	ini_set("display_errors",1);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(E_ERROR | E_PARSE);
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACION DE DB
