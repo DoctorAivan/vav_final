@@ -622,10 +622,10 @@ body
 							text-align: center;
 							z-index: 6;
 							font-family: 'Santral_Extrabold';
-							font-size: 3.1rem;
-							line-height: 3.1rem;
+							font-size: 3.05rem;
+							line-height: 3.05rem;
 							transition: all 0.75s ease-in-out;
-							padding: 2px 0 2px 0;
+							padding: 1px 0 3px 0;
 						}
 							.tottem .box .candidatos .candidato-votos-animacion
 							{
