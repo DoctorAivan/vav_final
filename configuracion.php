@@ -36,8 +36,8 @@
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DEL SITIO
-	$_APP_TITLE							=	"Plebiscito 2023";
-	$_APP_DESCRIPTION					=	"Chilevisión - Chile";
+	$_APP_TITLE							=	"Elecciones Chile - 2024";
+	$_APP_DESCRIPTION					=	"Regionales y Municipales - Chilevisión";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DE LOS DIRECTORIOS
@@ -64,8 +64,8 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	INFORMACION DE LA APLICACION
 
-//	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.3.4";
+	$_CONF_VERSION						=	"?alpha.".time();
+//	$_CONF_VERSION						=	"?version.3.5";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES
@@ -88,11 +88,13 @@
 	$_URL_MESA_VISUALIZADOR				=	"$_APP/mesas/visualizador/";
 	$_URL_MESA_VISUALIZADOR_PUBLICO		=	"$_APP/mesas/visualizador-publico/";
 	$_URL_MESA_SWICH					=	"$_APP/mesas/swich/";
+	$_URL_MESA_SWICH_QUAD				=	"$_APP/mesas/swich-quad/";
 	$_URL_MESA_SWICH_VISUALIZADOR		=	"$_APP/mesas/swich/visualizador/";
 	$_URL_MESA_SWICH_TOTEM				=	"$_APP/mesas/swich/totem/";
 	$_URL_MESA_SWICH_TOTEM_PREVIEW		=	"$_APP/mesas/swich/totem-preview/";
 	$_URL_MESA_SWICH_CHROMA				=	"$_APP/mesas/swich/chroma/";
 	$_URL_MESA_SWICH_CHROMA_PREVIEW		=	"$_APP/mesas/swich/chroma-preview/";
+	$_URL_MESA_SWICH_WALL				=	"$_APP/mesas/swich/wall/";
 	$_URL_MESA_OPERADOR					=	"$_APP/mesas/operador/";
 
 //	Usuarios
@@ -126,6 +128,7 @@
 	
 //	Crear Sesion
 	session_start();
+	$_SESION_ID = session_id();
 	
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACION DE FECHA Y HORA
@@ -162,10 +165,12 @@
 //	CONFIGURACION PARA PUBNUB
 
 //	Monitoreo de Mesas
-	$_PUBNUB_PUB_MESAS					=	"pub-c-84c5e706-2ab3-4d0b-890b-6f99ecd92b24";
-	$_PUBNUB_SUS_MESAS					=	"sub-c-573f9a64-62f3-11ea-8216-b6c21e45eadc";
+	#$_PUBNUB_PUB_MESAS					=	"pub-c-a967235b-7113-4366-ad35-62c18a797009";
+	#$_PUBNUB_SUS_MESAS					=	"sub-c-a9e93655-4ac5-4704-a76e-180fd4aa64b4";
 
-	#$_PUBNUB_PUB_MESAS					=	"pub-c-8b5c6d4e-d082-4615-a3a6-788949653edf";
-	#$_PUBNUB_SUS_MESAS					=	"sub-c-f7873e1d-1a48-4553-be89-86e9a189d093";
+	$_PUBNUB_PUB_MESAS					=	"pub-c-c2bcd954-a763-4e14-94a8-aa4f5cfc9552";
+	$_PUBNUB_SUS_MESAS					=	"sub-c-2d699765-7b7f-404a-be45-e473a24b5fa6";
+	$_PUBNUB_SECRET_KEY					=	"sec-c-Y2M4MTVhNDgtM2M1Ni00NTgyLWI3YTctZDNmZDJjNTMzZjdk";
+	$_PUBNUB_USER_ID					=	$_SESION_ID;
 
 ?>
