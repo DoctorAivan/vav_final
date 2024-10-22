@@ -470,7 +470,7 @@ body
 				font-family: 'Santral_Bold';
 				font-size: 1.7rem;
 				line-height: 1.7rem;
-				padding: 5px 0 2px 0;
+				padding: 5px 0 3px 0;
 			}
 				.tottem .box .header h2 .tipo
 				{
@@ -588,7 +588,7 @@ body
 							display: grid;
 							grid-template-columns: 1fr 1fr;
 							background: var(--color-white);
-							margin: 5px 23px 4px 23px;
+							margin: 5px 23px 2px 23px;
 							transition: all 0.75s ease-in-out;
 						}
 							.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-alianza .candidato-detalles-alianza-partido
