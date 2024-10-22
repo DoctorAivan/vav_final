@@ -500,7 +500,7 @@
 	//	Actualizar de las Mesas
 		$.post( path_app + '/swich/editar/' ,
 		{
-			swich_id				:	1,
+			swich_id				:	swich_id,
 			swich_modo				:	swich_modo,
 			swich_mesas				:	swich_mesas,
 			swich_mesa_1			:	swich_mesa_1,
@@ -528,6 +528,87 @@
             }
 
         //	Enviar Notificación a PubNub
+			enviarPubNub( pubnub );
+
+		//	Esperar para realizar cambios
+			if( recargar_estado == 1 )
+			{
+			//	Actualizar Pagina
+				location.reload();
+			}
+
+		//	Validar modo actual
+			if( swich_mesas != 0 && estado_consolidados == 'on'  )
+			{
+				//	Almacenar modo actual
+				swich_modo_anterior = swich_modo;
+
+				if( swich_mesa_1 != undefined )
+				{
+				//	Desactivar consolidados
+					estadoConsolidadosActual('of');
+				}
+			}
+
+			if( swich_modo != swich_modo_anterior )
+			{
+				//	Desactivar consolidados
+				estadoConsolidadosActual('of');
+
+				//	Almacenar modo actual
+				swich_modo_anterior = swich_modo;
+			}
+
+		//	Almacenar Mesas en historico
+			swich_mesa_1_historico		=	swich_mesa_1;
+			swich_mesa_2_historico		=	swich_mesa_2;
+		});
+	}
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+	
+//	Editar las Mesas que serán Mostradas
+	function swichQuadGuardar()
+	{
+	//	Obtener ID de las Mesas
+		let swich_mesa_1			=	$( "#mesa-1 > .mesa-swich" ).first().attr('mesa');
+		let swich_mesa_2			=	$( "#mesa-2 > .mesa-swich" ).first().attr('mesa');
+		let swich_mesa_3			=	$( "#mesa-3 > .mesa-swich" ).first().attr('mesa');
+		let swich_mesa_4			=	$( "#mesa-4 > .mesa-swich" ).first().attr('mesa');
+
+	//	Actualizar de las Mesas
+		$.post( path_app + '/swich/editar/' ,
+		{
+			swich_id				:	swich_id,
+			swich_modo				:	swich_modo,
+			swich_mesas				:	swich_mesas,
+			swich_mesa_1			:	swich_mesa_1,
+			swich_mesa_2			:	swich_mesa_2,
+			swich_mesa_3			:	swich_mesa_3,
+			swich_mesa_4			:	swich_mesa_4,
+			swich_votos				:	swich_votos
+		})
+		.done(function( data )
+		{
+		//	Aplicar Cambios a los Botones
+			swich_cambios	=	0;
+
+		//	Estado de Cambios en el Swich
+			estadoSwich();
+			
+		//	Construir Variable para enviar a PubNub
+			let pubnub       	=
+			{
+				'accion'		:	'switchQuad',
+				'modo'          :	swich_modo,
+				'template'		:	swich_mesas,
+				'mesa_1'		:	Number(swich_mesa_1),
+				'mesa_2'		:	Number(swich_mesa_2),
+				'mesa_3'		:	Number(swich_mesa_3),
+				'mesa_4'		:	Number(swich_mesa_4)
+			}
+
+		//	Enviar Notificación a PubNub
 			enviarPubNub( pubnub );
 
 		//	Esperar para realizar cambios

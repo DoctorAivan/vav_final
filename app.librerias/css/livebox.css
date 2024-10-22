@@ -215,7 +215,7 @@
 			color: var(--color-texto-1);
 			border: solid 1px var(--color-border-1);
 			border-radius: var(--border-radius);
-			padding: 13px 0 17px 0;
+			padding: 14px 0 15px 0;
 			cursor: pointer;
 		}
 			.livebox .tipo-mesa div i
@@ -253,10 +253,8 @@
 		{
 			float: left;
 			width: 100%;
-		/*
 			max-height: 292px;
 			overflow-y: scroll;
-		*/
 			padding: 9px 0 9px 0;
 		}
 		.livebox .candidatos-listado-titulo
@@ -278,6 +276,22 @@
 			{
 				padding: 20px 30px 7px 20px;
 			}
+
+		.livebox .candidato-titulos
+		{
+			float: left;
+			width: calc(100% - (var(--padding-box) * 2));
+			padding: 6px var(--padding-box) 6px var(--padding-box);
+			display: grid;
+			grid-template-columns: 450px 1fr;
+			grid-gap: 20px;
+			color: var(--color-texto-1);
+		}
+			.livebox .candidato-titulos i
+			{
+				margin: 0 0 0 13px;
+			}
+
 		.livebox .candidato
 		{
 			float: left;
@@ -301,7 +315,9 @@
 			}
 			.livebox .candidatos .titulo
 			{
-				padding: 0 var(--padding-box) 10px var(--padding-box);
+				z-index: 99;
+				padding: 0 var(--padding-box) 13px var(--padding-box);
+				box-shadow: 0 22px 22px #00000040;
 			}
 			.livebox .candidato input
 			{
@@ -322,6 +338,13 @@
 				font-weight: 400;
 				color: var(--color-texto-1);
 			}
+				.livebox .candidato .candidato-titulo i
+				{
+					font-size: 1rem;
+					line-height: 1rem;
+					color: var(--color-texto-1);
+					margin: 0 0 0 8px;
+				}
 			.livebox .candidato .candidato-nombre
 			{
 				float: left;
@@ -473,7 +496,7 @@
 						font-size: 0.9rem;
 						letter-spacing: 0.025rem;
 						display: grid;
-						grid-template-columns: 1fr 1fr;
+						grid-template-columns: 57% 43%;
 					}
 						.easy-autocomplete-container .box .child
 						{

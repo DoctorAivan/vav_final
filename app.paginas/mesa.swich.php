@@ -14,6 +14,7 @@
 
 <!--	Libreria Listados	-->
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>vav.mesas.js<?php echo $_CONF_VERSION; ?>"></script>
+		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>vav.consolidados.js<?php echo $_CONF_VERSION; ?>"></script>
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.sorteable.js<?php echo $_CONF_VERSION; ?>"></script>
 
 <!--	Librerias -->
@@ -24,17 +25,25 @@
 <!--	Librerias Jquery -->
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.timeago.js<?php echo $_CONF_VERSION; ?>"></script>
 
+		<!-- Libreria Autocomplate -->
+		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.autocomplete.js"></script>
+
+<!--	Livebox	-->		
+		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>livebox.js<?php echo $_CONF_VERSION; ?>"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>livebox.css<?php echo $_CONF_VERSION; ?>"/>
+
 <!--	Librerias Tipsy -->
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.tipsy.js<?php echo $_CONF_VERSION; ?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>jquery.tipsy.css<?php echo $_CONF_VERSION; ?>"/>
 		
 <!--	Librerias PubNub -->
-        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.17.0.min.js"></script>
+		<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.8.2.8.js"></script>
         
 <!--	Funcionalidades por Defecto -->
 		<script type="text/javascript">
 
 		//	Mesas Almacenadas
+			var swich_id		=	<?php echo $SWITCH_ID; ?>;
 			var swich_modo		=	<?php echo $_SWICH->swich_modo; ?>;
 			var swich_mesas		=	<?php echo $_SWICH->swich_mesas; ?>;
 			var swich_mesa_1	=	<?php echo $_SWICH->swich_mesa_1; ?>;
@@ -46,20 +55,20 @@
 		//	Pubnub Monitoreo de Mesas
 		    pubnub = new PubNub({
 				subscribeKey	:	"<?php echo $_PUBNUB_SUS_MESAS; ?>",
-				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>"
+				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>",
+				secretKey		:	"<?php echo $_PUBNUB_SECRET_KEY; ?>",
+				userId			:	"<?php echo $_PUBNUB_USER_ID; ?>"
 		    });
 
 		//	Enviar Información a PubNub
-            function enviarPubNub( parametro )
+			function enviarPubNub( parametro )
             {
 				var publishConfig = {
 					channel : "vav_mesas",
 					message : parametro
 				}
-				pubnub.publish( publishConfig , function( status , response )
-				{
-					
-				})
+				
+				pubnub.publish( publishConfig )
             }
 
 		</script>
@@ -81,6 +90,12 @@
 	//	Header
 		include_once "$_COMPONENTES/header.php";
 
+	//	Livebox Editar Mesa
+		include_once "$_COMPONENTES/livebox.consolidados.php";
+
+	//	Livebox Fondo
+		include_once "$_COMPONENTES/livebox.bg.php";
+
 ?>
 
 		<section class="main">
@@ -88,17 +103,23 @@
 			<section class="main-cnt cols x1 margin-bottom">
 				<section class="bg-blanco box-shadow bordes-radius crop">
 					<header class="titulo-seccion no-border">
-						<div class="icono"><i class="fab fa-slideshare"></i></div>
-						<h2 class="icono-on">Administrar Swich</h2>
+						<div class="icono">
+							<i class="far fa-window-restore"></i>
+						</div>
+						<h2 class="icono-on">Administrar Salida TV</h2>
 						<h3 class="icono-on">Listado completo de mesas</h3>
 
 						<div class="opciones">
+
 							<div class="input">
 								<label>
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-P" title="Plebiscito" onclick="mesa_filtrar('P');">🟡</div>
+							
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🟡</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-A" title="Alcaldes" onclick="mesa_filtrar('A');">🔴</div>
+
 						</div>
 					</header>
 				</section>
@@ -141,11 +162,22 @@
 ?>
 						</div>
 						<header>
-							<h2><i class="fas fa-passport"></i> <?php echo $_MESA->mesa_id; ?></h2>
+							<h2><i class="fas fa-hashtag"></i> <?php echo $_MESA->mesa_id; ?></h2>
 							<div class="tipo"><?php echo $mesa_tipo_titulo; ?></div>
 							<div class="zona"><?php echo $_MESA->mesa_zona_titulo; ?></div>
+<?php
+						if( $_MESA->mesa_local )
+						{
+?>
 							<h3 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_nombre"><?php echo $_MESA->mesa_local; ?></h3>
 <?php
+						}
+						else
+						{
+?>
+							<h3 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_nombre">SIN LOCAL</h3>
+<?php
+						}
 						if( $_MESA->mesa_numero )
 						{
 ?>
@@ -202,7 +234,7 @@
 						</div>
 
 						<div class="swich-r-box swich-nav box-shadow">
-							<div class="swich-mesas" id="swich-opcion-modo">
+							<div class="swich-mesas" id="swich-opcion-modo" style="display:none;">
 								<h2>Template</h2>
 								<div onclick="swichModo(0);" id="swich-opcion-modo-0" class="bordes-radius box-shadow-light of tipsy-top"
 								title="<h2>Modo Tótem</h2><p>Dos Mesas, consolidado a la Izquierda</p>">
@@ -213,12 +245,12 @@
 									<i class="fas fa-window-maximize"></i>
 								</div>
 							</div>
-							<div class="swich-separador"></div>
+							<div class="swich-separador" style="display:none;"></div>
 							<div class="swich-mesas" id="swich-opcion-mesas">
 								<h2>Cantidad de Mesas</h2>
 								<div onclick="swichMesas(0);" id="swich-opcion-mesas-0" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template Sin Mesas</h2><p>Se ocultaran todas las Mesas</p>"><i class="fas fa-ban"></i></div>
 								<div onclick="swichMesas(1);" id="swich-opcion-mesas-1" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template 1 Mesa</h2><p>Se mostrara en pantalla 1 Mesa</p>">1</div>
-								<div onclick="swichMesas(2);" id="swich-opcion-mesas-2" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template 2 Mesa</h2><p>Se mostrara en pantalla 2 Mesa</p>">2</div>
+								<div onclick="swichMesas(2);" id="swich-opcion-mesas-2" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template 2 Mesa</h2><p>Se mostrara en pantalla 2 Mesas</p>">2</div>
 							</div>
 							<div class="swich-separador"></div>
 							<div class="swich-controles">
@@ -232,24 +264,27 @@
 						</div>
 
 						<div class="swich-r-box swich-nav box-shadow">
-							<div class="swich-consolidados">
-								<noscript>
-								<div>
-									<div class="swich-consolidados-titulo">Mostrar total de Mesas</div>
-									<div class="swich-consolidados-items">
-										<div id="consolidados-posicion-l" class="item on" onclick="posicionConsolidados('l');">OCULTO</div>
-										<div id="consolidados-posicion-r" class="item of" onclick="posicionConsolidados('r');">VISIBLE</div>
-									</div>
+
+							<div class="swich-mesas" id="swich-opcion-mesas">
+								<h2>Configuración de consolidados</h2>
+								<div id="consolidados-render" class="consolidados bordes-radius" onclick="consolidados_asignar();">
+									<span id="consolidados-render-tipo" class="tipo">🔴&nbsp;&nbsp;GOBERNADOR</span>
+									<hr class="separador"><i class="fas fa-chevron-right"></i></hr>
+									<span id="consolidados-render-zona" class="zona">R. METROPOLITANA</span>
+									<i id="consolidados-render-icon" class="fa fa-highlighter"></i>
 								</div>
-								</noscript>
+							</div>
+
+							<div class="swich-consolidados">
 								<div>
-									<div class="swich-consolidados-titulo">Consolidados R. Metropolitana</div>
+									<div class="swich-consolidados-titulo">Estado del modulo en pantalla</div>
 									<div class="swich-consolidados-items">
-										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i> &nbsp;&nbsp;OCULTO</div>
-										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i> &nbsp;&nbsp;VISIBLE</div>
+										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO</div>
+										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE</div>
 									</div>
 								</div>
 							</div>
+							
 						</div>
 
 					</section>

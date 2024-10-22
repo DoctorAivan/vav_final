@@ -17,17 +17,18 @@
 		<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
 		<!-- Librerias PubNub -->
-        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.17.0.min.js"></script>
+        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.8.2.8.js"></script>
 
 		<!-- Funcionalidades por Defecto -->
 		<script type="text/javascript">
 
 		//	Pubnub Monitoreo de Mesas
-		    pubnub = new PubNub(
-			{
+			pubnub = new PubNub({
 				subscribeKey	:	"<?php echo $_PUBNUB_SUS_MESAS; ?>",
-				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>"
-		    });
+				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>",
+				secretKey		:	"<?php echo $_PUBNUB_SECRET_KEY; ?>",
+				userId			:	"<?php echo $_PUBNUB_USER_ID; ?>"
+            });
 
 		</script>
 

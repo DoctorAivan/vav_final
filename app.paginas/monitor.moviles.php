@@ -13,7 +13,7 @@
 ?>
 
 		<!-- Librerias PubNub -->
-        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.17.0.min.js"></script>
+        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.8.2.8.js"></script>
         
 		<!-- Funcionalidades por Defecto -->
 		<script type="text/javascript">

@@ -10,9 +10,6 @@ var mesa_filtro                     =   0;
 var mesa_candidatos                 =   Array();
 var mesa_estado_guardado            =   '';
 
-var autocompletar_regiones          =   [];
-var autocompletar_comunas           =   [];
-var autocompletar_distritos         =   [];
 var objeto_regiones                 =   [];
 var objeto_circunscripciones        =   [];
 var objeto_distritos                =   [];
@@ -32,43 +29,25 @@ $(function()
     var mesa_votos	=	$.cookie('vav_mesas_votos');
 
 //	Mostrar tipo de Votos
-    mesa_filtrar( 'P' );
+    mesa_filtrar( '' );
 
 //  Obtener Diccionario de Gobernadores
     $.getJSON( path_app + '/app.librerias/zonas.json' , function( json )
     {
+    //  Alimentar objeto con las regiones
+        objeto_regiones = json.regiones;
+
+    //  Alimentar objeto con las provincias
+        objeto_provincias = json.provincias
+
+    //  Alimentar objeto con las circunscripciones
+        objeto_circunscripciones = json.circunscripciones;
+
+    //  Alimentar objeto con los distritos
+        objeto_distritos = json.distritos;
+
     //  Alimentar objeto con las comunas
         objeto_comunas = json.comunas;
-
-    //  Alimentar objeto con las comunas
-        objeto_regiones      =   json.regiones;
-
-    //  Alimentar objeto con las comunas
-        objeto_distritos      =   json.distritos;
-
-    //  Alimentar objeto con las comunas
-        objeto_circunscripciones      =   json.circunscripciones;
-
-        //  Recorrer Comunas
-        $.each( json.distritos , function( i, distrito )
-        {
-        //  Agregar al objeto de autocompletar
-            autocompletar_distritos.push( { i: distrito.i , n: distrito.n , c: distrito.c , cp: distrito.cp } );
-        });
-
-    //  Completar autocompletar con Regiones
-        $.each( json.regiones , function( i, objeto )
-        {
-        //  Agregar al objeto de autocompletar
-            autocompletar_regiones.push( { i: objeto.i , n: objeto.n , r: objeto.r } );
-
-        //  Recorrer Comunas
-            $.each( objeto_comunas[ objeto.i ], function( i, comuna )
-            {
-            //  Agregar al objeto de autocompletar
-                autocompletar_comunas.push( { n: comuna.n , i: comuna.i , r: comuna.r , d: comuna.d , p: comuna.p , s: comuna.s } );
-            });
-        });
     });
 
 //  Consolidados estados
@@ -96,7 +75,7 @@ function mesa_nueva()
     liveboxAbrir('mesa');
 
 //  Marcar Pacto por Defecto
-    mesa_nueva_tipo('P');
+    mesa_nueva_tipo('G');
 
 //  Generar Listado de Regiones
 //  mesa_nueva_regiones_listado();
@@ -151,8 +130,8 @@ function mesa_nueva_autocompletar_comunas()
 {
 //  Crear objeto autocompletar
     let options = {
-        data: autocompletar_comunas,
-        getValue: "n",
+        data: objeto_comunas,
+        getValue: "nombre",
         list: {
             maxNumberOfElements: 5,
             match: {
@@ -164,12 +143,12 @@ function mesa_nueva_autocompletar_comunas()
             method: function(value, objeto)
             {
             //  Obtener Nombre de la Región
-                let region = autocompletar_regiones.filter( obj => obj.i === Number(objeto.r) )[0];
+                let region = objeto_regiones.find( obj => obj.id === objeto.region );
 
             //  Crear div con el resultado
-                let div     =   `<div class="box" onClick="nueva_mesa_zona(${objeto.i})">
+                let div     =   `<div class="box" onClick="nueva_mesa_zona(${objeto.id})">
                                     <div class="child">${value}</div>
-                                    <div class="parent">${region.n}</div>
+                                    <div class="parent">${region.nombre}</div>
                                 </div>`;
 
             //  Enviar resultado a la UI
@@ -186,48 +165,27 @@ function mesa_nueva_autocompletar_comunas()
 function nueva_mesa_zona( id )
 {
 //  Obtener información de la Comuna
-    let comuna = autocompletar_comunas.filter( obj => obj.i === Number(id) )[0];
+    let comuna = objeto_comunas.find( obj => obj.id === id );
+
+//  Obtener la Circunscripcion de la Comuna
+    let region = objeto_regiones.find( obj => obj.id === comuna.region );
+
+//  Tipo Zona Gobernador
+    if( mesa_tipo == 'G' )
+    {
+        mesa_zona = region.id;
+        mesa_zona_titulo = region.nombre;
+    }
+
+//  Tipo Zona Alcalde
+    if( mesa_tipo == 'A' )
+    {
+        mesa_zona = comuna.id;
+        mesa_zona_titulo = comuna.nombre;
+    }
 
 //  Almacenar Nombre de la comuna
-    mesa_nueva_comuna = comuna.n;
-
-//  Obtener la Circunscripcion de la Comuna
-    let region = autocompletar_regiones.filter( obj => obj.i === Number(comuna.r) )[0];
-
-//  Obtener la Circunscripcion de la Comuna
-    let circunscripcion = objeto_circunscripciones[comuna.s];
-
-//  Obtener el Distrito de la Comuna
-    let distrito = autocompletar_distritos.filter( obj => obj.c === Number(comuna.d) )[0];
-
-//  Validar Tipo de Zona
-
-//  Tipo Plebiscito
-    if( mesa_tipo == 'P' )
-    {
-        mesa_zona = region.i;
-
-    //  Asignar el nombre de la Zona
-        mesa_zona_titulo = region.n;
-    }
-
-//  Tipo Senadores
-    if( mesa_tipo == 'S' )
-    {
-        mesa_zona = comuna.s;
-
-    //  Asignar el nombre de la Zona
-        mesa_zona_titulo = circunscripcion.n;
-    }
-
-//  Tipo Diputados
-    if( mesa_tipo == 'D' )
-    {
-        mesa_zona = distrito.i;
-
-    //  Asignar el nombre de la Zona
-        mesa_zona_titulo = distrito.n;
-    }
+    mesa_nueva_comuna = comuna.nombre;
 
 //  Funcionalidad Botones nueva mesa
     const mensa_nueva_of = document.getElementById('mesa-nueva-of')
@@ -261,7 +219,7 @@ function mesa_nueva_regiones_listado()
     let div = '';
 
 //  Crear elemento en el objeto
-    $.each( autocompletar_regiones , function( i, region )
+    $.each( objeto_regiones , function( i, region )
     {
         div += `<div onclick="mesa_nueva_regiones_listado_marcar(${region.i});" id="region-listado-id-${region.i}" class="regiones-listado-box">
                     <div class="codigo">${region.r}</div>
@@ -311,7 +269,7 @@ function mesa_autocompletar_comunas()
 {
 //  Crear objeto autocompletar
     let options = {
-        data: autocompletar_comunas,
+        data: objeto_comunas,
         getValue: "n",
         list: {
             maxNumberOfElements: 5,
@@ -370,16 +328,16 @@ function mesa_detalles( id )
         let mesa_tipo_titulo;
 
     //  Asignar tipo de elección
-        switch( objeto.mesa.mesa_tipo )
+        switch( mesa_tipo )
         {
+            case 'G':
+                mesa_tipo_titulo        =   'ELECCIÓN DE GOBERNADORES';
+            break;
+            case 'A':
+                mesa_tipo_titulo        =   'ELECCIÓN DE ALCALDES';
+            break;
             case 'P':
-                mesa_tipo_titulo        =   'PLEBISCITO';
-            break;
-            case 'S':
-                mesa_tipo_titulo        =   'SENADORES';
-            break;
-            case 'D':
-                mesa_tipo_titulo        =   'DIPUTADOS';
+                mesa_tipo_titulo        =   'ELECCIÓN DE PLEBISCITO';
             break;
         }
 
@@ -414,62 +372,104 @@ function mesa_detalles( id )
     //  Crear Objeto con los candidatos
         objeto_candidatos = [];
 
-    //  Asignar los Candidatos
-        $.each( objeto.candidatos , function( i, candidato )
+    //  Validar que existan candidatos
+        if( objeto.candidatos )
         {
-        //  Agregar al objeto de autocompletar
-            objeto_candidatos.push( { i: Number(candidato.candidato_id) , n: String(candidato.candidato_nombre) } );
 
-        //  Crear Div candidato
-            let div     =   `<div class="candidato candidato-buscar-item candidato-hover-brightness" id="candidato-${candidato.candidato_id}">
-                                <div class="candidato-nombre">
-                                    <input disabled="disabled" id="candidato_nombres_${candidato.candidato_id}" type="text" autocomplete="off" class="numerico box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_nombres}"></input>
-                                </div>
-                                <div class="candidato-votos"><input candidato="${candidato.candidato_id}" id="voto-${candidato.voto_id}" type="text" autocomplete="off" class="mesa_valor_numerico numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${candidato.voto_total}" /></div>
-                                <div class="candidato-guardar"><i class="fas fa-check-circle tipsy-s" title="Guardar Voto" onclick="mesa_votos(${candidato.voto_id},'g',${candidato.candidato_id});"></i></div>
-                                <div class="candidato-sumar"><i class="fas fa-plus-circle tipsy-s" title="Sumar un Voto" onclick="mesa_votos(${candidato.voto_id},'s',${candidato.candidato_id});"></i></div>
-                                <div class="candidato-restar"><i class="fas fa-minus-circle tipsy-s" title="Restar un Voto" onclick="mesa_votos(${candidato.voto_id},'r',${candidato.candidato_id});"></i></div>
-                                <div id="candidato_voto_bloqueado_${candidato.candidato_id}" class="candidato-bloqueado"></div>
-                            </div>`;
+        //  Asignar los Candidatos
+            $.each( objeto.candidatos , function( i, candidato )
+            {
+            //  Agregar al objeto de autocompletar
+                objeto_candidatos.push( { i: Number(candidato.candidato_id) , n: String(candidato.candidato_nombre) } );
 
             /*
 
-            MODO CONSTITUYENTES
+                MODO SIN EDICIÓN
 
-        //  Crear Div candidato
-            let div     =   `<div class="candidato candidato-buscar-item candidato-hover-brightness" id="candidato-${candidato.candidato_id}">
-                                <div class="candidato-nombre">
-                                    <div class="candidato-nombre-historico tipsy-sw" title="<h2>Nombre Completo</h2><p>${candidato.candidato_nombre}</p>"><i class="fas fa-bookmark"></i></div>
-                                    <input id="candidato_nombres_${candidato.candidato_id}" type="text" autocomplete="off" class="candidato-nombres box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_nombres}"></input>
-                                    <input id="candidato_apellidos_${candidato.candidato_id}" type="text" autocomplete="off" class="candidato-apellidos box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_apellidos}"></input>
-                                    <div class="candidato-nombre-guardar" onclick="mesa_candidato_nombre(${candidato.candidato_id});"><i class="fas fa-check-circle"></i></div>
-                                </div>
-                                <div class="candidato-votos"><input candidato="${candidato.candidato_id}" id="voto-${candidato.voto_id}" type="text" autocomplete="off" class="mesa_valor_numerico numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${candidato.voto_total}" /></div>
-                                <div class="candidato-guardar"><i class="fas fa-check-circle tipsy-s" title="Guardar Voto" onclick="mesa_votos(${candidato.voto_id},'g',${candidato.candidato_id});"></i></div>
-                                <div class="candidato-sumar"><i class="fas fa-plus-circle tipsy-s" title="Sumar un Voto" onclick="mesa_votos(${candidato.voto_id},'s',${candidato.candidato_id});"></i></div>
-                                <div class="candidato-restar"><i class="fas fa-minus-circle tipsy-s" title="Restar un Voto" onclick="mesa_votos(${candidato.voto_id},'r',${candidato.candidato_id});"></i></div>
-                                <div id="candidato_voto_bloqueado_${candidato.candidato_id}" class="candidato-bloqueado"></div>
-                            </div>`;
+            //  Crear Div candidato
+                let div     =   `<div class="candidato candidato-buscar-item candidato-hover-brightness" id="candidato-${candidato.candidato_id}">
+                                    <div class="candidato-nombre">
+                                        <input disabled="disabled" id="candidato_nombres_${candidato.candidato_id}" type="text" autocomplete="off" class="numerico box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_nombres}"></input>
+                                    </div>
+                                    <div class="candidato-votos"><input candidato="${candidato.candidato_id}" id="voto-${candidato.voto_id}" type="text" autocomplete="off" class="mesa_valor_numerico numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${candidato.voto_total}" /></div>
+                                    <div class="candidato-guardar"><i class="fas fa-check-circle tipsy-s" title="Guardar Voto" onclick="mesa_votos(${candidato.voto_id},'g',${candidato.candidato_id});"></i></div>
+                                    <div class="candidato-sumar"><i class="fas fa-plus-circle tipsy-s" title="Sumar un Voto" onclick="mesa_votos(${candidato.voto_id},'s',${candidato.candidato_id});"></i></div>
+                                    <div class="candidato-restar"><i class="fas fa-minus-circle tipsy-s" title="Restar un Voto" onclick="mesa_votos(${candidato.voto_id},'r',${candidato.candidato_id});"></i></div>
+                                    <div id="candidato_voto_bloqueado_${candidato.candidato_id}" class="candidato-bloqueado"></div>
+                                </div>`;
 
-        //  Validar Lista de los candidatos
-            if( candidato.candidato_lista == 'A')
+            */
+
+                /*
+
+                MODO CONSTITUYENTES
+
+                */
+
+            //  Crear Div candidato
+                let div     =   `<div class="candidato candidato-buscar-item candidato-hover-brightness" id="candidato-${candidato.candidato_id}">
+                                    <div class="candidato-nombre">
+                                        <div class="candidato-nombre-historico tipsy-sw" title="<h2>Nombre Completo</h2><p>${candidato.candidato_nombre}</p>"><i class="fas fa-bookmark"></i></div>
+                                        <input id="candidato_nombres_${candidato.candidato_id}" type="text" autocomplete="off" class="candidato-nombres box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_nombres}"></input>
+                                        <input id="candidato_apellidos_${candidato.candidato_id}" type="text" autocomplete="off" class="candidato-apellidos box-shadow-light bordes-radius" placeholder="" value="${candidato.candidato_apellidos}"></input>
+                                        <div class="candidato-nombre-guardar" onclick="mesa_candidato_nombre(${candidato.candidato_id});"><i class="fas fa-check-circle"></i></div>
+                                    </div>
+                                    <div class="candidato-votos"><input candidato="${candidato.candidato_id}" id="voto-${candidato.voto_id}" type="text" autocomplete="off" class="mesa_valor_numerico numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${candidato.voto_total}" /></div>
+                                    <div class="candidato-guardar"><i class="fas fa-check-circle tipsy-s" title="Guardar Voto" onclick="mesa_votos(${candidato.voto_id},'g',${candidato.candidato_id});"></i></div>
+                                    <div class="candidato-sumar"><i class="fas fa-plus-circle tipsy-s" title="Sumar un Voto" onclick="mesa_votos(${candidato.voto_id},'s',${candidato.candidato_id});"></i></div>
+                                    <div class="candidato-restar"><i class="fas fa-minus-circle tipsy-s" title="Restar un Voto" onclick="mesa_votos(${candidato.voto_id},'r',${candidato.candidato_id});"></i></div>
+                                    <div id="candidato_voto_bloqueado_${candidato.candidato_id}" class="candidato-bloqueado"></div>
+                                </div>`;
+
+            /*
+
+            //  Validar Lista de los candidatos
+                if( candidato.candidato_lista == 'A')
+                {
+                //  Asignar al contenedor
+                    $('#candidatos-lista-a').append(div);
+                }
+                else
+                {
+                //  Asignar al contenedor
+                    $('#candidatos-lista-b').append(div);
+                }
+
+            */
+
+                $('#candidatos-lista').append(div);
+
+            //  Agregar al objeto de autocompletar
+                mesa_candidatos.push( { i: candidato.voto_id , n: candidato.candidato_nombre } );
+            });
+
+        }
+        else
+        {
+
+            for (let i = 1; i <= 15; i++)
             {
-            //  Asignar al contenedor
-                $('#candidatos-lista-a').append(div);
+
+                //  Crear Div candidato
+                let div     =   `<div class="candidato candidato-buscar-item candidato-hover-brightness" id="candidato-${i}">
+                    <div class="candidato-nombre">
+                        <div class="candidato-nombre-historico tipsy-sw" title="<h2>Nombre Completo</h2><p>${i}</p>"><i class="fas fa-bookmark"></i></div>
+                        <input id="candidato_nombres_${i}" type="text" autocomplete="off" class="candidato-nombres box-shadow-light bordes-radius" placeholder="" value="NOMBRE ${i}"></input>
+                        <input id="candidato_apellidos_${i}" type="text" autocomplete="off" class="candidato-apellidos box-shadow-light bordes-radius" placeholder="" value="APELLIDO ${i}"></input>
+                        <div class="candidato-nombre-guardar" onclick="mesa_candidato_nombre(${i});"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="candidato-votos"><input candidato="${i}" id="voto-${i}" type="text" autocomplete="off" class="mesa_valor_numerico numerico box-shadow-light bordes-radius align-right" maxlength="3" placeholder="999" value="${i + 2}" /></div>
+                    <div class="candidato-guardar"><i class="fas fa-check-circle tipsy-s" title="Guardar Voto" onclick="mesa_votos(${i});"></i></div>
+                    <div class="candidato-sumar"><i class="fas fa-plus-circle tipsy-s" title="Sumar un Voto" onclick="mesa_votos(${i});"></i></div>
+                    <div class="candidato-restar"><i class="fas fa-minus-circle tipsy-s" title="Restar un Voto" onclick="mesa_votos(${i});"></i></div>
+                    <div id="candidato_voto_bloqueado_${i}" class="candidato-bloqueado"></div>
+                </div>`;
+
+                $('#candidatos-lista').append(div);
+
             }
-            else
-            {
-            //  Asignar al contenedor
-                $('#candidatos-lista-b').append(div);
-            }
 
-        */
-
-            $('#candidatos-lista').append(div);
-
-        //  Agregar al objeto de autocompletar
-            mesa_candidatos.push( { i: candidato.voto_id , n: candidato.candidato_nombre } );
-        });
+        }
 
     //  Estado acciones votacion
         $('.mesa_valor_numerico').keyup(function (event)
@@ -486,7 +486,7 @@ function mesa_detalles( id )
         // TAMAÑO CONSTITUYENTES : 650
 
     //  Cambiar la dimensión
-        liveboxAncho('mesa-detalles' , 520 );
+        liveboxAncho('mesa-detalles' , 700 );
 
     //	Abrir Funcionalidad Livebox
         liveboxAbrir('mesa-detalles');
@@ -498,7 +498,7 @@ function mesa_detalles( id )
     //  mesa_autocompletar_comunas();
 
     //  Buscar un candidato en el listado
-    //  mesa_detalles_buscar_candidato();
+        mesa_detalles_buscar_candidato();
 
     //  Asignar funcionalidad Tootip
         $('.tipsy-sw').tipsy({gravity: "sw" , title: function() { return this.getAttribute('original-title'); } });
@@ -580,16 +580,16 @@ function mesa_detalles_confirmar()
     //  Asignar tipo de elección
         switch( mesa_tipo )
         {
+            case 'G':
+                mesa_tipo_titulo        =   '🟡&nbsp;&nbsp;&nbsp;GOBERNADORES';
+                mesa_tipo_icono         =   'fa-sticky-note';
+            break;
+            case 'A':
+                mesa_tipo_titulo        =   '🔴&nbsp;&nbsp;&nbsp;ALCALDES';
+                mesa_tipo_icono         =   'fa-sticky-note';
+            break;
             case 'P':
-                mesa_tipo_titulo        =   '🟡&nbsp;&nbsp;&nbsp;Plebiscito';
-                mesa_tipo_icono         =   'fa-sticky-note';
-            break;
-            case 'S':
-                mesa_tipo_titulo        =   '🔴&nbsp;&nbsp;SENADORES';
-                mesa_tipo_icono         =   'fa-sticky-note';
-            break;
-            case 'D':
-                mesa_tipo_titulo        =   '🔵&nbsp;&nbsp;DIPUTADOS';
+                mesa_tipo_titulo        =   '🔵&nbsp;&nbsp;&nbsp;PLEBISCITO';
                 mesa_tipo_icono         =   'fa-sticky-note';
             break;
         }
@@ -889,9 +889,8 @@ function mesa_cambiar_estado( ID , OBJETO )
 function mesa_filtrar( opcion )
 {
 //  Quitar opcion destacada
-    $("#opcion-voto-P").removeClass("activo").addClass("nuevo");
-    $("#opcion-voto-S").removeClass("activo").addClass("nuevo");
-    $("#opcion-voto-D").removeClass("activo").addClass("nuevo");
+    $("#opcion-voto-G").removeClass("activo").addClass("nuevo");
+    $("#opcion-voto-A").removeClass("activo").addClass("nuevo");
 
 //  Validar el estado del filtro
     if( mesa_filtro == opcion )
@@ -913,31 +912,22 @@ function mesa_filtrar( opcion )
     //  Ocultar todas las mesas
         $(".filtro-mesa").css("display","none");
 
-    //  Lista A
-        if( opcion == 'P' )
-        {
-            $(".P").css("display","block");
-
-        //  Marcar opcion destacada
-            $("#opcion-voto-P").removeClass("nuevo").addClass("activo");
-        }
-
-    //  Lista B
-        if( opcion == 'S' )
-        {
-            $(".S").css("display","block");
-
-        //  Marcar opcion destacada
-            $("#opcion-voto-S").removeClass("nuevo").addClass("activo");
-        }
-
     //  Gobernadores
-        if( opcion == 'D' )
+        if( opcion == 'G' )
         {
-            $(".D").css("display","block");
+            $(".G").css("display","block");
 
         //  Marcar opcion destacada
-            $("#opcion-voto-D").removeClass("nuevo").addClass("activo");
+            $("#opcion-voto-G").removeClass("nuevo").addClass("activo");
+        }
+
+    //  Alcaldes
+        if( opcion == 'A' )
+        {
+            $(".A").css("display","block");
+
+        //  Marcar opcion destacada
+            $("#opcion-voto-A").removeClass("nuevo").addClass("activo");
         }
 
     //  Almacenar Filtro
@@ -962,6 +952,9 @@ function estadoConsolidados( estado )
     const consolidados_on = document.getElementById('consolidados-estado-on');
     const consolidados_of = document.getElementById('consolidados-estado-of');
 
+    const consolidado_tipo_cookie = $.cookie('consolidado_tipo');
+    const consolidado_zona_cookie = $.cookie('consolidado_zona');
+
 //  Validar estado reciente
     if( estado_consolidados == estado )
     {
@@ -969,7 +962,7 @@ function estadoConsolidados( estado )
     }
     else
     {
-        if( estado_consolidados_animacion == false )
+        if( estado_consolidados_animacion == false && consolidado_zona_cookie != undefined )
         {
         //  Almacenar el estado de la accion
             estado_consolidados = estado
@@ -992,6 +985,8 @@ function estadoConsolidados( estado )
                 consolidados_on.classList.add('of')
             }
 
+            consolidados_render_estado(estado);
+
             consolidados_on.style.opacity = 0.5
             consolidados_of.style.opacity = 0.5
 
@@ -999,7 +994,9 @@ function estadoConsolidados( estado )
             let pubnub       	=
             {
                 'accion'		:	'cons_estado',
-                'estado'        :	estado
+                'estado'        :	estado,
+                'tipo'          :   consolidado_tipo_cookie,
+                'zona'          :   consolidado_zona_cookie
             }
 
         //	Enviar Notificación a PubNub
@@ -1013,7 +1010,7 @@ function estadoConsolidados( estado )
                 consolidados_of.style.opacity = 1
 
                 estado_consolidados_animacion = false
-            }, 2000);
+            }, 1500);
         }
     }
 
@@ -1084,23 +1081,40 @@ function estadoConsolidadosActual( estado )
     //  Almacenar el estado de la accion
         estado_consolidados = estado
         
-    //  Validar los estados
-        if( estado == 'on' )
-        {
-            consolidados_of.classList.remove('on')
-            consolidados_of.classList.add('of')
+        consolidados_on.style.opacity = 0.5
+        consolidados_of.style.opacity = 0.5
 
-            consolidados_on.classList.remove('of')
-            consolidados_on.classList.add('on')
-        }
-        else
+        setTimeout(function()
         {
-            consolidados_of.classList.remove('of')
-            consolidados_of.classList.add('on')
+            consolidados_on.style.opacity = 1
+            consolidados_of.style.opacity = 1
 
-            consolidados_on.classList.remove('on')
-            consolidados_on.classList.add('of')
-        }
+            estado_consolidados_animacion = false
+
+        //  Validar los estados
+            if( estado == 'on' )
+            {
+                consolidados_of.classList.remove('on')
+                consolidados_of.classList.add('of')
+
+                consolidados_on.classList.remove('of')
+                consolidados_on.classList.add('on')
+            }
+            else
+            {
+                consolidados_of.classList.remove('of')
+                consolidados_of.classList.add('on')
+
+                consolidados_on.classList.remove('on')
+                consolidados_on.classList.add('of')
+            }
+
+            consolidados_render_estado(estado);
+
+        //	Almacenar el Estado en Cookie
+            $.cookie('vav_cons_estado', estado , { expires: 7, path: '/' });
+
+        }, 1500);
     }
 }
 
@@ -1136,3 +1150,6 @@ function posicionConsolidadosActual( posicion )
         }
     }
 }
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+

@@ -33,7 +33,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>jquery.tipsy.css<?php echo $_CONF_VERSION; ?>"/>
 		
 		<!-- Librerias PubNub -->
-        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.17.0.min.js"></script>
+        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.8.2.8.js"></script>
         
 <!--	Funcionalidades por Defecto -->
 		<script type="text/javascript">
@@ -41,20 +41,20 @@
 		//	Pubnub Monitoreo de Mesas
             pubnub = new PubNub({
 				subscribeKey	:	"<?php echo $_PUBNUB_SUS_MESAS; ?>",
-				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>"
+				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>",
+				secretKey		:	"<?php echo $_PUBNUB_SECRET_KEY; ?>",
+				userId			:	"<?php echo $_PUBNUB_USER_ID; ?>"
             });
 
 		//	Enviar Información a PubNub
-            function enviarPubNub( parametro )
+			function enviarPubNub( parametro )
             {
 				var publishConfig = {
 					channel : "vav_mesas",
 					message : parametro
 				}
-				pubnub.publish( publishConfig , function( status , response )
-				{
-					
-				})
+				
+				pubnub.publish( publishConfig )
             }
 
 		</script>
@@ -95,7 +95,9 @@
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-P" title="Constituyentes" onclick="mesa_filtrar('P');">🟡</div>
+
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🟡</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-A" title="Alcaldes" onclick="mesa_filtrar('A');">🔴</div>
 							<div class="separador"></div>
 							<div class="boton boton-sin-margen editar box-shadow-light bordes-radius" onclick="mesa_nueva();"><i class="fas fa-plus-circle"></i> Nueva Mesa</div>
 
@@ -138,12 +140,23 @@
 						</div>
 						</noscript>
 
-						<h2><i class="fas fa-passport"></i> <?php echo $_MESA->mesa_id; ?></h2>
+						<h2><i class="fas fa-hashtag"></i> <?php echo $_MESA->mesa_id; ?></h2>
 						<h1 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_usuario"><i class="fas fa-user"></i> <?php echo $_MESA->usuario_nombre; ?></h1>
 				   		<div class="tipo"><?php echo $mesa_tipo_titulo; ?></div>
 						<div class="zona"><?php echo $_MESA->mesa_zona_titulo; ?></div>
+<?php
+					if( $_MESA->mesa_local )
+					{
+?>
 						<h3 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_nombre"><?php echo $_MESA->mesa_local; ?></h3>
 <?php
+					}
+					else
+					{
+?>
+						<h3 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_nombre">SIN LOCAL</h3>
+<?php
+					}
 					if( $_MESA->mesa_numero )
 					{
 ?>

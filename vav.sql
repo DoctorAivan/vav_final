@@ -732,8 +732,8 @@ CREATE FUNCTION mesa_nuevo(in_usuario_id bigint, in_mesa_tipo character varying,
 		);
 
     --  AGREGAR CANDIDATOS A LA MESA
-	--	INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo AND candidato_zona = in_mesa_zona;
-        INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo;
+		INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo AND candidato_zona = in_mesa_zona;
+    --	INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo;
 
         RETURN in_mesa_id;
 	        
@@ -1089,6 +1089,38 @@ CREATE FUNCTION swich_actual() RETURNS TABLE(swich_mesa_1 smallint, swich_mesa_2
 
 	END $$;
 
+CREATE FUNCTION swich_quad_actual() RETURNS TABLE(swich_mesa_1 smallint, swich_mesa_2 smallint, swich_mesa_3 smallint, swich_mesa_4 smallint)
+    LANGUAGE plpgsql
+    AS $$
+
+		BEGIN
+
+		return QUERY
+
+	    SELECT
+
+		    swich.swich_mesa_1,
+
+		    swich.swich_mesa_2,
+
+		    swich.swich_mesa_3,
+
+			swich.swich_mesa_4
+
+	    FROM
+
+	        swich
+
+		WHERE
+
+			swich.swich_id = 2
+
+	    LIMIT 1
+
+	    ;
+
+	END $$;
+
 
 ALTER FUNCTION public.swich_actual() OWNER TO postgres;
 
@@ -1143,7 +1175,7 @@ ALTER FUNCTION public.swich_editar(in_swich_id bigint, in_swich_modo bigint, in_
 -- Name: swich_mesas(bigint, bigint, bigint); Type: FUNCTION; Schema: public; Owner: app_vav
 --
 
-CREATE FUNCTION swich_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint) RETURNS TABLE(mesa_id bigint, mesa_tipo character varying, mesa_zona bigint, mesa_zona_titulo character varying, mesa_comuna character varying, mesa_local character varying, mesa_numero character varying)
+CREATE FUNCTION swich_quad_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint, in_mesa_4 bigint) RETURNS TABLE(mesa_id bigint, mesa_tipo character varying, mesa_zona bigint, mesa_zona_titulo character varying, mesa_comuna character varying, mesa_local character varying, mesa_numero character varying)
     LANGUAGE plpgsql
     AS $$
 	    
@@ -1163,9 +1195,9 @@ CREATE FUNCTION swich_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint
 	        mesa
 	        
 		WHERE
-			mesa.mesa_id IN ( in_mesa_1 , in_mesa_2 , in_mesa_3 )
+			mesa.mesa_id IN ( in_mesa_1 , in_mesa_2 , in_mesa_3 , in_mesa_4 )
 	
-	    LIMIT 3
+	    LIMIT 4
 	    ;
 	
 	END $$;
@@ -1264,19 +1296,12 @@ CREATE FUNCTION swich_obtener_datos(in_swich_id bigint) RETURNS TABLE(swich_mesa
 	    SELECT
 
 	        swich.swich_mesas,
-
 			swich.swich_modo,
-
 	        swich.swich_mesa_1,
-
 	        swich.swich_mesa_2,
-
 	        swich.swich_mesa_3,
-
 	        swich.swich_mesa_4,
-
 			swich.swich_votos,
-
 			swich.swich_cambio
 
 	    FROM

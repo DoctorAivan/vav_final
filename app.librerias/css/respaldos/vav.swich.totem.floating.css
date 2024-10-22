@@ -1,0 +1,145 @@
+/*
+	FLOATING
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.floating .box
+	{
+		position: relative;
+		overflow: hidden;
+		width: 100%;
+		height: 80px;
+		display: grid;
+		grid-template-columns: 450px 1fr 430px;
+		background: #fff;
+		overflow: hidden;
+	}
+		.floating .box .header
+		{
+			position: inherit;
+			z-index: 1;
+			color: var(--color-white);
+			padding: 14px 40px 0 130px;
+			height: auto;
+			text-align: center;
+			background: linear-gradient( 0deg, var(--color-totals-background-a) 0%, var(--color-totals-background-b) 100%) !important;
+		}
+			.floating .box .header h2
+			{
+				font-family: 'Santral_SemiBold';
+				font-size: 1.6rem;
+				line-height: 1.6rem;
+			}
+			.floating .box .header h4
+			{
+				font-family: 'Santral_Bold';
+				display: block;
+				background: var(--color-white);
+				color: var(--color-totals-background-a);
+				font-size: 1.1rem;
+				line-height: 1.1rem;
+				padding: 6px 0 1px 0;
+			}
+
+		.floating .box .logo
+		{
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% );
+		}
+			.floating .box .logo img
+			{
+				margin: 17px 0 0 136px;
+				height: 48px;
+			}
+
+		.floating .box .columns
+		{
+			z-index: 1;
+			position: relative;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			overflow: hidden;
+		}
+			.floating .box .columns .candidato
+			{
+				position: relative;
+				display: grid;
+				grid-template-columns: 215px 1fr;
+				width: 100%;
+				background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% );
+				padding: 18px 0 0 0;
+			}
+				.floating .box .columns .candidato .candidato-nombre
+				{
+					width: 100%;
+					z-index: 6;
+					font-family: 'Santral_Bold';
+					font-size: 1.9rem;
+					line-height: 1.9rem;
+					text-align: right;
+					display: -webkit-box;
+					letter-spacing: -1px;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 1;
+					overflow: hidden;
+					text-transform: uppercase;
+					padding: 11px 0 0 0;
+				}
+				.floating .box .columns .candidato .candidato-votos
+				{
+					position: relative;
+					text-align: center;
+					padding: 0 0 0 0;
+					display: grid;
+					grid-template-columns: auto auto;
+					justify-content: center;
+				}
+					.floating .box .columns .candidato .candidato-votos .candidato-votos-valor
+					{
+						position: relative;
+						z-index: 6;
+						font-family: 'Santral_Extrabold';
+						font-size: 3.6rem;
+						line-height: 3.6rem;
+						letter-spacing: -0.2rem;
+					}
+                    .floating .box .columns .candidato .candidato-votos .candidato-votos-icono
+                    {
+                        position: relative;
+                        z-index: 3;
+                        margin: 13px 13px 0 0;
+                    }
+				.floating .box .columns .candidato .candidato-votos-animacion
+				{
+					z-index: 1;
+					top: 0px;
+					right: 0px;
+					position: absolute;
+					width: 80%;
+					height: 100%;
+					opacity: 0;
+				}
+
+				.floating .box .columns .a-favor
+				{
+					color: var(--color-voted-red-a);
+				}
+				.floating .box .columns .a-favor .candidato-votos-animacion
+				{
+					background: linear-gradient( 135deg, var(--color-voted-totals-red-animation-a) 20%, var(--color-voted-totals-red-animation-b) 100%);
+				}
+				.floating .box .columns .a-favor .candidato-votos .candidato-votos-icono img
+				{
+					content:url("/vav_final/app.imagenes/voto_icono_rojo.png") !important;
+				}
+
+				.floating .box .columns .en-contra
+				{
+					color: var(--color-voted-blue-a);
+				}
+				.floating .box .columns .en-contra .candidato-votos-animacion
+				{
+					background: linear-gradient( 135deg, var(--color-voted-totals-blue-animation-a) 20%, var(--color-voted-totals-blue-animation-b) 100%);
+				}
+				.floating .box .columns .en-contra .candidato-votos .candidato-votos-icono img
+				{
+					content:url("/vav_final/app.imagenes/voto_icono_azul.png") !important;
+				}

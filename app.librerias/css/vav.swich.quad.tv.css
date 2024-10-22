@@ -1,0 +1,457 @@
+*
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@font-face
+{
+	font-family: 'panton_thin';
+	src: local('panton_thin'), url(fonts/cnn/panton_thin.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_extraLight';
+	src: local('panton_extraLight'), url(fonts/cnn/panton_extraLight.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_light';
+	src: local('panton_light'), url(fonts/cnn/panton_light.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_regular';
+	src: local('panton_regular'), url(fonts/cnn/panton_regular.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_semiBold';
+	src: local('panton_semiBold'), url(fonts/cnn/panton_semiBold.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_bold';
+	src: local('panton_bold'), url(fonts/cnn/panton_bold.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_extraBold';
+	src: local('panton_extraBold'), url(fonts/cnn/panton_extraBold.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_black';
+	src: local('panton_black'), url(fonts/cnn/panton_black.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_heavy';
+	src: local('panton_heavy'), url(fonts/cnn/panton_heavy.otf) format('opentype');
+}
+
+@font-face
+{
+	font-family: "ATC_rg";
+	src: local('ATTAleckCd_Rg'), url("fonts/ATTAleckCd_Rg.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "ATC_bd";
+	src: local('ATTAleckCd_W_Bd'), url("fonts/ATTAleckCd_W_Bd.ttf") format("truetype");
+}
+
+@font-face
+{
+	font-family: "Flama_Regular";
+	src: local('Flama_Regular'), url("fonts/Flama_Regular.otf") format("truetype");
+}
+@font-face
+{
+	font-family: "Flama_Medium";
+	src: local('Flama_Medium'), url("fonts/Flama_Medium.otf") format("truetype");
+}
+@font-face
+{
+	font-family: "Flama_Semibold";
+	src: local('Flama_Semibold'), url("fonts/Flama_Semibold.otf") format("truetype");
+}
+@font-face
+{
+	font-family: "Flama_Bold";
+	src: local('Flama_Bold'), url("fonts/Flama_Bold.otf") format("truetype");
+}
+
+@font-face
+{
+	font-family: "Santral_Book";
+	src: local('Santral_Book'), url("fonts/Santral-Book.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_SemiBold";
+	src: local('Santral_SemiBold'), url("fonts/Santral-SemiBold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_Bold";
+	src: local('Santral_Bold'), url("fonts/Santral-Bold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_ExtraBold";
+	src: local('Santral_ExtraBold'), url("fonts/Santral-ExtraBold.ttf") format("truetype");
+}
+
+:root
+{
+	--color-white : #ffffff;
+	--color-black : #1c1c1c;
+
+	--gobernador-color : #fd387f;
+	--gobernador-color-invertido : #ffffff;
+	--gobernador-color-sombra : #fd387f50;
+
+	--gobernador-voto-a : #ffffff;
+	--gobernador-voto-b : #fd387f;
+	--gobernador-1-voto-a : #ffffff00;
+	--gobernador-1-voto-b : #ffffffb1;
+
+	--alcalde-color : #007fef;
+	--alcalde-color-invertido : #ffffff;
+	--alcalde-color-sombra : #007fef50;
+	
+	--alcalde-voto-a : #ffffff;
+	--alcalde-voto-b : #007fef;
+	--alcalde-1-voto-a : #ffffff00;
+	--alcalde-1-voto-b : #ffffffb1;
+
+	--candidato-height : 250px;
+
+	--candidato-nombre : #1c1c1c;
+	--candidato-apellido : #1c1c1c;
+
+	--resultados : 490px;
+}
+
+body
+{
+	overflow: hidden;
+	background: transparent;
+}
+
+#render
+{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 1920px;
+	height: 1080px;
+	/*
+	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
+	*/
+	background: #222;
+	overflow: hidden;
+}
+	#no-cursor
+	{
+		z-index: 100;
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		display: none;
+	}
+/*
+	MESAS
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.mesas
+	{
+		position: relative;
+		width: 100%;
+		height: 823px;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		gap: 60px;
+		padding: 140px 100px 100px 100px;
+	}
+		.mesa
+		{
+			font-family: 'Santral_SemiBold';
+			font-size: 1.5rem;
+			line-height: 1.5rem;
+			color: var(--color-white);
+			background: #333;
+		}
+			.mesa .header
+			{
+				position: relative;
+				padding: 25px 25px 22px 25px;
+			}
+				.mesa .header h2
+				{
+					position: relative;
+					font-family: 'Santral_ExtraBold';
+					font-size: 1.7rem;
+					line-height: 1.7rem;
+					text-transform: uppercase;
+				}
+				.mesa .header h3
+				{
+					position: relative;
+					font-family: 'Santral_Book';
+					font-size: 1.2rem;
+					line-height: 1.2rem;
+					text-transform: uppercase;
+					padding: 3px 0 5px 0;
+				}
+				.mesa .header h4
+				{
+					position: relative;
+					font-family: 'Santral_Bold';
+					font-size: 1.4rem;
+					line-height: 1.4rem;
+					text-transform: uppercase;
+				}
+			.mesa .candidatos
+			{
+				position: relative;
+				height: calc( var(--candidato-height) * 2 );
+				background: #555;
+				overflow: hidden;
+			}
+				.mesa .candidatos .candidato
+				{
+					position: absolute;
+					width: 100%;
+					padding: 50px 25px 0 25px;
+					height: var(--candidato-height);
+					background: linear-gradient( 0deg, #555 0%, #777 100%);
+					display: grid;
+					grid-template-columns: 150px 1fr;
+					gap: 25px;
+					transition: all 0.75s ease;
+				}
+					.mesa .candidatos .candidato .candidato-imagen
+					{
+						z-index: 2;
+						position: relative;
+						width: 150px;
+						height: 150px;
+						border-radius: 100%;
+						overflow: hidden;
+						background: #fff;
+					}
+						.mesa .candidatos .candidato .candidato-imagen img
+						{
+							width: 100%;
+							height: 100%;
+							transition: all 0.75s ease-out;
+							opacity: 0;
+						}
+					.mesa .candidatos .candidato .candidato-ficha
+					{
+						z-index: 2;
+						position: relative;
+						padding: 10px 0 0 0;
+					}
+						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-nombre
+						{
+							position: relative;
+							font-family: 'Santral_Book';
+							font-size: 1.1rem;
+							line-height: 1.1rem;
+						}
+						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-apellido
+						{
+							position: relative;
+							font-family: 'Santral_ExtraBold';
+							font-size: 1.3rem;
+							line-height: 1.3rem;
+							padding: 4px 0 3px 0;
+						}
+						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-partido
+						{
+							position: relative;
+							font-family: 'Santral_Book';
+							font-size: 1.1rem;
+							line-height: 1.1rem;
+						}
+						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-votos
+						{
+							position: relative;
+							font-family: 'Santral_Extrabold';
+							font-size: 3.8rem;
+							line-height: 3.8rem;
+							padding: 14px 0 0 0;
+						}
+					.mesa .candidatos .candidato-votos-animacion
+					{
+						z-index: 1;
+						top: 0px;
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						opacity: 0;
+						background: linear-gradient( 0deg, #999 0%, #888 100%);
+					}
+
+/*
+	TOTTEM
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+
+/*
+	TOTTEM
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+
+/*
+	CANDIDATOS
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+
+/*
+	POSICIONES DE LOS BLOQUES
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.mesas .mesa .candidatos .order-1
+	{
+		z-index: 4;
+		top: calc( var(--candidato-height) * 0 );
+		animation: orden-1-kf 0s ease-out 1 forwards;
+	}
+	.mesas .mesa .candidatos .order-2
+	{
+		z-index: 3;
+		top: calc( var(--candidato-height) * 1 );
+		animation: orden-2-kf 0s ease-out 1 forwards;
+	}
+	.mesas .mesa .candidatos .order-3
+	{
+		z-index: 2;
+		top: calc( var(--candidato-height) * 2 );
+		animation: orden-3-kf 0s ease-out 1 forwards;
+	}
+
+	@keyframes orden-1-kf { 1% { z-index: 4 } }
+	@keyframes orden-2-kf { 1% { z-index: 3 } }
+	@keyframes orden-3-kf { 1% { z-index: 2 } }
+
+/*
+	ANIMACIONES
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.animar_imagen_in
+	{
+		animation: keyframe_imagen_in 0.5s ease-out 1 forwards;
+	}
+
+	.animar_voto
+	{
+		animation: keyframe_voto 1s ease 1 forwards;
+	}
+	.animar_voto_texto
+	{
+		animation: keyframe_voto_texto 1s ease 1 forwards;
+	}
+	.animar_voto_icono
+	{
+		animation: keyframe_voto_icono 1s ease 1 forwards;
+	}
+
+	.letters_in
+	{
+		animation: keyframe_letter_in 1.5s ease-out 1 forwards;
+	}
+	.letters_zoom_in
+	{
+		animation: keyframe_letter_zoom_in 1.5s ease-out 1 forwards;
+	}
+	.arrow_zoom_in
+	{
+		animation: keyframe_arrow_zoom_in 1.5s ease-out 1 forwards;
+	}
+
+	.transition
+	{
+		transition: all 0.75s ease-in-out;
+	}
+	.transition-on
+	{
+		transition: left 0.75s ease, right 0.75s ease, transform 0.75s ease, bottom 0.75s ease;
+	}
+	.transition-of
+	{
+		transition: all 0s ease;
+	}
+
+	@keyframes keyframe_imagen_in
+	{
+		0% { opacity: 0 }
+		100% { opacity: 1 }
+	}
+	@keyframes keyframe_letter_in
+	{
+		0% { opacity: 0 }
+		25% { opacity: 0 }
+		100% { opacity: 1 }
+	}
+	@keyframes keyframe_letter_zoom_in
+	{
+		0% { opacity: 0; transform: scale(1.2) }
+		50% { opacity: 0; transform: scale(1.2) }
+		100% { opacity: 1; transform: scale(1) }
+	}
+	@keyframes keyframe_arrow_zoom_in
+	{
+		0% { opacity: 0; filter: brightness(2); }
+		50% { opacity: 0; filter: brightness(2); }
+		100% { opacity: 1; filter: brightness(1); }
+	}
+
+	@keyframes keyframe_voto
+	{
+		0% { opacity: 0 }
+		45% { opacity: 1 }
+		55% { opacity: 1 }
+		100% { opacity: 0 }
+	}
+	@keyframes keyframe_voto_texto
+	{
+		0% {  }
+		45% { color: var(--color-white); }
+		55% { color: var(--color-white); }
+		100% {  }
+	}
+	@keyframes keyframe_voto_icono
+	{
+		0% { filter: invert(0) }
+		45% { filter: invert(1) }
+		55% { filter: invert(1) }
+		100% { filter: invert(0) }
+	}
+
+	.anim_view_in
+	{
+		animation: view_in 0.5s ease 1 forwards;
+	}
+	.anim_view_out
+	{
+		animation: view_out 0.5s ease 1 forwards;
+	}
+
+	@keyframes view_in
+	{
+		0% { opacity: 0 }
+		100% { opacity: 1 }
+	}
+	@keyframes view_out
+	{
+		0% { opacity: 1 }
+		100% { opacity: 0 }
+	}

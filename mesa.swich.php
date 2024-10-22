@@ -30,7 +30,7 @@
 //	Configuracion del SEO
 	$_SEO				=	array
 	(
-		"TITLE"			=>	"SWICH - VAV",
+		"TITLE"			=>	"SWITCH - VAV",
 		"DESCRIPCION"	=>	"DESCRIPCION",
 		"KEYWORDS"		=>	"KEYWORDS",
 		"IMAGE"			=>	"IMAGE",

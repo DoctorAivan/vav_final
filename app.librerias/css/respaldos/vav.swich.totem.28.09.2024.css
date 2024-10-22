@@ -1,0 +1,596 @@
+*
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@font-face
+{
+	font-family: 'panton_thin';
+	src: local('panton_thin'), url(fonts/cnn/panton_thin.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_extraLight';
+	src: local('panton_extraLight'), url(fonts/cnn/panton_extraLight.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_light';
+	src: local('panton_light'), url(fonts/cnn/panton_light.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_regular';
+	src: local('panton_regular'), url(fonts/cnn/panton_regular.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_semiBold';
+	src: local('panton_semiBold'), url(fonts/cnn/panton_semiBold.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_bold';
+	src: local('panton_bold'), url(fonts/cnn/panton_bold.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_extraBold';
+	src: local('panton_extraBold'), url(fonts/cnn/panton_extraBold.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_black';
+	src: local('panton_black'), url(fonts/cnn/panton_black.otf) format('opentype');
+}
+@font-face
+{
+	font-family: 'panton_heavy';
+	src: local('panton_heavy'), url(fonts/cnn/panton_heavy.otf) format('opentype');
+}
+
+@font-face
+{
+	font-family: "ATC_rg";
+	src: local('ATTAleckCd_Rg'), url("fonts/ATTAleckCd_Rg.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "ATC_bd";
+	src: local('ATTAleckCd_W_Bd'), url("fonts/ATTAleckCd_W_Bd.ttf") format("truetype");
+}
+
+@font-face
+{
+	font-family: "Flama_Regular";
+	src: local('Flama_Regular'), url("fonts/Flama_Regular.otf") format("truetype");
+}
+@font-face
+{
+	font-family: "Flama_Medium";
+	src: local('Flama_Medium'), url("fonts/Flama_Medium.otf") format("truetype");
+}
+@font-face
+{
+	font-family: "Flama_Semibold";
+	src: local('Flama_Semibold'), url("fonts/Flama_Semibold.otf") format("truetype");
+}
+@font-face
+{
+	font-family: "Flama_Bold";
+	src: local('Flama_Bold'), url("fonts/Flama_Bold.otf") format("truetype");
+}
+
+@font-face
+{
+	font-family: "Santral_Book";
+	src: local('Santral_Book'), url("fonts/Santral-Book.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_SemiBold";
+	src: local('Santral_SemiBold'), url("fonts/Santral-SemiBold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_Bold";
+	src: local('Santral_Bold'), url("fonts/Santral-Bold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_ExtraBold";
+	src: local('Santral_ExtraBold'), url("fonts/Santral-ExtraBold.ttf") format("truetype");
+}
+
+:root
+{
+	--color-white : #ffffff;
+	--color-black : #1c1c1c;
+
+	--color-blue-a : #56b3f0;
+	--color-blue-b : #428dd3;
+
+	--color-red-a : #e55080;
+	--color-red-b : #cb3469;
+
+	--color-voted-blue-a : #078dfc;
+	--color-voted-blue-b : #078dfc;
+	--color-voted-blue-animation-a : #078dfc;
+	--color-voted-blue-animation-b : #078dfc;
+	--color-voted-blue-shadow : #078dfc;
+	--color-voted-totals-blue-animation-a : #078dfc00;
+	--color-voted-totals-blue-animation-b : #078dfc60;
+
+	--color-voted-red-a : #fd387f;
+	--color-voted-red-b : #fd387f;
+	--color-voted-red-animation-a : #ffffff20;
+	--color-voted-red-animation-b : #ffffffeb;
+	--color-voted-red-shadow : #fd387f;
+	--color-voted-totals-red-animation-a : #fd387f00;
+	--color-voted-totals-red-animation-b : #fd387f60;
+
+	--color-header-background-a : #ffffff;
+	--color-header-background-b : #eeeeee;
+
+	--color-totals-background-a : #1a2b50;
+	--color-totals-background-b : #1a346b;
+
+
+	--vote-animation-a : #e5508000;
+	--vote-animation-b : #e5507f87;
+	--vote-animation-c : #cb3469;
+
+	--candidate-width-respaldo : 340px;
+	--candidate-width-r : 800px;
+	--candidate-width : 340px;
+
+	--candidate-height : 84px;
+	--candidate-margin : 0px;
+
+	--candidato-nombre : #1c1c1c;
+	--candidato-apellido : #1c1c1c;
+	--candidato-partido : #cb3469;
+	--candidato-votos : #1c1c1c;
+
+	--resultados : 490px;
+}
+
+body
+{
+	overflow: hidden;
+	background: transparent;
+}
+
+#render
+{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 1920px;
+	height: 1080px;
+	/*
+	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
+	*/
+	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
+	overflow: hidden;
+}
+	#no-cursor
+	{
+		z-index: 100;
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		display: none;
+	}
+	#render-mesa-1
+	{
+		z-index: 10;
+		position: absolute;
+	}
+	#render-mesa-2
+	{
+		z-index: 9;
+		position: absolute;
+	}
+	#render-mesa-totales
+	{
+		z-index: 11;
+		position: absolute;
+		left: 0px;
+		width: 100%;
+	}
+
+	.tottem
+	{
+		position: absolute;
+		width: var(--candidate-width);
+	}
+	.floating
+	{
+		position: absolute;
+		width: 100%;
+	}
+	.totals
+	{
+		position: absolute;
+		width: var(--candidate-width);
+	}
+
+
+	.tottem .totales
+	{
+		grid-template-columns: 1fr !important;
+	}
+		.tottem .totales .header
+		{
+			position: inherit;
+			z-index: 1;
+			color: var(--color-white) !important;
+			padding: 15px 15px 15px 15px !important;
+			height: auto !important;
+			text-align: center;
+			background: linear-gradient( 0deg, var(--color-totals-background-a) 0%, var(--color-totals-background-b) 100%) !important;
+		}
+			.tottem .totales .header h2
+			{
+				font-family: 'Santral_Extrabold';
+				font-size: 2rem !important;
+				line-height: 2rem !important;
+				padding: 0 0 3px 0;
+			}
+			.tottem .totales .header h4
+			{
+				display: block !important;
+				background: var(--color-white) !important;
+				color: var(--color-totals-background-a) !important;
+				font-size: 1.3rem !important;
+				line-height: 1.3rem !important;
+				padding: 7px 0 2px 0 !important;
+			}
+
+		.tottem .totales .logo
+		{
+			display: none;
+		}
+
+		.tottem .totales .columns .a-favor
+		{
+			color: var(--color-voted-red-a) !important;
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% ) !important;
+		}
+			.tottem .totales .columns .a-favor .candidato-nombre
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .a-favor .candidato-votos-valor
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .a-favor .candidato-votos .candidato-votos-icono img
+			{
+				content:url("/vav_final/app.imagenes/voto_icono_rojo.png") !important;
+			}
+			.tottem .totales .columns .a-favor .candidato-votos-animacion
+			{
+				background: linear-gradient( 135deg, var(--color-voted-totals-red-animation-a) 20%, var(--color-voted-totals-red-animation-b) 100%) !important;
+			}
+
+		.tottem .totales .columns .en-contra
+		{
+			color: var(--color-voted-blue-a) !important;
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% ) !important;
+		}
+			.tottem .totales .columns .en-contra .candidato-nombre
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .en-contra .candidato-votos-valor
+			{
+				text-shadow: 1px 1px 2px var(--color-white) !important;
+			}
+			.tottem .totales .columns .en-contra .candidato-votos .candidato-votos-icono img
+			{
+				content:url("/vav_final/app.imagenes/voto_icono_azul.png") !important;
+			}
+			.tottem .totales .columns .en-contra .candidato-votos-animacion
+			{
+				background: linear-gradient( 135deg, var(--color-voted-totals-blue-animation-a) 20%, var(--color-voted-totals-blue-animation-b) 100%) !important;
+			}
+
+/*
+	TOTTEM
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .box
+	{
+		position: relative;
+		overflow: hidden;
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+		.tottem .box .header
+		{
+			z-index: 3;
+			position: relative;
+			padding: 13px 0 13px 16px;
+			text-transform: uppercase;
+			color: var(--color-black);
+			background: linear-gradient( 90deg, var(--color-header-background-a) 80%, var(--color-header-background-b) 100% );
+			height: 112px;
+		}
+			.tottem .box .header h2
+			{
+				font-family: 'Santral_Extrabold';
+				font-size: 1.6rem;
+				line-height: 1.6rem;
+			}
+			.tottem .box .header h3
+			{
+				font-family: 'ATC_rg';
+				font-size: 1.4rem;
+				line-height: 1.4rem;
+				margin: 5px 0 4px 0;
+			}
+			.tottem .box .header h4
+			{
+				display: inline-block;
+				font-family: 'Santral_SemiBold';
+				font-size: 1.2rem;
+				line-height: 1.2rem;
+				padding: 5px 8px 4px 8px;
+				color: var(--color-white);
+				background: var(--color-black);
+			}
+/*
+	ZONA
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+		.tottem .box .zona
+		{
+			z-index: 3;
+			position: relative;
+			padding: 16px 0 11px 16px;
+			text-transform: uppercase;
+			color: var(--color-white);
+			background: var(--color-red-b);
+
+			font-family: 'Santral_Extrabold';
+			font-size: 1.6rem;
+			line-height: 1.6rem;
+		}
+/*
+	CANDIDATOS
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+		.tottem .box .candidatos
+		{
+			z-index: 1;
+			position: relative;
+			overflow: hidden;
+			height: calc( var(--candidate-height) * 6);
+			background: #ccc;
+		}
+			.tottem .box .candidatos .candidato
+			{
+				position: absolute;
+				width: 100%;
+				height: var(--candidate-height);
+				display: grid;
+				grid-template-columns: 1fr 140px;
+				background: linear-gradient( 0deg, #fff 0%, #eee 100%);
+				transition: all 0.75s ease-out;
+			}
+				.tottem .box .candidatos .candidato .candidato-detalles
+				{
+					padding: 15px 0 0 16px;
+					text-transform: uppercase;
+				}
+					.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-nombre
+					{
+						font-family: 'Santral_SemiBold';
+						font-size: 1rem;
+						line-height: 1rem;
+						color: var(--candidato-nombre);
+					}
+					.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-apellido
+					{
+						font-family: 'Santral_Bold';
+						font-size: 1rem;
+						line-height: 1rem;
+						padding: 3px 0 3px 0;
+						color: var(--candidato-apellido);
+					}
+					.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-partido
+					{
+						font-family: 'Santral_Book';
+						font-size: 1rem;
+						line-height: 1rem;
+						color: var(--candidato-partido);
+					}
+
+				.tottem .box .candidatos .candidato .candidato-votos
+				{
+					position: relative;
+					display: grid;
+					grid-gap: 12px;
+					grid-template-columns: auto auto;
+					justify-content: right;
+					padding: 25px 25px 0 0;
+				}
+					.tottem .box .candidatos .candidato .candidato-votos .candidato-votos-valor
+					{
+						position: relative;
+						z-index: 6;
+						font-family: 'Santral_Extrabold';
+						font-size: 2.5rem;
+						line-height: 2.5rem;
+						letter-spacing: -0.15rem;
+						color: var(--candidato-votos);
+					}
+                    .tottem .box .candidatos .candidato .candidato-votos .candidato-votos-icono
+                    {
+                        position: relative;
+                        z-index: 3;
+                        margin: 8px 0 0 0;
+                    }
+						.tottem .box .candidatos .candidato .candidato-votos .candidato-votos-icono img
+						{
+							content:url("/vav_final/app.imagenes/voto_icono_negro.png");
+							height: 14px;
+						}
+
+						.tottem .box .candidatos .candidato-votos-animacion
+						{
+							z-index: 1;
+							top: 0px;
+							position: absolute;
+							width: 100%;
+							height: 100%;
+							opacity: 0;
+							background: linear-gradient( 90deg, var(--vote-animation-a) 20%, var(--vote-animation-b) 60%, var(--vote-animation-c) 100%);
+						}
+
+/*
+	POSICIONES DE LOS BLOQUES
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .box .candidatos .order-1
+	{
+		z-index: 7;
+		top: calc( var(--candidate-height) * 0 );
+		animation: orden-1-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-2
+	{
+		z-index: 6;
+		top: calc( ( var(--candidate-height) + var(--candidate-margin) ) * 1 );
+		animation: orden-2-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-3
+	{
+		z-index: 5;
+		top: calc( ( var(--candidate-height) + var(--candidate-margin) ) * 2 );
+		animation: orden-3-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-4
+	{
+		z-index: 4;
+		top: calc( ( var(--candidate-height) + var(--candidate-margin) ) * 3 );
+		animation: orden-4-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-5
+	{
+		z-index: 3;
+		top: calc( ( var(--candidate-height) + var(--candidate-margin) ) * 4 );
+		animation: orden-5-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-6
+	{
+		z-index: 2;
+		top: calc( ( var(--candidate-height) + var(--candidate-margin) ) * 5 );
+		animation: orden-6-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-7
+	{
+		z-index: 1;
+		top: calc( ( var(--candidate-height) + var(--candidate-margin) ) * 6 );
+		animation: orden-7-kf 0s ease-out 1 forwards;
+	}
+
+	@keyframes orden-1-kf { 1% { z-index: 7 } }
+	@keyframes orden-2-kf { 1% { z-index: 6 } }
+	@keyframes orden-3-kf { 1% { z-index: 5 } }
+	@keyframes orden-4-kf { 1% { z-index: 4 } }
+	@keyframes orden-5-kf { 1% { z-index: 3 } }
+	@keyframes orden-6-kf { 1% { z-index: 2 } }
+	@keyframes orden-7-kf { 1% { z-index: 1 } }
+
+/*
+	ANIMACIONES
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.animar_voto
+	{
+		animation: keyframe_voto 1s ease 1 forwards;
+	}
+	.animar_voto_texto
+	{
+		animation: keyframe_voto_texto 1s ease 1 forwards;
+	}
+	.animar_voto_icono
+	{
+		animation: keyframe_voto_icono 1s ease 1 forwards;
+	}
+
+	.letters_in
+	{
+		animation: keyframe_letter_in 1.5s ease-out 1 forwards;
+	}
+	.letters_zoom_in
+	{
+		animation: keyframe_letter_zoom_in 1.5s ease-out 1 forwards;
+	}
+	.arrow_zoom_in
+	{
+		animation: keyframe_arrow_zoom_in 1.5s ease-out 1 forwards;
+	}
+
+	.transition
+	{
+		transition: all 0.75s ease-in-out;
+	}
+	.transition-on
+	{
+		transition: left 0.75s ease, right 0.75s ease, transform 0.75s ease, bottom 0.75s ease;
+	}
+	.transition-of
+	{
+		transition: all 0s ease;
+	}
+
+	@keyframes keyframe_letter_in
+	{
+		0% { opacity: 0 }
+		25% { opacity: 0 }
+		100% { opacity: 1 }
+	}
+	@keyframes keyframe_letter_zoom_in
+	{
+		0% { opacity: 0; transform: scale(1.2) }
+		50% { opacity: 0; transform: scale(1.2) }
+		100% { opacity: 1; transform: scale(1) }
+	}
+	@keyframes keyframe_arrow_zoom_in
+	{
+		0% { opacity: 0; filter: brightness(2); }
+		50% { opacity: 0; filter: brightness(2); }
+		100% { opacity: 1; filter: brightness(1); }
+	}
+
+	@keyframes keyframe_voto
+	{
+		0% { opacity: 0 }
+		45% { opacity: 1 }
+		55% { opacity: 1 }
+		100% { opacity: 0 }
+	}
+	@keyframes keyframe_voto_texto
+	{
+		0% {  }
+		45% { color: var(--color-white); }
+		55% { color: var(--color-white); }
+		100% {  }
+	}
+	@keyframes keyframe_voto_icono
+	{
+		0% { filter: invert(0) }
+		45% { filter: invert(1) }
+		55% { filter: invert(1) }
+		100% { filter: invert(0) }
+	}

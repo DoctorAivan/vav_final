@@ -57,10 +57,12 @@
 //	OBTENER MESAS ALMACENADAS
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
+	$SWITCH_ID = 1;
+
 //	Construir SQL
 	$QUERY									=	"
 
-		SELECT * FROM swich_obtener_datos( 1 );
+		SELECT * FROM swich_obtener_datos( $SWITCH_ID );
 
 	";
 

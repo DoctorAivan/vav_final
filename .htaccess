@@ -34,7 +34,8 @@
 	RewriteRule 	^swich/editar/																	/vav_final/app.sql/swich.php?f=swichEditar												[L]
 	RewriteRule 	^swich/mesas/																	/vav_final/app.sql/swich.php?f=swichMesas												[L]
 	RewriteRule 	^swich/mesas-actuales/															/vav_final/app.sql/swich.php?f=swichMesasActuales										[L]
-	RewriteRule 	^swich/mesas-totales/															/vav_final/app.sql/swich.php?f=swichMesasTotales										[L]
+	RewriteRule 	^swich-quad/mesas-actuales/														/vav_final/app.sql/swich.php?f=swichQuadMesasActuales									[L]
+	RewriteRule 	^swich/mesas-totales/([A-Z]+)-([0-9]+)											/vav_final/app.sql/swich.php?f=swichMesasTotales&t=$1&i=$2								[L]
 
 #	MESAS USUARIOS MOVIL
 	RewriteRule 	^monitor-moviles/																/vav_final/monitor.moviles.php															[L]
@@ -45,7 +46,7 @@
 	RewriteRule 	^mesas/destacada/																/vav_final/app.sql/mesas.php?f=mesaDestacada											[L]
 	
 	RewriteRule 	^mesas/nueva/																	/vav_final/app.sql/mesas.php?f=mesa_nueva												[L]
-	RewriteRule 	^mesas/guardar/																	/vav_final/app.sql/mesas.php?f=mesa_guardar											[L]
+	RewriteRule 	^mesas/guardar/																	/vav_final/app.sql/mesas.php?f=mesa_guardar												[L]
 
 	RewriteRule 	^mesas/candidato/guardar/														/vav_final/app.sql/mesas.php?f=mesa_candidato_guardar									[L]
 
@@ -54,29 +55,33 @@
 
 	RewriteRule 	^mesas/eliminar/																/vav_final/app.sql/mesas.php?f=mesa_eliminar											[L]
 
+	RewriteRule 	^mesas/swich-quad-tv/															/vav_final/mesa.swich.quad.tv.php														[L]
+
 	RewriteRule 	^mesas/editar/([0-9]+)															/vav_final/mesa.editar.php?&i=$1														[L]
 	RewriteRule 	^mesas/visualizador-publico/													/vav_final/mesa.visualizador.publico.php?&p=0											[L]
 	RewriteRule 	^mesas/visualizador/															/vav_final/mesa.visualizador.php?&p=0													[L]
-	RewriteRule 	^mesas/swich/totem/																/vav_final/mesa.swich.totem.php														[L]
-	RewriteRule 	^mesas/swich/totem-preview/														/vav_final/mesa.swich.totem.preview.php												[L]
+	RewriteRule 	^mesas/swich/totem/																/vav_final/mesa.swich.totem.php															[L]
+	RewriteRule 	^mesas/swich/totem-preview/														/vav_final/mesa.swich.totem.preview.php													[L]
+	RewriteRule 	^mesas/swich/wall/																/vav_final/mesa.swich.quad.tv.php														[L]
 	RewriteRule 	^mesas/swich/																	/vav_final/mesa.swich.php?&p=0															[L]
+	RewriteRule 	^mesas/swich-quad/																/vav_final/mesa.swich.quad.php?&p=0														[L]
 	RewriteRule 	^mesas/datos/([0-9]+)															/vav_final/app.sql/mesas.php?&f=mesaDatos&i=$1											[L]
 	RewriteRule 	^mesas/operador/([0-9]+)														/vav_final/mesa.usuario.php?&p=$1														[L]
 	RewriteRule 	^mesas/operador/																/vav_final/mesa.usuario.php?&p=0														[L]
 	RewriteRule 	^mesas/([0-9]+)																	/vav_final/mesa.php?&p=$1																[L]
 	RewriteRule 	^mesas/																			/vav_final/mesa.php?&p=0																[L]
 
-	RewriteRule 	^tv/																			/vav_final/mesa.swich.totem.php														[L]
+	RewriteRule 	^tv/																			/vav_final/mesa.swich.totem.php															[L]
 
 #	USUARIOS
 	RewriteRule 	^usuarios/json/																	/vav_final/app.sql/usuarios.php?f=usuarioJson											[L]
 	RewriteRule 	^usuarios/movil/																/vav_final/app.sql/usuarios.php?f=usuarioMovil											[L]
 	RewriteRule 	^usuarios/nuevo/																/vav_final/app.sql/usuarios.php?f=usuarioNuevo											[L]
-	RewriteRule 	^usuarios/editar/guardar/														/vav_final/app.sql/usuarios.php?f=usuarioEditar										[L]
-	RewriteRule 	^usuarios/editar/([0-9]+)														/vav_final/usuario.editar.php?&i=$1													[L]
+	RewriteRule 	^usuarios/editar/guardar/														/vav_final/app.sql/usuarios.php?f=usuarioEditar											[L]
+	RewriteRule 	^usuarios/editar/([0-9]+)														/vav_final/usuario.editar.php?&i=$1														[L]
 	RewriteRule 	^usuarios/eliminar/																/vav_final/app.sql/usuarios.php?&f=usuarioEliminar										[L]
 	RewriteRule 	^usuarios/([0-9]+)																/vav_final/usuario.php?&p=$1															[L]
-	RewriteRule 	^usuarios/																		/vav_final/usuario.php?&p=0															[L]
+	RewriteRule 	^usuarios/																		/vav_final/usuario.php?&p=0																[L]
 
 	RewriteRule 	^reboot-data/																	/vav_final/reboot.php																	[L]
 

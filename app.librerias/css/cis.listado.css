@@ -481,14 +481,14 @@
 			.mesa header h2
 			{
 				float: left;
-				font-size: 1.55rem;
+				font-size: 1.6rem;
 				color: var(--color-texto-1);
-				font-weight: 500;
+				font-weight: 600;
 			}
 				.mesa header h2 i
 				{
-					font-size: 1.4rem;
-					margin: 0 6px 0 0;
+					font-size: 1.6rem;
+					margin: 0 8px 0 0;
 				}
 			.mesa header .tipo
 			{
@@ -555,7 +555,7 @@
 					width: 15px;
 					font-size: 0.9rem;
 					line-height: 0.9rem;
-					margin: 0 5px 0 0;
+					margin: 0 8px 0 0;
 				}
 			.mesa header h6
 			{
@@ -569,7 +569,7 @@
 				{
 					width: 15px;
 					font-size: 0.9rem;
-					margin: 0 5px 0 0;
+					margin: 0 8px 0 0;
 				}
 				.mesa header h6 div
 				{

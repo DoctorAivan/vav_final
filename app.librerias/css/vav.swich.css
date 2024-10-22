@@ -164,7 +164,7 @@
 					line-height: 1rem;
 					font-weight: 400;
 					word-spacing: 6px;
-					padding: 11px 14px 0 14px;
+					padding: 11px 16px 0 16px;
 					margin: 8px 15px 0 0;
 					-webkit-transition: all .25s ease-out;
 					-moz-transition: all .25s ease-out;
@@ -196,6 +196,35 @@
 						background: var(--color-border-2);
 						cursor: not-allowed;
 					}
+					.swich-mesas .consolidados
+					{
+						color: var(--color-texto-1);
+						background: var(--color-border-1);
+						border: solid 1px var(--color-border-1);
+						cursor: pointer;
+						word-spacing: 3px;
+						padding: 13px 20px 1px 20px;
+					}
+						.swich-mesas .consolidados .tipo
+						{
+							color: var(--color-texto-1);
+							font-weight: 600;
+							padding: 0 0 0 0;
+						}
+						.swich-mesas .consolidados .zona
+						{
+							color: var(--color-texto-1);
+							font-weight: 300;
+							padding: 0 10px 0 10px;
+						}
+						.swich-mesas .consolidados .separador
+						{
+							display: inline-block;
+
+							height: 11px;
+							margin: 0 0 0 12px;
+						}
+
 			.swich-controles
 			{
 				float: left;
@@ -217,7 +246,7 @@
 					line-height: 1.2rem;
 					letter-spacing: 0.03rem;
 					color: var(--color-texto-1);
-					padding: 0 0 10px 0;
+					padding: 15px 0 10px 0;
 				}
 				.swich-consolidados-items
 				{
@@ -288,6 +317,7 @@
 				{
 					display: none;
 					color: var(--color-bg-box);
+					font-weight: 600;
 					background: var(--color-bg-boton-editar);
 					animation:animacionActivo 1s linear infinite;
 					cursor: pointer;
@@ -364,7 +394,7 @@
 				float: left;
 				font-size: 1.55rem;
 				color: var(--color-texto-1);
-				font-weight: 500;
+				font-weight: 600;
 			}
 				.mesa-swich header h2 i
 				{

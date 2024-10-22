@@ -3,15 +3,11 @@
 //  Obtener el icono relacionado
     function obtener_icono( $icono )
     {
-        if( $icono == 'P' )
+        if( $icono == 'G' )
         {
             return 'fa-sticky-note';
         }
-        else if( $icono == 'S' )
-        {
-            return 'fa-sticky-note';
-        }
-        else if( $icono == 'D' )
+        else if( $icono == 'A' )
         {
             return 'fa-sticky-note';
         }
@@ -22,17 +18,17 @@
 //  Obtener el titulo del tipo
     function obtener_titulo( $icono )
     {
-        if( $icono == 'P' )
+        if( $icono == 'G' )
         {
-            return '🟡&nbsp;&nbsp;&nbsp;PLEBISCITO';
+            return '🟡&nbsp;&nbsp;&nbsp;GOBERNADORES';
         }
-        else if( $icono == 'S' )
+        else if( $icono == 'A' )
         {
-            return '🔴&nbsp;&nbsp;SENADORES';
+            return '🔴&nbsp;&nbsp;&nbsp;ALCALDES';
         }
-        else if( $icono == 'D' )
+        else if( $icono == 'P' )
         {
-            return '🔵&nbsp;&nbsp;DIPUTADOS';
+            return '🔵&nbsp;&nbsp;&nbsp;PLEBISCITO';
         }
     }
 
