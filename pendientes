@@ -5,3 +5,39 @@
     -   actualizar votos consolidados [OK]
     -   actualizar flujo nueva mesa en el DOM
 
+
+    Espero te encuentres bien, te dejo el feedback que me dieron desde gráfica respecto a las piezas que enviamos:
+
+    -   Está bien el subir los campos de pacto y partido, entendiendo que si hay 3 dígitos iba a quedar muy apretado.
+    -   Los encabezados de los "consolidados" (envíe referencia en el último correo), fue lo que revisamos y acordamos
+        con Fernando Reyes Favor dejarlos respetando el último diseño, inclusive ya no va el término "consolidado" y se reemplazó por el número de mesas.
+    -   Eliminar todo tipo de efecto de sombras en los diseños.
+    -   Los números de votos en el "consolidado", deben ser al tamaño enviado, porque están más pequeños.
+    -   Revisar posición de las fotos en el "consolidado" de alcaldes, debe estar más cargada a la derecha, de lo contrario se cortará al aire.
+    -   Respetar posiciones enviadas en los cuadros inferiores flotantes, de lo contrario se cortarán al aire.
+    
+    Sobre las fotos me dijeron que aun no la tenían con la codificación y sobre las siluetas que usamos en caso de no haber foto, lo mencione en el correo pero no me respondieron nada al respecto. Favor me comentan cualquier cosa.
+
+    Saludos.
+
+    -       -       -       -       -       -       -       -       -       -       -       -       -       -       -       -       -
+
+    [OK]    -   Sobre las sombras que pidieron quitar son específicamente las que van detrás de los números, por ejemplo en la
+    siguiente imagen, sería solo quitar la sombra a los números que encerré. Esto aplica a consolidado y cajas de mesas.
+
+    [OK]    -   El caso de un candidato que es independiente y no tenga pacto, finalmente se considerara como fuera de pacto,
+    las siglas que debe seguir son “IND - FD” FD haciendo referencia a lo mencionado.
+
+    [OK]    -   El consolidado de gobernadores pidieron que saliera por la derecha y que el filtro para buscar consolidado de
+    gobernadores sea por región y no por comuna. Te dejo adjunta la imagen de referencia del consolidado de gobernadores.
+
+    [OK]    -   Ambos consolidados finalmente deben replicar lo que se envió en la referencia. Esto significa solo mostrar la cantidad
+     de mesas al inicio y comuna o región según corresponda.
+
+    [OK]    -   Sobre lo que conversamos de los tamaños de los números y el espaciado, esta perfecto como está actualmente,
+    considerando que trabajaremos con 4 dígitos probablemente dentro del consolidado.
+
+    [OK]    -   Las imágenes ya las procesaron, el área gráfica terminando las pruebas me las enviara y se las hago llegar.
+
+    -   Nos falta ver lo que conversamos en uno de los primeros correos sobre la funcionalidad de favoritos, si nos podemos juntar más tarde para conversarlo bien o mañana en caso de que les acomode.
+

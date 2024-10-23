@@ -142,8 +142,11 @@
 
 	--resultados : 490px;
 
+	--consolidado-header-height : 150px;
+	--consolidado-candidatos-height : 714px;
+
 	--consolidado-item-height : 208px;
-	--consolidado-item-margin : 25px;
+	--consolidado-item-margin : 30px;
 }
 
 body
@@ -193,6 +196,7 @@ body
 		width: 380px;
 		height: 912px;
 		background: #e3e3e3;
+		background: #000;
 	}
 
 	.tottem
@@ -213,38 +217,54 @@ body
 	{
 		position: relative;
 		width: 100%;
+		height: 912px;
+		background: #e3e3e3;
 	}
+		.consolidados .motion
+		{
+			position: absolute;
+			z-index: 10;
+			width: 100%;
+			height: 58px;
+			bottom: 0px;
+			background: linear-gradient( 0deg, #e3e3e3 0%, #e3e3e300 100%);
+		}
 		.consolidados .header
 		{
 			position: relative;
 			z-index: 2;
 			width: 100%;
-			height: 188px;
-			box-shadow: 0 2px 8px #00000010;
+			height: var(--consolidado-header-height);
+			box-shadow: 0 2px 8px #00000020;
 		}
+			.consolidados .header .header-cnt
+			{
+				position: absolute;
+				bottom: 15px;
+				z-index: 2;
+				width: 100%;
+			}
 			.consolidados .header h1
 			{
 				color: var(--alcalde-color-invertido);
 				font-family: 'Santral_Book';
 				font-size: 1.5rem;
 				line-height: 1.5rem;
-				padding: 40px 0 5px 35px;
+				padding: 40px 0 0 35px;
 			}
 			.consolidados .header h2
 			{
 				color: var(--alcalde-color-invertido);
-				font-family: 'Santral_ExtraBold';
-				font-size: 2.3rem;
-				line-height: 2.3rem;
-				padding: 0 0 4px 35px;
+				font-family: 'Santral_Book';
+				font-size: 1.9rem;
+				line-height: 1.9rem;
+				padding: 0 0 5px 35px;
 			}
 			.consolidados .header h3
 			{
 				color: var(--alcalde-color-invertido);
 				font-family: 'Santral_ExtraBold';
-				font-size: 1.7rem;
-				line-height: 1.7rem;
-				padding: 0 0 13px 35px;
+				padding: 0 0 0 35px;
 			}
 			.consolidados .header .totales
 			{
@@ -258,10 +278,10 @@ body
 			.consolidados .candidatos
 			{
 				position: relative;
+				margin: 7px 0 0 0;
 				z-index: 1;
 				width: 100%;
-				height: 724px;
-				background: #e3e3e3;
+				height: calc( ( var(--consolidado-item-height) * 3 ) + ( var(--consolidado-item-margin) * 4.5 ) - 7px );
 				overflow: hidden;
 			}
 				.consolidados .candidatos .candidato
@@ -290,9 +310,10 @@ body
 						{
 							position: absolute;
 							width: auto;
-							left: -33px;
+							left: 0;
 							right: 0;
-							height: var(--consolidado-item-height);
+							bottom: 0px;
+							height: calc( var(--consolidado-item-height) - 15px );
 							opacity: 1;
 						}
 
@@ -397,13 +418,13 @@ body
 	.floating .tipo-a .candidatos .candidato-detalles-alianza { border: solid 2px var(--alcalde-color) }
 	.floating .tipo-a .candidatos .candidato-detalles-alianza-partido { background: var(--alcalde-color); color: var(--color-white); }
 	.floating .tipo-a .candidatos .candidato-detalles-alianza-pacto { background: var(--color-white); color: var(--alcalde-color); }
-	.floating .tipo-a .candidatos .candidato-votos-valor { color: var(--alcalde-color); text-shadow: 2px 2px 5px var(--alcalde-color-sombra); }
+	.floating .tipo-a .candidatos .candidato-votos-valor { color: var(--alcalde-color); }
 
 	.floating .tipo-a .candidatos .order-1 .candidato-info { color: var(--color-white) !important; background: var(--alcalde-color) !important; }
 	.floating .tipo-a .candidatos .order-1 .candidato-detalles-alianza { border: solid 2px var(--color-white) !important }
 	.floating .tipo-a .candidatos .order-1 .candidato-detalles-alianza-partido { background: var(--color-white) !important; color: var(--alcalde-color) !important; }
 	.floating .tipo-a .candidatos .order-1 .candidato-detalles-alianza-pacto { background: var(--alcalde-color) !important; color: var(--color-white) !important; }
-	.floating .tipo-a .candidatos .order-1 .candidato-votos-valor { color: var(--color-white) !important; text-shadow: 2px 2px 5px var(--alcalde-color-sombra) !important; }
+	.floating .tipo-a .candidatos .order-1 .candidato-votos-valor { color: var(--color-white) !important; }
 
 	.floating .tipo-a .candidatos .candidato-votos-animacion { background: linear-gradient( 135deg, var(--alcalde-voto-a) 0%, var(--alcalde-voto-b) 100%); }
 	.floating .tipo-a .candidatos .order-1 .candidato-votos-animacion { background: linear-gradient( 135deg, var(--alcalde-1-voto-a) 0%, var(--alcalde-1-voto-b) 100%); }
@@ -412,13 +433,13 @@ body
 	.floating .tipo-g .candidatos .candidato-detalles-alianza { border: solid 2px var(--gobernador-color) }
 	.floating .tipo-g .candidatos .candidato-detalles-alianza-partido { background: var(--gobernador-color); color: var(--color-white); }
 	.floating .tipo-g .candidatos .candidato-detalles-alianza-pacto { background: var(--color-white); color: var(--gobernador-color); }
-	.floating .tipo-g .candidatos .candidato-votos-valor { color: var(--gobernador-color); text-shadow: 2px 2px 5px var(--gobernador-color-sombra); }
+	.floating .tipo-g .candidatos .candidato-votos-valor { color: var(--gobernador-color); }
 
 	.floating .tipo-g .candidatos .order-1 .candidato-info { color: var(--color-white) !important; background: var(--gobernador-color) !important; }
 	.floating .tipo-g .candidatos .order-1 .candidato-detalles-alianza { border: solid 2px var(--color-white) !important }
 	.floating .tipo-g .candidatos .order-1 .candidato-detalles-alianza-partido { background: var(--color-white) !important; color: var(--gobernador-color) !important; }
 	.floating .tipo-g .candidatos .order-1 .candidato-detalles-alianza-pacto { background: var(--gobernador-color) !important; color: var(--color-white) !important; }
-	.floating .tipo-g .candidatos .order-1 .candidato-votos-valor { color: var(--color-white) !important; text-shadow: 2px 2px 5px var(--gobernador-color-sombra) !important; }
+	.floating .tipo-g .candidatos .order-1 .candidato-votos-valor { color: var(--color-white) !important; }
 
 	.floating .tipo-g .candidatos .candidato-votos-animacion { background: linear-gradient( 135deg, var(--gobernador-voto-a) 0%, var(--gobernador-voto-b) 100%); }
 	.floating .tipo-g .candidatos .order-1 .candidato-votos-animacion { background: linear-gradient( 135deg, var(--gobernador-1-voto-a) 0%, var(--gobernador-1-voto-b) 100%); }
@@ -444,7 +465,7 @@ body
 	.consolidados .candidatos .order-4
 	{
 		z-index: 4;
-		top: calc( ( var(--consolidado-item-height) * 3 ) + var(--consolidado-item-margin) * 4 );
+		top: calc( ( var(--consolidado-item-height) * 3 ) + var(--consolidado-item-margin) * 5 );
 		animation: orden-4-kf 0s ease-out 1 forwards;
 	}
 
@@ -471,7 +492,7 @@ body
 				font-family: 'Santral_Bold';
 				font-size: 1.7rem;
 				line-height: 1.7rem;
-				padding: 5px 0 3px 0;
+				padding: 6px 0 4px 0;
 			}
 				.tottem .box .header h2 .tipo
 				{
@@ -490,7 +511,7 @@ body
 				font-family: 'Santral_SemiBold';
 				font-size: 1.3rem;
 				line-height: 1.3rem;
-				padding: 7px 0 7px 0;
+				padding: 8px 0 8px 0;
 			}
 				.tottem .box .header h3 .separador
 				{
@@ -603,7 +624,7 @@ body
 							}
 							.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-alianza .candidato-detalles-alianza-pacto
 							{
-								font-family: 'Santral_Book';
+								font-family: 'Santral_Bold';
 								font-size: 1rem;
 								line-height: 1rem;
 								padding: 4px 0 1px 0;
@@ -654,7 +675,7 @@ body
 	.tottem .tipo-g .header h2 { background: var(--gobernador-color); color: var(--gobernador-color-invertido) }
 	.tottem .tipo-g .header h2 .separador { background: var(--gobernador-color-invertido) }
 
-	.tottem .tipo-g .candidato-votos-valor{ color: var(--gobernador-color); text-shadow: 2px 2px 5px var(--gobernador-color-sombra); }
+	.tottem .tipo-g .candidato-votos-valor{ color: var(--gobernador-color); }
 	.tottem .tipo-g .candidato-detalles-alianza { border: solid 2px var(--gobernador-color) }
 	.tottem .tipo-g .candidato-detalles-alianza-partido { background: var(--gobernador-color) }
 	.tottem .tipo-g .candidato-detalles-alianza-pacto { color: var(--gobernador-color) }
@@ -669,7 +690,7 @@ body
 	.tottem .tipo-a .header h2 { background: var(--alcalde-color); color: var(--alcalde-color-invertido); }
 	.tottem .tipo-a .header h2 .separador { background: var(--alcalde-color-invertido) }
 
-	.tottem .tipo-a .candidato-votos-valor{ color: var(--alcalde-color); text-shadow: 2px 2px 5px var(--alcalde-color-sombra); }
+	.tottem .tipo-a .candidato-votos-valor{ color: var(--alcalde-color); }
 	.tottem .tipo-a .candidato-detalles-alianza { border: solid 2px var(--alcalde-color) }
 	.tottem .tipo-a .candidato-detalles-alianza-partido { background: var(--alcalde-color) }
 	.tottem .tipo-a .candidato-detalles-alianza-pacto { color: var(--alcalde-color) }

@@ -75,7 +75,7 @@ function mesa_nueva()
     liveboxAbrir('mesa');
 
 //  Marcar Pacto por Defecto
-    mesa_nueva_tipo('G');
+    mesa_nueva_tipo('A');
 
 //  Generar Listado de Regiones
 //  mesa_nueva_regiones_listado();
@@ -644,6 +644,8 @@ function mesa_detalles_confirmar()
             {
                 'mesa_id' : mesa_id,
                 'mesa_tipo' : mesa_tipo,
+                'mesa_zona' : mesa_zona,
+                'mesa_estado' : mesa_estado,
                 'accion' : 'recargar'
             }
 
@@ -954,7 +956,7 @@ function estadoConsolidados( estado )
 
     const consolidado_tipo_cookie = $.cookie('consolidado_tipo');
     const consolidado_zona_cookie = $.cookie('consolidado_zona');
-
+    
 //  Validar estado reciente
     if( estado_consolidados == estado )
     {
@@ -964,6 +966,8 @@ function estadoConsolidados( estado )
     {
         if( estado_consolidados_animacion == false && consolidado_zona_cookie != undefined )
         {
+            console.log(' IF ');
+            
         //  Almacenar el estado de la accion
             estado_consolidados = estado
 
@@ -1011,11 +1015,11 @@ function estadoConsolidados( estado )
 
                 estado_consolidados_animacion = false
             }, 1500);
+
+            //	Almacenar el Estado en Cookie
+            $.cookie('vav_cons_estado', estado , { expires: 7, path: '/' });
         }
     }
-
-//	Almacenar el Estado en Cookie
-    $.cookie('vav_cons_estado', estado , { expires: 7, path: '/' });
 }
 
 //  Cambiar el Estado de consolidados

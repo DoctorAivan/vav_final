@@ -230,11 +230,11 @@
 			if( accion == 'voto' )
 			{
 			//	Variables necesarias
-				let id = datoPubNub.id
-				let voto = datoPubNub.valor
-				let mesa = datoPubNub.mesa
-				let candidato = datoPubNub.candidato
-				let accion_voto = datoPubNub.accion_voto
+				const id = datoPubNub.id
+				const voto = datoPubNub.valor
+				const mesa = datoPubNub.mesa
+				const candidato = datoPubNub.candidato
+				const accion_voto = datoPubNub.accion_voto
 
 			//	Validar que el voto emitido este en pantalla
 				App.voto( id , mesa , candidato , voto );
@@ -249,7 +249,7 @@
 			if( accion == 'cons_estado' )
 			{
 			//	Variables necesarias
-				let estado = datoPubNub.estado
+				const estado = datoPubNub.estado
 
 			//	Validar estado del Modulo
 				if( estado == 'on' )
@@ -257,8 +257,12 @@
 				//	Obtener detalles de la Zona
 					const mesa_tipo = datoPubNub.tipo;
 					const mesa_zona = datoPubNub.zona;
-					
-					App.totales( mesa_tipo , mesa_zona );
+
+				//	Validar que exista una zona asignada
+					if( mesa_zona > 0 )
+					{
+						App.totales( mesa_tipo , mesa_zona );
+					}
 				}
 				else
 				{
@@ -272,8 +276,20 @@
 		//	Accion : Actualizar conteo total
 			if( accion == 'recargar' )
 			{
-			//	Actualizar mesa totales
-				App.totales_actualizar()
+			//	Obtener información de la mesa
+				const mesa_zona = datoPubNub.mesa_zona
+				const mesa_tipo = datoPubNub.mesa_tipo
+
+			//	Validar que exista una mesa
+				if( mesa_totales_zona > 0 && mesa_totales_estado )
+				{
+				//	Validar que la mesa coincida
+					if( mesa_totales_tipo == mesa_tipo && mesa_totales_zona == mesa_zona )
+					{
+					//	Actualizar mesa totales
+						App.totales_actualizar()
+					}
+				}
 			}
 
 		}
@@ -338,7 +354,10 @@
 		//	Validar que existan mesas en la Zona
 			if( api.mesas > 0 )
 			{
-				App.ordenar_votos_totales();
+				if( mesa_totales_estado )
+				{
+					App.ordenar_votos_totales();
+				}
 			}
 		},
 
@@ -444,21 +463,23 @@
 			const mesa_totales_detalles = document.getElementById('mesa-totales-detalles');
 			
 		//	Calcular el total de Votos
-			const mesa_totales_votos =  mesa_totales_candidatos.reduce((total, candidato) => total + candidato.votos, 0);
+		//	const mesa_totales_votos =  mesa_totales_candidatos.reduce((total, candidato) => total + candidato.votos, 0);
 
 		//	Actualizar el DOM
-			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
+			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }`
+		//	mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
 		},
 
 	//	Dibujar la mesa en el DOM
 		totales_draw : function()
 		{
+		//	Asignar tipo de zona
 			let totales_zona = ''
 
 		//	Validar Tipo de Zona
 			if( mesa_totales_tipo == 'G' )
 			{
-				totales_zona = 'R. ' + App.obtener_zona_region( mesa_totales_zona );
+				totales_zona = App.obtener_zona_region( mesa_totales_zona );
 			}
 			else
 			{
@@ -481,7 +502,7 @@
 		//	Asignar las clases a la mesa
 			div_mesa.className = `consolidados tipo-${mesa_totales_tipo.toLowerCase()}`
 
-		//	Crear elementos en el DIV
+/*
 			div_mesa.innerHTML =   `<div class="header">
 										<h1>${totales_tipo}</h1>
 										<h2>CONSOLIDADO</h2>
@@ -490,10 +511,25 @@
 											<b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS
 										</div>
 									</div>
+*/
+
+
+		//	Crear elementos en el DIV
+			div_mesa.innerHTML =   `<div class="header">
+										<div class="header-cnt">
+											<h2 id="mesa-totales-detalles">
+												${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }
+											</h2>
+											<h3 id="mesa-totales-zona">${totales_zona}</h3>
+										</div>
+									</div>
+									<div class="motion"></div>
 									<div class="candidatos" id="mesa-0-candidatos"></div>`;
 
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
+
+			App.validar_largo_zona(totales_zona)
 
 		//	Render de los candidatos en la mesa
 			const render_candidatos = document.getElementById('mesa-0-candidatos');
@@ -559,6 +595,43 @@
 					id_orden = 4
 				}
 			});
+		},
+
+	//	Cambiar el tamaño de texto
+		validar_largo_zona : function(zona)
+		{
+		//	Obtener el elemento que contiene el texto
+			const elemento = document.getElementById("mesa-totales-zona");
+		
+		//	Contar el largo del string
+			const largoTexto = zona.length;
+
+		//	Validar largo de la zona
+			if (largoTexto <= 8)
+			{
+				elemento.style.fontSize = "2.4rem";
+				elemento.style.lineHeight = "2.4rem";
+			}
+			else if (largoTexto <= 10)
+			{
+				elemento.style.fontSize = "2.3rem";
+				elemento.style.lineHeight = "2.3rem";
+			}
+			else if (largoTexto <= 12)
+			{
+				elemento.style.fontSize = "2.2rem";
+				elemento.style.lineHeight = "2.2rem";
+			}
+			else if (largoTexto <= 14)
+			{
+				elemento.style.fontSize = "2.1rem";
+				elemento.style.lineHeight = "2.1rem";
+			}
+			else
+			{
+				elemento.style.fontSize = "1.75rem";
+				elemento.style.lineHeight = "1.75rem";
+			}
 		},
 
 	//	Animar la entrada del bloque
@@ -887,7 +960,7 @@
 			}
 
 		//	Validar imagenes de los candidatos
-			candidato_poster( mesa.id );
+		//	candidato_poster( mesa.id );
 		},
 
 	//	Asignar votos a un candidato
@@ -900,6 +973,7 @@
 			if( candidato_voto != null )
 			{
 				const candidato_div_voto_valor = document.querySelector('#candidate-' + id + ' > div.candidato-info > div.candidato-votos > div.candidato-votos-valor');
+				candidato_div_voto_valor.innerHTML = votos;
 			//	candidato_div_voto_valor.classList.add('animar_voto_texto')
 
 				const candidato_div_voto_animacion = document.querySelector('#candidate-' + id + ' > div.candidato-info > div.candidato-votos-animacion');
@@ -912,12 +986,6 @@
 					candidato_div_voto_animacion.classList.remove('animar_voto');
 					
 				}, tiempo_transiciones_adicional);
-
-			//	Actualizar los valores
-				setTimeout(function()
-				{
-					candidato_div_voto_valor.innerHTML = votos;
-				}, 500);
 
 				if( mesa_1 )
 				{

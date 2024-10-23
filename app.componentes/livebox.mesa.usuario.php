@@ -17,9 +17,9 @@
 			</article>
 			<article class="formulario bg-1">
 				<div class="col-1">
-					<h2>Define una Comuna <span>Obligatorio</span></h2>
+					<h2>Define una zona <span>Obligatorio</span></h2>
 					<input name="mesa_nueva_comuna" id="mesa_nueva_comuna" type="text" class="alfanumerico input-autocomplate box-shadow-light bordes-radius" autocomplete="off" placeholder="Providencia" />
-					<h3><i class="fas fa-info-circle"></i> Deberás hacer un click sobre la comuna</h3>
+					<h3><i class="fas fa-info-circle"></i> Deberás hacer un click sobre la zona</h3>
 				</div>
 			</article>
 			<noscript>

@@ -2,97 +2,97 @@
     "regiones": [
         {
             "id": 3015,
-            "nombre": "DE ARICA Y PARINACOTA",
+            "nombre": "R. DE ARICA Y PARINACOTA",
             "orden": 1,
             "romano": "XV"
         },
         {
             "id": 3001,
-            "nombre": "DE TARAPACA",
+            "nombre": "R. DE TARAPACA",
             "orden": 2,
             "romano": "I"
         },
         {
             "id": 3002,
-            "nombre": "DE ANTOFAGASTA",
+            "nombre": "R. DE ANTOFAGASTA",
             "orden": 3,
             "romano": "II"
         },
         {
             "id": 3003,
-            "nombre": "DE ATACAMA",
+            "nombre": "R. DE ATACAMA",
             "orden": 4,
             "romano": "III"
         },
         {
             "id": 3004,
-            "nombre": "DE COQUIMBO",
+            "nombre": "R. DE COQUIMBO",
             "orden": 5,
             "romano": "IV"
         },
         {
             "id": 3005,
-            "nombre": "DE VALPARAISO",
+            "nombre": "R. DE VALPARAISO",
             "orden": 6,
             "romano": "V"
         },
         {
             "id": 3013,
-            "nombre": "METROPOLITANA",
+            "nombre": "R. METROPOLITANA",
             "orden": 7,
             "romano": "XIII"
         },
         {
             "id": 3006,
-            "nombre": "DE OHIGGINS",
+            "nombre": "R. DE OHIGGINS",
             "orden": 8,
             "romano": "VI"
         },
         {
             "id": 3007,
-            "nombre": "DEL MAULE",
+            "nombre": "R. DEL MAULE",
             "orden": 9,
             "romano": "VII"
         },
         {
             "id": 3016,
-            "nombre": "DE \u00d1UBLE",
+            "nombre": "R. DE \u00d1UBLE",
             "orden": 10,
             "romano": "XVI"
         },
         {
             "id": 3008,
-            "nombre": "DEL BIOBIO",
+            "nombre": "R. DEL BIOBIO",
             "orden": 11,
             "romano": "VIII"
         },
         {
             "id": 3009,
-            "nombre": "DE LA ARAUCANIA",
+            "nombre": "R. DE LA ARAUCANIA",
             "orden": 12,
             "romano": "IX"
         },
         {
             "id": 3014,
-            "nombre": "DE LOS RIOS",
+            "nombre": "R. DE LOS RIOS",
             "orden": 13,
             "romano": "XIV"
         },
         {
             "id": 3010,
-            "nombre": "DE LOS LAGOS",
+            "nombre": "R. DE LOS LAGOS",
             "orden": 14,
             "romano": "X"
         },
         {
             "id": 3011,
-            "nombre": "DE AYSEN",
+            "nombre": "R. DE AYSEN",
             "orden": 15,
             "romano": "XI"
         },
         {
             "id": 3012,
-            "nombre": "DE MAGALLANES",
+            "nombre": "R. DE MAGALLANES",
             "orden": 16,
             "romano": "XII"
         }
@@ -3854,59 +3854,9 @@
             "nombre": "POR CHILE, SEGUIMOS"
         },
         {
-            "id": 431,
-            "letra": "B",
-            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
-        },
-        {
-            "id": 433,
-            "letra": "B",
-            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
-        },
-        {
-            "id": 430,
-            "letra": "B",
-            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
-        },
-        {
-            "id": 432,
-            "letra": "B",
-            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
-        },
-        {
             "id": 458,
             "letra": "C",
             "nombre": "TODAS Y TODOS POR CHILE"
-        },
-        {
-            "id": 442,
-            "letra": "D",
-            "nombre": "DEMOCRATAS E INDEPENDIENTES"
-        },
-        {
-            "id": 394,
-            "letra": "E",
-            "nombre": "CHILE VAMOS UDI-EVOPOLI E INDEPENDIENTES"
-        },
-        {
-            "id": 387,
-            "letra": "F",
-            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
-        },
-        {
-            "id": 399,
-            "letra": "F",
-            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
-        },
-        {
-            "id": 386,
-            "letra": "F",
-            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
-        },
-        {
-            "id": 397,
-            "letra": "F",
-            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
         },
         {
             "id": 405,
@@ -3914,109 +3864,9 @@
             "nombre": "VERDES LIBERALES POR UNA COMUNA SEGURA"
         },
         {
-            "id": 401,
-            "letra": "H",
-            "nombre": "CONTIGO CHILE MEJOR"
-        },
-        {
-            "id": 393,
-            "letra": "I",
-            "nombre": "CHILE VAMOS RENOVACION NACIONAL - INDEPENDIENTES"
-        },
-        {
-            "id": 392,
-            "letra": "I",
-            "nombre": "CHILE VAMOS RENOVACI\u00d3N NACIONAL - INDEPENDIENTES"
-        },
-        {
-            "id": 443,
-            "letra": "J",
-            "nombre": "AMARILLOS E INDEPENDIENTES"
-        },
-        {
-            "id": 428,
-            "letra": "K",
-            "nombre": "IZQUIERDA DE TRABAJADORES E INDEPENDIENTES"
-        },
-        {
-            "id": 429,
-            "letra": "K",
-            "nombre": "IZQUIERDA DE TRABAJADORES E INDEPENDIENTES"
-        },
-        {
-            "id": 456,
-            "letra": "L",
-            "nombre": "TU REGION RADICAL"
-        },
-        {
-            "id": 457,
-            "letra": "L",
-            "nombre": "TU REGION RADICAL"
-        },
-        {
-            "id": 461,
-            "letra": "M",
-            "nombre": "REGIONES VERDES LIBERALES"
-        },
-        {
-            "id": 462,
-            "letra": "M",
-            "nombre": "REGIONES VERDES LIBERALES"
-        },
-        {
             "id": 463,
             "letra": "N",
             "nombre": "LO MEJOR PARA CHILE"
-        },
-        {
-            "id": 466,
-            "letra": "O",
-            "nombre": "POR CHILE Y SUS REGIONES"
-        },
-        {
-            "id": 418,
-            "letra": "P",
-            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
-        },
-        {
-            "id": 416,
-            "letra": "P",
-            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
-        },
-        {
-            "id": 417,
-            "letra": "P",
-            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
-        },
-        {
-            "id": 419,
-            "letra": "P",
-            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
-        },
-        {
-            "id": 455,
-            "letra": "Q",
-            "nombre": "POR UN CHILE MEJOR"
-        },
-        {
-            "id": 454,
-            "letra": "Q",
-            "nombre": "POR UN CHILE MEJOR"
-        },
-        {
-            "id": 446,
-            "letra": "R",
-            "nombre": "CENTRO DEMOCRATICO"
-        },
-        {
-            "id": 444,
-            "letra": "R",
-            "nombre": "CENTRO DEMOCRATICO"
-        },
-        {
-            "id": 445,
-            "letra": "R",
-            "nombre": "CENTRO DEMOCRATICO"
         },
         {
             "id": 451,
@@ -4034,68 +3884,218 @@
             "nombre": "CHILE MUCHO MEJOR"
         },
         {
-            "id": 395,
-            "letra": "V",
-            "nombre": "CHILE VAMOS UDI - INDEPENDIENTES"
+            "id": 386,
+            "letra": "PSC",
+            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
+        },
+        {
+            "id": 387,
+            "letra": "PSC",
+            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
         },
         {
             "id": 390,
-            "letra": "W",
+            "letra": "CVA",
             "nombre": "CHILE VAMOS EVOPOLI - INDEPENDIENTES"
         },
         {
-            "id": 426,
-            "letra": "X",
-            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+            "id": 397,
+            "letra": "PSC",
+            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
         },
         {
-            "id": 424,
-            "letra": "X",
-            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+            "id": 399,
+            "letra": "PSC",
+            "nombre": "PARTIDO SOCIAL CRISTIANO E INDEPENDIENTES"
         },
         {
-            "id": 427,
-            "letra": "X",
-            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+            "id": 392,
+            "letra": "CVA",
+            "nombre": "CHILE VAMOS RENOVACI\u00d3N NACIONAL - INDEPENDIENTES"
         },
         {
-            "id": 425,
-            "letra": "X",
-            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+            "id": 393,
+            "letra": "CVA",
+            "nombre": "CHILE VAMOS RENOVACION NACIONAL - INDEPENDIENTES"
         },
         {
-            "id": 437,
-            "letra": "Y",
-            "nombre": "REPUBLICANOS E INDEPENDIENTES"
+            "id": 394,
+            "letra": "CVA",
+            "nombre": "CHILE VAMOS UDI-EVOPOLI E INDEPENDIENTES"
         },
         {
-            "id": 438,
-            "letra": "Y",
-            "nombre": "REPUBLICANOS E INDEPENDIENTES"
-        },
-        {
-            "id": 439,
-            "letra": "Y",
-            "nombre": "REPUBLICANOS E INDEPENDIENTES"
-        },
-        {
-            "id": 440,
-            "letra": "Y",
-            "nombre": "REPUBLICANOS E INDEPENDIENTES"
+            "id": 395,
+            "letra": "CVA",
+            "nombre": "CHILE VAMOS UDI - INDEPENDIENTES"
         },
         {
             "id": 398,
-            "letra": "Z",
+            "letra": "CVA",
             "nombre": "CHILE VAMOS"
         },
         {
             "id": 400,
-            "letra": "Z",
+            "letra": "CVA",
             "nombre": "CHILE VAMOS"
         },
         {
+            "id": 401,
+            "letra": "CCM",
+            "nombre": "CONTIGO CHILE MEJOR"
+        },
+        {
+            "id": 416,
+            "letra": "PDG",
+            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
+        },
+        {
+            "id": 417,
+            "letra": "PDG",
+            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
+        },
+        {
+            "id": 418,
+            "letra": "PDG",
+            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
+        },
+        {
+            "id": 419,
+            "letra": "PDG",
+            "nombre": "PARTIDO DE LA GENTE E INDEPENDIENTES"
+        },
+        {
+            "id": 424,
+            "letra": "ECO",
+            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+        },
+        {
+            "id": 425,
+            "letra": "ECO",
+            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+        },
+        {
+            "id": 426,
+            "letra": "ECO",
+            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+        },
+        {
+            "id": 427,
+            "letra": "ECO",
+            "nombre": "ECOLOGISTAS, ANIMALISTAS E INDEPENDIENTES"
+        },
+        {
+            "id": 428,
+            "letra": "IZT",
+            "nombre": "IZQUIERDA DE TRABAJADORES E INDEPENDIENTES"
+        },
+        {
+            "id": 430,
+            "letra": "IZE",
+            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
+        },
+        {
+            "id": 431,
+            "letra": "IZE",
+            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
+        },
+        {
+            "id": 432,
+            "letra": "IZE",
+            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
+        },
+        {
+            "id": 433,
+            "letra": "IZE",
+            "nombre": "IZQUIERDA ECOLOGISTA POPULAR"
+        },
+        {
+            "id": 437,
+            "letra": "REP",
+            "nombre": "REPUBLICANOS E INDEPENDIENTES"
+        },
+        {
+            "id": 438,
+            "letra": "REP",
+            "nombre": "REPUBLICANOS E INDEPENDIENTES"
+        },
+        {
+            "id": 439,
+            "letra": "REP",
+            "nombre": "REPUBLICANOS E INDEPENDIENTES"
+        },
+        {
+            "id": 440,
+            "letra": "REP",
+            "nombre": "REPUBLICANOS E INDEPENDIENTES"
+        },
+        {
+            "id": 442,
+            "letra": "CDE",
+            "nombre": "DEMOCRATAS E INDEPENDIENTES"
+        },
+        {
+            "id": 443,
+            "letra": "CDE",
+            "nombre": "AMARILLOS E INDEPENDIENTES"
+        },
+        {
+            "id": 444,
+            "letra": "CDE",
+            "nombre": "CENTRO DEMOCRATICO"
+        },
+        {
+            "id": 445,
+            "letra": "CDE",
+            "nombre": "CENTRO DEMOCRATICO"
+        },
+        {
+            "id": 446,
+            "letra": "CDE",
+            "nombre": "CENTRO DEMOCRATICO"
+        },
+        {
+            "id": 454,
+            "letra": "PCM",
+            "nombre": "POR UN CHILE MEJOR"
+        },
+        {
+            "id": 455,
+            "letra": "PCM",
+            "nombre": "POR UN CHILE MEJOR"
+        },
+        {
+            "id": 456,
+            "letra": "TRR",
+            "nombre": "TU REGION RADICAL"
+        },
+        {
+            "id": 457,
+            "letra": "TRR",
+            "nombre": "TU REGION RADICAL"
+        },
+        {
+            "id": 461,
+            "letra": "RVL",
+            "nombre": "REGIONES VERDES LIBERALES"
+        },
+        {
+            "id": 462,
+            "letra": "RVL",
+            "nombre": "REGIONES VERDES LIBERALES"
+        },
+        {
+            "id": 466,
+            "letra": "PCR",
+            "nombre": "POR CHILE Y SUS REGIONES"
+        },
+        {
+            "id": 429,
+            "letra": "IZT",
+            "nombre": "IZQUIERDA DE TRABAJADORES E INDEPENDIENTES"
+        },
+        {
             "id": 999,
-            "letra": "0",
+            "letra": "FP",
             "nombre": "INDEPENDIENTES"
         }
     ],
@@ -4223,11 +4223,6 @@
             "sigla": "RN"
         },
         {
-            "id": 2,
-            "nombre": "PARTIDO DEMOCRATA CRISTIANO",
-            "sigla": "PDC"
-        },
-        {
             "id": 3,
             "nombre": "UNION DEMOCRATA INDEPENDIENTE",
             "sigla": "UDI"
@@ -4243,19 +4238,9 @@
             "sigla": "PS"
         },
         {
-            "id": 6,
-            "nombre": "PARTIDO COMUNISTA DE CHILE",
-            "sigla": "PCCH"
-        },
-        {
             "id": 7,
             "nombre": "PARTIDO RADICAL DE CHILE",
             "sigla": "PR"
-        },
-        {
-            "id": 37,
-            "nombre": "EVOLUCION POLITICA",
-            "sigla": "EVOPOLI"
         },
         {
             "id": 99,
@@ -4263,19 +4248,9 @@
             "sigla": "IND"
         },
         {
-            "id": 130,
-            "nombre": "FEDERACION REGIONALISTA VERDE SOCIAL",
-            "sigla": "FREVS"
-        },
-        {
             "id": 137,
             "nombre": "PARTIDO LIBERAL DE CHILE",
             "sigla": "PL"
-        },
-        {
-            "id": 150,
-            "nombre": "PARTIDO REPUBLICANO DE CHILE",
-            "sigla": "REPUBLICANO"
         },
         {
             "id": 157,
@@ -4293,44 +4268,69 @@
             "sigla": "AH"
         },
         {
-            "id": 191,
-            "nombre": "MOVIMIENTO AMARILLOS POR CHILE",
-            "sigla": "AMARILLOS"
-        },
-        {
             "id": 197,
             "nombre": "PARTIDO SOCIAL CRISTIANO",
             "sigla": "PSC"
         },
         {
+            "id": 232,
+            "nombre": "FRENTE AMPLIO",
+            "sigla": "FA"
+        },
+        {
+            "id": 2,
+            "nombre": "PARTIDO DEMOCRATA CRISTIANO",
+            "sigla": "DC"
+        },
+        {
+            "id": 6,
+            "nombre": "PARTIDO COMUNISTA DE CHILE",
+            "sigla": "PC"
+        },
+        {
+            "id": 37,
+            "nombre": "EVOLUCION POLITICA",
+            "sigla": "EVO"
+        },
+        {
+            "id": 130,
+            "nombre": "FEDERACION REGIONALISTA VERDE SOCIAL",
+            "sigla": "FRVS"
+        },
+        {
+            "id": 150,
+            "nombre": "PARTIDO REPUBLICANO DE CHILE",
+            "sigla": "REP"
+        },
+        {
+            "id": 191,
+            "nombre": "MOVIMIENTO AMARILLOS POR CHILE",
+            "sigla": "AMA"
+        },
+        {
             "id": 198,
             "nombre": "PARTIDO DEMOCRATAS CHILE",
-            "sigla": "DEMOCRATAS"
+            "sigla": "DEM"
         },
         {
             "id": 200,
             "nombre": "PARTIDO ALIANZA VERDE POPULAR",
-            "sigla": "PAVP"
+            "sigla": "AVP"
         },
         {
             "id": 201,
             "nombre": "IGUALDAD",
-            "sigla": "IGUALDAD"
+            "sigla": "PIG"
         },
         {
             "id": 203,
             "nombre": "POPULAR",
-            "sigla": "POPULAR"
+            "sigla": "PP"
         },
         {
             "id": 220,
             "nombre": "PARTIDO DE TRABAJADORES REVOLUCIONARIOS",
-            "sigla": "PTR"
-        },
-        {
-            "id": 232,
-            "nombre": "FRENTE AMPLIO",
-            "sigla": "FA"
+            "sigla": "PTRV"
         }
     ]
 }

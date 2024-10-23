@@ -4,6 +4,7 @@ let consolidado_zona_nombre = ''
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
+// Iniciar al cargar
 $(function()
 {
     consolidados_render();
@@ -50,7 +51,7 @@ function consolidados_render()
 // Consolidados Asignar
 function consolidados_asignar()
 {
-    if( estado_consolidados == "of" )
+    if( estado_consolidados != "on" )
     {
 
     //  Cambiar la dimensión
@@ -64,9 +65,6 @@ function consolidados_asignar()
 
     //  Marcar Pacto por Defecto
         consolidados_tipo( consolidados_tipo_cookie ? consolidados_tipo_cookie : 'G' );
-
-    //  Crear funcionalidad autocompletar
-        consolidados_autocompletar_comunas();
 
     //  Limpiar input comunas
         const input_comunas = document.getElementById('mesa_consolidado_comunas')
@@ -96,6 +94,24 @@ function consolidados_tipo( tipo )
 
 //  Almacenar tipo de Mesa
     consolidado_tipo       =   tipo;
+
+//  Tipo de mesa
+    if( tipo == 'G' )
+    {
+        consolidados_autocompletar_region();
+    }
+    else
+    {
+        consolidados_autocompletar_comunas();
+    }
+
+    //  Funcionalidad Botones nueva mesa
+    const mensa_nueva_of = document.getElementById('mesa-nueva-of')
+    const mensa_nueva_on = document.getElementById('mesa-nueva-on')
+
+    //  Estado de los botones
+    mensa_nueva_of.style.display = 'block';
+    mensa_nueva_on.style.display = 'none';
 }
 
 // Consolidados Guardar Valores
@@ -149,28 +165,47 @@ function consolidados_autocompletar_comunas()
     $("#mesa_consolidado_comunas").easyAutocomplete(options);
 }
 
-// Funcionalidad autocompletar asignar
-function consolidados_autocompletar_comunas_asignar( id )
+// Funcionalidad autocompletar
+function consolidados_autocompletar_region()
 {
-//  Obtener información de la Comuna
-    let comuna = objeto_comunas.find( obj => obj.id === id );
+//  Crear objeto autocompletar
+    let options = {
+        data: objeto_regiones,
+        getValue: "nombre",
+        list: {
+            maxNumberOfElements: 5,
+            match: {
+                enabled: true
+            }
+        },
+        template: {
+            type: "custom",
+            method: function(value, objeto)
+            {
+            //  Crear div con el resultado
+                let div     =   `<div class="box" onClick="consolidados_autocompletar_region_asignar(${objeto.id})">
+                                    <div class="child">${value}</div>
+                                </div>`;
 
+            //  Enviar resultado a la UI
+                return div;
+            }
+        }
+    };
+
+//  Asignar funcionalidad
+    $("#mesa_consolidado_comunas").easyAutocomplete(options);
+}
+
+// Funcionalidad autocompletar asignar
+function consolidados_autocompletar_region_asignar( id )
+{
 //  Obtener la Circunscripcion de la Comuna
-    let region = objeto_regiones.find( obj => obj.id === comuna.region );
+    let region = objeto_regiones.find( obj => obj.id === id );
 
 //  Tipo Zona Gobernador
-    if( consolidado_tipo == 'G' )
-    {
-        consolidado_zona = region.id;
-        consolidado_zona_nombre = 'R. ' + region.nombre;
-    }
-
-//  Tipo Zona Alcalde
-    if( consolidado_tipo == 'A' )
-    {
-        consolidado_zona = comuna.id;
-        consolidado_zona_nombre = comuna.nombre;
-    }
+    consolidado_zona = region.id;
+    consolidado_zona_nombre = region.nombre;
 
 //  Funcionalidad Botones nueva mesa
     const mensa_nueva_of = document.getElementById('mesa-nueva-of')
@@ -181,6 +216,26 @@ function consolidados_autocompletar_comunas_asignar( id )
     mensa_nueva_on.style.display = 'block';
 }
 
+// Funcionalidad autocompletar asignar
+function consolidados_autocompletar_comunas_asignar( id )
+{
+//  Obtener información de la Comuna
+    let comuna = objeto_comunas.find( obj => obj.id === id );
+
+//  Tipo Zona Alcalde
+    consolidado_zona = comuna.id;
+    consolidado_zona_nombre = comuna.nombre;
+
+//  Funcionalidad Botones nueva mesa
+    const mensa_nueva_of = document.getElementById('mesa-nueva-of')
+    const mensa_nueva_on = document.getElementById('mesa-nueva-on')
+
+//  Estado de los botones
+    mensa_nueva_of.style.display = 'none';
+    mensa_nueva_on.style.display = 'block';
+}
+
+// Validar el Estado de la accion
 function consolidados_render_estado(estado)
 {
     const consolidados_render = document.getElementById('consolidados-render');
