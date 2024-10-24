@@ -616,7 +616,7 @@ function mesa_detalles_confirmar()
                                 <div onclick="mesaDestacada( ${mesa_id} );" class="estado estado-0 box-shadow-light" id="${mesa_id}">
                                     <div></div>
                                 </div>
-                                <h2><i class="fas fa-passport"></i> ${mesa_id}</h2>
+                                <h2><i class="fas fa-hashtag"></i> ${mesa_id}</h2>
                                 <h1 class="line-1" id="${mesa_id}_mesa_usuario"><i class="fas fa-user"></i> ${mesa_usuario}</h1>
                                 <div class="tipo">${mesa_tipo_titulo}</div>
                                 <div class="zona">${mesa_zona_titulo}</div>

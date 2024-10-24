@@ -520,6 +520,7 @@
 											<h2 id="mesa-totales-detalles">
 												${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }
 											</h2>
+											<h1>${totales_tipo}</h1>
 											<h3 id="mesa-totales-zona">${totales_zona}</h3>
 										</div>
 									</div>
@@ -863,7 +864,7 @@
 										<h2>
 											<span class="tipo">${App.obtener_tipo_mesa(mesa.tipo)}</span>
 											<div class="separador"></div>
-											${mesa.comuna}
+											${mesa.tipo == 'A' ? mesa.comuna : mesa.zona}
 										</h2>
 										<h3>
 											${mesa.local}

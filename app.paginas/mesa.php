@@ -134,11 +134,9 @@
 
 					<header>
 
-						<noscript>
 						<div onclick="mesaDestacada( <?php echo $_MESA->mesa_id; ?> );" class="estado estado-<?php echo $_MESA->mesa_destacada; ?> box-shadow-light" id="<?php echo $_MESA->mesa_id; ?>">
 							<div></div>
 						</div>
-						</noscript>
 
 						<h2><i class="fas fa-hashtag"></i> <?php echo $_MESA->mesa_id; ?></h2>
 						<h1 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_usuario"><i class="fas fa-user"></i> <?php echo $_MESA->usuario_nombre; ?></h1>

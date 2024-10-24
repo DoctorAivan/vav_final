@@ -125,7 +125,7 @@
 						<div onclick="mesaDestacada( <?php echo $_MESA->mesa_id; ?> );" class="estado estado-<?php echo $_MESA->mesa_destacada; ?> box-shadow-light" id="<?php echo $_MESA->mesa_id; ?>">
 							<div></div>
 						</div>
-						<h2><i class="fas fa-passport"></i> <?php echo $_MESA->mesa_id; ?></h2>
+						<h2><i class="fas fa-hashtag"></i> <?php echo $_MESA->mesa_id; ?></h2>
 						<h1 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_usuario"><i class="fas fa-lock"></i> <?php echo $_MESA->usuario_nombre; ?></h1>
 						<div class="tipo"><?php echo $mesa_tipo_titulo; ?></div>
 						<div class="zona"><?php echo $_MESA->mesa_zona_titulo; ?></div>

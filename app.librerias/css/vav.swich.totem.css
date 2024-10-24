@@ -248,17 +248,18 @@ body
 			{
 				color: var(--alcalde-color-invertido);
 				font-family: 'Santral_Book';
+				letter-spacing: 3px;
 				font-size: 1.5rem;
 				line-height: 1.5rem;
-				padding: 40px 0 0 35px;
+				padding: 0 0 6px 35px;
 			}
 			.consolidados .header h2
 			{
 				color: var(--alcalde-color-invertido);
-				font-family: 'Santral_Book';
-				font-size: 1.9rem;
-				line-height: 1.9rem;
-				padding: 0 0 5px 35px;
+				font-family: 'Santral_SemiBold';
+				font-size: 1.7rem;
+				line-height: 1.7rem;
+				padding: 0 0 4px 35px;
 			}
 			.consolidados .header h3
 			{
@@ -503,7 +504,7 @@ body
 					display: inline-block;
 					width: 2px;
 					height: 20px;
-					margin: 0 10px 0 10px;
+					margin: 0 9px 0 9px;
 				}
 			.tottem .box .header h3
 			{
