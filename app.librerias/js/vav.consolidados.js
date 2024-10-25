@@ -8,6 +8,9 @@ let consolidado_zona_nombre = ''
 $(function()
 {
     consolidados_render();
+
+    consolidado_tipo = $.cookie('consolidado_tipo')
+    consolidado_zona = $.cookie('consolidado_zona')
 });
 
 // Actualizar información del consolidado
@@ -54,30 +57,32 @@ function consolidados_asignar()
     if( estado_consolidados != "on" )
     {
 
-    //  Cambiar la dimensión
-        liveboxAncho('consolidados' , 500 );
-
-    //	Abrir Funcionalidad Livebox
-        liveboxAbrir('consolidados');
-
-    //  Obtener Tipo
-        const consolidados_tipo_cookie = $.cookie('consolidado_tipo')
-
-    //  Marcar Pacto por Defecto
-        consolidados_tipo( consolidados_tipo_cookie ? consolidados_tipo_cookie : 'G' );
-
-    //  Limpiar input comunas
-        const input_comunas = document.getElementById('mesa_consolidado_comunas')
-        input_comunas.value = ''
-
-    //  Funcionalidad Botones nueva mesa
-        const mensa_nueva_of = document.getElementById('mesa-nueva-of')
-        const mensa_nueva_on = document.getElementById('mesa-nueva-on')
-
-    //  Estado de los botones de accion
-        mensa_nueva_of.style.display = 'block';
-        mensa_nueva_on.style.display = 'none';
     }
+
+
+//  Cambiar la dimensión
+    liveboxAncho('consolidados' , 500 );
+
+//	Abrir Funcionalidad Livebox
+    liveboxAbrir('consolidados');
+
+//  Obtener Tipo
+    const consolidados_tipo_cookie = $.cookie('consolidado_tipo')
+
+//  Marcar Pacto por Defecto
+    consolidados_tipo( consolidados_tipo_cookie ? consolidados_tipo_cookie : 'G' );
+
+//  Limpiar input comunas
+    const input_comunas = document.getElementById('mesa_consolidado_comunas')
+    input_comunas.value = ''
+
+//  Funcionalidad Botones nueva mesa
+    const mensa_nueva_of = document.getElementById('mesa-nueva-of')
+    const mensa_nueva_on = document.getElementById('mesa-nueva-on')
+
+//  Estado de los botones de accion
+    mensa_nueva_of.style.display = 'block';
+    mensa_nueva_on.style.display = 'none';
 }
 
 // Consolidados Tipo
@@ -238,6 +243,8 @@ function consolidados_autocompletar_comunas_asignar( id )
 // Validar el Estado de la accion
 function consolidados_render_estado(estado)
 {
+    /*
+
     const consolidados_render = document.getElementById('consolidados-render');
     const consolidados_render_icon = document.getElementById('consolidados-render-icon');
 
@@ -254,4 +261,6 @@ function consolidados_render_estado(estado)
         consolidados_render_icon.classList.remove('fa-lock')
         consolidados_render_icon.classList.add('fa-highlighter')
     }
+
+    */
 }

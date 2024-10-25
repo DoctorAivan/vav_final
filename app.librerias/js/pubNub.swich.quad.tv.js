@@ -215,7 +215,6 @@
 			setTimeout(function()
 			{
 				App.draw( id , mesa );
-				console.log('view_in' , id);
 			}, tiempo_transiciones );			
 		},
 
@@ -267,7 +266,6 @@
 			div_mesa.innerHTML =   `<div class="header">
 										<h2>${mesa.comuna}</h2>
 										<h3>${mesa.local}</h3>
-										<h4>${mesa.numero}</h4>
 									</div>
 									<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>`;
 
@@ -300,21 +298,31 @@
 
 			//	Asignar los elementos al div	
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img
-											src=""
-											id="candidato-imagen-${mesa.id}-${candidato.id}"
-											class="candidato-imagen-src"
-											data-nombre="${candidato.nombres} ${candidato.apellidos}"
-											data-objeto="${candidato.id}"
-										/>
+										<div class="candidato-imagen-marco">
+											<img
+												src=""
+												id="candidato-imagen-${mesa.id}-${candidato.id}"
+												class="candidato-imagen-src"
+												data-nombre="${candidato.nombres} ${candidato.apellidos}"
+												data-objeto="${candidato.id}"
+												data-load="false"
+											/>
+										</div>
 									</div>
 									<div class="candidato-ficha">
 										<div class="candidato-ficha-nombre">${candidato.nombres}</div>	
 										<div class="candidato-ficha-apellido">${candidato.apellidos}</div>
-										<div class="candidato-ficha-partido">${candidato.partido}</div>
-										<div class="candidato-ficha-votos" id="candidato-${candidato.objeto}-votos">${candidato.votos}</div>
-									</div>
-									<div class="candidato-votos-animacion"></div>`
+										<div class="candidato-ficha-footer">
+											<div class="candidato-ficha-footer-pacto">
+												<div class="partido">${App.obtener_partido(candidato.partido_id)}</div>
+												<div class="pacto">${App.obtener_pacto(candidato.pacto_id)}</div>
+											</div>
+											<div class="candidato-ficha-footer-votos" id="candidato-${candidato.objeto}-votos">
+												${candidato.votos}
+											</div>
+										</div>
+										<div class="candidato-votos-animacion"></div>
+									</div>`
 
 			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
@@ -344,30 +352,23 @@
 		voto : function( id , mesa, candidato, votos )
 		{
 		//	Actualizar votos en el DOM
-			const candidato_voto = document.getElementById(`candidato-${id}`);
+			const candidato_voto = document.getElementById(`candidato-${id}`);			
 
 		//	Validar que exista el elemento
 			if( candidato_voto != null )
 			{
-				const candidato_div_voto_valor = document.querySelector('#candidato-' + id + ' > div.candidato-ficha > div.candidato-ficha-votos');
-				candidato_div_voto_valor.classList.add('animar_voto_texto')
+				const candidato_div_voto_valor = document.querySelector('#candidato-' + id + ' > div.candidato-ficha > div.candidato-ficha-footer > div.candidato-ficha-footer-votos');
+				candidato_div_voto_valor.innerHTML = votos;
 
-				const candidato_div_voto_animacion = document.querySelector('#candidato-' + id + ' > div.candidato-votos-animacion');
+				const candidato_div_voto_animacion = document.querySelector('#candidato-' + id + ' > div.candidato-ficha > div.candidato-votos-animacion');
 				candidato_div_voto_animacion.classList.add('animar_voto');
 
 			//	Reiniciar animación del voto
 				setTimeout(function()
 				{
-					candidato_div_voto_valor.classList.remove('animar_voto_texto');
 					candidato_div_voto_animacion.classList.remove('animar_voto');
 					
 				}, tiempo_transiciones_adicional);
-
-			//	Actualizar los valores
-				setTimeout(function()
-				{
-					candidato_div_voto_valor.innerHTML = votos;
-				}, 500);
 
 				if( mesa_1 )
 				{
@@ -512,6 +513,13 @@
 		{
 			let partido = objeto_partidos.find( obj => obj.id === id );
 			return partido.sigla;
+		},
+
+	//	Obtener información del Pacto
+		obtener_pacto : function ( id )
+		{
+			let pacto = objeto_pactos.find( obj => obj.id === id );
+			return pacto.letra;
 		},
 
 	//	Agregar miles a los numeros

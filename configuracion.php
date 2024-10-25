@@ -60,12 +60,12 @@
 	$_LIBRERIAS_JS						=	"$_APP/app.librerias/js/";
 	$_LIBRERIAS_IMG						=	"$_APP/app.imagenes/";
 	$_LIBRERIAS_JSON					=	"/app.jsons/";
-	
+
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	INFORMACION DE LA APLICACION
 
 //	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.4.2";
+	$_CONF_VERSION						=	"?version.4.5";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES

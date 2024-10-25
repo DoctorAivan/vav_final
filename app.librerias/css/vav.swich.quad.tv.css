@@ -10,84 +10,6 @@
 
 @font-face
 {
-	font-family: 'panton_thin';
-	src: local('panton_thin'), url(fonts/cnn/panton_thin.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_extraLight';
-	src: local('panton_extraLight'), url(fonts/cnn/panton_extraLight.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_light';
-	src: local('panton_light'), url(fonts/cnn/panton_light.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_regular';
-	src: local('panton_regular'), url(fonts/cnn/panton_regular.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_semiBold';
-	src: local('panton_semiBold'), url(fonts/cnn/panton_semiBold.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_bold';
-	src: local('panton_bold'), url(fonts/cnn/panton_bold.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_extraBold';
-	src: local('panton_extraBold'), url(fonts/cnn/panton_extraBold.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_black';
-	src: local('panton_black'), url(fonts/cnn/panton_black.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_heavy';
-	src: local('panton_heavy'), url(fonts/cnn/panton_heavy.otf) format('opentype');
-}
-
-@font-face
-{
-	font-family: "ATC_rg";
-	src: local('ATTAleckCd_Rg'), url("fonts/ATTAleckCd_Rg.ttf") format("truetype");
-}
-@font-face
-{
-	font-family: "ATC_bd";
-	src: local('ATTAleckCd_W_Bd'), url("fonts/ATTAleckCd_W_Bd.ttf") format("truetype");
-}
-
-@font-face
-{
-	font-family: "Flama_Regular";
-	src: local('Flama_Regular'), url("fonts/Flama_Regular.otf") format("truetype");
-}
-@font-face
-{
-	font-family: "Flama_Medium";
-	src: local('Flama_Medium'), url("fonts/Flama_Medium.otf") format("truetype");
-}
-@font-face
-{
-	font-family: "Flama_Semibold";
-	src: local('Flama_Semibold'), url("fonts/Flama_Semibold.otf") format("truetype");
-}
-@font-face
-{
-	font-family: "Flama_Bold";
-	src: local('Flama_Bold'), url("fonts/Flama_Bold.otf") format("truetype");
-}
-
-@font-face
-{
 	font-family: "Santral_Book";
 	src: local('Santral_Book'), url("fonts/Santral-Book.ttf") format("truetype");
 }
@@ -110,7 +32,7 @@
 :root
 {
 	--color-white : #ffffff;
-	--color-black : #1c1c1c;
+	--color-black : #2d2d2d;
 
 	--gobernador-color : #fd387f;
 	--gobernador-color-invertido : #ffffff;
@@ -125,12 +47,12 @@
 	--alcalde-color-invertido : #ffffff;
 	--alcalde-color-sombra : #007fef50;
 	
-	--alcalde-voto-a : #ffffff;
-	--alcalde-voto-b : #007fef;
+	--alcalde-voto-a : #007fef00;
+	--alcalde-voto-b : #007fef90;
 	--alcalde-1-voto-a : #ffffff00;
 	--alcalde-1-voto-b : #ffffffb1;
 
-	--candidato-height : 250px;
+	--candidato-height : 365px;
 
 	--candidato-nombre : #1c1c1c;
 	--candidato-apellido : #1c1c1c;
@@ -152,9 +74,9 @@ body
 	width: 1920px;
 	height: 1080px;
 	/*
-	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
+	background: url("/vav_final/app.imagenes/bg_wall.jpg") no-repeat;
 	*/
-	background: #444;
+	background: url("/vav_final/app.imagenes/bg_wall.jpg") no-repeat;
 	overflow: hidden;
 }
 	#no-cursor
@@ -176,8 +98,8 @@ body
 		height: 823px;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
-		gap: 60px;
-		padding: 140px 100px 100px 100px;
+		gap: 70px;
+		padding: 105px 100px 100px 100px;
 	}
 		.mesa
 		{
@@ -185,29 +107,33 @@ body
 			font-size: 1.5rem;
 			line-height: 1.5rem;
 			color: var(--color-white);
-			background: #333;
 		}
 			.mesa .header
 			{
 				position: relative;
-				padding: 25px 25px 22px 25px;
+				text-align: center;
 			}
 				.mesa .header h2
 				{
 					position: relative;
-					font-family: 'Santral_ExtraBold';
-					font-size: 1.7rem;
-					line-height: 1.7rem;
+					font-family: 'Santral_Bold';
+					font-size: 2.2rem;
+					line-height: 2.2rem;
 					text-transform: uppercase;
+					color: var(--alcalde-color);
+					background: #fff;
+					padding: 11px 0 2px 0;
 				}
 				.mesa .header h3
 				{
 					position: relative;
-					font-family: 'Santral_Book';
-					font-size: 1.2rem;
-					line-height: 1.2rem;
+					font-family: 'Santral_Semibold';
+					font-size: 1.25rem;
+					line-height: 1.25rem;
 					text-transform: uppercase;
-					padding: 3px 0 5px 0;
+					color: #fff;
+					background: var(--alcalde-color);
+					padding: 10px 0 6px 0;
 				}
 				.mesa .header h4
 				{
@@ -220,74 +146,125 @@ body
 			.mesa .candidatos
 			{
 				position: relative;
-				height: calc( var(--candidato-height) * 2 );
-				background: #555;
+				height: calc( ( var(--candidato-height) * 2 ) + 30px );
+				background: #b8b8b8;
 				overflow: hidden;
 			}
 				.mesa .candidatos .candidato
 				{
 					position: absolute;
 					width: 100%;
-					padding: 50px 25px 0 25px;
+					padding: 45px 30px 0 30px;
 					height: var(--candidato-height);
-					background: linear-gradient( 0deg, #555 0%, #777 100%);
 					display: grid;
-					grid-template-columns: 150px 1fr;
-					gap: 25px;
+					grid-template-columns: 1fr;
 					transition: all 0.75s ease;
 				}
 					.mesa .candidatos .candidato .candidato-imagen
 					{
-						z-index: 2;
+						z-index: 1;
+						display: grid;
 						position: relative;
-						width: 150px;
-						height: 150px;
-						border-radius: 100%;
-						overflow: hidden;
+						width: 100%;
 						background: #fff;
 					}
+						.mesa .candidatos .candidato .candidato-imagen .candidato-imagen-marco
+						{
+							place-self: center;
+							position: relative;
+							width: 170px;
+							height: 150px;
+							background: #fff;
+							box-shadow: 0 80px 75px #00000065;
+						}
 						.mesa .candidatos .candidato .candidato-imagen img
 						{
+							top: -30px;
+							position: relative;
 							width: 100%;
-							height: 100%;
 							transition: all 0.75s ease-out;
 							opacity: 0;
 						}
+
 					.mesa .candidatos .candidato .candidato-ficha
 					{
 						z-index: 2;
 						position: relative;
-						padding: 10px 0 0 0;
+						color: var(--color-black);
+						background: #e0e0e0;
+						text-align: center;
+						transition: all 0.75s ease-in-out;
+						box-shadow: 0 4px 15px #00000015;
 					}
 						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-nombre
 						{
+							z-index: 5;
 							position: relative;
-							font-family: 'Santral_Book';
-							font-size: 1.1rem;
-							line-height: 1.1rem;
+							font-family: 'Santral_ExtraBold';
+							font-size: 1.8rem;
+							line-height: 1.8rem;
+							padding: 13px 0 2px 0;
 						}
 						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-apellido
 						{
+							z-index: 5;
 							position: relative;
 							font-family: 'Santral_ExtraBold';
-							font-size: 1.3rem;
-							line-height: 1.3rem;
-							padding: 4px 0 3px 0;
+							font-size: 2.15rem;
+							line-height: 2.15rem;
+							padding: 0 0 0 0;
 						}
 						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-partido
 						{
+							z-index: 5;
 							position: relative;
 							font-family: 'Santral_Book';
 							font-size: 1.1rem;
 							line-height: 1.1rem;
 						}
-						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-votos
+
+					.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-footer
+					{
+						z-index: 5;
+						display: grid;
+						grid-template-columns: 90px 1fr;
+						gap: 10px;
+						padding: 7px 20px 15px 20px;
+					}
+						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-pacto
 						{
+							display: grid;
+							position: relative;
+							font-family: 'Santral_Bold';
+							font-size: 1.6rem;
+							line-height: 1.6rem;
+							border: solid 2px var(--alcalde-color);
+							transition: all 0.75s ease-in-out;
+						}
+							.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-pacto .partido
+							{
+								background: var(--alcalde-color);
+								color: var(--color-white);
+								padding: 5px 0 0 0;
+								transition: all 0.75s ease-in-out;
+							}
+							.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-pacto .pacto
+							{
+								background: var(--color-white);
+								color: var(--alcalde-color);
+								padding: 5px 0 0 0;
+								transition: all 0.75s ease-in-out;
+							}
+						.mesa .candidatos .candidato .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-votos
+						{
+							z-index: 5;
 							position: relative;
 							font-family: 'Santral_Extrabold';
-							font-size: 3.8rem;
-							line-height: 3.8rem;
-							padding: 14px 0 0 0;
+							font-size: 4.9rem;
+							line-height: 3.1rem;
+							padding: 17px 0 0 0;
+							color: var(--alcalde-color);
+							transition: all 0.75s ease-in-out;
 						}
 					.mesa .candidatos .candidato-votos-animacion
 					{
@@ -297,23 +274,33 @@ body
 						width: 100%;
 						height: 100%;
 						opacity: 0;
-						background: linear-gradient( 0deg, #999 0%, #888 100%);
+						background: linear-gradient( 135deg, var(--alcalde-voto-a) 0%, var(--alcalde-voto-b) 100%);
 					}
 
-/*
-	TOTTEM
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
-
-/*
-	TOTTEM
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
-
-/*
-	CANDIDATOS
-	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-*/
+	.mesa .candidatos .order-1 .candidato-ficha
+	{
+		color: var(--color-white) !important;
+		background: var(--alcalde-color) !important;
+	}
+	.mesa .candidatos .order-1 .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-pacto
+	{
+		border: solid 2px var(--color-white) !important;
+	}
+		.mesa .candidatos .order-1 .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-pacto .partido
+		{
+			background: var(--color-white) !important;
+			color: var(--alcalde-color) !important;
+		}
+		.mesa .candidatos .order-1 .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-pacto .pacto
+		{
+			background: var(--alcalde-color) !important;
+			color: var(--color-white) !important;
+		}
+	.mesa .candidatos .order-1 .candidato-ficha .candidato-ficha-footer .candidato-ficha-footer-votos
+	{
+		color: var(--color-white) !important;
+	}
+	.mesa .candidatos .order-1 .candidato-ficha .candidato-votos-animacion { background: linear-gradient( 135deg, var(--alcalde-1-voto-a) 0%, var(--alcalde-1-voto-b) 100%) !important; }
 
 /*
 	POSICIONES DE LOS BLOQUES
@@ -334,7 +321,7 @@ body
 	.mesas .mesa .candidatos .order-3
 	{
 		z-index: 2;
-		top: calc( var(--candidato-height) * 2 );
+		top: calc( var(--candidato-height) * 2 + 25px );
 		animation: orden-3-kf 0s ease-out 1 forwards;
 	}
 

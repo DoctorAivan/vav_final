@@ -264,7 +264,6 @@
 						</div>
 
 						<div class="swich-r-box swich-nav box-shadow">
-
 							<div class="swich-mesas" id="swich-opcion-mesas">
 								<h2>Configuración de consolidados</h2>
 								<div id="consolidados-render" class="consolidados bordes-radius" onclick="consolidados_asignar();">
@@ -274,8 +273,14 @@
 									<i id="consolidados-render-icon" class="fa fa-highlighter"></i>
 								</div>
 							</div>
-
 							<div class="swich-consolidados">
+								<div>
+									<div class="swich-consolidados-titulo">Posición</div>
+									<div class="swich-consolidados-items">
+										<div id="consolidados-posicion-l" class="item on" onclick="posicionConsolidados('l');"><i class="fas fa-arrow-left"></i></div>
+										<div id="consolidados-posicion-r" class="item of" onclick="posicionConsolidados('r');"><i class="fas fa-arrow-right"></i></div>
+									</div>
+								</div>
 								<div>
 									<div class="swich-consolidados-titulo">Estado del modulo en pantalla</div>
 									<div class="swich-consolidados-items">
@@ -284,7 +289,6 @@
 									</div>
 								</div>
 							</div>
-							
 						</div>
 
 					</section>

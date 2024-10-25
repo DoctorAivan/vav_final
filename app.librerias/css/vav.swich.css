@@ -138,6 +138,13 @@
 						display: block !important;
 					}
 					
+		.switch-consolidados
+		{
+			display: grid;
+			grid-template-columns: 80px 1fr;
+		}
+
+
 		.swich-nav
 		{
 			grid-column: span 2;
@@ -235,7 +242,7 @@
 				width: 100%;
 				padding: 0 0 0 0;
 				display: grid;
-				grid-template-columns: 1fr 1fr;
+				grid-template-columns: 110px 1fr;
 				grid-gap: 1rem;
 			}
 				.swich-consolidados-titulo
@@ -261,7 +268,7 @@
 						font-size: 1rem;
 						line-height: 1rem;
 						font-weight: 400;
-						padding: 12px 20px 13px 20px;
+						padding: 12px 17px 13px 17px;
 					}
 						.swich-consolidados-items .on
 						{

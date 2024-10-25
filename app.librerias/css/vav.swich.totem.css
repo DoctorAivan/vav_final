@@ -195,8 +195,6 @@ body
 		left: -380px;
 		width: 380px;
 		height: 912px;
-		background: #e3e3e3;
-		background: #000;
 	}
 
 	.tottem
@@ -292,6 +290,7 @@ body
 					width: 100%;
 					height: var(--consolidado-item-height);
 					display: grid;
+					gap: 0;
 					grid-template-columns: 146px 1fr;
 					overflow: hidden;
 					transition: all 0.75s ease-in-out;
@@ -311,9 +310,8 @@ body
 						{
 							position: absolute;
 							width: auto;
-							left: 0;
-							right: 0;
 							bottom: 0px;
+							right: -16px;
 							height: calc( var(--consolidado-item-height) - 15px );
 							opacity: 1;
 						}

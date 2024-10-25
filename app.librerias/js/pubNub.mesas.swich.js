@@ -540,16 +540,31 @@
 		//	Validar modo actual
 			if( swich_mesas != 0 && estado_consolidados == 'on'  )
 			{
-				//	Almacenar modo actual
-				swich_modo_anterior = swich_modo;
-
-				if( swich_mesa_1 != undefined )
+			//	Validar tipo de mesa gobernador
+				if( posicion_consolidados == 'r' && swich_mesas >= 2 )
 				{
-				//	Desactivar consolidados
-					estadoConsolidadosActual('of');
+					if( swich_mesa_2 != undefined )
+					{
+					//	Desactivar consolidados
+						estadoConsolidadosActual('of');
+					}
 				}
+
+			//	Validar tipo de mesa alcalde
+				if( posicion_consolidados == 'l' && swich_mesas >= 1 )
+				{
+					if( swich_mesa_1 != undefined )
+					{
+					//	Desactivar consolidados
+						estadoConsolidadosActual('of');
+					}
+				}
+
+			//	Almacenar modo actual
+				swich_modo_anterior = swich_modo;
 			}
 
+		//	Validar coincidencia entre los modos
 			if( swich_modo != swich_modo_anterior )
 			{
 				//	Desactivar consolidados

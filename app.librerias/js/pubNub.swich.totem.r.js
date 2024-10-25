@@ -37,7 +37,6 @@
 	let mesa_totales_estado = false
 	let mesa_totales_iniciado = false
 	let mesa_totales_tipo = ''
-	let mesa_totales_posicion = ''
 	let mesa_totales_zona = 0
 
 //	Transiciones
@@ -168,7 +167,7 @@
 
 		//	Obtener Accion desde PubNub
 			let accion				=	datoPubNub.accion;
-
+		
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 		//	Accion : Cambio de switch
@@ -258,9 +257,6 @@
 				//	Obtener detalles de la Zona
 					const mesa_tipo = datoPubNub.tipo;
 					const mesa_zona = datoPubNub.zona;
-
-				//	Posicion de la mesa
-					mesa_totales_posicion = datoPubNub.position
 
 				//	Validar que exista una zona asignada
 					if( mesa_zona > 0 )
@@ -642,80 +638,32 @@
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()	
 		{
-			render_mesa_totales.classList.remove('transition-on')
 
-		//	Tipo de Mesa Gobernadores
-			if( mesa_totales_posicion == 'r' )
+			console.log( mesa_totales_tipo );
+			
+
+		//	Habilitar la animacion
+			render_mesa_totales.classList.add('transition-on')
+
+			if( mesa_1 == null )
 			{
-			//	Posicionar contenedor
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
-
-			//	Espera para reparar el bug
-				setTimeout(function()
-				{
-				//	Habilitar la animacion
-					render_mesa_totales.classList.add('transition-on')
-
-				//	Validar si existe mesa 1
-					if( mesa_2 == null )
-					{
-					//	Asignar Posiciones en el eje X
-						render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
-						render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
-					}
-					else
-					{
-					//	Quitar la Mesa 1
-						App.animar_salida_mesa_2();
-
-					//	Corrección para el Bug del salto
-						setTimeout(function()
-						{
-						//	Asignar Posiciones en el eje X
-							render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
-							render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
-
-						}, tiempo_transiciones );
-					}
-				}, 200 );
+			//	Asignar Posiciones en el eje X
+				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
+				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
 			}
-
-		//	Tipo de Mesa Alcaldes
-			if( mesa_totales_posicion == 'l' )
+			else
 			{
-			//	Posicionar contenedor
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
+				//	Quitar la Mesa 2
+				App.animar_salida_mesa_1();
 
-			//	Espera para reparar el bug
+			//	Corrección para el Bug del salto
 				setTimeout(function()
 				{
-				//	Habilitar la animacion
-					render_mesa_totales.classList.add('transition-on')
+				//	Asignar Posiciones en el eje X
+					render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
+					render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
 
-				//	Validar si existe mesa 1
-					if( mesa_1 == null )
-					{
-					//	Asignar Posiciones en el eje X
-						render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-						render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
-					}
-					else
-					{
-					//	Quitar la Mesa 1
-						App.animar_salida_mesa_1();
-		
-					//	Corrección para el Bug del salto
-						setTimeout(function()
-						{
-						//	Asignar Posiciones en el eje X
-							render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-							render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
-		
-						}, tiempo_transiciones );
-					}
-				}, 200 );
+				}, tiempo_transiciones );
 			}
 			
 		//	Set estado del total
@@ -725,50 +673,28 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
-		//	Tipo de Mesa Gobernadores
-			if( mesa_totales_posicion == 'r' )
-			{
 			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
+			render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
+			render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
+
+			mesa_totales_estado = false;
 
 			//	Corrección para el Bug del salto
-				setTimeout(function()
-				{
-					render_mesa_totales.classList.remove('transition-on')
-
-				//	Validar mesas antes de desplegar
-					if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_2 != null )
-					{
-						App.animar_entrada_mesa_2();
-					}
-
-				}, tiempo_transiciones );
-			}
-
-		//	Tipo de Mesa Alcaldes
-			if( mesa_totales_posicion == 'l' )
+			setTimeout(function()
 			{
-			//	Asignar Posiciones en el eje X
+				render_mesa_totales.classList.remove('transition-on')
+
+				//	Asignar Posiciones en el eje X
 				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
 				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
 
-			//	Corrección para el Bug del salto
-				setTimeout(function()
+			//	Validar mesas antes de desplegar
+				if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_1 != null )
 				{
-					render_mesa_totales.classList.remove('transition-on')
+					App.animar_entrada_mesa_1();
+				}
 
-				//	Validar mesas antes de desplegar
-					if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_1 != null )
-					{
-						App.animar_entrada_mesa_1();
-					}
-
-				}, tiempo_transiciones );
-			}
-
-		//	Definir estado de totales
-			mesa_totales_estado = false;
+			}, tiempo_transiciones );
 		},
 
 	//	-			-			-			-			-			-			-			-			-			-			-			-			
@@ -1150,7 +1076,7 @@
 		animar_entrada_mesa_1 : function()
 		{
 		//	Validar mesas antes de desplegar
-			if( mesa_totales_estado && mesa_totales_posicion == 'l' )
+			if( mesa_totales_estado )
 			{
 			//	Quitar Mesa de totales
 				App.animar_salida_totales()
@@ -1179,37 +1105,17 @@
 	//	Animar la entrada del bloque
 		animar_entrada_mesa_2 : function()
 		{
-		//	Validar mesas antes de desplegar
-			if( mesa_totales_estado && mesa_totales_posicion == 'r' )
-			{
-			//	Quitar Mesa de totales
-				App.animar_salida_totales()
-
 			//	Corrección para el Bug del salto
-				setTimeout(function()
-				{
-					render_mesa_2.classList.add('transition-on')
-
-				//	Asignar Posiciones en el eje X
-					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
-					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
-					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
-
-				}, tiempo_transiciones );			
-			}
-			else
+			setTimeout(function()
 			{
-				setTimeout(function()
-				{
-					render_mesa_2.classList.add('transition-on')
-	
-				//	Asignar Posiciones en el eje X
-					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
-					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
-					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
-	
-				}, 200 );
-			}
+				render_mesa_2.classList.add('transition-on')
+
+			//	Asignar Posiciones en el eje X
+				render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
+				render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
+				render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+
+			}, tiempo_transiciones_adicional / 4);				
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-

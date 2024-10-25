@@ -966,8 +966,6 @@ function estadoConsolidados( estado )
     {
         if( estado_consolidados_animacion == false && consolidado_zona_cookie != undefined )
         {
-            console.log(' IF ');
-            
         //  Almacenar el estado de la accion
             estado_consolidados = estado
 
@@ -999,6 +997,7 @@ function estadoConsolidados( estado )
             {
                 'accion'		:	'cons_estado',
                 'estado'        :	estado,
+                'position'		:	posicion_consolidados,
                 'tipo'          :   consolidado_tipo_cookie,
                 'zona'          :   consolidado_zona_cookie
             }
@@ -1014,7 +1013,7 @@ function estadoConsolidados( estado )
                 consolidados_of.style.opacity = 1
 
                 estado_consolidados_animacion = false
-            }, 1500);
+            }, 1000);
 
             //	Almacenar el Estado en Cookie
             $.cookie('vav_cons_estado', estado , { expires: 7, path: '/' });
@@ -1056,16 +1055,6 @@ function posicionConsolidados( posicion )
             consolidados_r.classList.remove('on')
             consolidados_r.classList.add('of')
         }
-
-    //	Construir Variable para enviar a PubNub
-        let pubnub       	=
-        {
-            'accion'		:	'cons_posicion',
-            'posicion'      :	posicion
-        }
-
-    //	Enviar Notificación a PubNub
-        enviarPubNub( pubnub );
     }
 
 //	Almacenar la Posicion en Cookie
