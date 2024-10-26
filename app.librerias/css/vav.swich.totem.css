@@ -257,7 +257,7 @@ body
 				font-family: 'Santral_SemiBold';
 				font-size: 1.7rem;
 				line-height: 1.7rem;
-				padding: 0 0 4px 35px;
+				padding: 0 0 7px 35px;
 			}
 			.consolidados .header h3
 			{
@@ -597,10 +597,7 @@ body
 							font-family: 'Santral_Bold';
 							font-size: 1.3rem;
 							line-height: 1.3rem;
-							padding: 2px 14px 0 14px;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							white-space: nowrap;
+							padding: 2px 0 0 0;
 							transition: all 0.75s ease-in-out;
 						}
 

@@ -524,7 +524,6 @@
 											<h2 id="mesa-totales-detalles">
 												${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }
 											</h2>
-											<h1>${totales_tipo}</h1>
 											<h3 id="mesa-totales-zona">${totales_zona}</h3>
 										</div>
 									</div>
@@ -534,6 +533,7 @@
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
 
+		//	Validar largo de la zona
 			App.validar_largo_zona(totales_zona)
 
 		//	Render de los candidatos en la mesa
@@ -571,7 +571,7 @@
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-apellido" id="consolidado-apellido-${candidato.id}">${candidato.apellidos}</div>
 											<div class="candidato-detalles-alianza">
 												<div class="candidato-detalles-alianza-partido">
 													${App.obtener_partido(candidato.partido)}
@@ -589,6 +589,9 @@
 
 			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
+
+			//	Validar largo del apellido
+				App.validar_largo_nombre_consolidados(candidato.id, candidato.apellidos);
 
 			//	Validar Posicion de los Objetos
 				if( id_orden < 3 )
@@ -636,6 +639,92 @@
 			{
 				elemento.style.fontSize = "1.75rem";
 				elemento.style.lineHeight = "1.75rem";
+			}
+		},
+
+	//	Cambiar el tamaño de texto
+		validar_largo_zona_doble : function(id, apellido)
+		{
+		//	Obtener el elemento que contiene el texto
+			const elemento = document.getElementById("candidato-detalles-apellido-" + id);
+		
+		//	Contar el largo del string
+			const largoTexto = apellido.length;
+
+		//	Validar largo de la zona
+			if (largoTexto < 13)
+			{
+				elemento.style.fontSize = "1.3rem";
+				elemento.style.lineHeight = "1.3rem";
+			}
+			else if (largoTexto <= 14)
+			{
+				elemento.style.fontSize = "1.15rem";
+				elemento.style.lineHeight = "1.15rem";
+				elemento.style.paddingTop = "2px";
+				elemento.style.paddingBottom = "2px";
+			}
+			else if (largoTexto <= 15)
+			{
+				elemento.style.fontSize = "1.05rem";
+				elemento.style.lineHeight = "1.05rem";
+				elemento.style.paddingTop = "3px";
+				elemento.style.paddingBottom = "3px";
+			}
+			else if (largoTexto > 16)
+			{
+				elemento.style.fontSize = "0.9rem";
+				elemento.style.lineHeight = "0.9rem";
+				elemento.style.paddingTop = "4px";
+				elemento.style.paddingBottom = "4px";
+			}
+			else
+			{
+				elemento.style.fontSize = "1.3rem";
+				elemento.style.lineHeight = "1.3rem";
+			}
+		},
+
+	//	Cambiar el tamaño de texto
+		validar_largo_nombre_consolidados : function(id, apellido)
+		{
+		//	Obtener el elemento que contiene el texto
+			const elemento = document.getElementById("consolidado-apellido-" + id);
+		
+		//	Contar el largo del string
+			const largoTexto = apellido.length;
+
+		//	Validar largo de la zona
+			if (largoTexto < 13)
+			{
+				elemento.style.fontSize = "1.6rem";
+				elemento.style.lineHeight = "1.6rem";
+			}
+			else if (largoTexto <= 14)
+			{
+				elemento.style.fontSize = "1.3rem";
+				elemento.style.lineHeight = "1.3rem";
+				elemento.style.paddingTop = "3px";
+				elemento.style.paddingBottom = "3px";
+			}
+			else if (largoTexto <= 15)
+			{
+				elemento.style.fontSize = "1.15rem";
+				elemento.style.lineHeight = "1.15rem";
+				elemento.style.paddingTop = "3px";
+				elemento.style.paddingBottom = "4px";
+			}
+			else if (largoTexto > 16)
+			{
+				elemento.style.fontSize = "1rem";
+				elemento.style.lineHeight = "1rem";
+				elemento.style.paddingTop = "5px";
+				elemento.style.paddingBottom = "6px";
+			}
+			else
+			{
+				elemento.style.fontSize = "1.6rem";
+				elemento.style.lineHeight = "1.6rem";
 			}
 		},
 
@@ -990,7 +1079,7 @@
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-apellido" id="candidato-detalles-apellido-${candidato.objeto}">${candidato.apellidos}</div>
 											<div class="candidato-detalles-alianza">
 												<div class="candidato-detalles-alianza-partido">
 													${App.obtener_partido(candidato.partido_id)}
@@ -1008,6 +1097,9 @@
 
             //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
+
+			//	Validación de largo de nombre
+				App.validar_largo_zona_doble(candidato.objeto, candidato.apellidos);
 
 			//	Validar Posicion de los Objetos
 				if( id_orden < 3 )

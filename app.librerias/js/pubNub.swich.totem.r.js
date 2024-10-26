@@ -520,7 +520,6 @@
 											<h2 id="mesa-totales-detalles">
 												${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }
 											</h2>
-											<h1>${totales_tipo}</h1>
 											<h3 id="mesa-totales-zona">${totales_zona}</h3>
 										</div>
 									</div>
@@ -638,10 +637,6 @@
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()	
 		{
-
-			console.log( mesa_totales_tipo );
-			
-
 		//	Habilitar la animacion
 			render_mesa_totales.classList.add('transition-on')
 
