@@ -302,17 +302,8 @@
 
 		//	Obtener Mesas almacenadas en el Swich
 			$QUERY									=	"
-				
-				SELECT
-					COUNT( mesa.mesa_id )
 
-				FROM
-					mesa
-				
-				WHERE
-					mesa.mesa_tipo = '$mesa_tipo' AND
-					mesa.mesa_estado IN(1,2) AND
-					mesa.mesa_zona = $mesa_zona
+				SELECT * FROM swich_consolidados_totales('$mesa_tipo', $mesa_zona);
 
 			";
 
@@ -323,39 +314,8 @@
 		//	Obtener la información de las Mesas almacenadas en el Swich
 			$QUERY									=	"
 		
-				SELECT
-					sum(voto.voto_total) as votos_total,
-					candidato.candidato_id,
-					candidato.candidato_nombres,
-					candidato.candidato_apellidos,
-					candidato.candidato_independiente,
-					partido.partido_id,
-					pacto.pacto_id
+				SELECT * FROM swich_consolidados_mesas('$mesa_tipo', $mesa_zona);
 
-				FROM
-					mesa,
-					voto,
-					candidato,
-					partido,
-					pacto
-
-				WHERE
-					mesa.mesa_tipo = '$mesa_tipo' AND
-					mesa.mesa_estado IN(1,2) AND
-					mesa.mesa_zona = $mesa_zona AND
-					voto.mesa_id = mesa.mesa_id AND
-					candidato.candidato_id = voto.candidato_id AND
-					partido.partido_id = candidato.partido_id AND
-					pacto.pacto_id = candidato.pacto_id
-
-				group by
-					candidato.candidato_id,
-					partido.partido_id,
-					pacto.pacto_id
-				
-				ORDER BY
-					votos_total DESC;
-		
 			";
 			
 		//	Ejecutar Query
@@ -369,7 +329,7 @@
 
 			$_CANDIDATOS['candidatos']				=	array();
 			$_CANDIDATOS['votos']					=	(int) 0;
-			$_CANDIDATOS['mesas']					=	(int) $_TOTAL_MESAS->count;
+			$_CANDIDATOS['mesas']					=	(int) $_TOTAL_MESAS->total;
 
 		//	Generar listado
 			while($_MESA_CANDIDATOS					=	pg_fetch_object($QUERY_MESAS))

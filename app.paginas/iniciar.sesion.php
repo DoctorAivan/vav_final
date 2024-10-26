@@ -43,14 +43,14 @@
 <!--	Livebox Editar Fotografia -->		
 		<div class="livebox" id="livebox-iniciar-sesion" style="width: 420px;">
 			<header>
-				<span><i class="fas fa-user-lock"></i></span>
+				<span><i class="fas fa-user-lock" style="margin: 4px 25px 0 0;"></i></span>
 				<h2 class="icono-on">Voto a Voto</h2>
 				<h3 class="icono-on">Iniciar sesión para continuar</h3>
 			</header>
 			<article class="formulario bg-1">
 				<div class="col-1">
 					<h2>Correo Electronico <span>Obligatorio</span></h2>
-					<input name="usuario_email" type="text" autocomplete="off" class="box-shadow-light bordes-radius" placeholder="juan.pablo.martinez@turner.com" />
+					<input name="usuario_email" type="text" autocomplete="off" class="box-shadow-light bordes-radius" placeholder="usuario@chilevision.cl" />
 				</div>
 				<div class="col-1">
 					<h2>Password <span>Obligatorio</span></h2>

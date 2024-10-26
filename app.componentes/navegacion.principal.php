@@ -7,12 +7,6 @@
 		if( $_SESSION['usuario_rol'] == 'VZ' )
 		{
 ?>
-			<a href="<?php echo $_URL_MESA_SWICH_TOTEM; ?>" target="_blank">
-				<div class="box">
-					<i class="fas fa-tv"></i>
-					<span>Ver&nbsp;Tótem</span>
-				</div>
-			</a>
 			<a href="<?php echo $_URL_MESA_SWICH; ?>">
 				<div class="box">
 					<i class="far fa-window-restore"></i>
@@ -23,12 +17,6 @@
 				<div class="box">
 					<i class="fas fa-window-restore"></i>
 					<span>Administrar&nbsp;Salida&nbsp;Wall</span>
-				</div>
-			</a>
-			<a href="<?php echo $_URL_MESA_SWICH_QUAD; ?>">
-				<div class="box">
-					<i class="fab fa-slideshare"></i>
-					<span>Administrar&nbsp;Switch&nbsp;Quad</span>
 				</div>
 			</a>
 <?php

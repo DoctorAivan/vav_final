@@ -124,7 +124,7 @@
 					while($_MESA						=	pg_fetch_object($QUERY_MESAS))
 					{
 					//	Ocultar Mesas Inactivas
-						if($_MESA->mesa_estado != 0)
+						if($_MESA->mesa_tipo == 'A')
 						{
 							$mesa_tipo_titulo			=	obtener_titulo($_MESA->mesa_tipo);
 							$mesa_tipo_icono			=	obtener_icono($_MESA->mesa_tipo);

@@ -90,7 +90,10 @@
 				else
 				{
 				//	Actualizar Pagina
-					location.reload();
+					if( datoPubNub.mesa_estado == 0 || datoPubNub.mesa_estado == 1 )
+					{
+						location.reload();
+					}
 				}
 
 			//	Almacenar Estado

@@ -23,7 +23,7 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 //	Consulta SQL
-	include_once "$_CONSULTAS/mesa.php";
+	include_once "$_CONSULTAS/mesa.todas.php";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-				
 

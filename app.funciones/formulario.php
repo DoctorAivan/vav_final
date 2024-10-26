@@ -130,24 +130,22 @@
 	(
 		'0'							=>	array
 		(
-			'titulo'				=>	'Mesa Inactiva',
+			'titulo'				=>	'MESA INACTIVA',
 			'detalle'				=>	'Estará oculta para el operador',
 			'icono'					=>	'fas fa-ban'
 		),
 		'1'							=>	array
 		(
-			'titulo'				=>	'Mesa Activa',
+			'titulo'				=>	'MESA ACTIVA',
 			'detalle'				=>	'Estará visible para el operador',
 			'icono'					=>	'fas fa-eye'
 		),
-		/*
 		'2'							=>	array
 		(
-			'titulo'				=>	'Mesa Cerrada',
+			'titulo'				=>	'MESA RECUENTO',
 			'detalle'				=>	'Estará oculta para el operador',
-			'icono'					=>	'fas fa-lock'
+			'icono'					=>	'fas fa-chart-line'
 		)
-		*/
 	);
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-

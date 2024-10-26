@@ -19,7 +19,7 @@
 		}
 		else
 		{
-			template	=	1;
+			template	=	2;
 		}
 
 	//	Aplicar Template

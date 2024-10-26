@@ -23,7 +23,7 @@
 //	Construir SQL
 	$QUERY_TOTAL							=	"
 
-	    SELECT * FROM mesa_contar_total();
+	    SELECT * FROM mesa_contar_total_switch();
 
 	";
 
@@ -38,7 +38,7 @@
 //	Construir SQL
 	$QUERY									=	"
 
-		SELECT * FROM mesa_listado( $CCNF_RESULTADOS_PAGINAS , ( $CCNF_RESULTADOS_PAGINAS * $CONF_PAGINA_ACTUAL ) );
+		SELECT * FROM mesa_switch_listado( $CCNF_RESULTADOS_PAGINAS , ( $CCNF_RESULTADOS_PAGINAS * $CONF_PAGINA_ACTUAL ) );
 
 	";
 

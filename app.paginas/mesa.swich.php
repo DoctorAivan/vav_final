@@ -130,18 +130,15 @@
 <?php
 				//	ID del Listado
 					$_ID								=	1;
-	
+
 				//	Tipo de Objeto
 					$_OBJETO_TIPO						=	'MES';
-	
+
 				//	Listado de Objetos Disponibles
 					while($_MESA						=	pg_fetch_object($QUERY_MESAS))
 					{
-					//	Ocultar Mesas Inactivas
-						if($_MESA->mesa_estado != 0)
-						{
-							$mesa_tipo_titulo			=	obtener_titulo($_MESA->mesa_tipo);
-							$mesa_tipo_icono			=	obtener_icono($_MESA->mesa_tipo);
+						$mesa_tipo_titulo				=	obtener_titulo($_MESA->mesa_tipo);
+						$mesa_tipo_icono				=	obtener_icono($_MESA->mesa_tipo);
 ?>
 					<article class="mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa <?php echo $_MESA->mesa_tipo; ?>" id="<?php echo $_OBJETO_TIPO.$_MESA->mesa_id; ?>" mesa="<?php echo $_MESA->mesa_id; ?>" date="<?php echo $_MESA->mesa_cambio; ?>">
 						<div class="cambios bordes-radius"></div>
@@ -196,8 +193,7 @@
 						</header>
 					</article>
 <?php
-							$_ID++;
-						}
+						$_ID++;
 					}
 ?>
 					</section>
@@ -295,13 +291,5 @@
 				</section>
 			</section>	
 		</section>
-
-<?php
-
-	//	Footer
-	//	include_once "$_COMPONENTES/footer.php";
-
-?>
-
 	</body>
 </html>

@@ -131,7 +131,12 @@
 						<i class="fas fa-copy tipsy-top invisible" title="<h2>Duplicar Mesa</h2><p>Podrás duplicar la información de la Mesa y los Votos asociados.</p>" onclick="duplicarMesa( <?php echo $_MESA->mesa_id; ?> );"></i>
 						<i class="fas fa-trash-alt tipsy-top"  title="<h2>Eliminar Mesa</h2><p>La Mesa será eliminada junto a toda la información relacionada.</p>" onclick="mesa_eliminar( <?php echo $_MESA->mesa_id; ?> );"></i>
 					</div>
-
+					<div class="mesa-ui mesa-ui-estado-0">
+                        INACTIVA
+					</div>
+					<div class="mesa-ui mesa-ui-estado-2">
+						RECUENTO
+					</div>
 					<header>
 
 						<div onclick="mesaDestacada( <?php echo $_MESA->mesa_id; ?> );" class="estado estado-<?php echo $_MESA->mesa_destacada; ?> box-shadow-light" id="<?php echo $_MESA->mesa_id; ?>">
