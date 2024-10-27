@@ -68,13 +68,13 @@
         },
         {
             "id": 3009,
-            "nombre": "R. DE LA ARAUCANIA",
+            "nombre": "R. DE LA ARAUCANÍA",
             "orden": 12,
             "romano": "IX"
         },
         {
             "id": 3014,
-            "nombre": "R. DE LOS RIOS",
+            "nombre": "R. DE LOS RÍOS",
             "orden": 13,
             "romano": "XIV"
         },
@@ -86,7 +86,7 @@
         },
         {
             "id": 3011,
-            "nombre": "R. DE AYSEN",
+            "nombre": "R. DE AYSÉN",
             "orden": 15,
             "romano": "XI"
         },
