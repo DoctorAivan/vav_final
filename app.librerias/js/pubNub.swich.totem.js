@@ -1,5 +1,5 @@
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
+	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3'
 
 //	Mode de la Aplicación
 	let app_modo = 0
