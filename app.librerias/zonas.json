@@ -915,7 +915,7 @@
             "provincia": 4131,
             "circunscripcion": 5007,
             "distrito": 6008,
-            "nombre": "ESTACION CENTRAL"
+            "nombre": "ESTACIÓN CENTRAL"
         },
         {
             "id": 2645,
@@ -1608,7 +1608,7 @@
             "provincia": 4135,
             "circunscripcion": 5007,
             "distrito": 6014,
-            "nombre": "MARIA PINTO"
+            "nombre": "MARÍA PINTO"
         },
         {
             "id": 2815,
@@ -2004,7 +2004,7 @@
             "provincia": 4131,
             "circunscripcion": 5007,
             "distrito": 6011,
-            "nombre": "PE\u00d1ALOLEN"
+            "nombre": "PEÑALOLÉN"
         },
         {
             "id": 2618,
@@ -2724,7 +2724,7 @@
             "provincia": 4131,
             "circunscripcion": 5007,
             "distrito": 6010,
-            "nombre": "SAN JOAQUIN"
+            "nombre": "SAN JOAQUÍN"
         },
         {
             "id": 2792,
@@ -2733,7 +2733,7 @@
             "provincia": 4132,
             "circunscripcion": 5007,
             "distrito": 6012,
-            "nombre": "SAN JOSE DE MAIPO"
+            "nombre": "SAN JOSÉ DE MAIPO"
         },
         {
             "id": 2731,
@@ -2814,7 +2814,7 @@
             "provincia": 4131,
             "circunscripcion": 5007,
             "distrito": 6013,
-            "nombre": "SAN RAMON"
+            "nombre": "SAN RAMÓN"
         },
         {
             "id": 2670,
@@ -3312,7 +3312,7 @@
         },
         {
             "id": 4081,
-            "nombre": "CONCEPCION",
+            "nombre": "CONCEPCIÓN",
             "orden": 17,
             "region": 3008
         },

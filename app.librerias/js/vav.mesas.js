@@ -32,7 +32,7 @@ $(function()
     mesa_filtrar( '' );
 
 //  Obtener Diccionario de Gobernadores
-    $.getJSON( path_app + '/app.librerias/zonas.json?v=123' , function( json )
+    $.getJSON( path_app + '/app.librerias/zonas.json?v=1.2' , function( json )
     {
     //  Alimentar objeto con las regiones
         objeto_regiones = json.regiones;
