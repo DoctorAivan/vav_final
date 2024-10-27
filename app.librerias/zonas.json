@@ -32,7 +32,7 @@
         },
         {
             "id": 3005,
-            "nombre": "R. DE VALPARAISO",
+            "nombre": "R. DE VALPARAÍSO",
             "orden": 6,
             "romano": "V"
         },
@@ -663,7 +663,7 @@
             "provincia": 4081,
             "circunscripcion": 5010,
             "distrito": 6020,
-            "nombre": "CONCEPCION"
+            "nombre": "CONCEPCIÓN"
         },
         {
             "id": 2761,
@@ -3093,7 +3093,7 @@
             "provincia": 4051,
             "circunscripcion": 5006,
             "distrito": 6007,
-            "nombre": "VALPARAISO"
+            "nombre": "VALPARAÍSO"
         },
         {
             "id": 2633,
