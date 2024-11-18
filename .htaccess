@@ -34,6 +34,7 @@
 	RewriteRule 	^swich/editar/																	/vav_final/app.sql/swich.php?f=swichEditar												[L]
 	RewriteRule 	^swich/mesas/																	/vav_final/app.sql/swich.php?f=swichMesas												[L]
 	RewriteRule 	^swich/mesas-actuales/															/vav_final/app.sql/swich.php?f=swichMesasActuales										[L]
+	RewriteRule 	^swich/mesas-controlador/														/vav_final/app.sql/swich.php?f=swichMesasControlador										[L]
 	RewriteRule 	^swich-quad/mesas-actuales/														/vav_final/app.sql/swich.php?f=swichQuadMesasActuales									[L]
 	RewriteRule 	^swich/mesas-totales/([A-Z]+)-([0-9]+)											/vav_final/app.sql/swich.php?f=swichMesasTotales&t=$1&i=$2								[L]
 

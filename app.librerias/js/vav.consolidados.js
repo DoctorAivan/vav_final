@@ -70,7 +70,8 @@ function consolidados_asignar()
     const consolidados_tipo_cookie = $.cookie('consolidado_tipo')
 
 //  Marcar Pacto por Defecto
-    consolidados_tipo( consolidados_tipo_cookie ? consolidados_tipo_cookie : 'G' );
+//  consolidados_tipo( consolidados_tipo_cookie ? consolidados_tipo_cookie : 'G' );
+    consolidados_tipo( 'G' );
 
 //  Limpiar input comunas
     const input_comunas = document.getElementById('mesa_consolidado_comunas')

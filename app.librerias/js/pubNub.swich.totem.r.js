@@ -1,5 +1,5 @@
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=1.5'
+const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 //	Mode de la Aplicación
 	let app_modo = 0
@@ -37,6 +37,7 @@
 	let mesa_totales_estado = false
 	let mesa_totales_iniciado = false
 	let mesa_totales_tipo = ''
+	let mesa_totales_posicion = ''
 	let mesa_totales_zona = 0
 
 //	Transiciones
@@ -167,7 +168,7 @@
 
 		//	Obtener Accion desde PubNub
 			let accion				=	datoPubNub.accion;
-		
+
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 		//	Accion : Cambio de switch
@@ -257,6 +258,9 @@
 				//	Obtener detalles de la Zona
 					const mesa_tipo = datoPubNub.tipo;
 					const mesa_zona = datoPubNub.zona;
+
+				//	Posicion de la mesa
+					mesa_totales_posicion = datoPubNub.position
 
 				//	Validar que exista una zona asignada
 					if( mesa_zona > 0 )
@@ -529,6 +533,7 @@
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
 
+		//	Validar largo de la zona
 			App.validar_largo_zona(totales_zona)
 
 		//	Render de los candidatos en la mesa
@@ -566,7 +571,7 @@
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-apellido" id="consolidado-apellido-${candidato.id}">${candidato.apellidos}</div>
 											<div class="candidato-detalles-alianza">
 												<div class="candidato-detalles-alianza-partido">
 													${App.obtener_partido(candidato.partido)}
@@ -584,6 +589,9 @@
 
 			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
+
+			//	Validar largo del apellido
+				App.validar_largo_nombre_consolidados(candidato.id, candidato.apellidos);
 
 			//	Validar Posicion de los Objetos
 				if( id_orden < 3 )
@@ -634,31 +642,169 @@
 			}
 		},
 
-	//	Animar la entrada del bloque
-		animar_entrada_totales : function()	
+	//	Cambiar el tamaño de texto
+		validar_largo_zona_doble : function(id, apellido)
 		{
-		//	Habilitar la animacion
-			render_mesa_totales.classList.add('transition-on')
+		//	Obtener el elemento que contiene el texto
+			const elemento = document.getElementById("candidato-detalles-apellido-" + id);
+		
+		//	Contar el largo del string
+			const largoTexto = apellido.length;
 
-			if( mesa_1 == null )
+		//	Validar largo de la zona
+			if (largoTexto < 13)
 			{
-			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
+				elemento.style.fontSize = "1.3rem";
+				elemento.style.lineHeight = "1.3rem";
+			}
+			else if (largoTexto <= 14)
+			{
+				elemento.style.fontSize = "1.15rem";
+				elemento.style.lineHeight = "1.15rem";
+				elemento.style.paddingTop = "2px";
+				elemento.style.paddingBottom = "2px";
+			}
+			else if (largoTexto <= 15)
+			{
+				elemento.style.fontSize = "1.05rem";
+				elemento.style.lineHeight = "1.05rem";
+				elemento.style.paddingTop = "3px";
+				elemento.style.paddingBottom = "3px";
+			}
+			else if (largoTexto > 16)
+			{
+				elemento.style.fontSize = "0.9rem";
+				elemento.style.lineHeight = "0.9rem";
+				elemento.style.paddingTop = "4px";
+				elemento.style.paddingBottom = "4px";
 			}
 			else
 			{
-				//	Quitar la Mesa 2
-				App.animar_salida_mesa_1();
+				elemento.style.fontSize = "1.3rem";
+				elemento.style.lineHeight = "1.3rem";
+			}
+		},
 
-			//	Corrección para el Bug del salto
+	//	Cambiar el tamaño de texto
+		validar_largo_nombre_consolidados : function(id, apellido)
+		{
+		//	Obtener el elemento que contiene el texto
+			const elemento = document.getElementById("consolidado-apellido-" + id);
+		
+		//	Contar el largo del string
+			const largoTexto = apellido.length;
+
+		//	Validar largo de la zona
+			if (largoTexto < 13)
+			{
+				elemento.style.fontSize = "1.6rem";
+				elemento.style.lineHeight = "1.6rem";
+			}
+			else if (largoTexto <= 14)
+			{
+				elemento.style.fontSize = "1.3rem";
+				elemento.style.lineHeight = "1.3rem";
+				elemento.style.paddingTop = "3px";
+				elemento.style.paddingBottom = "3px";
+			}
+			else if (largoTexto <= 15)
+			{
+				elemento.style.fontSize = "1.15rem";
+				elemento.style.lineHeight = "1.15rem";
+				elemento.style.paddingTop = "3px";
+				elemento.style.paddingBottom = "4px";
+			}
+			else if (largoTexto > 16)
+			{
+				elemento.style.fontSize = "1rem";
+				elemento.style.lineHeight = "1rem";
+				elemento.style.paddingTop = "5px";
+				elemento.style.paddingBottom = "6px";
+			}
+			else
+			{
+				elemento.style.fontSize = "1.6rem";
+				elemento.style.lineHeight = "1.6rem";
+			}
+		},
+
+	//	Animar la entrada del bloque
+		animar_entrada_totales : function()	
+		{
+			render_mesa_totales.classList.remove('transition-on')
+
+		//	Tipo de Mesa Gobernadores
+			if( mesa_totales_posicion == 'r' )
+			{
+			//	Posicionar contenedor
+				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
+				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
+
+			//	Espera para reparar el bug
 				setTimeout(function()
 				{
-				//	Asignar Posiciones en el eje X
-					render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-					render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
+				//	Habilitar la animacion
+					render_mesa_totales.classList.add('transition-on')
 
-				}, tiempo_transiciones );
+				//	Validar si existe mesa 1
+					if( mesa_2 == null )
+					{
+					//	Asignar Posiciones en el eje X
+						render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
+						render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
+					}
+					else
+					{
+					//	Quitar la Mesa 1
+						App.animar_salida_mesa_2();
+
+					//	Corrección para el Bug del salto
+						setTimeout(function()
+						{
+						//	Asignar Posiciones en el eje X
+							render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
+							render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
+
+						}, tiempo_transiciones );
+					}
+				}, 200 );
+			}
+
+		//	Tipo de Mesa Alcaldes
+			if( mesa_totales_posicion == 'l' )
+			{
+			//	Posicionar contenedor
+				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
+				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
+
+			//	Espera para reparar el bug
+				setTimeout(function()
+				{
+				//	Habilitar la animacion
+					render_mesa_totales.classList.add('transition-on')
+
+				//	Validar si existe mesa 1
+					if( mesa_1 == null )
+					{
+					//	Asignar Posiciones en el eje X
+						render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
+						render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
+					}
+					else
+					{
+					//	Quitar la Mesa 1
+						App.animar_salida_mesa_1();
+		
+					//	Corrección para el Bug del salto
+						setTimeout(function()
+						{
+						//	Asignar Posiciones en el eje X
+							render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
+							render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
+		
+						}, tiempo_transiciones );
+					}
+				}, 200 );
 			}
 			
 		//	Set estado del total
@@ -668,28 +814,50 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
+		//	Tipo de Mesa Gobernadores
+			if( mesa_totales_posicion == 'r' )
+			{
 			//	Asignar Posiciones en el eje X
-			render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
-			render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
-
-			mesa_totales_estado = false;
+				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
+				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
 
 			//	Corrección para el Bug del salto
-			setTimeout(function()
-			{
-				render_mesa_totales.classList.remove('transition-on')
+				setTimeout(function()
+				{
+					render_mesa_totales.classList.remove('transition-on')
 
-				//	Asignar Posiciones en el eje X
+				//	Validar mesas antes de desplegar
+					if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_2 != null )
+					{
+						App.animar_entrada_mesa_2();
+					}
+
+				}, tiempo_transiciones );
+			}
+
+		//	Tipo de Mesa Alcaldes
+			if( mesa_totales_posicion == 'l' )
+			{
+			//	Asignar Posiciones en el eje X
 				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
 				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
 
-			//	Validar mesas antes de desplegar
-				if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_1 != null )
+			//	Corrección para el Bug del salto
+				setTimeout(function()
 				{
-					App.animar_entrada_mesa_1();
-				}
+					render_mesa_totales.classList.remove('transition-on')
 
-			}, tiempo_transiciones );
+				//	Validar mesas antes de desplegar
+					if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_1 != null )
+					{
+						App.animar_entrada_mesa_1();
+					}
+
+				}, tiempo_transiciones );
+			}
+
+		//	Definir estado de totales
+			mesa_totales_estado = false;
 		},
 
 	//	-			-			-			-			-			-			-			-			-			-			-			-			
@@ -911,7 +1079,7 @@
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-apellido" id="candidato-detalles-apellido-${candidato.objeto}">${candidato.apellidos}</div>
 											<div class="candidato-detalles-alianza">
 												<div class="candidato-detalles-alianza-partido">
 													${App.obtener_partido(candidato.partido_id)}
@@ -929,6 +1097,9 @@
 
             //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
+
+			//	Validación de largo de nombre
+				App.validar_largo_zona_doble(candidato.objeto, candidato.apellidos);
 
 			//	Validar Posicion de los Objetos
 				if( id_orden < 3 )
@@ -1071,7 +1242,7 @@
 		animar_entrada_mesa_1 : function()
 		{
 		//	Validar mesas antes de desplegar
-			if( mesa_totales_estado )
+			if( mesa_totales_estado && mesa_totales_posicion == 'l' )
 			{
 			//	Quitar Mesa de totales
 				App.animar_salida_totales()
@@ -1100,17 +1271,37 @@
 	//	Animar la entrada del bloque
 		animar_entrada_mesa_2 : function()
 		{
-			//	Corrección para el Bug del salto
-			setTimeout(function()
+		//	Validar mesas antes de desplegar
+			if( mesa_totales_estado && mesa_totales_posicion == 'r' )
 			{
-				render_mesa_2.classList.add('transition-on')
+			//	Quitar Mesa de totales
+				App.animar_salida_totales()
 
-			//	Asignar Posiciones en el eje X
-				render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
-				render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
-				render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+			//	Corrección para el Bug del salto
+				setTimeout(function()
+				{
+					render_mesa_2.classList.add('transition-on')
 
-			}, tiempo_transiciones_adicional / 4);				
+				//	Asignar Posiciones en el eje X
+					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
+					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
+					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+
+				}, tiempo_transiciones );			
+			}
+			else
+			{
+				setTimeout(function()
+				{
+					render_mesa_2.classList.add('transition-on')
+	
+				//	Asignar Posiciones en el eje X
+					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
+					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
+					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+	
+				}, 200 );
+			}
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-

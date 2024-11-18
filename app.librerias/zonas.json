@@ -2,97 +2,97 @@
     "regiones": [
         {
             "id": 3015,
-            "nombre": "R. DE ARICA Y PARINACOTA",
+            "nombre": "REG. DE ARICA Y PARINACOTA",
             "orden": 1,
             "romano": "XV"
         },
         {
             "id": 3001,
-            "nombre": "R. DE TARAPACA",
+            "nombre": "REG. DE TARAPACA",
             "orden": 2,
             "romano": "I"
         },
         {
             "id": 3002,
-            "nombre": "R. DE ANTOFAGASTA",
+            "nombre": "REG. DE ANTOFAGASTA",
             "orden": 3,
             "romano": "II"
         },
         {
             "id": 3003,
-            "nombre": "R. DE ATACAMA",
+            "nombre": "REG. DE ATACAMA",
             "orden": 4,
             "romano": "III"
         },
         {
             "id": 3004,
-            "nombre": "R. DE COQUIMBO",
+            "nombre": "REG. DE COQUIMBO",
             "orden": 5,
             "romano": "IV"
         },
         {
             "id": 3005,
-            "nombre": "R. DE VALPARAÍSO",
+            "nombre": "REG. DE VALPARAÍSO",
             "orden": 6,
             "romano": "V"
         },
         {
             "id": 3013,
-            "nombre": "R. METROPOLITANA",
+            "nombre": "REG. METROPOLITANA",
             "orden": 7,
             "romano": "XIII"
         },
         {
             "id": 3006,
-            "nombre": "R. DE OHIGGINS",
+            "nombre": "REG. DE OHIGGINS",
             "orden": 8,
             "romano": "VI"
         },
         {
             "id": 3007,
-            "nombre": "R. DEL MAULE",
+            "nombre": "REG. DEL MAULE",
             "orden": 9,
             "romano": "VII"
         },
         {
             "id": 3016,
-            "nombre": "R. DE \u00d1UBLE",
+            "nombre": "REG. DE \u00d1UBLE",
             "orden": 10,
             "romano": "XVI"
         },
         {
             "id": 3008,
-            "nombre": "R. DEL BIOBÍO",
+            "nombre": "REG. DEL BIOBÍO",
             "orden": 11,
             "romano": "VIII"
         },
         {
             "id": 3009,
-            "nombre": "R. DE LA ARAUCANÍA",
+            "nombre": "REG. DE LA ARAUCANÍA",
             "orden": 12,
             "romano": "IX"
         },
         {
             "id": 3014,
-            "nombre": "R. DE LOS RÍOS",
+            "nombre": "REG. DE LOS RÍOS",
             "orden": 13,
             "romano": "XIV"
         },
         {
             "id": 3010,
-            "nombre": "R. DE LOS LAGOS",
+            "nombre": "REG. DE LOS LAGOS",
             "orden": 14,
             "romano": "X"
         },
         {
             "id": 3011,
-            "nombre": "R. DE AYSÉN",
+            "nombre": "REG. DE AYSÉN",
             "orden": 15,
             "romano": "XI"
         },
         {
             "id": 3012,
-            "nombre": "R. DE MAGALLANES",
+            "nombre": "REG. DE MAGALLANES",
             "orden": 16,
             "romano": "XII"
         }

@@ -12,7 +12,7 @@
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="mesa-tipo">
 					<div class="box-shadow-light" onclick="mesa_nueva_tipo('G');" id="mesa-tipo-G">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('A');" id="mesa-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
+					<div class="box-shadow-light off" id="mesa-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
 				</div>
 			</article>
 			<article class="formulario bg-1">

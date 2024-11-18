@@ -5,6 +5,7 @@
 	    <meta name="author" content="<?php echo $_SEO['AUTOR']; ?>" />
 		<meta name="copyright"content="<?php echo $_CONF_TITULO; ?>">
 		<meta name="apple-mobile-web-app-title" content="CIS">
+		<link rel="icon" type="image/x-icon" href="/vav_final/favicon.ico">
 
 <?php
 	//	Comprobar acceso de Robots

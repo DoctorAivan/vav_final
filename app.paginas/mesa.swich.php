@@ -22,9 +22,6 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>cis.listado.css<?php echo $_CONF_VERSION; ?>"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>cis.formulario.css<?php echo $_CONF_VERSION; ?>"/>
 
-<!--	Librerias Jquery -->
-		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.timeago.js<?php echo $_CONF_VERSION; ?>"></script>
-
 		<!-- Libreria Autocomplate -->
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.autocomplete.js"></script>
 
@@ -74,6 +71,7 @@
 		</script>
 
 <!--	Funcionalidad PubNub -->
+		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>vav.mesas.actualizacion.js<?php echo $_CONF_VERSION; ?>"></script>
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>pubNub.mesas.swich.js<?php echo $_CONF_VERSION; ?>"></script>
 
 <!--	Librerias Administrar Swich -->
@@ -107,19 +105,22 @@
 							<i class="far fa-window-restore"></i>
 						</div>
 						<h2 class="icono-on">Administrar Salida TV</h2>
-						<h3 class="icono-on">Listado completo de mesas</h3>
-
+						<h3 class="icono-on">Listado de mesas para despliegue</h3>
+						<div class="total-mesas">
+							<div id="total-mesas-numero" class="total">15</div>
+							<div>
+								<div id="total-mesas-valor" class="mesas">Mesas</div>
+								<div class="detalles">Disponibles</div>
+							</div>
+						</div>
 						<div class="opciones">
-
 							<div class="input">
 								<label>
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-							
 							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🟡</div>
 							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-A" title="Alcaldes" onclick="mesa_filtrar('A');">🔴</div>
-
 						</div>
 					</header>
 				</section>
@@ -140,26 +141,18 @@
 						$mesa_tipo_titulo				=	obtener_titulo($_MESA->mesa_tipo);
 						$mesa_tipo_icono				=	obtener_icono($_MESA->mesa_tipo);
 ?>
-					<article class="mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa <?php echo $_MESA->mesa_tipo; ?>" id="<?php echo $_OBJETO_TIPO.$_MESA->mesa_id; ?>" mesa="<?php echo $_MESA->mesa_id; ?>" date="<?php echo $_MESA->mesa_cambio; ?>">
-						<div class="cambios bordes-radius"></div>
-						<div class="destacado">
-<?php
-					if($_MESA->mesa_destacada == 1)
-					{
-?>
-							<i class="fas fa-star"></i>
-<?php
-					}
-					if($_MESA->mesa_estado == 2)
-					{
-?>
-							<i class="fas fa-lock tipsy-top"></i>
-<?php
-					}
-?>
-						</div>
+					<article class="mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa <?php echo $_MESA->mesa_tipo; ?>"
+					id="<?php echo $_OBJETO_TIPO.$_MESA->mesa_id; ?>"
+					mesa="<?php echo $_MESA->mesa_id; ?>"
+					created="<?php echo $_MESA->mesa_publicado; ?>"
+					date="<?php echo $_MESA->mesa_cambio; ?>">
+						<div class="mesa-nueva">NUEVA</div>
+						<div id="mesa-voto-<?php echo $_MESA->mesa_id; ?>" class="cambios bordes-radius"></div>
 						<header>
-							<h2><i class="fas fa-hashtag"></i> <?php echo $_MESA->mesa_id; ?></h2>
+							<h2 class="<?php echo ($_MESA->mesa_destacada == 1) ? 'importante' : ''; ?>">
+								<i class="fas <?php echo ($_MESA->mesa_destacada == 1) ? 'fa-star' : 'fa-hashtag'; ?>"></i>
+								<?php echo $_MESA->mesa_id; ?> 
+							</h2>
 							<div class="tipo"><?php echo $mesa_tipo_titulo; ?></div>
 							<div class="zona"><?php echo $_MESA->mesa_zona_titulo; ?></div>
 <?php
@@ -189,7 +182,9 @@
 						}
 ?>
 							<h5 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_ciudad"><i class="fas fa-globe-americas"></i> <?php echo $_MESA->mesa_comuna; ?></h5>
-							<h6 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_cambio"><time class="timeago line-1" data="<?php echo $_MESA->mesa_id; ?>" datetime="<?php echo $_MESA->mesa_cambio; ?>"></time></h6>
+							<h6 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_cambio">
+								<time class="timeago line-1" data="<?php echo $_MESA->mesa_id; ?>" datetime="<?php echo strtotime($_MESA->mesa_cambio); ?>"></time>
+							</h6>
 						</header>
 					</article>
 <?php
@@ -251,11 +246,9 @@
 							<div class="swich-separador"></div>
 							<div class="swich-controles">
 								<h2>Visualización en pantalla</h2>
-								<noscript>
-									<div class="preview bordes-radius" onclick="swichPreview();">PREVIEW</div>
-								</noscript>
 								<div id="cambios-on" class="on bordes-radius" onclick="swichGuardar();">PUBLICAR</div>
 								<div id="cambios-of" class="of bordes-radius">PUBLICAR</div>
+								<div id="estado-preview-switch" class="preview bordes-radius" onclick="swichPreview();">PREVIEW</div>
 							</div>
 						</div>
 
@@ -282,6 +275,9 @@
 									<div class="swich-consolidados-items">
 										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO</div>
 										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE</div>
+									</div>
+									<div class="swich-controles">
+										<div id="estado-preview-consolidados" class="preview bordes-radius" style="margin: 0 0 0 15px;" onclick="consolidadosPreview();">PREVIEW</div>
 									</div>
 								</div>
 							</div>

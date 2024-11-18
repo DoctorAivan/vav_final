@@ -15,53 +15,50 @@
 	let swich_mesa_1_historico = 0
 	let swich_mesa_2_historico = 0
 
+//	Total de mesas
+	let mesas_totales = 0
+
+//	Intervalo de validación de mesa nueva
+	let mesas_timer = null
+
+//	Intervalo de tiempo entre comprobación
+	const mesas_nueva_comparacion = 5000
+
 //	Iniciar al Cargar
 	$(function()
 	{
-	//	Iniciar funcionalidad TimeAgo
-		$("time.timeago").timeago();
-		
+	//	Almacenar el total de mesas
+		mesas = document.querySelectorAll('#mesas > article')
+
+	//	Actualizar el total de mesas
+		mesas_totales = mesas.length
+
 	//	Mover Mesas Almacenadas
 		cargarSwich();
 	});
 
-	var sortValues =
+//	Iniciar intervalo de actualización de los totales
+	function mesa_nueva_iniciar()
 	{
-		rojo: 2,
-		amarillo: 1,
-		verde: 0
-	};
+	//	Validar si la mesa es nueva
+		mesas_ultima_actualizacion();
 
-	var rexValues = /(rojo|amarillo|verde)/;
-
-	var myVar = setInterval(myTimer, 3000);
-
-	function myTimer()
-	{
-	//	mesas_orden_listado();
+	//	Validar si el timer esta activo
+		if (mesas_timer === null)
+		{
+			mesas_timer = setInterval( mesas_ultima_actualizacion , mesas_nueva_comparacion);
+		}
 	}
 
-//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-
-//	Ordenar Mesas
-	function mesas_orden_listado()
+//	Detener intervalo de actualización de los totales
+	function mesa_nueva_detener()
 	{
-		var elem = $('#mesas').find('.mesa').sort(sortMe);
-		$('#mesas').append(elem);
-
-	//	Reiniciar Timeago
-		$("time.timeago").timeago();
+		if (mesas_timer !== null)
+		{
+			clearInterval(mesas_timer);
+			mesas_timer = null;
+		}
 	}
-
-	function sortMe(a, b)
-	{
-		var aclass = a.className.match(rexValues);
-		var avalue = aclass ? sortValues[aclass[0]] : 99;
-		var bclass = b.className.match(rexValues);
-		var bvalue = bclass ? sortValues[bclass[0]] : 99;
-		return avalue - bvalue;
-	}
-
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -82,22 +79,8 @@
 		//	Accion : Actualizar el contenido
 			if( accion == 'recargar' )
 			{
-			//	Esperar para realizar cambios
-				if( swich_cambios == 1 )
-				{
-					console.log( 'recarga pausada' );
-				}
-				else
-				{
-				//	Actualizar Pagina
-					if( datoPubNub.mesa_estado == 0 || datoPubNub.mesa_estado == 1 )
-					{
-						location.reload();
-					}
-				}
-
-			//	Almacenar Estado
-				recargar_estado = 1;
+			//	Actualizar Mesas del listado
+				actualizarMesas();
 			}
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -105,32 +88,38 @@
 		//	Accion : Voto Emitido
 			if( accion == 'voto' )
 			{
-			//	Obtener Variables de la Mesa
-				let mesa_id				=	datoPubNub.mesa;
-				
-			//	Mostar Funcionalidad de carga
-				$("#MES" + mesa_id + " .cambios" ).fadeIn( 250 , function()
-				{
-				//	Reiniciar el Largo del contenedor
-					$("#MES" + mesa_id + " .cambios" ).delay( 100 ).fadeOut( 250 );
-				});
-				
-			//	Calcular Fecha y Hora
-				let today		=	new Date();
-				let date		=	today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-				let time		=	today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-				let dateTime	=	date+' '+time;
-				
-			//	Asignar Fecha actual
-				$( "#" + mesa_id + "_mesa_cambio" ).html( '<time class="timeago line-1" data="' + mesa_id + '"  datetime="'+ dateTime + '"></time>' );
-				
-			//	Reiniciar Timeago
-				$("time.timeago").timeago();
-			}
-		},
-		presence: function(presenceEvent)
-		{
+			//	Obtener ID de la Mesa
+				const mesa_id = datoPubNub.mesa;
 
+			//	Buscar mesa en el DOM
+				const mesa_voto = document.getElementById('mesa-voto-' + mesa_id);
+
+			//	Validar que exista el elemento
+				if( mesa_voto == null )
+				{
+					return
+				}
+				else
+				{
+				//	Asignar clase con la animación
+					mesa_voto.classList.add('animacionVotoMesa');
+
+				//	Esperar que la animación termine
+					mesa_voto.addEventListener('animationend' , function()
+					{
+					//	Eliminar la animación
+						mesa_voto.classList.remove('animacionVotoMesa');
+
+					//	Cambiar el color del estado
+						mesa_voto.parentElement.classList.remove('verde', 'amarillo', 'rojo');
+						mesa_voto.parentElement.classList.add('verde');
+
+					//	Asignar Fecha actual
+						const mesa_voto_date = document.getElementById(mesa_id + '_mesa_cambio');
+						mesa_voto_date.innerHTML = `<time class="timeago line-1" data="${mesa_id}"  datetime="${ Math.floor(message.timetoken / 10000000) }">Hace 1 segundo</time>`
+					});
+				}
+			}
 		}
 	});
 
@@ -140,14 +129,88 @@
     pubnub.subscribe(
 	{
         channels: ['vav_mesas'],
-        withPresence: true
+    //	withPresence: true
     });
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+//	Actualizar el listado de mesas
+	async function actualizarMesas()
+	{
+	//	Detener la validación de nuevas mesas
+		mesa_nueva_detener();
+
+	//	Solicitar la mesa asignada
+		const api = await fetch( path_app + '/swich/mesas-controlador/' )
+		.then( res => res.json() )
+		.then( res => res || [] );
+
+	//		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Actualizar valores globales
+		swich_modo		=	api.switch.swich_modo;
+		swich_mesas		=	api.switch.swich_mesas;
+		swich_mesa_1	=	api.switch.swich_mesa_1;
+		swich_mesa_2	=	api.switch.swich_mesa_2;
+		swich_mesa_3	=	api.switch.swich_mesa_3;
+		swich_mesa_4	=	api.switch.swich_mesa_4;
+
+	//		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Obtener el contenedor de las mesas
+		const render = document.getElementById('mesas' );
+		render.innerHTML = '';
+
+	//	Iterar mesas disponibles
+		api.mesas.forEach(mesa =>
+		{
+		//	Crear el div contenedor del candidato
+			const objeto = document.createElement('article');
+
+		//	Asignar las propiedades del div
+			objeto.id = 'MES' + mesa.mesa_id
+			objeto.className = `mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa G rojo`
+			objeto.setAttribute('mesa', mesa.mesa_id);
+			objeto.setAttribute('date', mesa.mesa_cambio);
+			objeto.setAttribute('created', mesa.mesa_publicado);
+
+		//	Asignar los elementos al div
+			objeto.innerHTML = `<div class="mesa-nueva">NUEVA</div>
+								<div id="mesa-voto-${mesa.mesa_id}" class="cambios bordes-radius"></div>
+								<header>
+									<h2 class="${ mesa.mesa_destacada == 1 ? 'importante' : '' }">
+										<i class="fas ${ mesa.mesa_destacada == 1 ? 'fa-star' : ' fa-hashtag'}"></i> ${mesa.mesa_id}
+									</h2>
+									<div class="tipo">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
+									<div class="zona">${mesa.mesa_zona_titulo}</div>
+									<h3 class="line-1" id="${mesa.mesa_id}_mesa_nombre">${mesa.mesa_local}</h3>
+									<h4 class="line-1" id="${mesa.mesa_id}_mesa_numero">${mesa.mesa_numero}</h4>
+									<h5 class="line-1" id="${mesa.mesa_id}_mesa_ciudad"><i class="fas fa-globe-americas"></i> ${mesa.mesa_comuna}</h5>
+									<h6 class="line-1" id="${mesa.mesa_id}_mesa_cambio"><time class="timeago line-1" data="${mesa.mesa_id}" datetime="${mesa.mesa_cambio}"></time></h6>
+								</header>`
+
+		//	Crear candidato en el listado
+			render.appendChild(objeto);
+		});
+
+	//	Mover Mesas Almacenadas
+		cargarSwichReload();
+
+	//	Actualizar el total de mesas
+		mesas_totales = api.mesas.length
+
+	//	Actualizar el numero total de mesas en pantalla
+		mesas_totales_actualizacion();
+	}
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 //	Mover Mesas Almacenadas
 	function cargarSwich()
 	{
+	//	Destruir Funcionalidad Sortable
+		$('.relacionados').sortable('destroy');
+		
 	//	Validar Espacio 1
 		if( swich_mesa_1 != 0 )
 		{
@@ -197,7 +260,43 @@
 		$("#swich-opcion-votos-" + swich_votos).removeClass("of").addClass("on");
 		
 	//	Validar Template y mesas Seleccionado
-		swichMesasActivas( swich_mesas );		
+		swichMesasActivas( swich_mesas );
+
+	//	Iniciar el intervalo para validar las mesas nuevas
+		mesa_nueva_iniciar();
+
+	//	Actualizar el numero total de mesas en pantalla
+		mesas_totales_actualizacion();
+	}
+
+//	Mover Mesas Almacenadas
+	function cargarSwichReload()
+	{
+	//	Destruir Funcionalidad Sortable
+		$('.relacionados').sortable('destroy');
+		
+	//	Obtener Listado de Mesas en el Listado
+		$( '#mesa-1 > article' ).each(function()
+		{
+			let mesa	=	$("#" + $(this).attr('id'));
+			mesa.remove();
+		});
+
+		$( '#mesa-2 > article' ).each(function()
+		{
+			let mesa	=	$("#" + $(this).attr('id'));
+			mesa.remove();
+		});
+		
+	//	Iniciar Funcionalidad Sortable
+		$( ".relacionados" ).sortable(
+		{
+			placeholder: "drag",
+			connectWith: ".relacionados"
+		});
+
+	//	Iniciar la validación de nuevas mesas
+		mesa_nueva_iniciar();
 	}
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -212,8 +311,8 @@
 		$( '#mesa-' + id + ' > article' ).each(function()
 		{
 			let mesa	=	$("#" + $(this).attr('id'));
-				mesa.clone().prependTo('#mesas');
-				mesa.remove();
+			mesa.clone().prependTo('#mesas');
+			mesa.remove();
 		});
 		
 	//	Reiniciar Funcionalidad Sortable
@@ -222,9 +321,6 @@
 			placeholder: "drag",
 			connectWith: ".relacionados"
 		});
-		
-	//	Reiniciar Timeago
-		$("time.timeago").timeago();
 		
 	//	Aplicar Cambios a los Botones
 		swich_cambios	=	1;
@@ -666,48 +762,114 @@
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 	
-//	Editar las Mesas que serán Mostradas
+	let estado_preview_switch = false;
+	let estado_preview_consolidado = false;
+
+//	Iniciar Preview Switch
 	function swichPreview()
 	{
-	//	Obtener ID de las Mesas
-		let swich_mesa_1			=	$( "#mesa-1 > .mesa-swich" ).first().attr('mesa');
-		let swich_mesa_2			=	$( "#mesa-2 > .mesa-swich" ).first().attr('mesa');
-		let swich_mesa_3			=	$( "#mesa-3 > .mesa-swich" ).first().attr('mesa');
-		let swich_mesa_4			=	$( "#mesa-4 > .mesa-swich" ).first().attr('mesa');
-
-	//	Actualizar de las Mesas
-		$.post( path_app + '/swich/editar/' ,
+	//	Validar estado del preview
+		if( estado_preview_switch == true )
 		{
-			swich_id				:	1,
-			swich_modo				:	swich_modo,
-			swich_mesas				:	swich_mesas,
-			swich_mesa_1			:	swich_mesa_1,
-			swich_mesa_2			:	swich_mesa_2,
-			swich_mesa_3			:	swich_mesa_3,
-			swich_mesa_4			:	swich_mesa_4,
-			swich_votos				:	swich_votos
-		})
-		.done(function( data )
+			return
+		}
+		else
 		{
-		//	Aplicar Cambios a los Botones
-		//	swich_cambios	=	0;
+		//	Obtener ID de las Mesas
+			let swich_mesa_1			=	$( "#mesa-1 > .mesa-swich" ).first().attr('mesa');
+			let swich_mesa_2			=	$( "#mesa-2 > .mesa-swich" ).first().attr('mesa');
+			let swich_mesa_3			=	$( "#mesa-3 > .mesa-swich" ).first().attr('mesa');
+			let swich_mesa_4			=	$( "#mesa-4 > .mesa-swich" ).first().attr('mesa');
 
-		//	Estado de Cambios en el Swich
-		//	estadoSwich();
-			
-        //	Construir Variable para enviar a PubNub
-            let pubnub       	=
-            {
-                'accion'		:	'preview',
-                'modo'          :	swich_modo,
-				'template'		:	swich_mesas,
-                'mesa_1'		:	Number(swich_mesa_1),
-				'mesa_2'		:	Number(swich_mesa_2),
-				'mesa_3'		:	Number(swich_mesa_3),
-				'mesa_4'		:	Number(swich_mesa_4)
-            }
+		//	Actualizar de las Mesas
+			$.post( path_app + '/swich/editar/' ,
+			{
+				swich_id				:	1,
+				swich_modo				:	swich_modo,
+				swich_mesas				:	swich_mesas,
+				swich_mesa_1			:	swich_mesa_1,
+				swich_mesa_2			:	swich_mesa_2,
+				swich_mesa_3			:	swich_mesa_3,
+				swich_mesa_4			:	swich_mesa_4,
+				swich_votos				:	swich_votos
+			})
+			.done(function( data )
+			{
+			//	Construir Variable para enviar a PubNub
+				let pubnub       	=
+				{
+					'accion'		:	'switch_preview',
+					'modo'          :	swich_modo,
+					'template'		:	swich_mesas,
+					'mesa_1'		:	Number(swich_mesa_1),
+					'mesa_2'		:	Number(swich_mesa_2)
+				}
 
-        //	Enviar Notificación a PubNub
+			//	Enviar Notificación a PubNub
+				enviarPubNub( pubnub );
+
+			//	Actualizar el valor de estado
+				estado_preview_switch = true;
+
+			//	Buscar mesa en el DOM
+				const boton_preview = document.getElementById('estado-preview-switch');
+
+			//	Asignar clase con la animación
+				boton_preview.classList.add('animacionEstadoPreview');
+
+			//	Esperar que la animación termine
+				boton_preview.addEventListener('animationend' , function()
+				{
+				//	Eliminar la animación
+					boton_preview.classList.remove('animacionEstadoPreview');
+
+				//	Actualizar el valor de estado
+					estado_preview_switch = false;
+				});
+			});
+		}
+	}
+
+//	Iniciar Preview Consolidados
+	function consolidadosPreview()
+	{
+	//	Validar estado del preview
+		if( estado_preview_consolidado == true )
+		{
+			return
+		}
+		else
+		{
+			//	Construir Variable para enviar a PubNub
+			let pubnub       	=
+			{
+				'accion'		:	'consolidados_preview',
+				'estado'        :	'on',
+				'position'		:	posicion_consolidados,
+				'tipo'          :   $.cookie('consolidado_tipo'),
+				'zona'          :   $.cookie('consolidado_zona')
+			}
+
+		//	Enviar Notificación a PubNub
 			enviarPubNub( pubnub );
-		});
+
+		//	Actualizar el valor de estado
+			estado_preview_consolidado = true;
+
+		//	Buscar mesa en el DOM
+			const boton_preview = document.getElementById('estado-preview-consolidados');
+
+		//	Asignar clase con la animación
+			boton_preview.classList.add('animacionEstadoPreview');
+
+		//	Esperar que la animación termine
+			boton_preview.addEventListener('animationend' , function()
+			{
+			//	Eliminar la animación
+				boton_preview.classList.remove('animacionEstadoPreview');
+
+			//	Actualizar el valor de estado
+				estado_preview_consolidado = false;
+			});
+		}
 	}

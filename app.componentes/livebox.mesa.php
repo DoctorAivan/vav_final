@@ -12,7 +12,7 @@
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="mesa-tipo">
 					<div class="box-shadow-light" onclick="mesa_nueva_tipo('G');" id="mesa-tipo-G">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('A');" id="mesa-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
+					<div class="box-shadow-light off" id="mesa-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
 					<noscript>
 						<div class="box-shadow-light off" id="mesa-tipo-S">🔴&nbsp;&nbsp;&nbsp;PRESIDENTE</div>
 					</noscript>
@@ -91,7 +91,7 @@
 			</article>
 			<article class="formulario candidatos bg-1">
 
-				<div class="col-1" style="border-top:solid 1px #454757; padding:10px 0 0 var(--padding-box);">
+				<div class="col-1" style="display:none; border-top:solid 1px #454757; padding:10px 0 0 var(--padding-box);">
 					<div class="tags-input">
 						<i class="icono-fixed fas fa-search"></i>
 						<input style="margin:14px 0 18px 0;" name="candidato_nombre" id="candidato_nombre" type="text" class="alfanumerico input-filtro-candidatos box-shadow-light bordes-radius" autocomplete="off" placeholder="FILTRAR POR NOMBRE" style="margin:14px 0 23px 0;">
@@ -103,7 +103,9 @@
 
 				<div class="candidato-titulos titulo">
 					<div class="candidato-titulo">Nombre candidato en pantalla <i class="fas fa-chevron-down"></i></div>
-					<div class="candidato-titulo">Modificar Votos <i class="fas fa-chevron-down"></i></div>
+					<div class="candidato-titulo" style="text-align: right;">
+						Modificar Votos <i class="fas fa-chevron-down"></i>
+					</div>
 				</div>
 				<div class="candidatos-listado">
 				<noscript>

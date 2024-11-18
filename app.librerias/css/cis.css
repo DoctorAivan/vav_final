@@ -30,6 +30,7 @@
 		--color-bg-boton-editar-a		:	#39b44b;
 		--color-bg-boton-eliminar		:	#f01e1f;
 		--color-bg-boton-eliminar-a		:	#d31a1b;
+		--color-bg-boton-preview		:	#ff5e00;
 		--color-bg-boton-cancelar		:	#ddd;
 		--color-bg-boton-cancelar-a		:	#bbb;
 		--color-bg-boton-inactivo		:	#e6e6ef;
@@ -568,6 +569,50 @@
 				{
 					margin: 0px;
 				}
+
+		.titulo-seccion .total-mesas
+		{
+			top: 12px;
+			left: 355px;
+			position: absolute;
+			display: grid;
+			grid-template-columns: auto 1fr;
+			border-left: solid 1px var(--color-bg-navegacion-a);
+			padding: 0 0 0 30px;
+			gap: 22px;
+		}
+			.titulo-seccion .total-mesas .total
+			{
+				background: -webkit-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				background: -moz-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				background: -ms-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				background: linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-size: 3.1rem;
+				line-height: 3.1rem;
+				font-weight: 600;
+			}
+			.titulo-seccion .total-mesas .mesas
+			{
+				background: -webkit-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				background: -moz-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				background: -ms-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				background: linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-size: 1.35rem;
+				line-height: 1.35rem;
+				font-weight: 500;
+				margin-top: 4px;
+			}
+			.titulo-seccion .total-mesas .detalles
+			{
+				color: var(--color-texto-2);
+				font-size: 1rem;
+				line-height: 1rem;
+				margin: 4px 0 0 0;
+			}
 					
 	.titulo-formulario
 	{
@@ -1098,6 +1143,20 @@
 	{
 		text-align: right !important;
 	}
+
+	.animacionVotoMesa
+	{
+		animation: animacionVotoMesa 0.6s ease-in-out 1;
+	}
+	.animacionEstadoPreview
+	{
+		animation: animacionEstadoPreview 2s ease-in-out 1;
+		cursor:wait !important;
+		color: var(--color-texto-2) !important;
+  		background: var(--color-border-2) !important;
+		border-color: var(--color-border-2) !important;
+	}
+
 /*
 
 	
@@ -1115,7 +1174,20 @@
 		    opacity: 1;
 	    }
 	}
-	
+
+	@keyframes animacionDestacado
+	{
+	    0% {
+			filter: brightness(1);
+	    }
+	    50% {
+		    filter: brightness(1.1);
+	    }
+	    100% {
+		    filter: brightness(1);
+	    }
+	}
+
     @keyframes animacionRotar360
     {
 		from
@@ -1127,6 +1199,32 @@
 			transform: rotate(360deg);
 		}
     }
+
+	@keyframes animacionVotoMesa
+	{
+	    0% {
+		    opacity: 0;
+	    }
+	    40% {
+		    opacity: 1;
+	    }
+	    60% {
+		    opacity: 1;
+	    }
+	    100% {
+		    opacity: 0;
+	    }
+	}
+
+	@keyframes animacionEstadoPreview
+	{
+	    0% {
+		    opacity: 1;
+	    }
+	    100% {
+		    opacity: 1;
+	    }
+	}
 
 	@media only screen and (min-width: 0px )
 	{

@@ -304,11 +304,13 @@
 				}
 				.swich-controles .preview
 				{
+					user-select: none;
 					height: 28px;
-					color: var(--color-bg-boton-nuevo);
-					border: solid 1px var(--color-bg-boton-nuevo);
+					color: var(--color-bg-boton-preview);
+					border: solid 1px var(--color-bg-boton-preview);
 					cursor: pointer;
-					margin: 8px 15px 0 0;
+					font-weight: 400;
+					margin: 8px 0 0 15px;
 					padding: 11px 20px 0 20px;
 					-webkit-transition: all .25s ease-out;
 					-moz-transition: all .25s ease-out;
@@ -318,7 +320,7 @@
 					.swich-controles .preview:hover
 					{
 						color: var(--color-bg-box);
-						background: var(--color-bg-boton-nuevo);
+						background: var(--color-bg-boton-preview);
 					}
 				.swich-controles .on
 				{
@@ -341,16 +343,53 @@
 		float: left;
 		position: relative;
 		cursor: default;
+		transition: border-color 0.75s ease-out;
 	}
+		.mesa-swich .mesa-nueva
+		{
+			z-index: 99;
+			position: absolute;
+			right: -10px;
+			top: 16px;
+			font-size: 0.8rem;
+			line-height: 0.8rem;
+			font-weight: 700;
+			text-align: center;
+			padding: 7px 14px 7px 15px;
+			box-shadow: 0px 8px 20px -5px var(--color-bg-shadow);
+			border-radius: 10px 0px 0px 10px;
+			display: block;
+			color: var(--color-bg-body);
+			background: linear-gradient(90deg, #28a2ff 0%, #0f8deb 100%);
+			animation: animacionDestacado 1s linear infinite;
+		}
+			.mesa-swich .mesa-nueva:before
+			{
+				width: 0px;
+				content: '';
+				height: 0px;
+				position: absolute;
+				right: 0px;
+				bottom: -10px;
+				border-style: solid;
+				border-width: 10px 10px 0 0;
+				border-color: #0f8deb40 transparent transparent transparent;
+			}
+		
 		.mesa-swich .cambios
 		{
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			z-index: 5;
+			top: 2px;
+			left: 1px;
 			position: absolute;
 			width: 100%;
-			height: 100%;
-			background: transparent;
-			z-index: 5;
-			box-shadow: 0px 0px 0px 1px #ffd900;
-			display: none;
+			height: calc(100% - 1px);
+			background: linear-gradient(140deg , #ffd90000 0%, #ffd90020 50%, #ffd90000 95%);
+			box-shadow: 0px 0px 0px 2px #ffd900;
+			opacity: 0;
 		}
 		.mesa-swich .destacado
 		{
@@ -471,6 +510,12 @@
 				{
 					float: left;
 				}
+			.mesa-swich header .importante
+			{
+				font-weight: 700;
+				color: #ffd900 !important;
+				animation: animacionDestacado 1s linear infinite;
+			}
 		.mesa-swich footer
 		{
 			float: left;

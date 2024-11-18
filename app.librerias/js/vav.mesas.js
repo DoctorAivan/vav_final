@@ -75,7 +75,7 @@ function mesa_nueva()
     liveboxAbrir('mesa');
 
 //  Marcar Pacto por Defecto
-    mesa_nueva_tipo('A');
+    mesa_nueva_tipo('G');
 
 //  Generar Listado de Regiones
 //  mesa_nueva_regiones_listado();

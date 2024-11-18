@@ -39,13 +39,14 @@
 	let mesa_totales_tipo = ''
 	let mesa_totales_posicion = ''
 	let mesa_totales_zona = 0
+	let mesa_totales_timer = null
+
+//	Intervalo de actualización de consolidados
+	const mesa_totales_intervalo = 5000
 
 //	Transiciones
-	let tiempo_transiciones = 750
-	let tiempo_transiciones_adicional = 1000
-
-//	Retardo del despliegue de las imagenes
-	let canditato_imagen_delay = 1
+	const tiempo_transiciones = 600
+	const tiempo_transiciones_adicional = 1000
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -72,25 +73,25 @@
 	const mesa_1_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '15px',
-				'y' : '183px',
+				'x' : '85px',
+				'y' : '178px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-600px',
-				'y' : '183px',
+				'x' : '-650px',
+				'y' : '178px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '15px',
-				'y' : '183px',
+				'x' : '85px',
+				'y' : '178px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-600px',
-				'y' : '183px',
+				'x' : '-650px',
+				'y' : '178px',
 				'z' : 'unset'
 			}
 		}
@@ -100,25 +101,25 @@
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1305px',
-				'y' : '183px',
+				'x' : '1185px',
+				'y' : '178px',
 				'z' : 'unset'
 			},
 			'oculta' : {
 				'x' : '1920px',
-				'y' : '183px',
+				'y' : '178px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1305px',
-				'y' : '183px',
+				'x' : '1185px',
+				'y' : '178px',
 				'z' : 'unset'
 			},
 			'oculta' : {
 				'x' : '1920px',
-				'y' : '183px',
+				'y' : '178px',
 				'z' : 'unset'
 			}
 		}
@@ -151,9 +152,6 @@
 			}
 		}
 	}
-	
-//	Titulo Mesa Conteo
-	const mesa_titulo = 'VOTO A VOTO'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -164,10 +162,10 @@
 		message: function(message)
 		{
 		//	Obtener Nuevo Dato
-			let datoPubNub			=	message.message;
+			const datoPubNub			=	message.message;
 
 		//	Obtener Accion desde PubNub
-			let accion				=	datoPubNub.accion;
+			const accion				=	datoPubNub.accion;
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -198,7 +196,7 @@
 					{
 					//	Iniciar Animaciones
 						App.init();
-					}, tiempo_transiciones_adicional );
+					}, tiempo_transiciones );
 				}
 				else
 				{
@@ -215,7 +213,7 @@
 					{
 					//	Iniciar Animaciones
 						App.init();
-					}, tiempo_transiciones_adicional );
+					}, tiempo_transiciones );
 
 				//	Almacenar el Template actual
 					app_modo = datoPubNub.modo
@@ -241,7 +239,7 @@
 				App.voto( id , mesa , candidato , voto );
 
 			//	Sumer votos a la mesa de consolidados
-				App.voto_totales( candidato , voto , accion_voto );
+			//	App.voto_totales( candidato , voto , accion_voto );
 			}
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -270,12 +268,20 @@
 				}
 				else
 				{
+				//	Detener el Intervalo de actualización
+					App.totales_actualizacion_detener();
+
+				//	Iniciar animación de salida
+					App.animar_salida_totales();
+
+				//	Actualizar el valor
 					mesa_totales_estado = false
-					App.animar_salida_totales()
 				}
 			}
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+		/*
 
 		//	Accion : Actualizar conteo total
 			if( accion == 'recargar' )
@@ -296,6 +302,8 @@
 				}
 			}
 
+		*/
+
 		}
 	});
 
@@ -311,6 +319,67 @@
 //	Constructor de la Aplicación
 	const App =
 	{
+	//	Iniciar intervalo de actualización de los totales
+		totales_actualizacion_iniciar : () =>
+		{
+			if (mesa_totales_timer === null)
+			{
+				mesa_totales_timer = setInterval(App.totales_actualizar, mesa_totales_intervalo);
+			}
+		},
+
+	//	Detener intervalo de actualización de los totales
+		totales_actualizacion_detener : () =>
+		{
+			if (mesa_totales_timer !== null)
+			{
+				clearInterval(mesa_totales_timer);
+				mesa_totales_timer = null;
+			}
+		},
+
+	//	Generar interpolación entre el valor actual y final
+		totales_actualizacion_votos : (element, newValue, duration) =>
+		{
+		//	Obtener del DOM el valor actual
+			const startValue = Number( element.innerText.replace('.','') );
+			const newValueFormated = Number( newValue )
+			
+		//	Validar cambio en los votos
+			if( startValue === newValueFormated )
+			{
+				return
+			}
+			else
+			{
+				const increment = newValue - startValue;
+				const startTime = performance.now();
+			
+				function update(currentTime)
+				{
+					const elapsedTime = currentTime - startTime;
+					const progress = Math.min(elapsedTime / duration, 1);
+					const currentValue = Math.round(startValue + increment * progress);
+	
+					element.innerText = App.numero(currentValue);
+					
+					if (progress < 1)
+					{
+						requestAnimationFrame(update);
+					}
+					else
+					{
+						element.innerText = App.numero(currentValue);
+						return
+					}
+				}
+			
+				requestAnimationFrame(update);
+			}
+		},
+
+	//	-			-			-			-			-			-			-			-			-			-			-			-			
+
 	//	Mesa con resultados totales
 		totales : async function( tipo , zona )
 		{
@@ -334,9 +403,7 @@
 			//	Dibujar la mesa en el DOM
 				App.totales_draw();
 
-			//	Mostrar el pantalla
-				App.animar_entrada_totales();
-
+			//	Actualizar estado
 				mesa_totales_estado = true
 			}
 		},
@@ -412,14 +479,14 @@
 					}
 				}
 
-				const candidato_div_voto_animacion = document.querySelector('#candidate-' + candidato + ' > div.candidato-info > div.candidato-votos-animacion');
+				const candidato_div_voto_animacion = document.querySelector('#candidato-' + candidato + ' > div.candidato-info > div.candidato-votos-animacion');
 				candidato_div_voto_animacion.classList.add('animar_voto');
 
 			//	Reiniciar animación del voto
 				setTimeout(function()
 				{
 					candidato_div_voto_animacion.classList.remove('animar_voto');
-				}, tiempo_transiciones_adicional);
+				}, tiempo_transiciones);
 
 			//	Ordenar candidatos
 				App.ordenar_votos_totales();
@@ -439,12 +506,14 @@
 			mesa_totales_candidatos.forEach(candidato =>
 			{
 			//  Get object from DOM
-				const candidato_div = document.getElementById(`candidate-${candidato.id}`);
+				const candidato_div = document.getElementById(`candidato-${candidato.id}`);
 				candidato_div.classList = `candidato order-${id_orden}`;
 
 			//	Obtener valor del voto
 				const candidato_voto_valor = document.getElementById(`candidato-${candidato.id}-votos`);
-				candidato_voto_valor.innerHTML = App.numero(candidato.votos);
+
+			//	Animar votos
+				App.totales_actualizacion_votos(candidato_voto_valor , Number( candidato.votos ) , 1000 );
 
 			//	Validar Posicion de los Objetos
 				if( id_orden < 3 )
@@ -457,6 +526,7 @@
 				}
 			});
 
+		//	Calcular el total de votos
 			App.calcular_votos_totales();
 		},
 
@@ -478,45 +548,20 @@
 		totales_draw : function()
 		{
 		//	Asignar tipo de zona
-			let totales_zona = ''
-
-		//	Validar Tipo de Zona
-			if( mesa_totales_tipo == 'G' )
-			{
-				totales_zona = App.obtener_zona_region( mesa_totales_zona );
-			}
-			else
-			{
-				totales_zona = App.obtener_zona_comuna( mesa_totales_zona );
-			}
-
-		//	Formatear tipo de Zona
-			const totales_tipo = App.obtener_tipo_mesa( mesa_totales_tipo );
+			const totales_zona = App.obtener_zona_region( mesa_totales_zona );
 
 		//  DIV render en el DOM
-			const render	=	document.getElementById('render-mesa-totales' );
+			const render = document.getElementById('render-mesa-totales' );
 
 		//	Vaciar el contenedor
 			render.innerHTML = '';
 
 		//	Crear el DIV de la mesa
-			let div_mesa = document.createElement('div');
+			const div_mesa = document.createElement('div');
 			div_mesa.id = 'mesa-0'
 
 		//	Asignar las clases a la mesa
 			div_mesa.className = `consolidados tipo-${mesa_totales_tipo.toLowerCase()}`
-
-/*
-			div_mesa.innerHTML =   `<div class="header">
-										<h1>${totales_tipo}</h1>
-										<h2>CONSOLIDADO</h2>
-										<h3>${totales_zona}</h3>
-										<div class="totales" id="mesa-totales-detalles">
-											<b>${mesa_totales_mesas} MESAS</b>&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS
-										</div>
-									</div>
-*/
-
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
@@ -533,9 +578,6 @@
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
 
-		//	Validar largo de la zona
-			App.validar_largo_zona(totales_zona)
-
 		//	Render de los candidatos en la mesa
 			const render_candidatos = document.getElementById('mesa-0-candidatos');
 
@@ -549,37 +591,33 @@
 			mesa_totales_candidatos.forEach(candidato =>
 			{
 			//	Crear el div contenedor del candidato
-				let objeto = document.createElement('div');
+				const objeto = document.createElement('div');
 				objeto.className = `candidato order-${id_orden}`
 
 			//	Asignar las propiedades del div
-				objeto.id = 'candidate-' + candidato.id
+				objeto.id = 'candidato-' + candidato.id
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
 										<div class="candidato-imagen-marco">
 											<img
 												src="${path_imagenes_candidatos}${candidato.id}.png"
-												id="candidato-imagen-0-${candidato.id}"
 												class="candidato-imagen-src"
-												data-nombre="${candidato.nombres} ${candidato.apellidos}"
-												data-objeto="${candidato.id}"
-												data-load="false"
 											/>
+										</div>
+										<div class="candidato-detalles-alianza">
+											<div class="candidato-detalles-alianza-partido">
+												${App.obtener_partido(candidato.partido)}
+											</div>
+											<div class="candidato-detalles-alianza-pacto">
+												${App.obtener_pacto(candidato.pacto)}
+											</div>
 										</div>
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido" id="consolidado-apellido-${candidato.id}">${candidato.apellidos}</div>
-											<div class="candidato-detalles-alianza">
-												<div class="candidato-detalles-alianza-partido">
-													${App.obtener_partido(candidato.partido)}
-												</div>
-												<div class="candidato-detalles-alianza-pacto">
-													${App.obtener_pacto(candidato.pacto)}
-												</div>
-											</div>
+											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
 										</div>
 										<div class="candidato-votos">
 											<div class="candidato-votos-valor" id="candidato-${candidato.id}-votos">${App.numero(candidato.votos)}</div>
@@ -590,19 +628,12 @@
 			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
-			//	Validar largo del apellido
-				App.validar_largo_nombre_consolidados(candidato.id, candidato.apellidos);
-
-			//	Validar Posicion de los Objetos
-				if( id_orden < 3 )
-				{
-					id_orden++	
-				}
-				else
-				{
-					id_orden = 4
-				}
+			//	Incrementar el ID de la lista
+				id_orden++
 			});
+
+		//	Mostrar el pantalla
+			App.animar_entrada_totales();
 		},
 
 	//	Cambiar el tamaño de texto
@@ -639,92 +670,6 @@
 			{
 				elemento.style.fontSize = "1.75rem";
 				elemento.style.lineHeight = "1.75rem";
-			}
-		},
-
-	//	Cambiar el tamaño de texto
-		validar_largo_zona_doble : function(id, apellido)
-		{
-		//	Obtener el elemento que contiene el texto
-			const elemento = document.getElementById("candidato-detalles-apellido-" + id);
-		
-		//	Contar el largo del string
-			const largoTexto = apellido.length;
-
-		//	Validar largo de la zona
-			if (largoTexto < 13)
-			{
-				elemento.style.fontSize = "1.3rem";
-				elemento.style.lineHeight = "1.3rem";
-			}
-			else if (largoTexto <= 14)
-			{
-				elemento.style.fontSize = "1.15rem";
-				elemento.style.lineHeight = "1.15rem";
-				elemento.style.paddingTop = "2px";
-				elemento.style.paddingBottom = "2px";
-			}
-			else if (largoTexto <= 15)
-			{
-				elemento.style.fontSize = "1.05rem";
-				elemento.style.lineHeight = "1.05rem";
-				elemento.style.paddingTop = "3px";
-				elemento.style.paddingBottom = "3px";
-			}
-			else if (largoTexto > 16)
-			{
-				elemento.style.fontSize = "0.9rem";
-				elemento.style.lineHeight = "0.9rem";
-				elemento.style.paddingTop = "4px";
-				elemento.style.paddingBottom = "4px";
-			}
-			else
-			{
-				elemento.style.fontSize = "1.3rem";
-				elemento.style.lineHeight = "1.3rem";
-			}
-		},
-
-	//	Cambiar el tamaño de texto
-		validar_largo_nombre_consolidados : function(id, apellido)
-		{
-		//	Obtener el elemento que contiene el texto
-			const elemento = document.getElementById("consolidado-apellido-" + id);
-		
-		//	Contar el largo del string
-			const largoTexto = apellido.length;
-
-		//	Validar largo de la zona
-			if (largoTexto < 13)
-			{
-				elemento.style.fontSize = "1.6rem";
-				elemento.style.lineHeight = "1.6rem";
-			}
-			else if (largoTexto <= 14)
-			{
-				elemento.style.fontSize = "1.3rem";
-				elemento.style.lineHeight = "1.3rem";
-				elemento.style.paddingTop = "3px";
-				elemento.style.paddingBottom = "3px";
-			}
-			else if (largoTexto <= 15)
-			{
-				elemento.style.fontSize = "1.15rem";
-				elemento.style.lineHeight = "1.15rem";
-				elemento.style.paddingTop = "3px";
-				elemento.style.paddingBottom = "4px";
-			}
-			else if (largoTexto > 16)
-			{
-				elemento.style.fontSize = "1rem";
-				elemento.style.lineHeight = "1rem";
-				elemento.style.paddingTop = "5px";
-				elemento.style.paddingBottom = "6px";
-			}
-			else
-			{
-				elemento.style.fontSize = "1.6rem";
-				elemento.style.lineHeight = "1.6rem";
 			}
 		},
 
@@ -806,6 +751,9 @@
 					}
 				}, 200 );
 			}
+
+		//	Iniciar el intervalo de actualización
+			App.totales_actualizacion_iniciar();
 			
 		//	Set estado del total
 			mesa_totales_estado = true;
@@ -897,10 +845,6 @@
 
 				render_mesa_2.classList.remove('floating');
 				render_mesa_2.classList.add('tottem');
-
-			//	render_mesa_totales.style.width = '100%'
-			//	render_mesa_totales.classList.remove('tottem');
-			//	render_mesa_totales.classList.add('floating');
 			}
 			else if( app_modo == 1 )
 			{
@@ -910,10 +854,6 @@
 
 				render_mesa_2.classList.remove('floating');
 				render_mesa_2.classList.add('tottem');
-
-			//	render_mesa_totales.style.width = '520px'
-			//	render_mesa_totales.classList.remove('floating');
-			//	render_mesa_totales.classList.add('tottem');
 			}
 
 		//	Validar que exista la Mesa 1
@@ -1020,7 +960,7 @@
 			render.innerHTML = '';
 
 		//	Crear el DIV de la mesa
-			let div_mesa = document.createElement('div');
+			const div_mesa = document.createElement('div');
 			div_mesa.id = 'mesa-' + mesa.id
 
 		//	Asignar las clases a la mesa
@@ -1029,9 +969,9 @@
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
 										<h2>
-											<span class="tipo">${App.obtener_tipo_mesa(mesa.tipo)}</span>
+											<span>${mesa.zona}</span>
 											<div class="separador"></div>
-											${mesa.tipo == 'A' ? mesa.comuna : mesa.zona}
+											<span class="tipo">${mesa.comuna}</span>
 										</h2>
 										<h3>
 											${mesa.local}
@@ -1039,7 +979,9 @@
 											${mesa.numero}
 										</h3>
 									</div>
-									<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>`;
+									<div class="candidatos-padding">
+										<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>
+									</div>`;
 
         //	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
@@ -1057,29 +999,25 @@
 			mesa.candidatos.forEach(candidato =>
             {
             //	Crear el div contenedor del candidato
-                let objeto = document.createElement('div');
+                const objeto = document.createElement('div');
 				objeto.className = `candidato order-${id_orden}`
 
             //	Asignar las propiedades del div
-                objeto.id = 'candidate-' + candidato.objeto
+                objeto.id = 'candidato-' + candidato.objeto
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
 										<div class="candidato-imagen-marco">
 											<img
 												src="${path_imagenes_candidatos}${candidato.id}.png"
-												id="candidato-imagen-${mesa.id}-${candidato.id}"
 												class="candidato-imagen-src"
-												data-nombre="${candidato.nombres} ${candidato.apellidos}"
-												data-objeto="${candidato.id}"
-												data-load="false"
 											/>
 										</div>
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido" id="candidato-detalles-apellido-${candidato.objeto}">${candidato.apellidos}</div>
+											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
 											<div class="candidato-detalles-alianza">
 												<div class="candidato-detalles-alianza-partido">
 													${App.obtener_partido(candidato.partido_id)}
@@ -1089,27 +1027,17 @@
 												</div>
 											</div>
 										</div>
-										<div class="candidato-votos" id="candidato-${candidato.objeto}-votos">
-											<div class="candidato-votos-valor">${candidato.votos}</div>
+										<div class="candidato-votos">
+											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">${candidato.votos}</div>
 										</div>
-										<div class="candidato-votos-animacion"></div>
+										<div id="candidato-${candidato.objeto}-animacion" class="candidato-votos-animacion"></div>
 									</div>`
 
             //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
-			//	Validación de largo de nombre
-				App.validar_largo_zona_doble(candidato.objeto, candidato.apellidos);
-
-			//	Validar Posicion de los Objetos
-				if( id_orden < 3 )
-				{
-					id_orden++	
-				}
-				else
-				{
-					id_orden = 4
-				}
+			//	Incrementar el ID de la lista
+				id_orden++
             });
 
 		//	Asignar posición 2 en pantalla
@@ -1129,43 +1057,38 @@
 					App.animar_entrada_mesa_2();
 				}
 			}
-
-		//	Validar imagenes de los candidatos
-		//	candidato_poster( mesa.id );
 		},
 
 	//	Asignar votos a un candidato
 		voto : function( id , mesa, candidato, votos )
 		{
-		//	Actualizar votos en el DOM
-			const candidato_voto = document.getElementById(`candidate-${id}`);
+		//	Buscar en candidato en el DOM
+			const candidato_votos = document.getElementById(`candidato-${id}-votos`);
 
 		//	Validar que exista el elemento
-			if( candidato_voto != null )
+			if( candidato_votos == null )
 			{
-				const candidato_div_voto_valor = document.querySelector('#candidate-' + id + ' > div.candidato-info > div.candidato-votos > div.candidato-votos-valor');
-				candidato_div_voto_valor.innerHTML = votos;
-			//	candidato_div_voto_valor.classList.add('animar_voto_texto')
+				return
+			}
+			else
+			{
+			//	Actualizar los votos
+				candidato_votos.innerHTML = votos;
 
-				const candidato_div_voto_animacion = document.querySelector('#candidate-' + id + ' > div.candidato-info > div.candidato-votos-animacion');
-				candidato_div_voto_animacion.classList.add('animar_voto');
-
-			//	Reiniciar animación del voto
-				setTimeout(function()
-				{
-				//	candidato_div_voto_valor.classList.remove('animar_voto_texto');
-					candidato_div_voto_animacion.classList.remove('animar_voto');
-					
-				}, tiempo_transiciones_adicional);
+			//	Obtener el contenedor de la animación
+				const candidato_animacion = document.getElementById(`candidato-${id}-animacion`);
+				candidato_animacion.classList.add('animar_voto');
 
 				if( mesa_1 )
 				{
 					if( mesa == mesa_1.id)
 					{
+					//	Actualizar la cantidad de votos
 						const result = mesa_1.candidatos.find(({ objeto }) => objeto === id);
 						result.votos = votos;
 
-						App.ordenar_votos(mesa);
+					//	Actualizar DOM
+						App.ordenar_votos(mesa_1.candidatos);
 					}
 				}
 
@@ -1173,66 +1096,42 @@
 				{
 					if( mesa == mesa_2.id)
 					{
+					//	Actualizar la cantidad de votos
 						const result = mesa_2.candidatos.find(({ objeto }) => objeto === id);
 						result.votos = votos;
 
-						App.ordenar_votos(mesa);
+					//	Actualizar DOM
+						App.ordenar_votos(mesa_2.candidatos);
 					}
 				}
+
+			//	Esperar que la animación termine
+				candidato_animacion.addEventListener('animationend' , function()
+				{
+				//	Eliminar la animación
+					candidato_animacion.classList.remove('animar_voto');
+				});
 			}
 		},
 
-		//	Ordenar Votos de los candidatos
-		ordenar_votos : function (mesa)
+	//	Ordenar Votos de los candidatos
+		ordenar_votos : function (candidatos)
 		{
-		//	Mesa Candidatos por cambiar
-			let mesa_candidatos
-
-		//	Validar si existe mesa 1
-			if( mesa_1 )
-			{
-				if( mesa == mesa_1.id )
-				{
-				//	Ordenar los candidatos por sus votos
-					mesa_1.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
-
-				//	Guardar Mesa
-					mesa_candidatos = mesa_1.candidatos;
-				}
-			}
-
-		//	Validar si existe mesa 1
-			if( mesa_2 )
-			{
-				if( mesa == mesa_2.id )
-				{
-				//	Ordenar los candidatos por sus votos
-					mesa_2.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
-
-				//	Guardar Mesa
-					mesa_candidatos = mesa_2.candidatos;
-				}
-			}
-
 		//	Orden del candidato
 			let id_orden = 1;
 
+		//	Ordenar los votos de la mesa
+			candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+
 		//	Iterar listado de candidatos
-			mesa_candidatos.forEach(candidato =>
+			candidatos.forEach(candidato =>
 			{
 			//  Get object from DOM
-				let candidato_div = document.getElementById(`candidate-${candidato.objeto}`);
+				const candidato_div = document.getElementById(`candidato-${candidato.objeto}`);
 				candidato_div.classList = `candidato order-${id_orden}`;
 
-			//	Validar Posicion de los Objetos
-				if( id_orden < 3 )
-				{
-					id_orden++	
-				}
-				else
-				{
-					id_orden = 4
-				}
+			//	Incrementar el ID de la lista
+				id_orden++
 			});
 		},
 
@@ -1326,7 +1225,7 @@
 				//	Asignar mode del Render
 					app_modo = modo;
 
-				}, tiempo_transiciones_adicional );
+				}, tiempo_transiciones );
 			}
 			else
 			{
@@ -1342,7 +1241,7 @@
 						render_mesa_1.innerHTML = ''
 					}
 
-				}, tiempo_transiciones_adicional );
+				}, tiempo_transiciones );
 			}
 
 			mesa_1_historico = 0
@@ -1368,7 +1267,7 @@
 				//	Asignar mode del Render
 					app_modo = modo;
 
-				}, tiempo_transiciones_adicional );
+				}, tiempo_transiciones );
 			}
 			else
 			{
@@ -1384,7 +1283,7 @@
 						render_mesa_2.innerHTML = ''
 					}
 
-				}, tiempo_transiciones_adicional );
+				}, tiempo_transiciones );
 			}
 
 		//	if( mesa_totales_estado != true && mesa_id == null )
@@ -1412,28 +1311,28 @@
 	//	Obtener información del Partido
 		obtener_zona_region : function ( id )
 		{
-			let region = objeto_regiones.find( obj => obj.id === Number(id) );
+			const region = objeto_regiones.find( obj => obj.id === Number(id) );
 			return region.nombre;
 		},
 
 	//	Obtener información del Partido
 		obtener_zona_comuna : function ( id )
 		{
-			let comuna = objeto_comunas.find( obj => obj.id === Number(id) );
+			const comuna = objeto_comunas.find( obj => obj.id === Number(id) );
 			return comuna.nombre;
 		},
 
 	//	Obtener información del Partido
 		obtener_partido : function ( id )
 		{
-			let partido = objeto_partidos.find( obj => obj.id === id );
+			const partido = objeto_partidos.find( obj => obj.id === id );
 			return partido.sigla;
 		},
 
 	//	Obtener información del Pacto
 		obtener_pacto : function ( id )
 		{
-			let pacto = objeto_pactos.find( obj => obj.id === id );
+			const pacto = objeto_pactos.find( obj => obj.id === id );
 			return pacto.letra;
 		},
 

@@ -20,9 +20,6 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>cis.listado.css<?php echo $_CONF_VERSION; ?>"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>cis.formulario.css<?php echo $_CONF_VERSION; ?>"/>
 
-<!--	Librerias Jquery -->
-		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>jquery.timeago.js<?php echo $_CONF_VERSION; ?>"></script>
-
 <!--	Librerias LiveBox -->
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>livebox.js<?php echo $_CONF_VERSION; ?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>livebox.css<?php echo $_CONF_VERSION; ?>"/>
@@ -45,16 +42,10 @@
 				userId			:	"<?php echo $_PUBNUB_USER_ID; ?>"
             });
 
-		//	Iniciar al Cargar
-			$(function()
-			{
-			//	Iniciar funcionalidad TimeAgo
-				$("time.timeago").timeago();
-			});
-		
 		</script>
 		
 <!--	Funcionalidad PubNub -->
+		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>vav.mesas.actualizacion.js<?php echo $_CONF_VERSION; ?>"></script>
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>pubNub.mesas.visualizador.js<?php echo $_CONF_VERSION; ?>"></script>
 
 		<style type="text/css">
@@ -95,7 +86,14 @@
 					<header class="titulo-seccion no-border">
 						<div class="icono"><i class="fas fa-poll"></i></div>
 						<h2 class="icono-on">Visualizador Mesas</h2>
-						<h3 class="icono-on">Listado completo de mesas disponibles</h3>
+						<h3 class="icono-on">Listado de mesas para despliegue</h3>
+						<div class="total-mesas">
+							<div id="total-mesas-numero" class="total">15</div>
+							<div>
+								<div id="total-mesas-valor" class="mesas">Mesas</div>
+								<div class="detalles">Disponibles</div>
+							</div>
+						</div>
 						<div class="opciones">
 							<div class="input">
 								<label>
@@ -124,28 +122,18 @@
 			$mesa_tipo_titulo			=	obtener_titulo($_MESA->mesa_tipo);
 			$mesa_tipo_icono			=	obtener_icono($_MESA->mesa_tipo);
 ?>
-				<article class="filtro-mesa mesa bg-blanco box-shadow bordes-radius <?php echo $_MESA->mesa_tipo; ?>" id="<?php echo $_OBJETO_TIPO.$_MESA->mesa_id; ?>" data="<?php echo $_MESA->mesa_id; ?>" date="<?php echo $_MESA->mesa_cambio; ?>">
-					<div class="cambios bordes-radius"></div>
-					<div class="destacado">
-						<i id="M<?php echo $_MESA->mesa_id; ?>" class="fas fa-mobile-alt"></i>
-						<i id="D<?php echo $_MESA->mesa_id; ?>" class="fas fa-laptop"></i>
-<?php
-					if($_MESA->mesa_destacada == 1)
-					{
-?>
-						<i class="fas fa-star tipsy-top"></i>
-<?php
-					}
-					if($_MESA->mesa_estado == 2)
-					{
-?>
-						<i class="fas fa-lock tipsy-top"></i>
-<?php
-					}
-?>
-					</div>
+				<article class="mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa <?php echo $_MESA->mesa_tipo; ?>"
+				id="<?php echo $_OBJETO_TIPO.$_MESA->mesa_id; ?>"
+				mesa="<?php echo $_MESA->mesa_id; ?>"
+				created="<?php echo $_MESA->mesa_publicado; ?>"
+				date="<?php echo strtotime($_MESA->mesa_cambio); ?>">
+					<div class="mesa-nueva">NUEVA</div>
+					<div id="mesa-voto-<?php echo $_MESA->mesa_id; ?>" class="cambios bordes-radius"></div>
 					<header>
-						<h2><i class="fas fa-hashtag"></i> <?php echo $_MESA->mesa_id; ?></h2>
+						<h2 class="<?php echo ($_MESA->mesa_destacada == 1) ? 'importante' : ''; ?>">
+							<i class="fas <?php echo ($_MESA->mesa_destacada == 1) ? 'fa-star' : 'fa-hashtag'; ?>"></i>
+							<?php echo $_MESA->mesa_id; ?> 
+						</h2>
 						<h1 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_usuario"><i class="fas fa-user"></i> <?php echo $_MESA->usuario_nombre; ?></h1>
 						<div class="tipo"><?php echo $mesa_tipo_titulo; ?></div>
 						<div class="zona"><?php echo $_MESA->mesa_zona_titulo; ?></div>
@@ -176,7 +164,9 @@
 					}
 ?>
 						<h5 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_ciudad"><i class="fas fa-globe-americas"></i> <?php echo $_MESA->mesa_comuna; ?></h5>
-						<h6 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_cambio"><time class="timeago" data="<?php echo $_MESA->mesa_id; ?>" datetime="<?php echo $_MESA->mesa_cambio; ?>"></time></h6>
+						<h6 class="line-1" id="<?php echo $_MESA->mesa_id; ?>_mesa_cambio">
+							<time class="timeago line-1" data="<?php echo $_MESA->mesa_id; ?>" datetime="<?php echo strtotime($_MESA->mesa_cambio); ?>"></time>
+						</h6>
 					</header>
 				</article>
 <?php

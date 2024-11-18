@@ -3,19 +3,12 @@
 //	Configuracion Inicial
 	include_once "configuracion.php";
 
-//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-//	Librerias Necesarias
-	require_once("$_FUNCIONES/usuarios.php");
-	require_once("$_FUNCIONES/filtros.php");
-	require_once("$_FUNCIONES/imagenes.php");
-	require_once("$_FUNCIONES/fechas.php");
-
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-				
 
 //	Configuracion del SEO
 	$_SEO				=	array
 	(
-		"TITLE"			=>	"TITLE",
+		"TITLE"			=>	"TV DISPLAY PREVIEW",
 		"DESCRIPCION"	=>	"DESCRIPCION",
 		"KEYWORDS"		=>	"KEYWORDS",
 		"IMAGE"			=>	"IMAGE",

@@ -37,7 +37,7 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DEL SITIO
 	$_APP_TITLE							=	"Elecciones Chile - 2024";
-	$_APP_DESCRIPTION					=	"Regionales y Municipales - Chilevisión";
+	$_APP_DESCRIPTION					=	"Segunda vuelta Gobernadores - Chilevisión";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DE LOS DIRECTORIOS
@@ -64,8 +64,8 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	INFORMACION DE LA APLICACION
 
-//	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.6.2";
+	$_CONF_VERSION						=	"?alpha.".time();
+//	$_CONF_VERSION						=	"?version.6.2";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES

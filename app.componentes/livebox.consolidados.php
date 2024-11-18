@@ -12,10 +12,7 @@
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="consolidado-tipo">
 					<div class="box-shadow-light" onclick="consolidados_tipo('G');" id="consolidado-tipo-G">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
-					<div class="box-shadow-light" onclick="consolidados_tipo('A');" id="consolidado-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
-					<noscript>
-						<div class="box-shadow-light off" id="mesa-tipo-S">🔴&nbsp;&nbsp;&nbsp;PRESIDENTE</div>
-					</noscript>
+					<div class="box-shadow-light off" id="consolidado-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
 				</div>
 			</article>
 			<article class="formulario bg-1">

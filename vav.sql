@@ -637,7 +637,18 @@ ALTER FUNCTION public.mesa_eliminar(in_mesa_id bigint) OWNER TO app_vav;
 -- Name: mesa_guardar(bigint, bigint, bigint, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: app_vav
 --
 
-CREATE FUNCTION mesa_guardar(in_mesa_id bigint, in_usuario_id bigint, in_mesa_estado bigint, in_mesa_comuna character varying, in_mesa_local character varying, in_mesa_numero character varying) RETURNS bigint
+DROP FUNCTION mesa_guardar;
+
+CREATE FUNCTION mesa_guardar(
+	in_mesa_id bigint,
+	in_usuario_id bigint,
+	in_mesa_estado bigint,
+	in_mesa_comuna character varying,
+	in_mesa_local character varying,
+	in_mesa_numero character varying,
+	in_mesa_publicado character varying,
+	)
+	RETURNS bigint
     LANGUAGE plpgsql
     AS $$
 
@@ -654,16 +665,12 @@ CREATE FUNCTION mesa_guardar(in_mesa_id bigint, in_usuario_id bigint, in_mesa_es
 		SET
 
 			usuario_id	= in_usuario_id,
-
 			mesa_estado = in_mesa_estado,
-
 			mesa_comuna = in_mesa_comuna,
-
 			mesa_local = in_mesa_local,
-
 			mesa_numero = in_mesa_numero,
-
-			mesa_cambio = now()
+			mesa_cambio = now(),
+			mesa_publicado = in_mesa_publicado
 
 		WHERE
 
@@ -836,7 +843,7 @@ ALTER FUNCTION public.mesa_obtener_datos(in_mesa_id bigint) OWNER TO postgres;
 -- Name: mesa_switch_listado(integer, integer); Type: FUNCTION; Schema: public; Owner: app_vav
 --
 
-CREATE FUNCTION mesa_switch_listado(in_limit integer, in_offset integer) RETURNS TABLE(mesa_id bigint, usuario_id bigint, mesa_tipo character varying, mesa_orden smallint, mesa_destacada smallint, mesa_estado smallint, mesa_zona bigint, mesa_zona_titulo character varying, mesa_comuna character varying, mesa_local character varying, mesa_numero character varying, mesa_votos_blancos smallint, mesa_votos_nulos smallint, mesa_cambio timestamp without time zone, mesa_creado timestamp without time zone, usuario_nombre character varying)
+CREATE FUNCTION mesa_switch_listado(in_limit integer, in_offset integer) RETURNS TABLE(mesa_id bigint, usuario_id bigint, mesa_tipo character varying, mesa_orden smallint, mesa_destacada smallint, mesa_estado smallint, mesa_zona bigint, mesa_zona_titulo character varying, mesa_comuna character varying, mesa_local character varying, mesa_numero character varying, mesa_cambio timestamp without time zone, mesa_publicado character varying, usuario_nombre character varying)
     LANGUAGE plpgsql
     AS $$
 	    
@@ -855,10 +862,8 @@ CREATE FUNCTION mesa_switch_listado(in_limit integer, in_offset integer) RETURNS
 			mesa.mesa_comuna,
 		    mesa.mesa_local,
 		    mesa.mesa_numero,
-		    mesa.mesa_votos_blancos,
-		    mesa.mesa_votos_nulos,
 			mesa.mesa_cambio,
-			mesa.mesa_creado,
+			mesa.mesa_publicado,
 			usuario.usuario_nombre
 	
 	    FROM
@@ -870,7 +875,7 @@ CREATE FUNCTION mesa_switch_listado(in_limit integer, in_offset integer) RETURNS
             mesa.mesa_estado = 1
 	
 	    ORDER BY
-	        mesa.mesa_cambio DESC
+	        mesa.mesa_publicado DESC
 	
 	    LIMIT in_limit OFFSET in_offset
 	    ;
@@ -1441,6 +1446,8 @@ CREATE FUNCTION swich_obtener_datos(in_swich_id bigint) RETURNS TABLE(swich_mesa
 		WHERE
 
 			swich.swich_id = in_swich_id
+
+		LIMIT 1
 
 	    ;
 
@@ -2187,7 +2194,8 @@ CREATE TABLE mesa (
     mesa_votos_blancos smallint DEFAULT 0 NOT NULL,
     mesa_votos_nulos smallint DEFAULT 0 NOT NULL,
     mesa_cambio timestamp without time zone DEFAULT now() NOT NULL,
-    mesa_creado timestamp without time zone DEFAULT now() NOT NULL
+    mesa_creado timestamp without time zone DEFAULT now() NOT NULL,
+	mesa_publicado timestamp without time zone DEFAULT now() NOT NULL,
 );
 
 

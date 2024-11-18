@@ -108,7 +108,7 @@
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
-	//	Obtener Mesas del Swich
+	//	Obtener Mesas actuales del Swich
 		case "swichMesasActuales"					:
 		{
 		//	Obtener Mesas almacenadas en el Swich
@@ -200,6 +200,90 @@
 		break;
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Obtener Mesas del Swich
+		case "swichMesasControlador"					:
+		{
+		//	Obtener la información de las Mesas almacenadas en el Swich
+			$QUERY									=	"
+		
+				SELECT * FROM mesa_switch_listado( 50 , 0 );
+		
+			";
+			
+		//	Ejecutar Query
+			$QUERY_MESAS							=	pg_query($CONF_DB_CONNECT, $QUERY);
+			
+			$MESA_ID = 0;
+
+		//	Generar listado
+			while($_MESA							=	pg_fetch_object($QUERY_MESAS))
+			{
+			//	Crear Array
+				$_OBJETO['mesas'][$MESA_ID]					=	array	
+				(
+					'mesa_id' => (int) $_MESA->mesa_id,
+					'mesa_estado' => $_MESA->mesa_estado,
+					'mesa_destacada' => $_MESA->mesa_destacada,
+					'mesa_tipo' => $_MESA->mesa_tipo,
+					'mesa_zona' => $_MESA->mesa_zona,
+					'mesa_zona_titulo' => $_MESA->mesa_zona_titulo,
+					'mesa_comuna' => $_MESA->mesa_comuna,
+					'mesa_local' => $_MESA->mesa_local,
+					'mesa_numero' => $_MESA->mesa_numero,
+					'mesa_cambio' => strtotime($_MESA->mesa_cambio),
+					'mesa_publicado' => (int) $_MESA->mesa_publicado,
+					'usuario_nombre' =>$_MESA->usuario_nombre
+				);
+
+				$MESA_ID++;
+			}
+
+			if( $MESA_ID == 0 )
+			{
+				$_OBJETO['mesas']					=	array();
+			}
+
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+		//	Construir SQL
+			$QUERY									=	"
+		
+				SELECT * FROM swich_obtener_datos( 1 );
+		
+			";
+		
+		//	Ejecutar Query
+			$QUERY_SWICH							=	pg_query($CONF_DB_CONNECT, $QUERY);
+		
+		//	Obtener información del Swich
+			$_SWICH									=	pg_fetch_object($QUERY_SWICH);
+
+			$_OBJETO['switch']						=	array	
+			(
+				'swich_modo' => (int) $_SWICH->swich_modo,
+				'swich_mesas' => (int) $_SWICH->swich_mesas,
+				'swich_mesa_1' => (int) $_SWICH->swich_mesa_1,
+				'swich_mesa_2' => (int) $_SWICH->swich_mesa_2,
+				'swich_mesa_3' => (int) $_SWICH->swich_mesa_3,
+				'swich_mesa_4' => (int) $_SWICH->swich_mesa_4
+			);
+			
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+		//	Encodear Resultados
+			$_JSON									=	json_encode($_OBJETO);
+
+		//	Asignar formato Json
+			header('Content-Type: application/json');
+
+		//	Generar Json con los Datos
+			echo $_JSON;
+		}
+		break;
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
 
 	//	Obtener Mesas del Swich
 		case "swichQuadMesasActuales"					:

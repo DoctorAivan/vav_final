@@ -131,6 +131,17 @@
 			$mesa_local								=	filtrarVAR($_POST['mesa_local']);
 			$mesa_numero							=	filtrarVAR($_POST['mesa_numero']);
 		
+			$mesa_publicado = '';
+
+			if( $mesa_estado == 1 )
+			{
+				$mesa_publicado = time();
+			}
+			else
+			{
+				$mesa_publicado = 0;
+			}
+
 		//	Construir SQL
 			$QUERY									=	"
 			
@@ -142,7 +153,8 @@
 					$mesa_estado,
 					'$mesa_comuna',
 					'$mesa_local',
-					'$mesa_numero'
+					'$mesa_numero',
+					'$mesa_publicado'
 				);
 			
 			";
