@@ -181,7 +181,7 @@
 									<h2 class="${ mesa.mesa_destacada == 1 ? 'importante' : '' }">
 										<i class="fas ${ mesa.mesa_destacada == 1 ? 'fa-star' : ' fa-hashtag'}"></i> ${mesa.mesa_id}
 									</h2>
-									<div class="tipo">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
+									<div class="tipo">🔴&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
 									<div class="zona">${mesa.mesa_zona_titulo}</div>
 									<h3 class="line-1" id="${mesa.mesa_id}_mesa_nombre">${mesa.mesa_local}</h3>
 									<h4 class="line-1" id="${mesa.mesa_id}_mesa_numero">${mesa.mesa_numero}</h4>

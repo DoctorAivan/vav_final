@@ -53,7 +53,7 @@
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -601,7 +601,7 @@
 				objeto.innerHTML = `<div class="candidato-imagen">
 										<div class="candidato-imagen-marco">
 											<img
-												src="${path_imagenes_candidatos}${candidato.id}.png"
+												src="${path_imagenes_candidatos}${candidato.id}.webp"
 												class="candidato-imagen-src"
 											/>
 										</div>
@@ -1009,7 +1009,7 @@
 				objeto.innerHTML = `<div class="candidato-imagen">
 										<div class="candidato-imagen-marco">
 											<img
-												src="${path_imagenes_candidatos}${candidato.id}.png"
+												src="${path_imagenes_candidatos}${candidato.id}.webp"
 												class="candidato-imagen-src"
 											/>
 										</div>
@@ -1366,7 +1366,7 @@
 		const version = '1.1.3';
 
 	//	Construir ruta de la imagen
-		const objeto_imagen = path_imagenes_candidatos + objeto.dataset.objeto + '.png?v=' + version;
+		const objeto_imagen = path_imagenes_candidatos + objeto.dataset.objeto + '.webp?v=' + version;
 
 	//	Solicitar la imagen
 		await fetch( objeto_imagen , { method: 'GET' }).then(res =>

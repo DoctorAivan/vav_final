@@ -8,7 +8,7 @@
 //	Configuracion del SEO
 	$_SEO				=	array
 	(
-		"TITLE"			=>	"TV DISPLAY PREVIEW",
+		"TITLE"			=>	"TV DISPLAY PREVIEW - VAV",
 		"DESCRIPCION"	=>	"DESCRIPCION",
 		"KEYWORDS"		=>	"KEYWORDS",
 		"IMAGE"			=>	"IMAGE",

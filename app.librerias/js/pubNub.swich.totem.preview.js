@@ -54,7 +54,7 @@
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -374,7 +374,7 @@
 				objeto.innerHTML = `<div class="candidato-imagen">
 										<div class="candidato-imagen-marco">
 											<img
-												src="${path_imagenes_candidatos}${candidato.id}.png"
+												src="${path_imagenes_candidatos}${candidato.id}.webp"
 												class="candidato-imagen-src"
 											/>
 										</div>
@@ -742,7 +742,7 @@
 				objeto.innerHTML = `<div class="candidato-imagen">
 										<div class="candidato-imagen-marco">
 											<img
-												src="${path_imagenes_candidatos}${candidato.id}.png"
+												src="${path_imagenes_candidatos}${candidato.id}.webp"
 												class="candidato-imagen-src"
 											/>
 										</div>

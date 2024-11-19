@@ -21,7 +21,7 @@
 //	Configuracion del SEO
 	$_SEO				=	array
 	(
-		"TITLE"			=>	"VISUALIZADOR - VAV",
+		"TITLE"			=>	"VISUALIZADOR PÚBLICO - VAV",
 		"DESCRIPCION"	=>	"DESCRIPCION",
 		"KEYWORDS"		=>	"KEYWORDS",
 		"IMAGE"			=>	"IMAGE",

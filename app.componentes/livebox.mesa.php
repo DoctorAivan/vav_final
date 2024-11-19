@@ -11,11 +11,8 @@
 					<h2>Selecciona el tipo de votación <span>Obligatorio</span></h2>
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="mesa-tipo">
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('G');" id="mesa-tipo-G">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
-					<div class="box-shadow-light off" id="mesa-tipo-A">🔴&nbsp;&nbsp;&nbsp;ALCALDES</div>
-					<noscript>
-						<div class="box-shadow-light off" id="mesa-tipo-S">🔴&nbsp;&nbsp;&nbsp;PRESIDENTE</div>
-					</noscript>
+					<div class="box-shadow-light" onclick="mesa_nueva_tipo('G');" id="mesa-tipo-G">🔴&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
+					<div class="box-shadow-light off" id="mesa-tipo-A">🔵&nbsp;&nbsp;&nbsp;ALCALDES</div>
 				</div>
 			</article>
 			<article class="formulario bg-1">

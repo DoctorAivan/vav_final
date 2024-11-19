@@ -1,13 +1,12 @@
 .tipsy
 {
 	position:absolute;
-	padding:5px;
+	padding:10px;
 	z-index:999;
 }
-
 .tipsy-inner
 {
-	background-color:#000;
+	background-color:#000000ea;
 	color:#FFF;
 	font-size: 0.9rem;
 	line-height: 1.2rem;
@@ -16,6 +15,7 @@
 	padding:12px 17px 13px 17px;
 	border-radius: 10px;
 	text-align:left;
+	box-shadow: 0px 0px 12px #ffd90020;
 }
 	.tipsy-inner h2
 	{
@@ -35,29 +35,29 @@
 	width:0;
 	height:0;
 	line-height:0;
-	border:5px dashed #000;
+	border:10px dashed #000000ea;
 }
 
 .tipsy-arrow-n {
-	border-bottom-color:#000;
+	border-bottom-color:#000000ea;
 }
 
 .tipsy-arrow-s {
-	border-top-color:#000;
+	border-top-color:#000000ea;
 }
 
 .tipsy-arrow-e {
-	border-left-color:#000;
+	border-left-color:#000000ea;
 }
 
 .tipsy-arrow-w {
-	border-right-color:#000;
+	border-right-color:#000000ea;
 }
 
 .tipsy-n .tipsy-arrow {
 	top:0;
 	left:50%;
-	margin-left:-5px;
+	margin-left:-10px;
 	border-bottom-style:solid;
 	border-top:none;
 	border-left-color:transparent;
@@ -66,7 +66,7 @@
 
 .tipsy-nw .tipsy-arrow {
 	top:0;
-	left:10px;
+	left:15px;
 	border-bottom-style:solid;
 	border-top:none;
 	border-left-color:transparent;
@@ -75,7 +75,7 @@
 
 .tipsy-ne .tipsy-arrow {
 	top:0;
-	right:10px;
+	right:15px;
 	border-bottom-style:solid;
 	border-top:none;
 	border-left-color:transparent;
@@ -85,7 +85,7 @@
 .tipsy-s .tipsy-arrow {
 	bottom:0;
 	left:50%;
-	margin-left:-5px;
+	margin-left:-10px;
 	border-top-style:solid;
 	border-bottom:none;
 	border-left-color:transparent;
@@ -103,7 +103,7 @@
 
 .tipsy-se .tipsy-arrow {
 	bottom:0;
-	right:10px;
+	right:15px;
 	border-top-style:solid;
 	border-bottom:none;
 	border-left-color:transparent;
@@ -113,7 +113,7 @@
 .tipsy-e .tipsy-arrow {
 	right:0;
 	top:50%;
-	margin-top:-5px;
+	margin-top:-10px;
 	border-left-style:solid;
 	border-right:none;
 	border-top-color:transparent;
@@ -123,7 +123,7 @@
 .tipsy-w .tipsy-arrow {
 	left:0;
 	top:50%;
-	margin-top:-5px;
+	margin-top:-10px;
 	border-right-style:solid;
 	border-left:none;
 	border-top-color:transparent;

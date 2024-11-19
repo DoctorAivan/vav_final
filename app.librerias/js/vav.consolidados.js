@@ -27,11 +27,11 @@ function consolidados_render()
 //  Validar Tipo
     if( consolidados_tipo == 'G' )
     {
-        consolidados_render_tipo.innerHTML = '🟡&nbsp;&nbsp;GOBERNADORES';
+        consolidados_render_tipo.innerHTML = '🔴&nbsp;&nbsp;GOBERNADORES';
     }
     else if( consolidados_tipo == 'A' )
     {
-        consolidados_render_tipo.innerHTML = '🔴&nbsp;&nbsp;ALCALDES';
+        consolidados_render_tipo.innerHTML = '🔵&nbsp;&nbsp;ALCALDES';
     }
     else
     {

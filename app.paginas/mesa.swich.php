@@ -119,15 +119,14 @@
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🟡</div>
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-A" title="Alcaldes" onclick="mesa_filtrar('A');">🔴</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🔴</div>
 						</div>
 					</header>
 				</section>
 			</section>
 			<section class="main-cnt swich">
 				<section class="swich-l">
-					<section class="swich-l-scroll relacionados cols x4" id="mesas">
+					<section class="swich-l-scroll relacionados" id="mesas">
 <?php
 				//	ID del Listado
 					$_ID								=	1;
@@ -241,7 +240,7 @@
 								<h2>Cantidad de Mesas</h2>
 								<div onclick="swichMesas(0);" id="swich-opcion-mesas-0" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template Sin Mesas</h2><p>Se ocultaran todas las Mesas</p>"><i class="fas fa-ban"></i></div>
 								<div onclick="swichMesas(1);" id="swich-opcion-mesas-1" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template 1 Mesa</h2><p>Se mostrara en pantalla 1 Mesa</p>">1</div>
-								<div onclick="swichMesas(2);" id="swich-opcion-mesas-2" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template 2 Mesa</h2><p>Se mostrara en pantalla 2 Mesas</p>">2</div>
+								<div onclick="swichMesas(2);" id="swich-opcion-mesas-2" class="bordes-radius box-shadow-light of tipsy-top" title="<h2>Template 2 Mesas</h2><p>Se mostraran en pantalla 2 Mesas</p>">2</div>
 							</div>
 							<div class="swich-separador"></div>
 							<div class="swich-controles">
@@ -254,7 +253,8 @@
 
 						<div class="swich-r-box swich-nav box-shadow">
 							<div class="swich-mesas" id="swich-opcion-mesas">
-								<h2>Configuración de consolidados</h2>
+								<h1>Configuración de consolidados</h1>
+								<h2>Selecciona una región para desplegar los resultados</h2>
 								<div id="consolidados-render" class="consolidados bordes-radius" onclick="consolidados_asignar();">
 									<span id="consolidados-render-tipo" class="tipo">🔴&nbsp;&nbsp;GOBERNADOR</span>
 									<hr class="separador"><i class="fas fa-chevron-right"></i></hr>
@@ -266,8 +266,8 @@
 								<div>
 									<div class="swich-consolidados-titulo">Posición</div>
 									<div class="swich-consolidados-items">
-										<div id="consolidados-posicion-l" class="item on" onclick="posicionConsolidados('l');"><i class="fas fa-arrow-left"></i></div>
-										<div id="consolidados-posicion-r" class="item of" onclick="posicionConsolidados('r');"><i class="fas fa-arrow-right"></i></div>
+										<div id="consolidados-posicion-l" class="item on tipsy-top" onclick="posicionConsolidados('l');" title="<h2>A la izquierda</h2><p>Será publicado el modulo consolidados</p>"><i class="fas fa-arrow-left"></i></div>
+										<div id="consolidados-posicion-r" class="item of tipsy-top" onclick="posicionConsolidados('r');" title="<h2>A la derecha</h2><p>Será publicado el modulo consolidados</p>"><i class="fas fa-arrow-right"></i></div>
 									</div>
 								</div>
 								<div>

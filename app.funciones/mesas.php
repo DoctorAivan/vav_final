@@ -20,11 +20,11 @@
     {
         if( $icono == 'G' )
         {
-            return '🟡&nbsp;&nbsp;&nbsp;GOBERNADORES';
+            return '🔴&nbsp;&nbsp;&nbsp;GOBERNADORES';
         }
         else if( $icono == 'A' )
         {
-            return '🔴&nbsp;&nbsp;&nbsp;ALCALDES';
+            return '🔵&nbsp;&nbsp;&nbsp;ALCALDES';
         }
         else if( $icono == 'P' )
         {

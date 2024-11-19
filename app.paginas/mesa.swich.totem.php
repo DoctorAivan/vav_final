@@ -2,6 +2,10 @@
 <html lang="es">
 	<head>
 
+		<!-- Informacion General -->
+		<title><?php echo $_SEO['TITLE']; ?></title>
+		<meta name="description" content="<?php echo $_SEO['DESCRIPCION']; ?>"/>
+
 		<!-- Librerias PubNub -->
         <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.8.2.8.js"></script>
 
