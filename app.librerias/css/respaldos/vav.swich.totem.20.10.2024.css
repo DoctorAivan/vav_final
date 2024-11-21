@@ -169,6 +169,7 @@ body
 	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
 	*/
 	background: transparent;
+	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
 	overflow: hidden;
 }
 	.render-preview
@@ -250,7 +251,6 @@ body
 			}
 			.consolidados .header h1
 			{
-				position: relative;
 				color: var(--candidato-nombre);
 				font-family: 'Santral_Book';
 				letter-spacing: 3px;
@@ -260,26 +260,14 @@ body
 			}
 			.consolidados .header h2
 			{
-				position: relative;
-				float: left;
-				color: var(--gobernador-color-invertido);
-				background: var(--gobernador-color);
+				color: var(--gobernador-color);
 				font-family: 'Santral_Bold';
-				font-size: 2.1rem;
-				line-height: 2.1rem;
-				margin: 0 0 9px 25px;
-				padding: 8px 12px 0px 12px;
+				font-size: 1.6rem;
+				line-height: 1.6rem;
+				padding: 0 0 4px 25px;
 			}
-				.consolidados .header h2 span
-				{
-					font-family: 'Santral_Book';
-					margin: 0 0 0 3px;
-				}
 			.consolidados .header h3
 			{
-				position: relative;
-				float: left;
-				width: 100%;
 				color: var(--candidato-nombre);
 				font-size: 1.6rem;
 				line-height: 1.6rem;
@@ -288,7 +276,6 @@ body
 			}
 			.consolidados .header .totales
 			{
-				position: relative;
 				font-family: 'Santral_ExtraBold';
 				font-size: 1.4rem;
 				line-height: 1.4rem;
@@ -422,7 +409,7 @@ body
 					{
 						position: relative;
 						width: 100%;
-						padding: 5px 0 2px 20px;
+						padding: 5px 0 7px 20px;
 					}
 						.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor
 						{
@@ -547,16 +534,13 @@ body
 		{
 			z-index: 1;
 			position: relative;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 10px 10px;
 			width: 100%;
 			height: 165px;
 		}
 			.tottem .box .candidatos .candidato
 			{
-				position: relative;
-				width: 100%;
+				position: absolute;
+				width: var(--candidate-item-width);
 				display: grid;
 				grid-template-columns: 115px 1fr;
 				transition: all var(--transition-time) ease-in-out;
@@ -635,7 +619,7 @@ body
 							display: grid;
 							grid-template-columns: 1fr 1fr;
 							background: var(--color-white);
-							margin: 5px 20px 6px 0;
+							margin: 5px 20px 11px 0;
 							transition: all var(--transition-time) ease-in-out;
 							text-align: center;
 						}
@@ -729,14 +713,35 @@ body
 	.tottem .box .candidatos .order-1
 	{
 		z-index: 7;
+		left: calc( var(--candidate-item-width) * 0 );
+		animation: orden-1-kf 0s ease-out 1 forwards;
 	}
 	.tottem .box .candidatos .order-2
 	{
 		z-index: 6;
+		left: calc( var(--candidate-item-width) * 1 + 10px );
+		animation: orden-2-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-3
+	{
+		z-index: 5;
+		left: calc( var(--candidate-item-width) * 2 + 10px );
+		animation: orden-3-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-4
+	{
+		z-index: 4;
+		left: calc( var(--candidate-item-width) * 3 + 25px);
+		animation: orden-4-kf 0s ease-out 1 forwards;
 	}
 
 	@keyframes orden-1-kf { 1% { z-index: 7 } }
 	@keyframes orden-2-kf { 1% { z-index: 6 } }
+	@keyframes orden-3-kf { 1% { z-index: 5 } }
+	@keyframes orden-4-kf { 1% { z-index: 4 } }
+	@keyframes orden-5-kf { 1% { z-index: 3 } }
+	@keyframes orden-6-kf { 1% { z-index: 2 } }
+	@keyframes orden-7-kf { 1% { z-index: 1 } }
 
 /*
 	ANIMACIONES

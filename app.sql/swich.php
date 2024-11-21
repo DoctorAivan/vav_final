@@ -153,14 +153,11 @@
 					(
 						'objeto'					=>	(int) $_MESA_CANDIDATOS->voto_id,
 						'id'						=>	(int) $_MESA_CANDIDATOS->candidato_id,
+						'orden'						=>	(int) $_MESA_CANDIDATOS->candidato_orden,
 						'nombres'					=>	$_MESA_CANDIDATOS->candidato_nombres,
 						'apellidos'					=>	$_MESA_CANDIDATOS->candidato_apellidos,
-						'ind'						=>	$_MESA_CANDIDATOS->candidato_independiente,
-						'genero'					=>	$_MESA_CANDIDATOS->candidato_genero,
 						'votos'						=>	(int) $_MESA_CANDIDATOS->voto_total,
-						'partido'					=>	$_MESA_CANDIDATOS->partido_codigo,
 						'partido_id'				=>	(int) $_MESA_CANDIDATOS->partido_id,
-						'pacto'						=>	$_MESA_CANDIDATOS->pacto_codigo,
 						'pacto_id'					=>	(int) $_MESA_CANDIDATOS->pacto_id
 					);
 				}
@@ -201,7 +198,7 @@
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
-	//	Obtener Mesas del Swich
+	//	Obtener Mesas Controlador Switch
 		case "swichMesasControlador"					:
 		{
 		//	Obtener la información de las Mesas almacenadas en el Swich
@@ -283,7 +280,6 @@
 		break;
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-
 
 	//	Obtener Mesas del Swich
 		case "swichQuadMesasActuales"					:
@@ -446,7 +442,7 @@
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
-	//	Obtener Mesas del Swich
+	//	Obtener Mesas actuales del Swich Respaldo
 		case "swichMesasActualesR"					:
 		{
 		//	Obtener Mesas almacenadas en el Swich

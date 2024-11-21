@@ -540,7 +540,7 @@
 		//	const mesa_totales_votos =  mesa_totales_candidatos.reduce((total, candidato) => total + candidato.votos, 0);
 
 		//	Actualizar el DOM
-			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }`
+			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} <span>${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }</span>`
 		//	mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
 		},
 
@@ -567,7 +567,7 @@
 			div_mesa.innerHTML =   `<div class="header">
 										<div class="header-cnt">
 											<h2 id="mesa-totales-detalles">
-												${mesa_totales_mesas} ${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }
+												${mesa_totales_mesas} <span>${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }</span>
 											</h2>
 											<h3 id="mesa-totales-zona">${totales_zona}</h3>
 										</div>
@@ -993,7 +993,7 @@
 			let id_orden = 1;
 
 		//	Ordenar los candidatos por sus votos
-			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+		//	mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
 
         //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
@@ -1039,6 +1039,9 @@
 			//	Incrementar el ID de la lista
 				id_orden++
             });
+
+		//	Ordenar Votos de los candidatos
+			App.ordenar_votos(mesa.candidatos);
 
 		//	Asignar posición 2 en pantalla
 			if( posicion == 1 )
@@ -1121,7 +1124,7 @@
 			let id_orden = 1;
 
 		//	Ordenar los votos de la mesa
-			candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+			candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.orden > b.orden) ? 1 : -1) : -1 )
 
 		//	Iterar listado de candidatos
 			candidatos.forEach(candidato =>
