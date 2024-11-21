@@ -250,6 +250,9 @@
 				}
 				else
 				{
+				//	Detener el Intervalo de actualización
+					App.totales_actualizacion_detener();
+
 				//	Iniciar animación de salida
 					App.animar_salida_totales();
 
@@ -289,6 +292,67 @@
 //	Constructor de la Aplicación
 	const App =
 	{
+	//	Iniciar intervalo de actualización de los totales
+		totales_actualizacion_iniciar : () =>
+		{
+			if (mesa_totales_timer === null)
+			{
+				mesa_totales_timer = setInterval(App.totales_actualizar, mesa_totales_intervalo);
+			}
+		},
+
+	//	Detener intervalo de actualización de los totales
+		totales_actualizacion_detener : () =>
+		{
+			if (mesa_totales_timer !== null)
+			{
+				clearInterval(mesa_totales_timer);
+				mesa_totales_timer = null;
+			}
+		},
+
+	//	Generar interpolación entre el valor actual y final
+		totales_actualizacion_votos : (element, newValue, duration) =>
+		{
+		//	Obtener del DOM el valor actual
+			const startValue = Number( element.innerText.replace('.','') );
+			const newValueFormated = Number( newValue )
+			
+		//	Validar cambio en los votos
+			if( startValue === newValueFormated )
+			{
+				return
+			}
+			else
+			{
+				const increment = newValue - startValue;
+				const startTime = performance.now();
+			
+				function update(currentTime)
+				{
+					const elapsedTime = currentTime - startTime;
+					const progress = Math.min(elapsedTime / duration, 1);
+					const currentValue = Math.round(startValue + increment * progress);
+
+					element.innerText = App.numero(currentValue);
+					
+					if (progress < 1)
+					{
+						requestAnimationFrame(update);
+					}
+					else
+					{
+						element.innerText = App.numero(currentValue);
+						return
+					}
+				}
+			
+				requestAnimationFrame(update);
+			}
+		},
+
+	//	-			-			-			-			-			-			-			-			-			-			-			-			
+
 	//	Mesa con resultados totales
 		totales : async function( tipo , zona )
 		{
@@ -317,6 +381,142 @@
 			}
 		},
 
+	//	Actualizar Mesa con resultados totales
+		totales_actualizar : async function()
+		{
+		//	Solicitar la mesa asignada
+			const api = await fetch( path_app + `/swich/mesas-totales/${mesa_totales_tipo}-${mesa_totales_zona}` )
+			.then( res => res.json() )
+			.then( res => res || [] );
+
+			mesa_totales_mesas = api.mesas
+			mesa_totales_votos = api.votos
+
+		//	Almacenar listado de candidatos para gestionar actualizacion
+			mesa_totales_candidatos = api.candidatos
+
+		//	Validar que existan mesas en la Zona
+			if( api.mesas > 0 )
+			{
+				if( mesa_totales_estado )
+				{
+					App.ordenar_votos_totales();
+				}
+			}
+		},
+
+	//	Asignar votos a la mesa de consolidados
+		voto_totales : function( candidato , voto , accion )
+		{
+		//	Obtener el candidato desde el listado
+			let candidato_obj = mesa_totales_candidatos.find(({ id }) => id === candidato);
+
+		//	Validar que el candidato exista en el DOM
+			if( candidato_obj )
+			{
+			//	Actualizar un voto
+				if( accion == 'g' )
+				{
+				//	Actualizar mesa totales
+					App.totales_actualizar()
+					return
+				}
+
+			//	Sumar un voto
+				else if( accion == 's' )
+				{
+				//	Actualizar el voto en el listado
+					candidato_obj.votos += 1
+
+				//	Actualizar el total de votos
+					mesa_totales_votos += 1
+				}
+
+			//	Restar un voto
+				else if( accion == 'r' )
+				{
+				//	Validar que el voto no sea cero
+					if( voto != 0 )
+					{
+					//	Actualizar el voto en el listado
+						candidato_obj.votos -= 1
+
+					//	Actualizar el total de votos
+						mesa_totales_votos -= 1
+					}
+					else
+					{
+					//	Actualizar mesa totales
+						App.totales_actualizar()
+						return
+					}
+				}
+
+				const candidato_div_voto_animacion = document.querySelector('#candidato-' + candidato + ' > div.candidato-info > div.candidato-votos-animacion');
+				candidato_div_voto_animacion.classList.add('animar_voto');
+
+			//	Reiniciar animación del voto
+				setTimeout(function()
+				{
+					candidato_div_voto_animacion.classList.remove('animar_voto');
+				}, tiempo_transiciones);
+
+			//	Ordenar candidatos
+				App.ordenar_votos_totales();
+			}
+		},
+
+	//	Ordenar Votos de los candidatos
+		ordenar_votos_totales : function ()
+		{
+		//	Ordenar los candidatos por sus votos
+			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+
+		//	Orden del candidato
+			let id_orden = 1;
+
+		//	Iterar listado de candidatos
+			mesa_totales_candidatos.forEach(candidato =>
+			{
+			//  Get object from DOM
+				const candidato_div = document.getElementById(`candidato-${candidato.id}`);
+				candidato_div.classList = `candidato order-${id_orden}`;
+
+			//	Obtener valor del voto
+				const candidato_voto_valor = document.getElementById(`candidato-${candidato.id}-votos`);
+
+			//	Animar votos
+				App.totales_actualizacion_votos(candidato_voto_valor , Number( candidato.votos ) , 1000 );
+
+			//	Validar Posicion de los Objetos
+				if( id_orden < 3 )
+				{
+					id_orden++	
+				}
+				else
+				{
+					id_orden = 4
+				}
+			});
+
+		//	Calcular el total de votos
+			App.calcular_votos_totales();
+		},
+
+	//	Calcular el total de votos
+		calcular_votos_totales : function ()
+		{
+		//	Obtener contenedor de los totales
+			const mesa_totales_detalles = document.getElementById('mesa-totales-detalles');
+			
+		//	Calcular el total de Votos
+		//	const mesa_totales_votos =  mesa_totales_candidatos.reduce((total, candidato) => total + candidato.votos, 0);
+
+		//	Actualizar el DOM
+			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} <span>${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }</span>`
+		//	mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
+		},
+
 	//	Dibujar la mesa en el DOM
 		totales_draw : function()
 		{
@@ -324,7 +524,7 @@
 			const totales_zona = App.obtener_zona_region( mesa_totales_zona );
 
 		//  DIV render en el DOM
-			const render	=	document.getElementById('render-mesa-totales' );
+			const render = document.getElementById('render-mesa-totales' );
 
 		//	Vaciar el contenedor
 			render.innerHTML = '';
@@ -409,6 +609,43 @@
 			App.animar_entrada_totales();
 		},
 
+	//	Cambiar el tamaño de texto
+		validar_largo_zona : function(zona)
+		{
+		//	Obtener el elemento que contiene el texto
+			const elemento = document.getElementById("mesa-totales-zona");
+		
+		//	Contar el largo del string
+			const largoTexto = zona.length;
+
+		//	Validar largo de la zona
+			if (largoTexto <= 8)
+			{
+				elemento.style.fontSize = "2.4rem";
+				elemento.style.lineHeight = "2.4rem";
+			}
+			else if (largoTexto <= 10)
+			{
+				elemento.style.fontSize = "2.3rem";
+				elemento.style.lineHeight = "2.3rem";
+			}
+			else if (largoTexto <= 12)
+			{
+				elemento.style.fontSize = "2.2rem";
+				elemento.style.lineHeight = "2.2rem";
+			}
+			else if (largoTexto <= 14)
+			{
+				elemento.style.fontSize = "2.1rem";
+				elemento.style.lineHeight = "2.1rem";
+			}
+			else
+			{
+				elemento.style.fontSize = "1.75rem";
+				elemento.style.lineHeight = "1.75rem";
+			}
+		},
+
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()	
 		{
@@ -488,6 +725,9 @@
 				}, 200 );
 			}
 
+		//	Iniciar el intervalo de actualización
+			App.totales_actualizacion_iniciar();
+			
 		//	Set estado del total
 			mesa_totales_estado = true;
 		},
@@ -929,12 +1169,12 @@
 				setTimeout(function()
 				{
 					render_mesa_2.classList.add('transition-on')
-	
+
 				//	Asignar Posiciones en el eje X
 					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
 					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
 					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
-	
+
 				}, 200 );
 			}
 		},
@@ -1029,7 +1269,7 @@
 			}
 		},
 
-//			-			-			-			-			-			-			-			-			-			-			-
+	//			-			-			-			-			-			-			-			-			-			-			-
 
 	//	Obtener información del tipo de Mesa
 		obtener_tipo_mesa : function ( tipo )
@@ -1079,5 +1319,50 @@
 		}
 	}
 
-//	Iniciar las Zonas
+	//	Validación de las Imagenes
+	const candidato_poster = async ( id ) =>
+	{
+		//	Actualizar votos en el DOM
+		const candidato_voto = document.getElementById(`mesa-${id}-candidatos`);
+
+	//	Recorrer las imagenes de los candidatos
+		Array.from(candidato_voto.querySelectorAll('.candidato-imagen-src')).forEach(function(e)
+		{
+			candidato_poster_crear( id , e.dataset.objeto );
+		});
+	}
+
+	//	Validar la imagen del Candidato
+	const candidato_poster_crear = async ( mesa , id ) =>
+	{
+	//	Obtener información del objeto
+		const objeto = document.getElementById('candidato-imagen-' + mesa + '-' + id);
+
+	//	Version de cache de las imagenes
+		const version = '1.1.3';
+
+	//	Construir ruta de la imagen
+		const objeto_imagen = path_imagenes_candidatos + objeto.dataset.objeto + '.webp?v=' + version;
+
+	//	Solicitar la imagen
+		await fetch( objeto_imagen , { method: 'GET' }).then(res =>
+		{
+			if ( res.ok )
+			{
+				objeto.src = objeto_imagen;
+				objeto.style.opacity = 1
+				objeto.dataset.load = true
+			}
+			else
+			{
+				objeto.src = path_imagenes_candidatos_error
+				objeto.style.opacity = 1
+				objeto.dataset.load = false
+
+				console.log( '[404]' , objeto.dataset.objeto , '-' , objeto.dataset.nombre );
+			}
+		});
+	}
+
+	//	Iniciar las Zonas
 	App.zone();
