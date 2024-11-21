@@ -20,6 +20,8 @@ var posicion_consolidados           =   'l';
 
 var estado_consolidados_animacion   =   false;
 
+var json_cache                      =   '2.2.2'
+
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 //	Iniciar al Cargar
@@ -32,7 +34,7 @@ $(function()
     mesa_filtrar( '' );
 
 //  Obtener Diccionario de Gobernadores
-    $.getJSON( path_app + '/app.librerias/zonas.json?v=1.6' , function( json )
+    $.getJSON( path_app + '/app.librerias/zonas.json?v=' + json_cache , function( json )
     {
     //  Alimentar objeto con las regiones
         objeto_regiones = json.regiones;

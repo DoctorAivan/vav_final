@@ -14,7 +14,7 @@
         },
         {
             "id": 3002,
-            "nombre": "ANTOFAGASTA",
+            "nombre": "REG. ANTOFAGASTA",
             "orden": 3,
             "romano": "II"
         },
@@ -32,7 +32,7 @@
         },
         {
             "id": 3005,
-            "nombre": "VALPARAÍSO",
+            "nombre": "REG. VALPARAÍSO",
             "orden": 6,
             "romano": "V"
         },
