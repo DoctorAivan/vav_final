@@ -73,7 +73,7 @@
 	const mesa_1_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '95px',
+				'x' : '65px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
@@ -85,7 +85,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '95px',
+				'x' : '65px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
@@ -96,12 +96,12 @@
 			}
 		}
 	}
-	
+
 //	Cordenadas de la Mesa 2
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1175px',
+				'x' : '1205px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
@@ -113,7 +113,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1175px',
+				'x' : '1205px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
