@@ -295,7 +295,10 @@
 			$_MESA_VOTOS						=	pg_fetch_object($QUERY_MESA_VOTOS);
 
 		//	Imprimir Salida
-			echo $_MESA_VOTOS->mesa_voto;
+		//	echo $_MESA_VOTOS->mesa_voto;
+			echo $mesa_id."\t";
+			echo $voto_id."\t";
+			echo $voto_total."\t";
 		}
 		break;
 

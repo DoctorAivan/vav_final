@@ -65,7 +65,7 @@
 //	INFORMACION DE LA APLICACION
 
 //	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.8.2";
+	$_CONF_VERSION						=	"?version.8.4";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES
@@ -96,6 +96,9 @@
 	$_URL_MESA_SWICH_CHROMA_PREVIEW		=	"$_APP/mesas/swich/chroma-preview/";
 	$_URL_MESA_SWICH_WALL				=	"$_APP/mesas/swich/wall/";
 	$_URL_MESA_OPERADOR					=	"$_APP/mesas/operador/";
+
+//	Simulador
+	$_URL_SIMULADOR_VOTOS				=	"$_APP/simulador-votos/";	
 
 //	Usuarios
 	$_URL_USUARIO_LISTADO				=	"$_APP/usuarios/";

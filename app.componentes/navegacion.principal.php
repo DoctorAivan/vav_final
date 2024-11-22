@@ -102,6 +102,12 @@
 					<span>Administrar&nbsp;Mesas</span>
 				</div>
 			</a>
+			<a href="<?php echo $_URL_SIMULADOR_VOTOS; ?>">
+				<div class="box">
+					<i class="fas fa-vial"></i>
+					<span>Simulador&nbsp;de&nbsp;Votos</span>
+				</div>
+			</a>
 			<a href="<?php echo $_URL_USUARIO_LISTADO; ?>">
 				<div class="box">
 					<i class="fas fa-users"></i>

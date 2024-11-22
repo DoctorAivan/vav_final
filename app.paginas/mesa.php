@@ -53,7 +53,7 @@
 					channel : "vav_mesas",
 					message : parametro
 				}
-				
+
 				pubnub.publish( publishConfig )
             }
 

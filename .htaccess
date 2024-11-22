@@ -26,7 +26,7 @@
 	RewriteRule 	^paises/																		/vav_final/pais.php?&p=0																[L]
 	
 #	OBJETOS
-	RewriteRule 	^objeto/imagen-nueva/															/vav_final/app.sql/objetos.imagenes.php?f=objetoImagenNueva							[L]
+	RewriteRule 	^objeto/imagen-nueva/															/vav_final/app.sql/objetos.imagenes.php?f=objetoImagenNueva								[L]
 	RewriteRule 	^objeto/imagen/eliminar/														/vav_final/app.sql/objetos.imagenes.php?f=objetoImagenEliminar							[L]
 	RewriteRule 	^objeto/estado/																	/vav_final/app.sql/objetos.php?f=objetoEstado											[L]
 
@@ -34,9 +34,13 @@
 	RewriteRule 	^swich/editar/																	/vav_final/app.sql/swich.php?f=swichEditar												[L]
 	RewriteRule 	^swich/mesas/																	/vav_final/app.sql/swich.php?f=swichMesas												[L]
 	RewriteRule 	^swich/mesas-actuales/															/vav_final/app.sql/swich.php?f=swichMesasActuales										[L]
-	RewriteRule 	^swich/mesas-controlador/														/vav_final/app.sql/swich.php?f=swichMesasControlador										[L]
+	RewriteRule 	^swich/mesas-controlador/														/vav_final/app.sql/swich.php?f=swichMesasControlador									[L]
 	RewriteRule 	^swich-quad/mesas-actuales/														/vav_final/app.sql/swich.php?f=swichQuadMesasActuales									[L]
 	RewriteRule 	^swich/mesas-totales/([A-Z]+)-([0-9]+)											/vav_final/app.sql/swich.php?f=swichMesasTotales&t=$1&i=$2								[L]
+
+#	SIMULADOR DE VOTOS
+	RewriteRule 	^simulador-votos/																/vav_final/monitor.testing.php															[L]
+	RewriteRule 	^simulador-mesas-actuales/														/vav_final/app.sql/swich.php?f=swichMesasActuales										[L]
 
 #	MESAS USUARIOS MOVIL
 	RewriteRule 	^monitor-moviles/																/vav_final/monitor.moviles.php															[L]
