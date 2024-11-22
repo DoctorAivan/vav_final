@@ -494,7 +494,7 @@ body
 			text-transform: uppercase;
 			text-align: center;
 			background: #ffffff;
-			padding: 14px 0 8px 0;
+			padding: 13px 0 8px 0;
 		}
 			.tottem .box .header h2
 			{
@@ -623,7 +623,7 @@ body
 							font-family: 'Santral_Bold';
 							font-size: 1.5rem;
 							line-height: 1.5rem;
-							padding: 3px 0 1px 0;
+							padding: 2px 0 1px 0;
 							transition: all var(--transition-time) ease-in-out;
 							white-space: nowrap;
 							overflow: hidden;
