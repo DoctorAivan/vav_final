@@ -733,6 +733,9 @@ ALTER FUNCTION public.mesa_listado(in_limit integer, in_offset integer) OWNER TO
 -- Name: mesa_nuevo(bigint, character varying, bigint, character varying, character varying); Type: FUNCTION; Schema: public; Owner: app_vav
 --
 
+DROP FUNCTION mesa_nuevo(integer);
+DROP FUNCTION mesa_nuevo(in_usuario_id bigint, in_mesa_tipo character varying, in_mesa_zona bigint, in_mesa_zona_titulo character varying, in_mesa_comuna character varying);
+
 CREATE FUNCTION mesa_nuevo(in_usuario_id bigint, in_mesa_tipo character varying, in_mesa_zona bigint, in_mesa_zona_titulo character varying, in_mesa_comuna character varying) RETURNS bigint
     LANGUAGE plpgsql
     AS $$
@@ -763,8 +766,8 @@ CREATE FUNCTION mesa_nuevo(in_usuario_id bigint, in_mesa_tipo character varying,
 		);
 
     --  AGREGAR CANDIDATOS A LA MESA
-		INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo AND candidato_zona = in_mesa_zona;
-    --	INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo;
+	--	INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo AND candidato_zona = in_mesa_zona;
+    	INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo;
 
         RETURN in_mesa_id;
 	        
@@ -1173,6 +1176,49 @@ ALTER FUNCTION public.swich_actual() OWNER TO postgres;
 -- Name: swich_consolidados_mesas(character varying, bigint); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
+CREATE FUNCTION swich_consolidados_presidenciales_totales(in_mesa_tipo character varying) RETURNS TABLE(votos_total bigint, candidato_id bigint, candidato_nombres character varying, candidato_apellidos character varying, candidato_independiente boolean, partido_id bigint, pacto_id bigint)
+    LANGUAGE plpgsql
+    AS $$
+
+		BEGIN
+
+		return QUERY
+
+			SELECT
+				sum(voto.voto_total) as votos_total,
+				candidato.candidato_id,
+				candidato.candidato_nombres,
+				candidato.candidato_apellidos,
+				candidato.candidato_independiente,
+				partido.partido_id,
+				pacto.pacto_id
+
+			FROM
+				mesa,
+				voto,
+				candidato,
+				partido,
+				pacto
+
+			WHERE
+				mesa.mesa_tipo = in_mesa_tipo AND
+				mesa.mesa_estado IN(1,2) AND
+				voto.mesa_id = mesa.mesa_id AND
+				candidato.candidato_id = voto.candidato_id AND
+				partido.partido_id = candidato.partido_id AND
+				pacto.pacto_id = candidato.pacto_id
+
+			group by
+				candidato.candidato_id,
+				partido.partido_id,
+				pacto.pacto_id
+			
+			ORDER BY
+				votos_total DESC
+	    ;
+
+	END $$;
+
 CREATE FUNCTION swich_consolidados_mesas(in_mesa_tipo character varying, in_mesa_zona bigint) RETURNS TABLE(votos_total bigint, candidato_id bigint, candidato_nombres character varying, candidato_apellidos character varying, candidato_independiente boolean, partido_id bigint, pacto_id bigint)
     LANGUAGE plpgsql
     AS $$
@@ -1223,6 +1269,29 @@ ALTER FUNCTION public.swich_consolidados_mesas(in_mesa_tipo character varying, i
 --
 -- Name: swich_consolidados_totales(character varying, bigint); Type: FUNCTION; Schema: public; Owner: postgres
 --
+
+DROP FUNCTION swich_consolidados_presidenciales();
+CREATE FUNCTION swich_consolidados_presidenciales() RETURNS TABLE(total bigint)
+    LANGUAGE plpgsql
+    AS $$
+
+		BEGIN
+
+		return QUERY
+
+				SELECT
+					COUNT( mesa.mesa_id ) as total
+
+				FROM
+					mesa
+				
+				WHERE
+					mesa.mesa_tipo = 'P' AND
+					mesa.mesa_estado IN(1,2)
+	    ;
+
+	END $$;
+
 
 CREATE FUNCTION swich_consolidados_totales(in_mesa_tipo character varying, in_mesa_zona bigint) RETURNS TABLE(total bigint)
     LANGUAGE plpgsql

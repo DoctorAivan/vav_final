@@ -7,8 +7,7 @@ let consolidado_zona_nombre = ''
 // Iniciar al cargar
 $(function()
 {
-    consolidados_render();
-
+//  consolidados_render();
     consolidado_tipo = $.cookie('consolidado_tipo')
     consolidado_zona = $.cookie('consolidado_zona')
 });
@@ -30,6 +29,10 @@ function consolidados_render()
         consolidados_render_tipo.innerHTML = '🔴&nbsp;&nbsp;GOBERNADORES';
     }
     else if( consolidados_tipo == 'A' )
+    {
+        consolidados_render_tipo.innerHTML = '🔵&nbsp;&nbsp;ALCALDES';
+    }
+    else if( consolidados_tipo == 'P' )
     {
         consolidados_render_tipo.innerHTML = '🔵&nbsp;&nbsp;ALCALDES';
     }
@@ -58,7 +61,6 @@ function consolidados_asignar()
     {
 
     }
-
 
 //  Cambiar la dimensión
     liveboxAncho('consolidados' , 500 );

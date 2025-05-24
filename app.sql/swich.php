@@ -375,6 +375,85 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 	//	Obtener Mesas Consolidadas
+		case "swichConsolidadosPresidenciales"					:
+		{
+			//	Obtener Mesas publicadas
+			$QUERY									=	"
+
+				SELECT * FROM swich_consolidados_presidenciales();
+
+			";
+
+		//	Ejecutar Query
+			$QUERY_TOTAL_MESAS						=	pg_query($CONF_DB_CONNECT, $QUERY);
+			$_TOTAL_MESAS							=	pg_fetch_object($QUERY_TOTAL_MESAS);
+
+		//	Obtener la información de las Mesas almacenadas en el Swich
+			$QUERY									=	"
+			
+				SELECT * FROM swich_consolidados_presidenciales_totales('P');
+
+			";
+			
+		//	Ejecutar Query
+			$QUERY_MESAS							=	pg_query($CONF_DB_CONNECT, $QUERY);
+
+			$_CANDIDATOS['candidatos']				=	array();
+			$_CANDIDATOS['votos']					=	(int) 0;
+			$_CANDIDATOS['mesas']					=	(int) $_TOTAL_MESAS->total;
+
+		//	Generar listado
+			while($_MESA_CANDIDATOS					=	pg_fetch_object($QUERY_MESAS))
+			{
+			//	Asignar información del candidato
+				$_CANDIDATOS['candidatos'][]		=	array	
+				(
+					'id'							=>	(int) $_MESA_CANDIDATOS->candidato_id,
+					'nombres'						=>	$_MESA_CANDIDATOS->candidato_nombres,
+					'apellidos'						=>	$_MESA_CANDIDATOS->candidato_apellidos,
+					'ind'							=>	$_MESA_CANDIDATOS->candidato_independiente,
+					'votos'							=>	(int) $_MESA_CANDIDATOS->votos_total,
+					'partido'						=>	(int) $_MESA_CANDIDATOS->partido_id,
+					'pacto'							=>	(int) $_MESA_CANDIDATOS->pacto_id
+				);
+
+				$_CANDIDATOS['votos'] += $_MESA_CANDIDATOS->votos_total;
+			}
+
+			// Paso 3: Calcular porcentaje para cada candidato
+			$totalVotos = $_CANDIDATOS['votos'];
+
+			// Agregar el porcentaje a cada candidato
+			foreach ($_CANDIDATOS['candidatos'] as &$candidato)
+			{
+				if ($totalVotos > 0)
+				{
+					$porcentaje = ($candidato['votos'] / $totalVotos) * 100;
+					$candidato['porcentaje'] = number_format($porcentaje, 2);
+				}
+				else
+				{
+					$candidato['porcentaje'] = '0.00';
+				}
+			}
+
+			// Limpiar la referencia
+			unset($candidato);
+
+		//	Encodear Resultados
+			$_JSON									=	json_encode($_CANDIDATOS);
+
+		//	Asignar formato Json
+			header('Content-Type: application/json');
+
+		//	Generar Json con los Datos
+			echo $_JSON;
+		}
+		break;
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Obtener Mesas Consolidadas
 		case "swichMesasTotales"					:
 		{
 			$mesa_tipo								=	filtrarVAR($_GET['t']);

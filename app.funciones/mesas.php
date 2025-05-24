@@ -11,6 +11,10 @@
         {
             return 'fa-sticky-note';
         }
+        else if( $icono == 'P' )
+        {
+            return 'fa-sticky-note';
+        }
     }
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -28,7 +32,7 @@
         }
         else if( $icono == 'P' )
         {
-            return '🔵&nbsp;&nbsp;&nbsp;PLEBISCITO';
+            return '🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES';
         }
     }
 

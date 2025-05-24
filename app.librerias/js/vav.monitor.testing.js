@@ -9,7 +9,7 @@ $(function()
 let votos_timer = null
 
 //	Intervalo de tiempo entre comprobación
-const intervalo_votos = 250
+const intervalo_votos = 500
 
 //	Listado de mesas en pantalla
 const mesas_actuales = []

@@ -96,7 +96,7 @@
 								</label>
 							</div>
 
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🔴</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Presidenciales" onclick="mesa_filtrar('G');">🔴</div>
 							<div class="separador"></div>
 							<div class="boton boton-sin-margen editar box-shadow-light bordes-radius" onclick="mesa_nueva();"><i class="fas fa-plus-circle"></i> Nueva Mesa</div>
 

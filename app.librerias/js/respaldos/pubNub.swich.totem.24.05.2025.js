@@ -253,7 +253,18 @@
 			//	Validar estado del Modulo
 				if( estado == 'on' )
 				{
-					App.totales();
+				//	Obtener detalles de la Zona
+					const mesa_tipo = datoPubNub.tipo;
+					const mesa_zona = datoPubNub.zona;
+
+				//	Posicion de la mesa
+					mesa_totales_posicion = datoPubNub.position
+
+				//	Validar que exista una zona asignada
+					if( mesa_zona > 0 )
+					{
+						App.totales( mesa_tipo , mesa_zona );
+					}
 				}
 				else
 				{
@@ -376,7 +387,7 @@
 			mesa_totales_zona = zona
 
 		//	Solicitar la mesa asignada
-			const api = await fetch( path_app + '/swich/consolidados-presidencial/' )
+			const api = await fetch( path_app + `/swich/mesas-totales/${tipo}-${zona}` )
 			.then( res => res.json() )
 			.then( res => res || [] );
 
@@ -957,7 +968,11 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
-										<h2>${mesa.comuna}</h2>
+										<h2>
+											<span>${mesa.zona}</span>
+											<div class="separador"></div>
+											<span class="tipo">${mesa.comuna}</span>
+										</h2>
 										<h3>
 											${mesa.local}
 											<div class="separador"></div>
@@ -978,7 +993,7 @@
 			let id_orden = 1;
 
 		//	Ordenar los candidatos por sus votos
-			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+		//	mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
 
         //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
@@ -992,15 +1007,25 @@
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img
-											src="${path_imagenes_candidatos}${candidato.id}.webp"
-											class="candidato-imagen-src"
-										/>
+										<div class="candidato-imagen-marco">
+											<img
+												src="${path_imagenes_candidatos}${candidato.id}.webp"
+												class="candidato-imagen-src"
+											/>
+										</div>
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
 											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
 											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-alianza">
+												<div class="candidato-detalles-alianza-partido">
+													${App.obtener_partido(candidato.partido_id)}
+												</div>
+												<div class="candidato-detalles-alianza-pacto">
+													${App.obtener_pacto(candidato.pacto_id)}
+												</div>
+											</div>
 										</div>
 										<div class="candidato-votos">
 											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">${candidato.votos}</div>
@@ -1118,27 +1143,67 @@
 	//	Animar la entrada del bloque
 		animar_entrada_mesa_1 : function()
 		{
-			render_mesa_1.classList.add('transition-on')
+		//	Validar mesas antes de desplegar
+			if( mesa_totales_estado && mesa_totales_posicion == 'l' )
+			{
+			//	Quitar Mesa de totales
+				App.animar_salida_totales()
 
-		//	Asignar Posiciones en el eje X
-			render_mesa_1.style.bottom = mesa_1_cordenadas.template_tottem.visible.y;
-			render_mesa_1.style.left = mesa_1_cordenadas.template_tottem.visible.x;
-			render_mesa_1.style.transform = mesa_1_cordenadas.template_tottem.visible.z;
+			//	Corrección para el Bug del salto
+				setTimeout(function()
+				{
+					render_mesa_1.classList.add('transition-on')
+
+				//	Asignar Posiciones en el eje X
+					render_mesa_1.style.bottom = mesa_1_cordenadas.template_tottem.visible.y;
+					render_mesa_1.style.left = mesa_1_cordenadas.template_tottem.visible.x;
+					render_mesa_1.style.transform = mesa_1_cordenadas.template_tottem.visible.z;
+
+				}, tiempo_transiciones );			
+			}
+			else
+			{
+			//	Asignar Posiciones en el eje X
+				render_mesa_1.style.bottom = mesa_1_cordenadas.template_tottem.visible.y;
+				render_mesa_1.style.left = mesa_1_cordenadas.template_tottem.visible.x;
+				render_mesa_1.style.transform = mesa_1_cordenadas.template_tottem.visible.z;
+			}
 		},
 
 	//	Animar la entrada del bloque
 		animar_entrada_mesa_2 : function()
 		{
-			setTimeout(function()
+		//	Validar mesas antes de desplegar
+			if( mesa_totales_estado && mesa_totales_posicion == 'r' )
 			{
-				render_mesa_2.classList.add('transition-on')
+			//	Quitar Mesa de totales
+				App.animar_salida_totales()
 
-			//	Asignar Posiciones en el eje X
-				render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
-				render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
-				render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+			//	Corrección para el Bug del salto
+				setTimeout(function()
+				{
+					render_mesa_2.classList.add('transition-on')
 
-			}, 200 );
+				//	Asignar Posiciones en el eje X
+					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
+					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
+					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+
+				}, tiempo_transiciones );			
+			}
+			else
+			{
+				setTimeout(function()
+				{
+					render_mesa_2.classList.add('transition-on')
+	
+				//	Asignar Posiciones en el eje X
+					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
+					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
+					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
+	
+				}, 200 );
+			}
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-

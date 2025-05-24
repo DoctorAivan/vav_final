@@ -85,7 +85,7 @@
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Gobernadores" onclick="mesa_filtrar('G');">🔴</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Presidenciales" onclick="mesa_filtrar('G');">🔴</div>
 						</div>
 					</header>
 				</section>

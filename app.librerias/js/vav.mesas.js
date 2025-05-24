@@ -77,7 +77,7 @@ function mesa_nueva()
     liveboxAbrir('mesa');
 
 //  Marcar Pacto por Defecto
-    mesa_nueva_tipo('G');
+    mesa_nueva_tipo('P');
 
 //  Generar Listado de Regiones
 //  mesa_nueva_regiones_listado();
@@ -171,6 +171,13 @@ function nueva_mesa_zona( id )
 
 //  Obtener la Circunscripcion de la Comuna
     let region = objeto_regiones.find( obj => obj.id === comuna.region );
+
+//  Tipo Zona Presidente
+    if( mesa_tipo == 'P' )
+    {
+        mesa_zona = comuna.id;
+        mesa_zona_titulo = comuna.nombre;
+    }
 
 //  Tipo Zona Gobernador
     if( mesa_tipo == 'G' )
@@ -339,7 +346,8 @@ function mesa_detalles( id )
                 mesa_tipo_titulo        =   'ELECCIÓN DE ALCALDES';
             break;
             case 'P':
-                mesa_tipo_titulo        =   'ELECCIÓN DE PLEBISCITO';
+            //  mesa_tipo_titulo        =   'ELECCIÓN DE PLEBISCITO';
+                mesa_tipo_titulo        =   'ELECCIÓN PRIMARIA PRESIDENCIAL';
             break;
         }
 
@@ -591,7 +599,8 @@ function mesa_detalles_confirmar()
                 mesa_tipo_icono         =   'fa-sticky-note';
             break;
             case 'P':
-                mesa_tipo_titulo        =   '🔵&nbsp;&nbsp;&nbsp;PLEBISCITO';
+            //  mesa_tipo_titulo        =   '🔵&nbsp;&nbsp;&nbsp;PLEBISCITO';
+                mesa_tipo_titulo        =   '🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES';
                 mesa_tipo_icono         =   'fa-sticky-note';
             break;
         }
@@ -972,7 +981,8 @@ function estadoConsolidados( estado )
     }
     else
     {
-        if( estado_consolidados_animacion == false && consolidado_zona_cookie != undefined )
+    //  if( estado_consolidados_animacion == false && consolidado_zona_cookie != undefined )
+        if( estado_consolidados_animacion == false )
         {
         //  Almacenar el estado de la accion
             estado_consolidados = estado

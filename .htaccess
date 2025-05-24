@@ -37,6 +37,7 @@
 	RewriteRule 	^swich/mesas-controlador/														/vav_final/app.sql/swich.php?f=swichMesasControlador									[L]
 	RewriteRule 	^swich-quad/mesas-actuales/														/vav_final/app.sql/swich.php?f=swichQuadMesasActuales									[L]
 	RewriteRule 	^swich/mesas-totales/([A-Z]+)-([0-9]+)											/vav_final/app.sql/swich.php?f=swichMesasTotales&t=$1&i=$2								[L]
+	RewriteRule 	^swich/consolidados-presidencial/												/vav_final/app.sql/swich.php?f=swichConsolidadosPresidenciales							[L]
 
 #	SIMULADOR DE VOTOS
 	RewriteRule 	^simulador-votos/																/vav_final/monitor.testing.php															[L]
