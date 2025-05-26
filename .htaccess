@@ -58,11 +58,8 @@
 
 	RewriteRule 	^mesas/detalles/([0-9]+)														/vav_final/app.sql/mesas.php?f=mesa_detalles&i=$1										[L]
 	RewriteRule 	^mesas/voto/																	/vav_final/app.sql/mesas.php?f=mesa_voto												[L]
-
 	RewriteRule 	^mesas/eliminar/																/vav_final/app.sql/mesas.php?f=mesa_eliminar											[L]
-
 	RewriteRule 	^mesas/swich-quad-tv/															/vav_final/mesa.swich.quad.tv.php														[L]
-
 	RewriteRule 	^mesas/editar/([0-9]+)															/vav_final/mesa.editar.php?&i=$1														[L]
 	RewriteRule 	^mesas/visualizador-publico/													/vav_final/mesa.visualizador.publico.php?&p=0											[L]
 	RewriteRule 	^mesas/visualizador/															/vav_final/mesa.visualizador.php?&p=0													[L]
