@@ -10,80 +10,18 @@
 
 @font-face
 {
-	font-family: 'panton_thin';
-	src: local('panton_thin'), url(fonts/cnn/panton_thin.otf) format('opentype');
+	font-family: "TTFirsNeue_Light";
+	src: local('TTFirsNeue_Light'), url("fonts/TTFirsNeue-Light.ttf") format("truetype");
 }
 @font-face
 {
-	font-family: 'panton_extraLight';
-	src: local('panton_extraLight'), url(fonts/cnn/panton_extraLight.otf) format('opentype');
+	font-family: "TTFirsNeue_SemiBold";
+	src: local('TTFirsNeue_SemiBold'), url("fonts/TTFirsNeue-SemiBold.ttf") format("truetype");
 }
 @font-face
 {
-	font-family: 'panton_light';
-	src: local('panton_light'), url(fonts/cnn/panton_light.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_regular';
-	src: local('panton_regular'), url(fonts/cnn/panton_regular.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_semiBold';
-	src: local('panton_semiBold'), url(fonts/cnn/panton_semiBold.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_bold';
-	src: local('panton_bold'), url(fonts/cnn/panton_bold.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_extraBold';
-	src: local('panton_extraBold'), url(fonts/cnn/panton_extraBold.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_black';
-	src: local('panton_black'), url(fonts/cnn/panton_black.otf) format('opentype');
-}
-@font-face
-{
-	font-family: 'panton_heavy';
-	src: local('panton_heavy'), url(fonts/cnn/panton_heavy.otf) format('opentype');
-}
-
-@font-face
-{
-	font-family: "ATC_rg";
-	src: local('ATTAleckCd_Rg'), url("fonts/ATTAleckCd_Rg.ttf") format("truetype");
-}
-@font-face
-{
-	font-family: "ATC_bd";
-	src: local('ATTAleckCd_W_Bd'), url("fonts/ATTAleckCd_W_Bd.ttf") format("truetype");
-}
-
-@font-face
-{
-	font-family: "Flama_Regular";
-	src: local('Flama_Regular'), url("fonts/Flama_Regular.otf") format("truetype");
-}
-@font-face
-{
-	font-family: "Flama_Medium";
-	src: local('Flama_Medium'), url("fonts/Flama_Medium.otf") format("truetype");
-}
-@font-face
-{
-	font-family: "Flama_Semibold";
-	src: local('Flama_Semibold'), url("fonts/Flama_Semibold.otf") format("truetype");
-}
-@font-face
-{
-	font-family: "Flama_Bold";
-	src: local('Flama_Bold'), url("fonts/Flama_Bold.otf") format("truetype");
+	font-family: "TTFirsNeue_Bold";
+	src: local('TTFirsNeue_Bold'), url("fonts/TTFirsNeue-Bold.ttf") format("truetype");
 }
 
 @font-face
@@ -170,7 +108,6 @@ body
 	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
 	*/
 	background: transparent;
-	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
 	overflow: hidden;
 }
 	.render-preview
@@ -224,7 +161,7 @@ body
 		position: relative;
 		width: 100%;
 		height: var(--consolidado-height);
-		background: #e0e0e0;
+		background: #ececec;
 	}
 	.consolidados .titulo
 	{
@@ -251,7 +188,7 @@ body
 				width: var(--consolidado-candidato-width);
 				height: var(--consolidado-candidato-height);
 				background: #ffffff;
-				box-shadow: 0 30px 15px #00000015;
+				box-shadow: 0 30px 20px #00000025;
 				display: grid;
 				grid-template-columns: 99px 148px 178px;
 				transition: all var(--transition-time) ease-in-out;
@@ -276,8 +213,8 @@ body
 						text-transform: uppercase;
 						color: var(--candidato-nombre);
 						background: #ffffff;
-						padding: 28px 0 0 12px;
-						box-shadow: 0 40px 50px #00000050;
+						padding: 28px 0 0 13px;
+						box-shadow: 0 40px 60px #00000050;
 						transition: all var(--transition-time) ease-in-out;
 					}
 						.consolidados .candidatos .candidato .candidato-detalles .candidato-detalles-nombre
@@ -312,7 +249,7 @@ body
 							font-family: 'Santral_SemiBold';
 							font-size: 1rem;
 							line-height: 1rem;
-							padding: 5px 10px 1px 10px;
+							padding: 5px 8px 1px 8px;
 							transition: all var(--transition-time) ease-in-out;
 							color: var(--color-white);
 							background: var(--canditado-color);
@@ -323,9 +260,9 @@ body
 						z-index: 1;
 						position: relative;
 						width: 100%;
-						padding: 60px 0 0 0;
+						padding: 60px 0 0 15px;
 						background: #ffffff;
-						text-align: center;
+						text-align: left;
 						transition: all var(--transition-time) ease-in-out;
 					}
 						.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor
@@ -333,19 +270,18 @@ body
 							position: relative;
 							width: 100%;
 							z-index: 6;
-							padding-top: 3px;
 							color: var(--canditado-color);
 							transition: all var(--transition-time) ease-in-out;
 						}
 							.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor .votos
 							{
-								font-family: 'Santral_Extrabold';
-								font-size: 2.6rem;
-								line-height: 2.6rem;
+								font-family: 'TTFirsNeue_SemiBold';
+								font-size: 2.7rem;
+								line-height: 2.7rem;
 							}
 							.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor .porcentaje
 							{
-								font-family: 'Santral_Book';
+								font-family: 'TTFirsNeue_Light';
 								font-size: 1.6rem;
 								line-height: 1.6rem;
 								padding-top: 3px;
@@ -451,8 +387,8 @@ body
 	{
 		position: relative;
 		width: 100%;
-		padding: 5px 10px 10px 10px;
-		background: linear-gradient( 0deg, #eeeeee 0%, #ffffff 100%);
+		padding: 0 10px 10px 10px;
+		background: linear-gradient( 0deg, #ececec 0%, #ffffff 100%);
 		overflow: hidden;
 	}
 		.tottem .box .candidatos
@@ -470,6 +406,7 @@ body
 				grid-template-columns: 1fr;
 				transition: all var(--transition-time) ease-in-out;
 				box-shadow: 0 10px 10px #00000010;
+				overflow: hidden;
 			}
 				.tottem .box .candidatos .candidato .candidato-imagen
 				{
@@ -477,7 +414,7 @@ body
 					display: grid;
 					position: relative;
 					width: 100%;
-					height: 150px;
+					height: 131px;
 					background: #fff;
 					overflow: hidden;
 				}
@@ -485,17 +422,17 @@ body
 					{
 						place-self: center;
 						position: relative;
-						height: 150px;
+						height: 131px;
 						opacity: 1;
 					}
 				.tottem .box .candidatos .candidato .candidato-info
 				{
 					z-index: 2;
 					position: relative;
-					background: #ffffff;
+					background: #f6f6f6;
 					transition: all var(--transition-time) ease-in-out;;
 					padding: 9px 15px 0 15px;
-					margin-top: -23px;
+					margin-top: -5px;
 				}
 					.tottem .box .candidatos .candidato .candidato-detalles
 					{
@@ -536,16 +473,16 @@ body
 						position: relative;
 						width: 100%;
 						text-align: center;
+						margin: -1px 0 10px 0;
 					}
 						.tottem .box .candidatos .candidato .candidato-votos .candidato-votos-valor
 						{
 							position: relative;
 							width: 100%;
 							z-index: 6;
-							font-family: 'Santral_Extrabold';
+							font-family: 'TTFirsNeue_SemiBold';
 							font-size: 3.2rem;
 							line-height: 3.2rem;
-							padding-top: 3px;
 							color: var(--canditado-color);
 							transition: all var(--transition-time) ease-in-out;
 						}

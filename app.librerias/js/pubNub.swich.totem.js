@@ -53,7 +53,7 @@
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp?v=1.0'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -469,7 +469,7 @@
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.webp" />
+										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.webp?v=1.0" />
 									</div>
 									<div class="candidato-detalles">
 										<div class="candidato-detalles-nombre">${candidato.nombres}</div>
@@ -715,7 +715,7 @@
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img src="${path_imagenes_candidatos}${candidato.id}.webp" class="candidato-imagen-src" />
+										<img src="${path_imagenes_candidatos}${candidato.id}.webp?v=1.0" class="candidato-imagen-src" />
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">

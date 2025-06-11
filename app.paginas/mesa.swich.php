@@ -278,9 +278,17 @@
 									<div class="swich-consolidados-h1">Configuración de consolidados</div>
 									<div class="swich-consolidados-titulo">Estado del modulo en pantalla</div>
 									<div class="swich-consolidados-items">
-										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO</div>
-										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE</div>
+										<div id="consolidados-estado-xx" class="item on"><i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO</div>
+										<div id="consolidados-estado-xx" class="item of"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE</div>
 									</div>
+
+									<noscript>
+										<div class="swich-consolidados-items">
+											<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO</div>
+											<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE</div>
+										</div>
+									</noscript>
+
 									<div class="swich-controles">
 										<div id="estado-preview-consolidados" class="preview bordes-radius" style="margin: 0 0 0 15px;" onclick="consolidadosPreview();">PREVIEW</div>
 									</div>
