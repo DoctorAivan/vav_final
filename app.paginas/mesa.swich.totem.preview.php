@@ -30,7 +30,6 @@
 
 		<!-- Funcionalidades por Defecto -->
 		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>vav.swich.totem.css<?php echo $_CONF_VERSION; ?>"/>
-		<link rel="stylesheet" type="text/css" href="<?php echo $_LIBRERIAS_CSS; ?>vav.swich.totem.floating.css<?php echo $_CONF_VERSION; ?>"/>
 
 	</head>
 	<body>

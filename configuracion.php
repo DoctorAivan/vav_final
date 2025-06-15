@@ -10,7 +10,7 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 */
 
-	#exit();
+//	exit();
 
 //	Reportes de errores para la Aplicacion
 	ini_set("display_errors",1);
@@ -65,7 +65,7 @@
 //	INFORMACION DE LA APLICACION
 
 //	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.10.0";
+	$_CONF_VERSION						=	"?version.10.1";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES

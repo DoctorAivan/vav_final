@@ -42,7 +42,7 @@
 	let mesa_totales_timer = null
 
 //	Intervalo de actualización de consolidados
-	const mesa_totales_intervalo = 5000
+	const mesa_totales_intervalo = 3000
 
 //	Transiciones
 	const tiempo_transiciones = 600
