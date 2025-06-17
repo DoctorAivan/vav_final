@@ -65,7 +65,7 @@
 //	INFORMACION DE LA APLICACION
 
 //	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.10.1";
+	$_CONF_VERSION						=	"?version.10.2";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES
