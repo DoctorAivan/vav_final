@@ -216,7 +216,7 @@ body
 						text-transform: uppercase;
 						color: var(--candidato-nombre);
 						background: #ffffff;
-						padding: 28px 0 0 13px;
+						padding: 25px 0 0 13px;
 						box-shadow: 0 40px 60px #00000050;
 						transition: all var(--transition-time) ease-in-out;
 					}
