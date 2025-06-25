@@ -53,7 +53,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp?v=1.0'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.0'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -339,6 +339,46 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 			}
 		},
 
+	//	Generar interpolación entre el valor actual y final
+		totales_actualizacion_votos_totales : (element, newValue, duration) =>
+		{
+		//	Obtener del DOM el valor actual
+			const startValue = Number(element.innerText.replace('.',''));
+			const newValueFormated = Number(newValue);
+		
+		//	Validar cambio en los votos
+			if( startValue === newValueFormated )
+			{
+				return
+			}
+			else
+			{
+				const increment = newValue - startValue;
+				const startTime = performance.now();
+			
+				function update(currentTime)
+				{
+					const elapsedTime = currentTime - startTime;
+					const progress = Math.min(elapsedTime / duration, 1);
+					const currentValue = startValue + increment * progress;
+
+					element.innerText = App.numero(currentValue.toFixed(0))
+					
+					if (progress < 1)
+					{
+						requestAnimationFrame(update);
+					}
+					else
+					{
+						element.innerText = App.numero(currentValue.toFixed(0))
+						return
+					}
+				}
+			
+				requestAnimationFrame(update);
+			}
+		},
+
 	//	-			-			-			-			-			-			-			-			-			-			-			-			
 
 	//	Mesa con resultados totales
@@ -382,6 +422,9 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 		//	Almacenar listado de candidatos para gestionar actualizacion
 			mesa_totales_candidatos = api.candidatos
+
+			const get_mesa_totales_votos = document.getElementById('mesa-0-totales');
+			App.totales_actualizacion_votos_totales(get_mesa_totales_votos , mesa_totales_votos , 1000 );
 
 		//	Validar que existan mesas en la Zona
 			if( api.mesas > 0 )
@@ -445,7 +488,8 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
-									<div class="titulo">CONSOLIDADO CHV</div>`;
+									<div class="titulo">
+										CONSOLIDADO CHV <span class="titulo-totales"><span id="mesa-0-totales">${ App.numero(mesa_totales_votos) }</span> VOTOS</span></div>`;
 
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
@@ -471,7 +515,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.webp?v=1.0" />
+										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.png?v=2.0" />
 									</div>
 									<div class="candidato-detalles">
 										<div class="candidato-detalles-nombre">${candidato.nombres}</div>
@@ -667,8 +711,8 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 	//	Dibujar la mesa en el DOM
 		draw : function( posicion , mesa )
 		{
-        //  DIV render en el DOM
-            const render	=	document.getElementById('render-mesa-' + posicion );
+		//  DIV render en el DOM
+			const render	=	document.getElementById('render-mesa-' + posicion );
 
 		//	Vaciar el contenedor
 			render.innerHTML = '';
@@ -693,7 +737,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 										<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>
 									</div>`;
 
-        //	Dibujar la Mesa en el DOM
+		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
 
 		//	Render de los candidatos en la mesa
@@ -705,24 +749,28 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 		//	Ordenar los candidatos por sus votos
 			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
 
-        //	Recorrer el listado de candidatos
+		//	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
-            {
-            //	Crear el div contenedor del candidato
-                const objeto = document.createElement('div');
+			{
+			//	Crear el div contenedor del candidato
+				const objeto = document.createElement('div');
 				objeto.className = `candidato order-${id_orden}`
 
-            //	Asignar las propiedades del div
-                objeto.id = 'candidato-' + candidato.objeto
+			//	Asignar las propiedades del div
+				objeto.id = 'candidato-' + candidato.objeto
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img src="${path_imagenes_candidatos}${candidato.id}.webp?v=1.0" class="candidato-imagen-src" />
+										<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.0" class="candidato-imagen-src" />
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
-											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
 											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-partido">
+												<div class="candidato-detalles-partido-valor">
+													${ App.obtener_partido(candidato.partido_id) }
+												</div>
+											</div>
 										</div>
 										<div class="candidato-votos">
 											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">${candidato.votos}</div>
@@ -730,12 +778,12 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 										<div id="candidato-${candidato.objeto}-animacion" class="candidato-votos-animacion"></div>
 									</div>`
 
-            //	Crear candidato en el listado
+			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
 			//	Incrementar el ID de la lista
 				id_orden++
-            });
+			});
 
 		//	Ordenar Votos de los candidatos
 			App.ordenar_votos(mesa.candidatos);

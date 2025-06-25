@@ -107,6 +107,7 @@ body
 	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
 	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
 	*/
+	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
 	background: transparent;
 	overflow: hidden;
 }
@@ -174,12 +175,17 @@ body
 		font-size: 1.35rem;
 		padding: 4px 0 0 80px;
 	}
+		.consolidados .titulo .titulo-totales
+		{
+			font-family: 'Santral_ExtraBold';
+		}
 		.consolidados .candidatos
 		{
 			position: relative;
 			width: 1760px;
 			height: var(--consolidado-candidatos-height);
 			margin: 0px 0px 0px 80px;
+			overflow: hidden;
 		}
 			.consolidados .candidatos .candidato
 			{
@@ -205,7 +211,7 @@ body
 					{
 						position: absolute;
 						width: 100%;
-						bottom: 0px;
+						bottom: -22px;
 					}
 					
 					.consolidados .candidatos .candidato .candidato-detalles
@@ -417,7 +423,7 @@ body
 					display: grid;
 					position: relative;
 					width: 100%;
-					height: 131px;
+					height: 128px;
 					background: #fff;
 					overflow: hidden;
 				}
@@ -425,7 +431,7 @@ body
 					{
 						place-self: center;
 						position: relative;
-						height: 131px;
+						height: 158px;
 						opacity: 1;
 					}
 				.tottem .box .candidatos .candidato .candidato-info
@@ -464,12 +470,28 @@ body
 							font-family: 'Santral_Bold';
 							font-size: 1.5rem;
 							line-height: 1.5rem;
-							padding: 1px 0 0 0;
 							transition: all var(--transition-time) ease-in-out;
 							white-space: nowrap;
 							overflow: hidden;
 							text-overflow: ellipsis;
 						}
+						.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-partido
+						{
+							width: 100%;
+							display: flex;
+							justify-content: center;
+						}
+							.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-partido-valor
+							{
+								font-family: 'Santral_SemiBold';
+								font-size: 1rem;
+								line-height: 1rem;
+								padding: 3px 8px 3px 8px;
+								margin: 0 0 3px 0;
+								transition: all var(--transition-time) ease-in-out;
+								color: var(--color-white);
+								background: var(--canditado-color);
+							}
 
 					.tottem .box .candidatos .candidato .candidato-votos
 					{
@@ -512,6 +534,11 @@ body
 	.tottem .box .candidatos .order-1 .candidato-detalles
 	{
 		color: var(--color-white);
+	}
+	.tottem .box .candidatos .order-1 .candidato-detalles .candidato-detalles-partido-valor
+	{
+		color: var(--ganador-color);
+		background: var(--color-white);
 	}
 	.tottem .box .candidatos .order-1 .candidato-votos .candidato-votos-valor
 	{
