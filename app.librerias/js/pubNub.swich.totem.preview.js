@@ -78,7 +78,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-650px',
+				'x' : '-630px',
 				'y' : '178px',
 				'z' : 'unset'
 			}
@@ -90,7 +90,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-650px',
+				'x' : '-630px',
 				'y' : '178px',
 				'z' : 'unset'
 			}

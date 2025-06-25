@@ -78,7 +78,7 @@
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-650px',
+				'x' : '-630px',
 				'y' : '178px',
 				'z' : 'unset'
 			}
@@ -90,7 +90,7 @@
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-650px',
+				'x' : '-630px',
 				'y' : '178px',
 				'z' : 'unset'
 			}

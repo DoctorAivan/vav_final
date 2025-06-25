@@ -68,11 +68,11 @@
 	--canditado-1-voto-a : #ffffff00;
 	--canditado-1-voto-b : #ffffffb1;
 
-	--candidate-width : 650px;
+	--candidate-width : 630px;
 	--candidate-height : 84px;
 	--candidate-margin : 0px;
 
-	--candidate-item-width : 150px;
+	--candidate-item-width : 145px;
 	--candidate-item-height : 260px;
 
 	--candidato-nombre : #1c1c1c;
@@ -430,7 +430,7 @@ body
 					{
 						place-self: center;
 						position: relative;
-						height: 158px;
+						height: 152px;
 						opacity: 1;
 					}
 				.tottem .box .candidatos .candidato .candidato-info
