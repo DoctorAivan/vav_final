@@ -53,7 +53,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.0'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.1'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -515,7 +515,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.png?v=2.0" />
+										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.png?v=2.1" />
 									</div>
 									<div class="candidato-detalles">
 										<div class="candidato-detalles-nombre">${candidato.nombres}</div>
@@ -761,7 +761,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.0" class="candidato-imagen-src" />
+										<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.1" class="candidato-imagen-src" />
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
