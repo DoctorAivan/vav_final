@@ -101,7 +101,7 @@
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1215px',
+				'x' : '1235px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
@@ -113,7 +113,7 @@
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1215px',
+				'x' : '1235px',
 				'y' : '178px',
 				'z' : 'unset'
 			},

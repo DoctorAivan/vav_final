@@ -101,7 +101,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1215px',
+				'x' : '1235px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
@@ -113,7 +113,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1215px',
+				'x' : '1235px',
 				'y' : '178px',
 				'z' : 'unset'
 			},
