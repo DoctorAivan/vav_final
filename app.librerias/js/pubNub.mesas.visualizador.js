@@ -139,7 +139,7 @@
 										<i class="fas ${ mesa.mesa_destacada == 1 ? 'fa-star' : ' fa-hashtag'}"></i> ${mesa.mesa_id}
 									</h2>
 									<h1 class="line-1" id="${mesa.mesa_id}_mesa_usuario"><i class="fas fa-user"></i> ${mesa.usuario_nombre}</h1>
-									<div class="tipo">🟡&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
+									<div class="tipo">🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES</div>
 									<div class="zona">${mesa.mesa_zona_titulo}</div>
 									<h3 class="line-1" id="${mesa.mesa_id}_mesa_nombre">${mesa.mesa_local}</h3>
 									<h4 class="line-1" id="${mesa.mesa_id}_mesa_numero">${mesa.mesa_numero}</h4>
