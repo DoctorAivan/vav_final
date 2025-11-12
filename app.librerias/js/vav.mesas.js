@@ -20,7 +20,7 @@ var posicion_consolidados           =   'l';
 
 var estado_consolidados_animacion   =   false;
 
-var json_cache                      =   '2.2.2'
+var json_cache                      =   '2.2.3'
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -71,7 +71,7 @@ $(function()
 function mesa_nueva()
 {
 //  Cambiar la dimensión
-    liveboxAncho('mesa' , 500 );
+    liveboxAncho('mesa' , 550 );
 
 //	Abrir Funcionalidad Livebox
     liveboxAbrir('mesa');
@@ -169,20 +169,21 @@ function nueva_mesa_zona( id )
 //  Obtener información de la Comuna
     let comuna = objeto_comunas.find( obj => obj.id === id );
 
-//  Obtener la Circunscripcion de la Comuna
-    let region = objeto_regiones.find( obj => obj.id === comuna.region );
-
 //  Tipo Zona Presidente
     if( mesa_tipo == 'P' )
     {
-        mesa_zona = comuna.id;
+    //  mesa_zona = comuna.id;
+        mesa_zona = 19001;
         mesa_zona_titulo = comuna.nombre;
     }
 
 //  Tipo Zona Gobernador
     if( mesa_tipo == 'G' )
     {
-        mesa_zona = region.id;
+    //  Obtener Región
+        let region = objeto_regiones.find( obj => obj.id === comuna.region );
+
+        mesa_zona = comuna.region;
         mesa_zona_titulo = region.nombre;
     }
 
@@ -191,6 +192,26 @@ function nueva_mesa_zona( id )
     {
         mesa_zona = comuna.id;
         mesa_zona_titulo = comuna.nombre;
+    }
+
+//  Tipo Zona Senador
+    if( mesa_tipo == 'S' )
+    {
+    //  Obtener Circunscripcion
+        let circunscripcion = objeto_circunscripciones.find( obj => obj.id === comuna.circunscripcion );
+
+        mesa_zona = comuna.circunscripcion;
+        mesa_zona_titulo = circunscripcion.nombre;
+    }
+
+//  Tipo Zona Diputados
+    if( mesa_tipo == 'D' )
+    {
+    //  Obtener distrito
+        let distrito = objeto_distritos.find( obj => obj.id === comuna.distrito );
+
+        mesa_zona = comuna.distrito;
+        mesa_zona_titulo = distrito.nombre;
     }
 
 //  Almacenar Nombre de la comuna
@@ -346,8 +367,13 @@ function mesa_detalles( id )
                 mesa_tipo_titulo        =   'ELECCIÓN DE ALCALDES';
             break;
             case 'P':
-            //  mesa_tipo_titulo        =   'ELECCIÓN DE PLEBISCITO';
-                mesa_tipo_titulo        =   'ELECCIÓN PRIMARIA PRESIDENCIAL';
+                mesa_tipo_titulo        =   'ELECCIÓN DE PRESIDENTE';
+            break;
+            case 'S':
+                mesa_tipo_titulo        =   'ELECCIÓN DE SENADORES';
+            break;
+            case 'D':
+                mesa_tipo_titulo        =   'ELECCIÓN DE DIPUTADOS';
             break;
         }
 
@@ -554,7 +580,7 @@ function mesa_local_largo()
     const mesa_local = document.getElementById("mesa_local")
     const mesa_local_largo = document.getElementById("mesa_local_largo")
 
-    const maximo = 25
+    const maximo = 24
     const caracteres = mesa_local.value.length
     let caracteres_restantes = maximo - caracteres;
 
@@ -599,8 +625,15 @@ function mesa_detalles_confirmar()
                 mesa_tipo_icono         =   'fa-sticky-note';
             break;
             case 'P':
-            //  mesa_tipo_titulo        =   '🔵&nbsp;&nbsp;&nbsp;PLEBISCITO';
                 mesa_tipo_titulo        =   '🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES';
+                mesa_tipo_icono         =   'fa-sticky-note';
+            break;
+            case 'S':
+                mesa_tipo_titulo        =   '🔵&nbsp;&nbsp;&nbsp;SENADORES';
+                mesa_tipo_icono         =   'fa-sticky-note';
+            break;
+            case 'D':
+                mesa_tipo_titulo        =   '🟠&nbsp;&nbsp;&nbsp;DIPUTADOS';
                 mesa_tipo_icono         =   'fa-sticky-note';
             break;
         }
@@ -908,8 +941,9 @@ function mesa_cambiar_estado( ID , OBJETO )
 function mesa_filtrar( opcion )
 {
 //  Quitar opcion destacada
-    $("#opcion-voto-G").removeClass("activo").addClass("nuevo");
-    $("#opcion-voto-A").removeClass("activo").addClass("nuevo");
+    $("#opcion-voto-P").removeClass("activo").addClass("nuevo");
+    $("#opcion-voto-S").removeClass("activo").addClass("nuevo");
+    $("#opcion-voto-D").removeClass("activo").addClass("nuevo");
 
 //  Validar el estado del filtro
     if( mesa_filtro == opcion )
@@ -947,6 +981,33 @@ function mesa_filtrar( opcion )
 
         //  Marcar opcion destacada
             $("#opcion-voto-A").removeClass("nuevo").addClass("activo");
+        }
+
+    //  Presidentes
+        if( opcion == 'P' )
+        {
+            $(".P").css("display","block");
+
+        //  Marcar opcion destacada
+            $("#opcion-voto-P").removeClass("nuevo").addClass("activo");
+        }
+
+    //  Senadores
+        if( opcion == 'S' )
+        {
+            $(".S").css("display","block");
+
+        //  Marcar opcion destacada
+            $("#opcion-voto-S").removeClass("nuevo").addClass("activo");
+        }
+
+    //  Diputados
+        if( opcion == 'D' )
+        {
+            $(".D").css("display","block");
+
+        //  Marcar opcion destacada
+            $("#opcion-voto-D").removeClass("nuevo").addClass("activo");
         }
 
     //  Almacenar Filtro
@@ -1042,7 +1103,9 @@ function estadoConsolidados( estado )
 //  Cambiar el Estado de consolidados
 function posicionConsolidados( posicion )
 {
-//  Obtener los elementos
+    if( estado_consolidados == 'of' ) {}
+
+    //  Obtener los elementos
     const consolidados_l = document.getElementById('consolidados-posicion-l');
     const consolidados_r = document.getElementById('consolidados-posicion-r');
 
@@ -1075,8 +1138,19 @@ function posicionConsolidados( posicion )
         }
     }
 
+    //	Construir Variable para enviar a PubNub
+    let pubnub       	=
+    {
+        'accion'		:	'cons_template',
+        'position'      :	posicion
+    }
+
+//	Enviar Notificación a PubNub
+    enviarPubNub( pubnub );
+
 //	Almacenar la Posicion en Cookie
     $.cookie('vav_cons_posicion', posicion , { expires: 7, path: '/' });
+
 }
 
 //  Cambiar el Estado de consolidados

@@ -119,7 +119,9 @@
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Presidenciales" onclick="mesa_filtrar('G');">🔴</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-P" title="Presidenciales" onclick="mesa_filtrar('P');">🔴</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-S" title="Senadores" onclick="mesa_filtrar('S');">🔵</div>
+							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-D" title="Diputados" onclick="mesa_filtrar('D');">🟠</div>
 						</div>
 					</header>
 				</section>
@@ -252,8 +254,9 @@
 						</div>
 
 						<div class="swich-r-box swich-nav box-shadow">
+							
 							<noscript>
-							<div class="swich-mesas" id="swich-opcion-mesas">
+							<div class="swich-mesas" id="swich-opcion-mesas" style="margin: 0px 0px 10px 0px">
 								<h1>Configuración de consolidados</h1>
 								<h2>Selecciona una región para desplegar los resultados</h2>
 								<div id="consolidados-render" class="consolidados bordes-radius" onclick="consolidados_asignar();">
@@ -264,28 +267,32 @@
 								</div>
 							</div>
 							</noscript>
+							
 							<div class="swich-consolidados">
-								<noscript>
 								<div>
-									<div class="swich-consolidados-titulo">Posición</div>
-									<div class="swich-consolidados-items">
-										<div id="consolidados-posicion-l" class="item on tipsy-top" onclick="posicionConsolidados('l');" title="<h2>A la izquierda</h2><p>Será publicado el modulo consolidados</p>"><i class="fas fa-arrow-left"></i></div>
-										<div id="consolidados-posicion-r" class="item of tipsy-top" onclick="posicionConsolidados('r');" title="<h2>A la derecha</h2><p>Será publicado el modulo consolidados</p>"><i class="fas fa-arrow-right"></i></div>
+									<div class="swich-consolidados-h1">Consolidados Presidenciales</div>
+									<div class="swich-consolidados-titulo">Cantidad de candidatos en pantalla</div>
+									<div class="swich-consolidados-items" id="consolidados-candidad-candidatos">
+										<div id="consolidados-posicion-l" class="item on" onclick="posicionConsolidados('l');">
+										&nbsp;<span style="font-weight: bold;">3</span>&nbsp;&nbsp;MAYORIAS&nbsp;
+										</div>
+										<div id="consolidados-posicion-r" class="item of" onclick="posicionConsolidados('r');">
+											TODOS LOS CANDIDATOS&nbsp;
+										</div>
 									</div>
 								</div>
-								</noscript>
 								<div>
-									<div class="swich-consolidados-h1">Configuración de consolidados</div>
 									<div class="swich-consolidados-titulo">Estado del modulo en pantalla</div>
 									<div class="swich-consolidados-items">
-										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');"><i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO</div>
-										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE</div>
+										<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');">&nbsp;<i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO&nbsp;</div>
+										<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');">&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE&nbsp;</div>
 									</div>
 									<div class="swich-controles">
 										<div id="estado-preview-consolidados" class="preview bordes-radius" style="margin: 0 0 0 15px;" onclick="consolidadosPreview();">PREVIEW</div>
 									</div>
 								</div>
 							</div>
+
 						</div>
 
 					</section>

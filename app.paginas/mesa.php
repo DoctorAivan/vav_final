@@ -95,11 +95,11 @@
 									<div>Filtrar<br>Mesas</div>
 								</label>
 							</div>
-
-							<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-G" title="Presidenciales" onclick="mesa_filtrar('G');">🔴</div>
+							<div class="boton box-shadow-light bordes-radius tipsy-top" id="opcion-voto-P" title="Presidenciales" onclick="mesa_filtrar('P');">🔴</div>
+							<div class="boton box-shadow-light bordes-radius tipsy-top" id="opcion-voto-S" title="Senadores" onclick="mesa_filtrar('S');">🔵</div>
+							<div class="boton box-shadow-light bordes-radius tipsy-top" id="opcion-voto-D" title="Diputados" onclick="mesa_filtrar('D');">🟠</div>
 							<div class="separador"></div>
 							<div class="boton boton-sin-margen editar box-shadow-light bordes-radius" onclick="mesa_nueva();"><i class="fas fa-plus-circle"></i> Nueva Mesa</div>
-
 							<noscript>
 								<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-1" title="Gobernadores" onclick="mesa_filtrar(1);"><i class="fas fa-university"></i></div>
 								<div class="boton nuevo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-2" title="Alcaldes" onclick="mesa_filtrar(2);"><i class="fas fa-user"></i></div>

@@ -15,6 +15,14 @@
         {
             return 'fa-sticky-note';
         }
+        else if( $icono == 'S' )
+        {
+            return 'fa-sticky-note';
+        }
+        else if( $icono == 'D' )
+        {
+            return 'fa-sticky-note';
+        }
     }
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
@@ -33,6 +41,14 @@
         else if( $icono == 'P' )
         {
             return '🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES';
+        }
+        else if( $icono == 'S' )
+        {
+            return '🔵&nbsp;&nbsp;&nbsp;SENADORES';
+        }
+        else if( $icono == 'D' )
+        {
+            return '🟠&nbsp;&nbsp;&nbsp;DIPUTADOS';
         }
     }
 

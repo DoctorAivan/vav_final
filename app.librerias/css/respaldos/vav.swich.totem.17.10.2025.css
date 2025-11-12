@@ -1,0 +1,701 @@
+*
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@font-face
+{
+	font-family: "TTFirsNeue_Light";
+	src: local('TTFirsNeue_Light'), url("fonts/TTFirsNeue-Light.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "TTFirsNeue_SemiBold";
+	src: local('TTFirsNeue_SemiBold'), url("fonts/TTFirsNeue-SemiBold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "TTFirsNeue_Bold";
+	src: local('TTFirsNeue_Bold'), url("fonts/TTFirsNeue-Bold.ttf") format("truetype");
+}
+
+@font-face
+{
+	font-family: "Santral_Book";
+	src: local('Santral_Book'), url("fonts/Santral-Book.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_SemiBold";
+	src: local('Santral_SemiBold'), url("fonts/Santral-SemiBold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_Bold";
+	src: local('Santral_Bold'), url("fonts/Santral-Bold.ttf") format("truetype");
+}
+@font-face
+{
+	font-family: "Santral_ExtraBold";
+	src: local('Santral_ExtraBold'), url("fonts/Santral-ExtraBold.ttf") format("truetype");
+}
+
+:root
+{
+	--color-white : #ffffff;
+	--color-black : #1c1c1c;
+
+	--ganador-color : #ff1b6a;
+	--ganador-color-invertido : #ffffff;
+	--ganador-color-sombra : #ff1b6a50;
+
+	--ganador-voto-a : #ff1b6a00;
+	--ganador-voto-b : #ff1b6a50;
+	--ganador-1-voto-a : #ffffff00;
+	--ganador-1-voto-b : #ffffffb1;
+
+	/* CONTENEDOR PRINCIPAL */
+	--contenedor-principal-width : 350px;
+	--contenedor-principal-height : 700px;
+	--contenedor-principal-margin : 10px;
+
+	/* CONTENEDOR CANDITATOS */
+	--candidato-contenedor-width : 320px;
+	--candidato-contenedor-height : 260px;
+
+	--candidato-nombre : #1c1c1c;
+	--candidato-apellido : #1c1c1c;
+
+	--canditado-color : #007fef;
+	--canditado-color-invertido : #ffffff;
+	--canditado-color-sombra : #007fef50;
+	
+	--canditado-voto-a : #007fef00;
+	--canditado-voto-b : #007fef85;
+	--canditado-1-voto-a : #ffffff00;
+	--canditado-1-voto-b : #ffffffb1;
+
+	/* CONTENEDOR CONSOLIDADOS */
+	--consolidado-height : 140px;
+	--consolidado-candidatos-height : 105px;
+	--consolidado-titulo-height : 35px;
+	--consolidado-background : #203363;
+
+	--consolidado-candidato-width : 425px;
+	--consolidado-candidato-height : 105px;
+	--consolidado-item-margin : 30px;
+
+	--transition-time : 0.6s;
+
+	/* Colores para los tipos de candidatos */
+	--presidentes-color : #ff1b6a;
+	--senadores-color : #1b7aff;
+	--diputados-color : #ffc61b;
+}
+
+body
+{
+	overflow: hidden;
+	background: transparent;
+}
+
+#render
+{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 1920px;
+	height: 1080px;
+	/*
+	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
+	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
+	*/
+	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
+	background: transparent;
+	overflow: hidden;
+}
+	.render-preview
+	{
+		background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
+	}
+	#no-cursor
+	{
+		z-index: 100;
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		display: none;
+	}
+	#render-mesa-1
+	{
+		z-index: 10;
+		position: absolute;
+	}
+	#render-mesa-2
+	{
+		z-index: 9;
+		position: absolute;
+	}
+	#render-mesa-totales
+	{
+		z-index: 99;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 1920px;
+		height: var(--consolidado-height)
+	}
+
+	.tottem
+	{
+		position: absolute;
+		width: var(--contenedor-principal-width);
+	}
+	.floating
+	{
+		position: absolute;
+	}
+
+/*
+	CONSOLIDADOS
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.consolidados
+	{
+		position: relative;
+		width: 100%;
+		height: var(--consolidado-height);
+		background: #ececec;
+	}
+	.consolidados .titulo
+	{
+		position: relative;
+		width: 100%;
+		height: var(--consolidado-titulo-height);
+		background: var(--consolidado-background);
+		font-family: 'Santral_SemiBold';
+		color: var(--color-white);
+		font-size: 1.35rem;
+		padding: 4px 0 0 80px;
+	}
+		.consolidados .titulo .titulo-totales
+		{
+			font-family: 'Santral_ExtraBold';
+		}
+		.consolidados .candidatos
+		{
+			position: relative;
+			width: 1760px;
+			height: var(--consolidado-candidatos-height);
+			margin: 0px 0px 0px 80px;
+			overflow: hidden;
+		}
+			.consolidados .candidatos .candidato
+			{
+				position: absolute;
+				overflow: hidden;
+				width: var(--consolidado-candidato-width);
+				height: var(--consolidado-candidato-height);
+				background: #ffffff;
+				box-shadow: 0 30px 20px #00000025;
+				display: grid;
+				grid-template-columns: 99px 148px 178px;
+				transition: all var(--transition-time) ease-in-out;
+			}
+				.consolidados .candidatos .candidato .candidato-imagen
+				{
+					z-index: 3;
+					position: relative;
+					padding: 0 0 0 0;
+					width: 100%;
+					height: 100%;
+				}
+					.consolidados .candidatos .candidato .candidato-imagen img
+					{
+						position: absolute;
+						width: 100%;
+						bottom: -22px;
+					}
+					
+					.consolidados .candidatos .candidato .candidato-detalles
+					{
+						z-index: 2;
+						position: relative;
+						text-align: left;
+						text-transform: uppercase;
+						color: var(--candidato-nombre);
+						background: #ffffff;
+						padding: 25px 0 0 13px;
+						box-shadow: 0 40px 60px #00000050;
+						transition: all var(--transition-time) ease-in-out;
+					}
+						.consolidados .candidatos .candidato .candidato-detalles .candidato-detalles-nombre
+						{
+							font-family: 'Santral_SemiBold';
+							font-size: 1.2rem;
+							line-height: 1.2rem;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							transition: all var(--transition-time) ease-in-out;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						.consolidados .candidatos .candidato .candidato-detalles .candidato-detalles-apellido
+						{
+							width: 100%;
+							font-family: 'Santral_Bold';
+							font-size: 1.5rem;
+							line-height: 1.5rem;
+							padding: 1px 0 3px 0;
+							transition: all var(--transition-time) ease-in-out;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						.consolidados .candidatos .candidato .candidato-detalles .candidato-detalles-partido
+						{
+							float: left;
+							width: auto;
+							font-family: 'Santral_SemiBold';
+							font-size: 1rem;
+							line-height: 1rem;
+							padding: 3px 8px 3px 8px;
+							transition: all var(--transition-time) ease-in-out;
+							color: var(--color-white);
+							background: var(--canditado-color);
+						}
+
+					.consolidados .candidatos .candidato .candidato-votos
+					{
+						z-index: 1;
+						position: relative;
+						width: 100%;
+						padding: 60px 0 0 15px;
+						background: #ffffff;
+						text-align: left;
+						transition: all var(--transition-time) ease-in-out;
+					}
+						.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor
+						{
+							position: relative;
+							width: 100%;
+							z-index: 6;
+							color: var(--canditado-color);
+							transition: all var(--transition-time) ease-in-out;
+						}
+							.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor .votos
+							{
+								font-family: 'TTFirsNeue_SemiBold';
+								font-size: 2.7rem;
+								line-height: 2.7rem;
+							}
+							.consolidados .candidatos .candidato .candidato-votos .candidato-votos-valor .porcentaje
+							{
+								font-family: 'TTFirsNeue_Light';
+								font-size: 1.6rem;
+								line-height: 1.6rem;
+								padding-top: 3px;
+							}
+
+/*
+	ESTILOS DEL GANADOR
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.consolidados .candidatos .order-1 .candidato-votos
+	{
+		background: var(--ganador-color) !important;
+	}
+	.consolidados .candidatos .order-1 .candidato-detalles
+	{
+		background: var(--ganador-color) !important;
+		color: var(--color-white);
+	}
+		.consolidados .candidatos .order-1 .candidato-detalles .candidato-detalles-partido
+		{
+			background: var(--color-white) !important;
+			color: var(--ganador-color);
+		}
+	.consolidados .candidatos .order-1 .candidato-votos .candidato-votos-valor
+	{
+		color: var(--color-white);
+	}
+
+	.consolidados .candidatos .order-1
+	{
+		z-index: 4;
+		left: calc( var(--consolidado-candidato-width) * 0 );
+		animation: orden-1-kf 0s ease-out 1 forwards;
+	}
+	.consolidados .candidatos .order-2
+	{
+		z-index: 3;
+		left: calc( var(--consolidado-candidato-width) * 1 + 20px );
+		animation: orden-2-kf 0s ease-out 1 forwards;
+	}
+	.consolidados .candidatos .order-3
+	{
+		z-index: 2;
+		left: calc( var(--consolidado-candidato-width) * 2 + 40px );
+		animation: orden-3-kf 0s ease-out 1 forwards;
+	}
+	.consolidados .candidatos .order-4
+	{
+		z-index: 1;
+		left: calc( var(--consolidado-candidato-width) * 3 + 60px);
+		animation: orden-4-kf 0s ease-out 1 forwards;
+	}
+/*
+	TOTTEM
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .box
+	{
+		position: relative;
+		width: 100%;
+	}
+		.tottem .box .header
+		{
+			z-index: 3;
+			width: 100%;
+			position: relative;
+			text-transform: uppercase;
+			text-align: center;
+			background: #ffffff;
+		}
+			.tottem .box .header h2
+			{
+				font-family: 'Santral_Bold';
+				font-size: 1.7rem;
+				line-height: 1.7rem;
+				color: var(--color-white);
+				margin-bottom: 8px;
+				padding: 8px 0px 6px 0;
+			}
+			.tottem .box .header h3
+			{
+				background: var(--alcalde-color-invertido);
+				font-family: 'Santral_Bold';
+				font-size: 1.3rem;
+				line-height: 1.3rem;
+				opacity: 0.7;
+				margin: 3px 0 0 0;
+			}
+				.tottem .box .header h3 .separador
+				{
+					display: inline-block;
+					width: 2px;
+					height: 15px;
+					margin: 0 5px 0 5px;
+					background: var(--color-black);
+				}
+/*
+	CANDIDATOS
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .box .candidatos-padding
+	{
+		position: relative;
+		width: 100%;
+		padding: 0 var(--contenedor-principal-margin) var(--contenedor-principal-margin) var(--contenedor-principal-margin);
+		background: linear-gradient( 0deg, #ececec 0%, #ffffff 100%);
+		overflow: hidden;
+	}
+		.tottem .box .candidatos
+		{
+			z-index: 1;
+			position: relative;
+			width: 100%;
+			height: var(--contenedor-principal-height);
+		}
+			.tottem .box .candidatos .candidato
+			{
+				position: absolute;
+				width: var(--candidato-contenedor-width);
+				display: grid;
+				grid-template-columns: 1fr;
+				transition: all var(--transition-time) ease-in-out;
+				box-shadow: 0 10px 10px #00000010;
+				overflow: hidden;
+			}
+				.tottem .box .candidatos .candidato .candidato-imagen
+				{
+					z-index: 1;
+					display: grid;
+					position: relative;
+					width: 100%;
+					height: 128px;
+					background: #fff;
+					overflow: hidden;
+				}
+					.tottem .box .candidatos .candidato .candidato-imagen img
+					{
+						place-self: center;
+						position: relative;
+						height: 152px;
+						opacity: 1;
+					}
+				.tottem .box .candidatos .candidato .candidato-info
+				{
+					z-index: 2;
+					position: relative;
+					background: #f6f6f6;
+					transition: all var(--transition-time) ease-in-out;;
+					padding: 9px 15px 0 15px;
+					margin-top: -5px;
+				}
+					.tottem .box .candidatos .candidato .candidato-detalles
+					{
+						position: relative;
+						z-index: 6;
+						text-align: center;
+						text-transform: uppercase;
+						color: var(--candidato-nombre);
+					}
+						.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-nombre
+						{
+							font-family: 'Santral_SemiBold';
+							font-size: 1.2rem;
+							line-height: 1.2rem;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							transition: all var(--transition-time) ease-in-out;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-apellido
+						{
+							width: 100%;
+							font-family: 'Santral_Bold';
+							font-size: 1.1rem;
+							line-height: 1.1rem;
+							transition: all var(--transition-time) ease-in-out;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-partido
+						{
+							width: 100%;
+							display: flex;
+							justify-content: center;
+						}
+							.tottem .box .candidatos .candidato .candidato-detalles .candidato-detalles-partido-valor
+							{
+								font-family: 'Santral_SemiBold';
+								font-size: 1rem;
+								line-height: 1rem;
+								padding: 3px 8px 3px 8px;
+								margin: 0 0 3px 0;
+								transition: all var(--transition-time) ease-in-out;
+								color: var(--color-white);
+								background: var(--canditado-color);
+							}
+
+					.tottem .box .candidatos .candidato .candidato-votos
+					{
+						position: relative;
+						width: 100%;
+						text-align: center;
+						margin: -1px 0 10px 0;
+					}
+						.tottem .box .candidatos .candidato .candidato-votos .candidato-votos-valor
+						{
+							position: relative;
+							width: 100%;
+							z-index: 6;
+							font-family: 'TTFirsNeue_SemiBold';
+							font-size: 3.2rem;
+							line-height: 3.2rem;
+							color: var(--canditado-color);
+							transition: all var(--transition-time) ease-in-out;
+						}
+							.tottem .box .candidatos .candidato-votos-animacion
+							{
+								z-index: 1;
+								top: 0px;
+								left: 0px;
+								position: absolute;
+								width: 100%;
+								height: 100%;
+								opacity: 0;
+								background: linear-gradient( 135deg, var(--canditado-voto-a) 0%, var(--canditado-voto-b) 100%);
+							}
+
+/*
+	ESTILOS DEL GANADOR
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .box .candidatos .order-1 .candidato-info
+	{
+		background: var(--ganador-color) !important;
+	}
+	.tottem .box .candidatos .order-1 .candidato-detalles
+	{
+		color: var(--color-white);
+	}
+	.tottem .box .candidatos .order-1 .candidato-detalles .candidato-detalles-partido-valor
+	{
+		color: var(--ganador-color);
+		background: var(--color-white);
+	}
+	.tottem .box .candidatos .order-1 .candidato-votos .candidato-votos-valor
+	{
+		color: var(--color-white);
+	}
+	.tottem .box .candidatos .order-1 .candidato-votos-animacion
+	{
+		background: linear-gradient( 135deg, var(--ganador-1-voto-a) 0%, var(--ganador-1-voto-b) 100%);
+	}
+
+/*
+	COLORES CANDIDATOS SEGUN SU TIPO
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .tipo-presidencial .header h2
+	{
+		background-color: var(--presidentes-color);
+	}
+
+	.tottem .tipo-senadores .header h2
+	{
+		background-color: var(--senadores-color);
+	}
+
+	.tottem .tipo-diputados .header h2
+	{
+		background-color: var(--diputados-color);
+	}
+
+/*
+	POSICIONES DE LOS BLOQUES
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.tottem .box .candidatos .order-1
+	{
+		z-index: 7;
+		top: calc( var(--candidato-contenedor-height) * 0 );
+		animation: orden-1-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-2
+	{
+		z-index: 6;
+		top: calc( var(--candidato-contenedor-height) * 1);
+		animation: orden-2-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-3
+	{
+		z-index: 5;
+		top: calc( var(--candidato-contenedor-height) * 2);
+		animation: orden-3-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-4
+	{
+		z-index: 4;
+		top: calc( var(--candidato-contenedor-height) * 3);
+		animation: orden-4-kf 0s ease-out 1 forwards;
+	}
+	.tottem .box .candidatos .order-5
+	{
+		z-index: 3;
+		top: calc( var(--candidato-contenedor-height) * 4);
+		animation: orden-5-kf 0s ease-out 1 forwards;
+	}
+
+	@keyframes orden-1-kf { 1% { z-index: 5 } }
+	@keyframes orden-2-kf { 1% { z-index: 4 } }
+	@keyframes orden-3-kf { 1% { z-index: 3 } }
+	@keyframes orden-4-kf { 1% { z-index: 2 } }
+	@keyframes orden-5-kf { 1% { z-index: 1 } }
+
+/*
+	ANIMACIONES
+	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+*/
+	.animar_voto
+	{
+		animation: keyframe_voto var(--transition-time) ease 1 forwards;
+	}
+	.animar_voto_texto
+	{
+		animation: keyframe_voto_texto var(--transition-time) ease 1 forwards;
+	}
+	.animar_voto_icono
+	{
+		animation: keyframe_voto_icono var(--transition-time) ease 1 forwards;
+	}
+
+	.letters_in
+	{
+		animation: keyframe_letter_in var(--transition-time) ease-out 1 forwards;
+	}
+	.letters_zoom_in
+	{
+		animation: keyframe_letter_zoom_in var(--transition-time) ease-out 1 forwards;
+	}
+	.arrow_zoom_in
+	{
+		animation: keyframe_arrow_zoom_in var(--transition-time) ease-out 1 forwards;
+	}
+
+	.transition
+	{
+		transition: all var(--transition-time) ease-in-out;
+	}
+	.transition-on
+	{
+		transition: top var(--transition-time) ease, left var(--transition-time) ease, right var(--transition-time) ease, transform var(--transition-time) ease, bottom var(--transition-time) ease;
+	}
+	.transition-of
+	{
+		transition: all 0s ease;
+	}
+
+	@keyframes keyframe_letter_in
+	{
+		0% { opacity: 0 }
+		25% { opacity: 0 }
+		100% { opacity: 1 }
+	}
+	@keyframes keyframe_letter_zoom_in
+	{
+		0% { opacity: 0; transform: scale(1.2) }
+		50% { opacity: 0; transform: scale(1.2) }
+		100% { opacity: 1; transform: scale(1) }
+	}
+	@keyframes keyframe_arrow_zoom_in
+	{
+		0% { opacity: 0; filter: brightness(2); }
+		50% { opacity: 0; filter: brightness(2); }
+		100% { opacity: 1; filter: brightness(1); }
+	}
+
+	@keyframes keyframe_voto
+	{
+		0% { opacity: 0 }
+		45% { opacity: 1 }
+		55% { opacity: 1 }
+		100% { opacity: 0 }
+	}
+	@keyframes keyframe_voto_texto
+	{
+		0% {  }
+		45% { color: var(--color-white); }
+		55% { color: var(--color-white); }
+		100% {  }
+	}
+	@keyframes keyframe_voto_icono
+	{
+		0% { filter: invert(0) }
+		45% { filter: invert(1) }
+		55% { filter: invert(1) }
+		100% { filter: invert(0) }
+	}

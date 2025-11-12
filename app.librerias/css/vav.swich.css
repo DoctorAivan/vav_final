@@ -263,7 +263,7 @@
 				padding: 0 0 0 0;
 				display: grid;
 				grid-template-columns: 1fr;
-				grid-gap: 1rem;
+				grid-gap: 10px;
 			}
 				.swich-consolidados-h1
 				{
@@ -292,6 +292,7 @@
 					background: var(--color-border-2);
 					border-radius: var(--border-radius);
 					overflow: hidden;
+					transition: all .25s ease-in-out;
 				}
 					.swich-consolidados-items .item
 					{

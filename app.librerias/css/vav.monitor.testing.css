@@ -12,12 +12,7 @@
 }
     .titulo-seccion .test-votos .accion
     {
-        background: -webkit-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
-        background: -moz-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
-        background: -ms-linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
-        background: linear-gradient(to bottom , var(--color-texto-1) , var(--color-texto-1-a) 85%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+
     }
         .titulo-seccion .test-votos .accion i
         {
@@ -25,6 +20,7 @@
             line-height: 2.6rem;
             font-weight: 600;
             cursor: pointer;
+            color:white;
         }
     .titulo-seccion .test-votos .mesas
     {

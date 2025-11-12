@@ -167,12 +167,39 @@
 		//	Crear el div contenedor del candidato
 			const objeto = document.createElement('article');
 
+			console.log( mesa );
+			
 		//	Asignar las propiedades del div
 			objeto.id = 'MES' + mesa.mesa_id
 			objeto.className = `mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa G rojo`
 			objeto.setAttribute('mesa', mesa.mesa_id);
 			objeto.setAttribute('date', mesa.mesa_cambio);
 			objeto.setAttribute('created', mesa.mesa_publicado);
+
+		//	Definir el tipo de mesa
+			let mesa_tipo = ''
+
+		//	Validar tipo de mesa
+			if( mesa.mesa_tipo == 'G' )
+			{
+				mesa_tipo = '🔴&nbsp;&nbsp;&nbsp;GOBERNADORES';
+			}
+			else if( mesa.mesa_tipo == 'A' )
+			{
+				mesa_tipo = '🔵&nbsp;&nbsp;&nbsp;ALCALDES';
+			}
+			else if( mesa.mesa_tipo == 'P' )
+			{
+				mesa_tipo = '🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES';
+			}
+			else if( mesa.mesa_tipo == 'S' )
+			{
+				mesa_tipo = '🔵&nbsp;&nbsp;&nbsp;SENADORES';
+			}
+			else if( mesa.mesa_tipo == 'D' )
+			{
+				mesa_tipo = '🟠&nbsp;&nbsp;&nbsp;DIPUTADOS';
+			}
 
 		//	Asignar los elementos al div
 			objeto.innerHTML = `<div class="mesa-nueva">NUEVA</div>
@@ -181,7 +208,7 @@
 									<h2 class="${ mesa.mesa_destacada == 1 ? 'importante' : '' }">
 										<i class="fas ${ mesa.mesa_destacada == 1 ? 'fa-star' : ' fa-hashtag'}"></i> ${mesa.mesa_id}
 									</h2>
-									<div class="tipo">🔴&nbsp;&nbsp;&nbsp;PRESIDENCIALES</div>
+									<div class="tipo">${mesa_tipo}</div>
 									<div class="zona">${mesa.mesa_zona_titulo}</div>
 									<h3 class="line-1" id="${mesa.mesa_id}_mesa_nombre">${mesa.mesa_local}</h3>
 									<h4 class="line-1" id="${mesa.mesa_id}_mesa_numero">${mesa.mesa_numero}</h4>

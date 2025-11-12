@@ -11,8 +11,9 @@
 					<h2>Selecciona el tipo de votación <span>Obligatorio</span></h2>
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="consolidado-tipo">
-					<div class="box-shadow-light" onclick="consolidados_tipo('G');" id="consolidado-tipo-G">🔴&nbsp;&nbsp;&nbsp;GOBERNADORES</div>
-					<div class="box-shadow-light off" id="consolidado-tipo-A">🔵&nbsp;&nbsp;&nbsp;ALCALDES</div>
+					<div class="box-shadow-light" onclick="consolidados_tipo('P');" id="consolidado-tipo-P">🔴&nbsp;&nbsp;&nbsp;Presidentes</div>
+					<div class="box-shadow-light" onclick="consolidados_tipo('S');" id="consolidado-tipo-S">🔵&nbsp;&nbsp;&nbsp;Senadores</div>
+					<div class="box-shadow-light" onclick="consolidados_tipo('D');" id="consolidado-tipo-D">🟠&nbsp;&nbsp;&nbsp;Diputados</div>
 				</div>
 			</article>
 			<article class="formulario bg-1">

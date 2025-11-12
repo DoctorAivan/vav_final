@@ -2,9 +2,9 @@
     PostgreSQL Admin
     http://10.236.100.38/phpPgAdmin/
 
-    https://drive.google.com/drive/folders/1a0ZpoAvpPrdRENxXSALJNuFjqSPcI9Os?usp=sharing
-
     -   validar cantidad de mesas a mostrar [OK]
     -   validar accion reload en totem [OK]
     -   revisar mesa destacado estrella [OK]
-    -   consolidados preview , validar entrada y salida
+    -   Error en el switch al agregar una nueva mesa [OK]
+    -   consolidados preview , validar entrada y salida [OK]
+    

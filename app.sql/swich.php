@@ -410,6 +410,7 @@
 				$_CANDIDATOS['candidatos'][]		=	array	
 				(
 					'id'							=>	(int) $_MESA_CANDIDATOS->candidato_id,
+					'orden'							=>	(int) $_MESA_CANDIDATOS->candidato_orden,
 					'nombres'						=>	$_MESA_CANDIDATOS->candidato_nombres,
 					'apellidos'						=>	$_MESA_CANDIDATOS->candidato_apellidos,
 					'ind'							=>	$_MESA_CANDIDATOS->candidato_independiente,

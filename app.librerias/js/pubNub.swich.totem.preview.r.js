@@ -1,6 +1,5 @@
-
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
+const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 //	Mode de la Aplicación
 	let app_modo = 0
@@ -42,8 +41,11 @@
 	let mesa_totales_zona = 0
 	let mesa_totales_timer = null
 
+//	Cantidad maxima de candidatos por listado
+	const cantidad_maxima_candidatos = 8
+
 //	Intervalo de actualización de consolidados
-	const mesa_totales_intervalo = 5000
+	const mesa_totales_intervalo = 6000
 
 //	Transiciones
 	const tiempo_transiciones = 600
@@ -54,7 +56,7 @@
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.2'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -68,31 +70,38 @@
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
-//	Posicion de los Elementos en las Animaciones
+//	Contenedor de pantalla Full HD
+	const contenedor_tv_ancho = 1920;
+	const contenedor_tv_alto = 1080;
+
+//	Contenedor de los candidatos
+	const candidato_contenedor_ancho = 290;
+	const candidato_contenedor_separacion_x = 60;
+	const candidato_contenedor_separacion_y = 270; //178
 
 //	Cordenadas de la Mesa 1
 	const mesa_1_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '55px',
-				'y' : '178px',
+				'x' : candidato_contenedor_separacion_x + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-650px',
-				'y' : '178px',
+				'x' : ( candidato_contenedor_ancho * -1) + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '55px',
-				'y' : '178px',
+				'x' : candidato_contenedor_separacion_x + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-650px',
-				'y' : '178px',
+				'x' : ( candidato_contenedor_ancho * -1) + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			}
 		}
@@ -102,25 +111,25 @@
 	const mesa_2_cordenadas = {
 		'template_tottem' : {
 			'visible' : {
-				'x' : '1215px',
-				'y' : '178px',
+				'x' : ( contenedor_tv_ancho - candidato_contenedor_ancho - candidato_contenedor_separacion_x ) + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '1920px',
-				'y' : '178px',
+				'x' : contenedor_tv_ancho + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1215px',
-				'y' : '178px',
+				'x' : ( contenedor_tv_ancho - candidato_contenedor_ancho - candidato_contenedor_separacion_x ) + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '1920px',
-				'y' : '178px',
+				'x' : contenedor_tv_ancho + 'px',
+				'y' : candidato_contenedor_separacion_y + 'px',
 				'z' : 'unset'
 			}
 		}
@@ -135,20 +144,20 @@
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '-380px',
+				'x' : '0px',
 				'y' : '0px',
 				'z' : 'unset'
 			}
 		},
 		'template_floating' : {
 			'visible' : {
-				'x' : '1540px',
-				'y' : '0px',
+				'x' : '0px',
+				'y' : '863px',
 				'z' : 'unset'
 			},
 			'oculta' : {
-				'x' : '1920px',
-				'y' : '0px',
+				'x' : '0px',
+				'y' : '1125px',
 				'z' : 'unset'
 			}
 		}
@@ -163,10 +172,10 @@
 		message: function(message)
 		{
 		//	Obtener Nuevo Dato
-			let datoPubNub			=	message.message;
+			const datoPubNub			=	message.message;
 
 		//	Obtener Accion desde PubNub
-			let accion				=	datoPubNub.accion;
+			const accion				=	datoPubNub.accion;
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -226,6 +235,21 @@
 
 		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
+		//	Accion : Voto Emitido
+			if( accion == 'voto' )
+			{
+			//	Variables necesarias
+				const id = datoPubNub.id
+				const voto = datoPubNub.valor
+				const mesa = datoPubNub.mesa
+				const candidato = datoPubNub.candidato
+
+			//	Validar que el voto emitido este en pantalla
+				App.voto( id , mesa , candidato , voto );
+			}
+
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
 			//	Accion : Estado consolidados
 			if( accion == 'consolidados_preview' )
 			{
@@ -235,18 +259,7 @@
 			//	Validar estado del Modulo
 				if( estado == 'on' )
 				{
-				//	Obtener detalles de la Zona
-					const mesa_tipo = datoPubNub.tipo;
-					const mesa_zona = datoPubNub.zona;
-
-				//	Posicion de la mesa
-					mesa_totales_posicion = datoPubNub.position
-
-				//	Validar que exista una zona asignada
-					if( mesa_zona > 0 )
-					{
-						App.totales( mesa_tipo , mesa_zona );
-					}
+					App.totales();
 				}
 				else
 				{
@@ -260,23 +273,6 @@
 					mesa_totales_estado = false
 				}
 			}
-
-		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
-
-		//	Accion : Voto Emitido
-			if( accion == 'voto' )
-			{
-			//	Variables necesarias
-				const id = datoPubNub.id
-				const voto = datoPubNub.valor
-				const mesa = datoPubNub.mesa
-				const candidato = datoPubNub.candidato
-				const accion_voto = datoPubNub.accion_voto
-
-			//	Validar que el voto emitido este en pantalla
-				App.voto( id , mesa , candidato , voto );
-			}
-
 		}
 	});
 
@@ -298,6 +294,9 @@
 			if (mesa_totales_timer === null)
 			{
 				mesa_totales_timer = setInterval(App.totales_actualizar, mesa_totales_intervalo);
+			
+			//	Actualizar
+				App.actualizar_reloj();
 			}
 		},
 
@@ -315,9 +314,9 @@
 		totales_actualizacion_votos : (element, newValue, duration) =>
 		{
 		//	Obtener del DOM el valor actual
-			const startValue = Number( element.innerText.replace('.','') );
-			const newValueFormated = Number( newValue )
-			
+			const startValue = Number(element.innerText.replace(',','.'));
+			const newValueFormated = Number(newValue);
+		
 		//	Validar cambio en los votos
 			if( startValue === newValueFormated )
 			{
@@ -332,9 +331,9 @@
 				{
 					const elapsedTime = currentTime - startTime;
 					const progress = Math.min(elapsedTime / duration, 1);
-					const currentValue = Math.round(startValue + increment * progress);
+					const currentValue = startValue + increment * progress;
 
-					element.innerText = App.numero(currentValue);
+					element.innerText = currentValue.toFixed(2).replace('.',',');
 					
 					if (progress < 1)
 					{
@@ -342,7 +341,47 @@
 					}
 					else
 					{
-						element.innerText = App.numero(currentValue);
+						element.innerText = currentValue.toFixed(2).replace('.',',');
+						return
+					}
+				}
+			
+				requestAnimationFrame(update);
+			}
+		},
+
+	//	Generar interpolación entre el valor actual y final
+		totales_actualizacion_votos_totales : (element, newValue, duration) =>
+		{
+		//	Obtener del DOM el valor actual
+			const startValue = Number(element.innerText.replace('.',''));
+			const newValueFormated = Number(newValue);
+		
+		//	Validar cambio en los votos
+			if( startValue === newValueFormated )
+			{
+				return
+			}
+			else
+			{
+				const increment = newValue - startValue;
+				const startTime = performance.now();
+			
+				function update(currentTime)
+				{
+					const elapsedTime = currentTime - startTime;
+					const progress = Math.min(elapsedTime / duration, 1);
+					const currentValue = startValue + increment * progress;
+
+					element.innerText = App.numero(currentValue.toFixed(0))
+					
+					if (progress < 1)
+					{
+						requestAnimationFrame(update);
+					}
+					else
+					{
+						element.innerText = App.numero(currentValue.toFixed(0))
 						return
 					}
 				}
@@ -360,7 +399,7 @@
 			mesa_totales_zona = zona
 
 		//	Solicitar la mesa asignada
-			const api = await fetch( path_app + `/swich/mesas-totales/${tipo}-${zona}` )
+			const api = await fetch( path_app + '/swich/consolidados-presidencial/' )
 			.then( res => res.json() )
 			.then( res => res || [] );
 
@@ -385,7 +424,7 @@
 		totales_actualizar : async function()
 		{
 		//	Solicitar la mesa asignada
-			const api = await fetch( path_app + `/swich/mesas-totales/${mesa_totales_tipo}-${mesa_totales_zona}` )
+			const api = await fetch( path_app + '/swich/consolidados-presidencial/' )
 			.then( res => res.json() )
 			.then( res => res || [] );
 
@@ -395,6 +434,9 @@
 		//	Almacenar listado de candidatos para gestionar actualizacion
 			mesa_totales_candidatos = api.candidatos
 
+			const get_mesa_totales_votos = document.getElementById('mesa-0-totales');
+			App.totales_actualizacion_votos_totales(get_mesa_totales_votos , mesa_totales_votos , 1000 );
+
 		//	Validar que existan mesas en la Zona
 			if( api.mesas > 0 )
 			{
@@ -403,67 +445,22 @@
 					App.ordenar_votos_totales();
 				}
 			}
+
+		//	Reloj
+			App.actualizar_reloj();
 		},
 
-	//	Asignar votos a la mesa de consolidados
-		voto_totales : function( candidato , voto , accion )
+	//	Actualizar reloj de consolidados
+		actualizar_reloj : function()
 		{
-		//	Obtener el candidato desde el listado
-			let candidato_obj = mesa_totales_candidatos.find(({ id }) => id === candidato);
+		//	Construir reloj
+			const now = new Date();
+			const hh = String(now.getHours()).padStart(2, '0');
+			const mm = String(now.getMinutes()).padStart(2, '0');
+			const reloj = `${hh}:${mm}`;
 
-		//	Validar que el candidato exista en el DOM
-			if( candidato_obj )
-			{
-			//	Actualizar un voto
-				if( accion == 'g' )
-				{
-				//	Actualizar mesa totales
-					App.totales_actualizar()
-					return
-				}
-
-			//	Sumar un voto
-				else if( accion == 's' )
-				{
-				//	Actualizar el voto en el listado
-					candidato_obj.votos += 1
-
-				//	Actualizar el total de votos
-					mesa_totales_votos += 1
-				}
-
-			//	Restar un voto
-				else if( accion == 'r' )
-				{
-				//	Validar que el voto no sea cero
-					if( voto != 0 )
-					{
-					//	Actualizar el voto en el listado
-						candidato_obj.votos -= 1
-
-					//	Actualizar el total de votos
-						mesa_totales_votos -= 1
-					}
-					else
-					{
-					//	Actualizar mesa totales
-						App.totales_actualizar()
-						return
-					}
-				}
-
-				const candidato_div_voto_animacion = document.querySelector('#candidato-' + candidato + ' > div.candidato-info > div.candidato-votos-animacion');
-				candidato_div_voto_animacion.classList.add('animar_voto');
-
-			//	Reiniciar animación del voto
-				setTimeout(function()
-				{
-					candidato_div_voto_animacion.classList.remove('animar_voto');
-				}, tiempo_transiciones);
-
-			//	Ordenar candidatos
-				App.ordenar_votos_totales();
-			}
+			const contenedor_reloj = document.getElementById('candidatos-reloj');
+			contenedor_reloj.innerHTML = reloj			
 		},
 
 	//	Ordenar Votos de los candidatos
@@ -486,7 +483,7 @@
 				const candidato_voto_valor = document.getElementById(`candidato-${candidato.id}-votos`);
 
 			//	Animar votos
-				App.totales_actualizacion_votos(candidato_voto_valor , Number( candidato.votos ) , 1000 );
+				App.totales_actualizacion_votos(candidato_voto_valor , candidato.porcentaje , 1000 );
 
 			//	Validar Posicion de los Objetos
 				if( id_orden < 3 )
@@ -498,31 +495,11 @@
 					id_orden = 4
 				}
 			});
-
-		//	Calcular el total de votos
-			App.calcular_votos_totales();
-		},
-
-	//	Calcular el total de votos
-		calcular_votos_totales : function ()
-		{
-		//	Obtener contenedor de los totales
-			const mesa_totales_detalles = document.getElementById('mesa-totales-detalles');
-			
-		//	Calcular el total de Votos
-		//	const mesa_totales_votos =  mesa_totales_candidatos.reduce((total, candidato) => total + candidato.votos, 0);
-
-		//	Actualizar el DOM
-			mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} <span>${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }</span>`
-		//	mesa_totales_detalles.innerHTML = `${mesa_totales_mesas} MESAS&ensp;-&ensp;${App.numero(mesa_totales_votos)} VOTOS`
 		},
 
 	//	Dibujar la mesa en el DOM
 		totales_draw : function()
 		{
-		//	Asignar tipo de zona
-			const totales_zona = App.obtener_zona_region( mesa_totales_zona );
-
 		//  DIV render en el DOM
 			const render = document.getElementById('render-mesa-totales' );
 
@@ -534,19 +511,32 @@
 			div_mesa.id = 'mesa-0'
 
 		//	Asignar las clases a la mesa
-			div_mesa.className = `consolidados tipo-${mesa_totales_tipo.toLowerCase()}`
+			div_mesa.className = `consolidados`
 
 		//	Crear elementos en el DIV
-			div_mesa.innerHTML =   `<div class="header">
-										<div class="header-cnt">
-											<h2 id="mesa-totales-detalles">
-												${mesa_totales_mesas} <span>${ mesa_totales_mesas > 1 ? 'MESAS' : 'MESA' }</span>
-											</h2>
-											<h3 id="mesa-totales-zona">${totales_zona}</h3>
+			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
+									<div class="candidatos-detalles">
+										<div class="candidatos-detalles-votos">
+											<span class="candidatos-detalles-votos-border"></span>
+											<span class="candidatos-detalles-votos-titulo">
+												CONSOLIDADO
+											</span>
+											<span class="candidatos-detalles-votos-chv">
+												CHV
+											</span>
+											<span class="candidatos-detalles-votos-totales" id="mesa-0-totales">
+												${ App.numero(mesa_totales_votos) }
+											</span>
+											<span class="candidatos-detalles-votos-subtitulo">
+												VOTOS
+											</span>
 										</div>
-									</div>
-									<div class="motion"></div>
-									<div class="candidatos" id="mesa-0-candidatos"></div>`;
+										<div class="candidatos-detalles-hashtag">#Elecciones2025</div>
+										<div class="candidatos-detalles-reloj" id="candidatos-reloj">16:22</div>
+										<div class="candidatos-detalles-logo">
+											<img src="${path_imagenes}logo-chv-noticias.png?v=2.2" />
+										</div>
+									</div>`;
 
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
@@ -571,159 +561,49 @@
 				objeto.id = 'candidato-' + candidato.id
 
 			//	Asignar los elementos al div
-				objeto.innerHTML = `<div class="candidato-imagen">
-										<div class="candidato-imagen-marco">
-											<img
-												src="${path_imagenes_candidatos}${candidato.id}.webp"
-												class="candidato-imagen-src"
-											/>
-										</div>
-										<div class="candidato-detalles-alianza">
-											<div class="candidato-detalles-alianza-partido">
-												${App.obtener_partido(candidato.partido)}
-											</div>
-											<div class="candidato-detalles-alianza-pacto">
-												${App.obtener_pacto(candidato.pacto)}
-											</div>
+				objeto.innerHTML = `<div class="candidato-electo">
+										<img src="${path_imagenes}icono-electo.png" />
+									</div>
+									<div class="candidato-imagen">
+										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.png?v=2.2" />
+									</div>
+									<div class="candidato-detalles">
+										<div class="candidato-detalles-nombre">${candidato.nombres} ${candidato.apellidos}</div>
+										<div class="candidato-votos-valor">
+											<span class="votos" id="candidato-${candidato.id}-votos">${ candidato.porcentaje.replace('.',',') }</span>
+											<span class="porcentaje">%</span>
 										</div>
 									</div>
-									<div class="candidato-info">
-										<div class="candidato-detalles">
-											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
-											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
-										</div>
-										<div class="candidato-votos">
-											<div class="candidato-votos-valor" id="candidato-${candidato.id}-votos">${App.numero(candidato.votos)}</div>
-										</div>
-										<div class="candidato-votos-animacion"></div>
+									<div class="candidato-votos-animacion"></div>
+									<div class="candidato-fondo">
+										<img src="${path_imagenes}bg-candidato-consolidados.png?v=2.2" />
 									</div>`
 
 			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
-			//	Incrementar el ID de la lista
-				id_orden++
+			//	Validar Posicion de los Objetos
+				if( id_orden < 3 )
+				{
+					id_orden++	
+				}
+				else
+				{
+					id_orden = 4
+				}
+
 			});
 
 		//	Mostrar el pantalla
 			App.animar_entrada_totales();
 		},
 
-	//	Cambiar el tamaño de texto
-		validar_largo_zona : function(zona)
-		{
-		//	Obtener el elemento que contiene el texto
-			const elemento = document.getElementById("mesa-totales-zona");
-		
-		//	Contar el largo del string
-			const largoTexto = zona.length;
-
-		//	Validar largo de la zona
-			if (largoTexto <= 8)
-			{
-				elemento.style.fontSize = "2.4rem";
-				elemento.style.lineHeight = "2.4rem";
-			}
-			else if (largoTexto <= 10)
-			{
-				elemento.style.fontSize = "2.3rem";
-				elemento.style.lineHeight = "2.3rem";
-			}
-			else if (largoTexto <= 12)
-			{
-				elemento.style.fontSize = "2.2rem";
-				elemento.style.lineHeight = "2.2rem";
-			}
-			else if (largoTexto <= 14)
-			{
-				elemento.style.fontSize = "2.1rem";
-				elemento.style.lineHeight = "2.1rem";
-			}
-			else
-			{
-				elemento.style.fontSize = "1.75rem";
-				elemento.style.lineHeight = "1.75rem";
-			}
-		},
-
 	//	Animar la entrada del bloque
 		animar_entrada_totales : function()	
 		{
-			render_mesa_totales.classList.remove('transition-on')
-
-		//	Tipo de Mesa Gobernadores
-			if( mesa_totales_posicion == 'r' )
-			{
-			//	Posicionar contenedor
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
-
-			//	Espera para reparar el bug
-				setTimeout(function()
-				{
-				//	Habilitar la animacion
-					render_mesa_totales.classList.add('transition-on')
-
-				//	Validar si existe mesa 1
-					if( mesa_2 == null )
-					{
-					//	Asignar Posiciones en el eje X
-						render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
-						render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
-					}
-					else
-					{
-					//	Quitar la Mesa 1
-						App.animar_salida_mesa_2();
-
-					//	Corrección para el Bug del salto
-						setTimeout(function()
-						{
-						//	Asignar Posiciones en el eje X
-							render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.visible.y;
-							render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
-
-						}, tiempo_transiciones );
-					}
-				}, 200 );
-			}
-
-		//	Tipo de Mesa Alcaldes
-			if( mesa_totales_posicion == 'l' )
-			{
-			//	Posicionar contenedor
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
-
-			//	Espera para reparar el bug
-				setTimeout(function()
-				{
-				//	Habilitar la animacion
-					render_mesa_totales.classList.add('transition-on')
-
-				//	Validar si existe mesa 1
-					if( mesa_1 == null )
-					{
-					//	Asignar Posiciones en el eje X
-						render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-						render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
-					}
-					else
-					{
-					//	Quitar la Mesa 1
-						App.animar_salida_mesa_1();
-		
-					//	Corrección para el Bug del salto
-						setTimeout(function()
-						{
-						//	Asignar Posiciones en el eje X
-							render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.visible.y;
-							render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.visible.x;
-		
-						}, tiempo_transiciones );
-					}
-				}, 200 );
-			}
+		//	Asignar Posiciones en el eje X
+			render_mesa_totales.style.top = mesa_totales_cordenadas.template_floating.visible.y;
+			render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.visible.x;
 
 		//	Iniciar el intervalo de actualización
 			App.totales_actualizacion_iniciar();
@@ -735,47 +615,9 @@
 	//	Animar la entrada del bloque
 		animar_salida_totales : function()
 		{
-		//	Tipo de Mesa Gobernadores
-			if( mesa_totales_posicion == 'r' )
-			{
-			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_floating.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
-
-			//	Corrección para el Bug del salto
-				setTimeout(function()
-				{
-					render_mesa_totales.classList.remove('transition-on')
-
-				//	Validar mesas antes de desplegar
-					if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_2 != null )
-					{
-						App.animar_entrada_mesa_2();
-					}
-
-				}, tiempo_transiciones );
-			}
-
-		//	Tipo de Mesa Alcaldes
-			if( mesa_totales_posicion == 'l' )
-			{
-			//	Asignar Posiciones en el eje X
-				render_mesa_totales.style.bottom = mesa_totales_cordenadas.template_tottem.oculta.y;
-				render_mesa_totales.style.left = mesa_totales_cordenadas.template_tottem.oculta.x;
-
-			//	Corrección para el Bug del salto
-				setTimeout(function()
-				{
-					render_mesa_totales.classList.remove('transition-on')
-
-				//	Validar mesas antes de desplegar
-					if( app_modo == 0 && app_template != 0 && mesa_totales_estado == false  && mesa_1 != null )
-					{
-						App.animar_entrada_mesa_1();
-					}
-
-				}, tiempo_transiciones );
-			}
+		//	Asignar Posiciones en el eje X
+			render_mesa_totales.style.top = mesa_totales_cordenadas.template_floating.oculta.y;
+			render_mesa_totales.style.left = mesa_totales_cordenadas.template_floating.oculta.x;
 
 		//	Definir estado de totales
 			mesa_totales_estado = false;
@@ -926,8 +768,35 @@
 	//	Dibujar la mesa en el DOM
 		draw : function( posicion , mesa )
 		{
-		//  DIV render en el DOM
-			const render	=	document.getElementById('render-mesa-' + posicion );
+        //  DIV render en el DOM
+            const render	=	document.getElementById('render-mesa-' + posicion );
+
+			let mesa_tipo;
+			let mesa_titulo;
+
+		//	Validar tipo de mesa
+			if( mesa.tipo == 'P' )
+			{
+				mesa_tipo = 'PRESIDENCIAL'
+			}
+			else if( mesa.tipo == 'S' )
+			{
+				mesa_tipo = 'SENADORES'
+
+				const zona = App.consultar_circunscripcion(mesa.zona_id)
+				console.log( zona );
+			}
+			else if( mesa.tipo == 'D' )
+			{
+				mesa_tipo = 'DIPUTADOS'
+
+				const zona = App.consultar_distrito(mesa.zona_id)
+				console.log( zona );
+			}
+			else
+			{
+
+			}
 
 		//	Vaciar el contenedor
 			render.innerHTML = '';
@@ -937,15 +806,11 @@
 			div_mesa.id = 'mesa-' + mesa.id
 
 		//	Asignar las clases a la mesa
-			div_mesa.className = `box tipo-${mesa.tipo.toLowerCase()} pos-${posicion}`
+			div_mesa.className = `box tipo-${mesa_tipo.toLowerCase()} pos-${posicion}`
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
-										<h2>
-											<span>${mesa.zona}</span>
-											<div class="separador"></div>
-											<span class="tipo">${mesa.comuna}</span>
-										</h2>
+										<h2>${mesa.comuna}</h2>
 										<h3>
 											${mesa.local}
 											<div class="separador"></div>
@@ -956,7 +821,7 @@
 										<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>
 									</div>`;
 
-		//	Dibujar la Mesa en el DOM
+        //	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
 
 		//	Render de los candidatos en la mesa
@@ -966,52 +831,56 @@
 			let id_orden = 1;
 
 		//	Ordenar los candidatos por sus votos
-		//	mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
 
-		//	Recorrer el listado de candidatos
+        //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
-			{
-			//	Crear el div contenedor del candidato
-				const objeto = document.createElement('div');
+            {
+            //	Crear el div contenedor del candidato
+                const objeto = document.createElement('div');
 				objeto.className = `candidato order-${id_orden}`
 
-			//	Asignar las propiedades del div
-				objeto.id = 'candidato-' + candidato.objeto
+            //	Asignar las propiedades del div
+                objeto.id = 'candidato-' + candidato.objeto
 
 			//	Asignar los elementos al div
+			//	<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.2" class="candidato-imagen-src" />
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<div class="candidato-imagen-marco">
-											<img
-												src="${path_imagenes_candidatos}${candidato.id}.webp"
-												class="candidato-imagen-src"
-											/>
-										</div>
+										<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.2" class="candidato-imagen-src" />
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
-											<div class="candidato-detalles-nombre">${candidato.nombres}</div>
 											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
-											<div class="candidato-detalles-alianza">
-												<div class="candidato-detalles-alianza-partido">
-													${App.obtener_partido(candidato.partido_id)}
-												</div>
-												<div class="candidato-detalles-alianza-pacto">
-													${App.obtener_pacto(candidato.pacto_id)}
+											<div class="candidato-detalles-partido">
+												<div class="candidato-detalles-partido-valor">
+													${ App.obtener_partido(candidato.partido_id) }
 												</div>
 											</div>
 										</div>
 										<div class="candidato-votos">
-											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">${candidato.votos}</div>
+											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">
+												${candidato.votos}<img src="" class="candidato-votos-valor-icono" />
+											</div>
 										</div>
 										<div id="candidato-${candidato.objeto}-animacion" class="candidato-votos-animacion"></div>
 									</div>`
 
-			//	Crear candidato en el listado
+            //	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
+			//	Validar Posicion de los Objetos
+				if( id_orden < cantidad_maxima_candidatos )
+				{
+					id_orden++;
+				}
+				else
+				{
+					id_orden = cantidad_maxima_candidatos + 1;
+				}
+
 			//	Incrementar el ID de la lista
-				id_orden++
-			});
+			//	id_orden++;
+            });
 
 		//	Ordenar Votos de los candidatos
 			App.ordenar_votos(mesa.candidatos);
@@ -1049,7 +918,7 @@
 			else
 			{
 			//	Actualizar los votos
-				candidato_votos.innerHTML = votos;
+				candidato_votos.innerHTML = votos + '<img src="" class="candidato-votos-valor-icono" />';
 
 			//	Obtener el contenedor de la animación
 				const candidato_animacion = document.getElementById(`candidato-${id}-animacion`);
@@ -1106,8 +975,18 @@
 				const candidato_div = document.getElementById(`candidato-${candidato.objeto}`);
 				candidato_div.classList = `candidato order-${id_orden}`;
 
+			//	Validar Posicion de los Objetos
+				if( id_orden < cantidad_maxima_candidatos )
+				{
+					id_orden++;
+				}
+				else
+				{
+					id_orden = cantidad_maxima_candidatos + 1;
+				}
+
 			//	Incrementar el ID de la lista
-				id_orden++
+			//	id_orden++
 			});
 		},
 
@@ -1116,67 +995,27 @@
 	//	Animar la entrada del bloque
 		animar_entrada_mesa_1 : function()
 		{
-		//	Validar mesas antes de desplegar
-			if( mesa_totales_estado && mesa_totales_posicion == 'l' )
-			{
-			//	Quitar Mesa de totales
-				App.animar_salida_totales()
+			render_mesa_1.classList.add('transition-on')
 
-			//	Corrección para el Bug del salto
-				setTimeout(function()
-				{
-					render_mesa_1.classList.add('transition-on')
-
-				//	Asignar Posiciones en el eje X
-					render_mesa_1.style.bottom = mesa_1_cordenadas.template_tottem.visible.y;
-					render_mesa_1.style.left = mesa_1_cordenadas.template_tottem.visible.x;
-					render_mesa_1.style.transform = mesa_1_cordenadas.template_tottem.visible.z;
-
-				}, tiempo_transiciones );			
-			}
-			else
-			{
-			//	Asignar Posiciones en el eje X
-				render_mesa_1.style.bottom = mesa_1_cordenadas.template_tottem.visible.y;
-				render_mesa_1.style.left = mesa_1_cordenadas.template_tottem.visible.x;
-				render_mesa_1.style.transform = mesa_1_cordenadas.template_tottem.visible.z;
-			}
+		//	Asignar Posiciones en el eje X
+			render_mesa_1.style.bottom = mesa_1_cordenadas.template_tottem.visible.y;
+			render_mesa_1.style.left = mesa_1_cordenadas.template_tottem.visible.x;
+			render_mesa_1.style.transform = mesa_1_cordenadas.template_tottem.visible.z;
 		},
 
 	//	Animar la entrada del bloque
 		animar_entrada_mesa_2 : function()
 		{
-		//	Validar mesas antes de desplegar
-			if( mesa_totales_estado && mesa_totales_posicion == 'r' )
+			setTimeout(function()
 			{
-			//	Quitar Mesa de totales
-				App.animar_salida_totales()
+				render_mesa_2.classList.add('transition-on')
 
-			//	Corrección para el Bug del salto
-				setTimeout(function()
-				{
-					render_mesa_2.classList.add('transition-on')
+			//	Asignar Posiciones en el eje X
+				render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
+				render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
+				render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
 
-				//	Asignar Posiciones en el eje X
-					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
-					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
-					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
-
-				}, tiempo_transiciones );			
-			}
-			else
-			{
-				setTimeout(function()
-				{
-					render_mesa_2.classList.add('transition-on')
-
-				//	Asignar Posiciones en el eje X
-					render_mesa_2.style.bottom = mesa_2_cordenadas.template_tottem.visible.y;
-					render_mesa_2.style.left = mesa_2_cordenadas.template_tottem.visible.x;
-					render_mesa_2.style.transform = mesa_2_cordenadas.template_tottem.visible.z;
-
-				}, 200 );
-			}
+			}, 200 );
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-
@@ -1271,32 +1110,28 @@
 
 	//			-			-			-			-			-			-			-			-			-			-			-
 
-	//	Obtener información del tipo de Mesa
-		obtener_tipo_mesa : function ( tipo )
-		{
-			if( tipo == 'G')
-			{
-				return 'GOBERNACIÓN';
-			}
-			if( tipo == 'A')
-			{
-				return 'ALCALDÍA'
-			}
-		},
-
 	//	Obtener información del Partido
-		obtener_zona_region : function ( id )
+		consultar_region : function ( id )
 		{
 			const region = objeto_regiones.find( obj => obj.id === Number(id) );
-			return region.nombre;
+			return region;
 		},
 
-	//	Obtener información del Partido
-		obtener_zona_comuna : function ( id )
+	//	Obtener información de la circunscripcion
+		consultar_circunscripcion : function ( id )
 		{
-			const comuna = objeto_comunas.find( obj => obj.id === Number(id) );
-			return comuna.nombre;
+			const circunscripcion = objeto_circunscripciones.find( obj => obj.id === Number(id) );
+			return circunscripcion;
 		},
+
+	//	Obtener información del distrito
+		consultar_distrito : function ( id )
+		{
+			const distrito = objeto_distritos.find( obj => obj.id === Number(id) );
+			return distrito;
+		},
+
+	//			-			-			-			-			-			-			-			-			-			-			-
 
 	//	Obtener información del Partido
 		obtener_partido : function ( id )
@@ -1319,50 +1154,5 @@
 		}
 	}
 
-	//	Validación de las Imagenes
-	const candidato_poster = async ( id ) =>
-	{
-		//	Actualizar votos en el DOM
-		const candidato_voto = document.getElementById(`mesa-${id}-candidatos`);
-
-	//	Recorrer las imagenes de los candidatos
-		Array.from(candidato_voto.querySelectorAll('.candidato-imagen-src')).forEach(function(e)
-		{
-			candidato_poster_crear( id , e.dataset.objeto );
-		});
-	}
-
-	//	Validar la imagen del Candidato
-	const candidato_poster_crear = async ( mesa , id ) =>
-	{
-	//	Obtener información del objeto
-		const objeto = document.getElementById('candidato-imagen-' + mesa + '-' + id);
-
-	//	Version de cache de las imagenes
-		const version = '1.1.3';
-
-	//	Construir ruta de la imagen
-		const objeto_imagen = path_imagenes_candidatos + objeto.dataset.objeto + '.webp?v=' + version;
-
-	//	Solicitar la imagen
-		await fetch( objeto_imagen , { method: 'GET' }).then(res =>
-		{
-			if ( res.ok )
-			{
-				objeto.src = objeto_imagen;
-				objeto.style.opacity = 1
-				objeto.dataset.load = true
-			}
-			else
-			{
-				objeto.src = path_imagenes_candidatos_error
-				objeto.style.opacity = 1
-				objeto.dataset.load = false
-
-				console.log( '[404]' , objeto.dataset.objeto , '-' , objeto.dataset.nombre );
-			}
-		});
-	}
-
-	//	Iniciar las Zonas
+//	Iniciar las Zonas
 	App.zone();

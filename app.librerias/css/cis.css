@@ -36,7 +36,29 @@
 		--color-bg-boton-inactivo		:	#e6e6ef;
 		--color-bg-boton-inactivo-a		:	#e0e0e7;
 	}
-	
+		
+
+	/* width */
+	::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background-color: var(--color-bg-box);
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background-color: var(--color-bg-box-hover);
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background-color: var(--color-bg-box-hover);
+	}
+
+
 	html
 	{
 		color: #006bbd;

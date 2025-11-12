@@ -37,7 +37,7 @@
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DEL SITIO
 	$_APP_TITLE							=	"Elecciones Chile - 2025";
-	$_APP_DESCRIPTION					=	"Primarias presidenciales - Chilevisión";
+	$_APP_DESCRIPTION					=	"Elección Presidencial y Parlamentarias";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 //	CONFIGURACIONES DE LOS DIRECTORIOS
@@ -65,7 +65,7 @@
 //	INFORMACION DE LA APLICACION
 
 //	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.11.3";
+	$_CONF_VERSION						=	"?version.12.0";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES
