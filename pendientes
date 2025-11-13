@@ -1,10 +1,16 @@
 
-    PostgreSQL Admin
-    http://10.236.100.38/phpPgAdmin/
+PostgreSQL Admin
+http://10.236.100.38/phpPgAdmin/
 
-    -   validar cantidad de mesas a mostrar [OK]
-    -   validar accion reload en totem [OK]
-    -   revisar mesa destacado estrella [OK]
-    -   Error en el switch al agregar una nueva mesa [OK]
-    -   consolidados preview , validar entrada y salida [OK]
-    
+-   validar cantidad de mesas a mostrar [OK]
+-   validar accion reload en totem [OK]
+-   revisar mesa destacado estrella [OK]
+-   Error en el switch al agregar una nueva mesa [OK]
+-   consolidados preview , validar entrada y salida [OK]
+
+-   mesa tipo senadores : mostrar region no comuna [OK]
+-   decimales de consolidados 2 [OK]
+-   mover las mesas hacia la horilla [OK]
+-   quitar el icono de voto [OK]
+-   agregar candidato ind en el json [OK]
+-   agregar candidato ind al frontend [OK]

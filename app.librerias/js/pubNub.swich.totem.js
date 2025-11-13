@@ -1,5 +1,5 @@
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.1'
+	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.2'
 
 //	Mode de la Aplicación
 	let app_modo = 0
@@ -57,7 +57,7 @@
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.5'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.6'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -77,7 +77,7 @@
 
 //	Contenedor de los candidatos
 	const candidato_contenedor_ancho = 295;
-	const candidato_contenedor_separacion_x = 60;
+	const candidato_contenedor_separacion_x = 40;
 	const candidato_contenedor_separacion_y = 270; //178
 
 //	Cordenadas de la Mesa 1
@@ -572,9 +572,6 @@
 												VOTOS
 											</span>
 										</div>
-										<div></div>
-										<div></div>
-										<div></div>
 									</div>`;
 /*
 									<div class="candidatos-detalles-hashtag">#Elecciones2025</div>
@@ -611,7 +608,9 @@
 										<img src="${path_imagenes}icono-electo.png" />
 									</div>
 									<div class="candidato-imagen">
-										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.webp?v=2.5" />
+										<div class="candidato-imagen-cnt">
+											<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.webp?v=2.5" />
+										</div>
 									</div>
 									<div class="candidato-detalles">
 										<img src="${path_imagenes}bg-candidato-consolidados${ template_candidatos =='tres' ? '' : '-ocho'}.png?v=2.5" />
@@ -826,18 +825,21 @@
 
 			let mesa_tipo;
 			let mesa_titulo;
+			let mesa_zona;
+
+			console.log( mesa );
 
 		//	Validar tipo de mesa
 			if( mesa.tipo == 'P' )
 			{
 				mesa_tipo = 'PRESIDENCIAL'
+				mesa_zona = mesa.comuna
 			}
 			else if( mesa.tipo == 'S' )
 			{
 				mesa_tipo = 'SENADORES'
-
-				const zona = App.consultar_circunscripcion(mesa.zona_id)
-				mesa_titulo = 'S-' + zona.orden
+				mesa_titulo = ''
+				mesa_zona = App.obtener_region(Number(mesa.zona_id))
 			}
 			else if( mesa.tipo == 'D' )
 			{
@@ -845,6 +847,7 @@
 
 				const zona = App.consultar_distrito(mesa.zona_id)
 				mesa_titulo = 'D-' + zona.orden
+				mesa_zona = mesa.comuna
 			}
 			else
 			{
@@ -875,7 +878,7 @@
 											</h3>
 											<h2>
 												<span>${mesa.numero}</span>
-												${mesa.comuna}
+												${mesa_zona}
 												<div class="separador"></div>
 											</h2>
 										</div>
@@ -928,12 +931,12 @@
 												}
 											</div>
 											<div class="candidato-detalles-partido">
-												${ App.obtener_partido(candidato.partido_id) }
+												${ candidato.partido }
 											</div>
 										</div>
 										<div class="candidato-votos">
 											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">
-												${candidato.votos}<img src="" class="candidato-votos-valor-icono" />
+												${candidato.votos}
 											</div>
 										</div>
 										<div id="candidato-${candidato.objeto}-animacion" class="candidato-votos-animacion"></div>
@@ -992,7 +995,8 @@
 			else
 			{
 			//	Actualizar los votos
-				candidato_votos.innerHTML = votos + '<img src="" class="candidato-votos-valor-icono" />';
+			//	candidato_votos.innerHTML = votos + '<img src="" class="candidato-votos-valor-icono" />';
+				candidato_votos.innerHTML = votos;
 
 			//	Obtener el contenedor de la animación
 				const candidato_animacion = document.getElementById(`candidato-${id}-animacion`);
@@ -1186,7 +1190,7 @@
 		{
 			const nombre = candidato.nombres.trim().charAt(0);
 			const apellido = candidato.apellidos.trim().split(' ');
-			return `${nombre}. ${apellido[0]}`;
+			return `${nombre}.&nbsp;&nbsp;${apellido[0]}`;
 		},
 
 	//	Obtener información del Partido
@@ -1211,6 +1215,14 @@
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-
+
+	//	Obtener información del Partido
+		obtener_region : function ( id )
+		{
+			const circunscripcion = objeto_circunscripciones.find( obj => obj.id === id );
+			const region = objeto_regiones.find( obj => obj.id === circunscripcion.region );
+			return region.nombre
+		},
 
 	//	Obtener información del Partido
 		obtener_partido : function ( id )

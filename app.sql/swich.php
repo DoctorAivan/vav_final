@@ -148,6 +148,24 @@
 			//	Obtener listado de candidatos
 				while($_MESA_CANDIDATOS				=	pg_fetch_object($QUERY_MESA_CANDIDATOS))
 				{
+
+				//	Validar candidato independiente
+					if($_MESA_CANDIDATOS->candidato_independiente == 't')
+					{
+						if($_MESA_CANDIDATOS->partido_codigo == 'IND')
+						{
+							$partido = 'IND';
+						}
+						else
+						{
+							$partido = 'IND-'.$_MESA_CANDIDATOS->partido_codigo;
+						}
+					}
+					else
+					{
+						$partido = $_MESA_CANDIDATOS->partido_codigo;
+					}
+
 				//	Asignar información del candidato
 					$_CANDIDATOS['candidatos'][]			=	array	
 					(
@@ -156,9 +174,11 @@
 						'orden'						=>	(int) $_MESA_CANDIDATOS->candidato_orden,
 						'nombres'					=>	$_MESA_CANDIDATOS->candidato_nombres,
 						'apellidos'					=>	$_MESA_CANDIDATOS->candidato_apellidos,
+						'ind'						=>	$_MESA_CANDIDATOS->candidato_independiente == "t" ? true : false,
 						'votos'						=>	(int) $_MESA_CANDIDATOS->voto_total,
 						'partido_id'				=>	(int) $_MESA_CANDIDATOS->partido_id,
-						'pacto_id'					=>	(int) $_MESA_CANDIDATOS->pacto_id
+						'pacto_id'					=>	(int) $_MESA_CANDIDATOS->pacto_id,
+						'partido'					=>	$partido
 					);
 				}
 
@@ -433,7 +453,7 @@
 					$_PORCENTAJE = ($_CANDIDATO['votos'] / $_CANDIDATOS['votos']) * 100;
 
 				//	Asignar el porcentaje al candidato
-					$_CANDIDATO['porcentaje'] = number_format($_PORCENTAJE, 2);
+					$_CANDIDATO['porcentaje'] = number_format($_PORCENTAJE, 1);
 				}
 				else
 				{

@@ -2,67 +2,67 @@
     "regiones": [
         {
             "id": 3015,
-            "nombre": "ARICA Y PARINACOTA"
+            "nombre": "R. ARICA Y PARINACOTA"
         },
         {
             "id": 3001,
-            "nombre": "TARAPACA"
+            "nombre": "R. TARAPACÁ"
         },
         {
             "id": 3002,
-            "nombre": "ANTOFAGASTA"
+            "nombre": "R. ANTOFAGASTA"
         },
         {
             "id": 3003,
-            "nombre": "ATACAMA"
+            "nombre": "R. ATACAMA"
         },
         {
             "id": 3004,
-            "nombre": "COQUIMBO"
+            "nombre": "R. COQUIMBO"
         },
         {
             "id": 3005,
-            "nombre": "VALPARAISO"
+            "nombre": "R. VALPARAÍSO"
         },
         {
             "id": 3013,
-            "nombre": "METROPOLITANA"
+            "nombre": "R. METROPOLITANA"
         },
         {
             "id": 3006,
-            "nombre": "OHIGGINS"
+            "nombre": "R. OHIGGINS"
         },
         {
             "id": 3007,
-            "nombre": "MAULE"
+            "nombre": "R. MAULE"
         },
         {
             "id": 3016,
-            "nombre": "\u00d1UBLE"
+            "nombre": "R. \u00d1UBLE"
         },
         {
             "id": 3008,
-            "nombre": "BIOBIO"
+            "nombre": "R. BIOBIO"
         },
         {
             "id": 3009,
-            "nombre": "ARAUCANIA"
+            "nombre": "R. ARAUCANIA"
         },
         {
             "id": 3014,
-            "nombre": "LOS RIOS"
+            "nombre": "R. LOS RIOS"
         },
         {
             "id": 3010,
-            "nombre": "LOS LAGOS"
+            "nombre": "R. LOS LAGOS"
         },
         {
             "id": 3011,
-            "nombre": "AYSEN"
+            "nombre": "R. AYSEN"
         },
         {
             "id": 3012,
-            "nombre": "MAGALLANES"
+            "nombre": "R. MAGALLANES"
         }
     ],
     "provincias": [
@@ -398,7 +398,7 @@
         },
         {
             "id": 4051,
-            "nombre": "VALPARAISO",
+            "nombre": "VALPARAÍSO",
             "orden": 56,
             "region": 3005
         }

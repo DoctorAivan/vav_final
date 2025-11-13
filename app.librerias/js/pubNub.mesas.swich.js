@@ -672,7 +672,7 @@
 					if( swich_mesa_2 != undefined )
 					{
 					//	Desactivar consolidados
-						estadoConsolidadosActual('of');
+					//	estadoConsolidadosActual('of');
 					}
 				}
 
@@ -682,7 +682,7 @@
 					if( swich_mesa_1 != undefined )
 					{
 					//	Desactivar consolidados
-						estadoConsolidadosActual('of');
+					//	estadoConsolidadosActual('of');
 					}
 				}
 
@@ -694,7 +694,7 @@
 			if( swich_modo != swich_modo_anterior )
 			{
 				//	Desactivar consolidados
-				estadoConsolidadosActual('of');
+				//	estadoConsolidadosActual('of');
 
 				//	Almacenar modo actual
 				swich_modo_anterior = swich_modo;
