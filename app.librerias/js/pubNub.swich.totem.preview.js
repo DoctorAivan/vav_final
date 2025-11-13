@@ -77,7 +77,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.2'
 
 //	Contenedor de los candidatos
 	const candidato_contenedor_ancho = 295;
-	const candidato_contenedor_separacion_x = 40;
+	const candidato_contenedor_separacion_x = 0;
 	const candidato_contenedor_separacion_y = 270; //178
 
 //	Cordenadas de la Mesa 1
