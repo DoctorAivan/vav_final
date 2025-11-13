@@ -2,67 +2,67 @@
     "regiones": [
         {
             "id": 3015,
-            "nombre": "R. ARICA Y PARINACOTA"
+            "nombre": "ARICA Y PARINACOTA"
         },
         {
             "id": 3001,
-            "nombre": "R. TARAPACÁ"
+            "nombre": "TARAPACÁ"
         },
         {
             "id": 3002,
-            "nombre": "R. ANTOFAGASTA"
+            "nombre": "ANTOFAGASTA"
         },
         {
             "id": 3003,
-            "nombre": "R. ATACAMA"
+            "nombre": "ATACAMA"
         },
         {
             "id": 3004,
-            "nombre": "R. COQUIMBO"
+            "nombre": "COQUIMBO"
         },
         {
             "id": 3005,
-            "nombre": "R. VALPARAÍSO"
+            "nombre": "VALPARAÍSO"
         },
         {
             "id": 3013,
-            "nombre": "R. METROPOLITANA"
+            "nombre": "METROPOLITANA"
         },
         {
             "id": 3006,
-            "nombre": "R. OHIGGINS"
+            "nombre": "OHIGGINS"
         },
         {
             "id": 3007,
-            "nombre": "R. MAULE"
+            "nombre": "MAULE"
         },
         {
             "id": 3016,
-            "nombre": "R. \u00d1UBLE"
+            "nombre": "\u00d1UBLE"
         },
         {
             "id": 3008,
-            "nombre": "R. BIOBIO"
+            "nombre": "BIOBIO"
         },
         {
             "id": 3009,
-            "nombre": "R. ARAUCANIA"
+            "nombre": "ARAUCANIA"
         },
         {
             "id": 3014,
-            "nombre": "R. LOS RIOS"
+            "nombre": "LOS RIOS"
         },
         {
             "id": 3010,
-            "nombre": "R. LOS LAGOS"
+            "nombre": "LOS LAGOS"
         },
         {
             "id": 3011,
-            "nombre": "R. AYSEN"
+            "nombre": "AYSEN"
         },
         {
             "id": 3012,
-            "nombre": "R. MAGALLANES"
+            "nombre": "MAGALLANES"
         }
     ],
     "provincias": [
