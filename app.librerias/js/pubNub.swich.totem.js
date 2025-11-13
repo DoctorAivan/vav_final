@@ -552,8 +552,6 @@
 				template_candidatos = 'ocho'
 			}
 
-			console.log( template_candidatos );
-			
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos ${template_candidatos}" id="mesa-0-candidatos"></div>
 									<div class="candidatos-detalles">
@@ -826,8 +824,6 @@
 			let mesa_tipo;
 			let mesa_titulo;
 			let mesa_zona;
-
-			console.log( mesa );
 
 		//	Validar tipo de mesa
 			if( mesa.tipo == 'P' )

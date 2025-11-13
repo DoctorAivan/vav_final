@@ -65,7 +65,7 @@
 //	INFORMACION DE LA APLICACION
 
 //	$_CONF_VERSION						=	"?alpha.".time();
-	$_CONF_VERSION						=	"?version.12.5";
+	$_CONF_VERSION						=	"?version.12.7";
 
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-	
 //	CREACION DE URLS AMIGABLES
@@ -168,9 +168,6 @@
 //	CONFIGURACION PARA PUBNUB
 
 //	Monitoreo de Mesas
-	#$_PUBNUB_PUB_MESAS					=	"pub-c-a967235b-7113-4366-ad35-62c18a797009";
-	#$_PUBNUB_SUS_MESAS					=	"sub-c-a9e93655-4ac5-4704-a76e-180fd4aa64b4";
-
 	$_PUBNUB_PUB_MESAS					=	"pub-c-c2bcd954-a763-4e14-94a8-aa4f5cfc9552";
 	$_PUBNUB_SUS_MESAS					=	"sub-c-2d699765-7b7f-404a-be45-e473a24b5fa6";
 	$_PUBNUB_SECRET_KEY					=	"sec-c-Y2M4MTVhNDgtM2M1Ni00NTgyLWI3YTctZDNmZDJjNTMzZjdk";

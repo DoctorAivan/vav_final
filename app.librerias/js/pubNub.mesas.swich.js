@@ -166,8 +166,6 @@
 		{
 		//	Crear el div contenedor del candidato
 			const objeto = document.createElement('article');
-
-			console.log( mesa );
 			
 		//	Asignar las propiedades del div
 			objeto.id = 'MES' + mesa.mesa_id
