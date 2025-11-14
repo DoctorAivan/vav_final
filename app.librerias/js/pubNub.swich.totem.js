@@ -352,7 +352,7 @@
 					const progress = Math.min(elapsedTime / duration, 1);
 					const currentValue = startValue + increment * progress;
 
-					element.innerText = currentValue.toFixed(2).replace('.',',');
+					element.innerText = currentValue.toFixed(1).replace('.',',');
 					
 					if (progress < 1)
 					{
@@ -360,7 +360,7 @@
 					}
 					else
 					{
-						element.innerText = currentValue.toFixed(2).replace('.',',');
+						element.innerText = currentValue.toFixed(1).replace('.',',');
 						return
 					}
 				}
