@@ -41,6 +41,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.3'
 	let mesa_totales_cantidad = ''
 	let mesa_totales_zona = 0
 	let mesa_totales_timer = null
+	let mesa_totales_preview = false
 
 //	Cantidad maxima de candidatos por listado
 	const cantidad_maxima_candidatos = 8
@@ -257,13 +258,17 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.3'
 			//	Variables necesarias
 				const estado = datoPubNub.estado
 
+				console.log(datoPubNub);
+				
 			//	Cantidad de candidatos
 				mesa_totales_cantidad = datoPubNub.position
 
 			//	Validar estado del Modulo
-				if( estado == 'on' )
+				if( mesa_totales_preview == false )
 				{
 					App.totales();
+
+					mesa_totales_preview = true
 				}
 				else
 				{
@@ -275,6 +280,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.3'
 
 				//	Actualizar el valor
 					mesa_totales_estado = false
+					mesa_totales_preview = false
 				}
 			}
 

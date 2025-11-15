@@ -67,17 +67,19 @@
 ?>
 					<input type="hidden" name="usuario_id" id="usuario_id" value="" />
 				</div>
-				<div class="col-2">
-					<h2>Comuna <span>Obligatorio</span></h2>
-					<input name="mesa_comuna" id="mesa_comuna" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" />
-				</div>
-				<div class="col-2">
-					<h2>Numero de mesa <span>MESA 25</span></h2>
-					<input name="mesa_numero" id="mesa_numero" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="M 115" />
-				</div>
-				<div class="col-1">
-					<h2>Nombre del local de votación <span id="mesa_local_largo"><b>24 Caracteres</b> disponibles</span></h2>
-					<input name="mesa_local" id="mesa_local" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" maxlength="24" />
+				<div class="col-1" style="display:grid; gap: 20px; grid-template-columns: 200px 1fr 150px;">
+					<div class="">
+						<h2>Comuna <span>Obligatorio</span></h2>
+						<input name="mesa_comuna" id="mesa_comuna" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Providencia" />
+					</div>
+					<div class="">
+						<h2>Local de votación <span id="mesa_local_largo"><b>24 Caracteres</b> disponibles</span></h2>
+						<input name="mesa_local" id="mesa_local" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" maxlength="24" />
+					</div>
+					<div class="">
+						<h2>Numero de mesa </h2>
+						<input name="mesa_numero" id="mesa_numero" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="M 115" />
+					</div>
 				</div>
 			</article>
 			<article class="formulario candidatos bg-1">

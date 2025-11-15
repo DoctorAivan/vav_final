@@ -522,7 +522,7 @@ function mesa_detalles( id )
         // TAMAÑO CONSTITUYENTES : 650
 
     //  Cambiar la dimensión
-        liveboxAncho('mesa-detalles' , 700 );
+        liveboxAncho('mesa-detalles' , 800 );
 
     //	Abrir Funcionalidad Livebox
         liveboxAbrir('mesa-detalles');
