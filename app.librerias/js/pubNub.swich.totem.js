@@ -57,7 +57,7 @@
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.6'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp?v=2.6'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -1262,7 +1262,7 @@
 		const objeto = document.getElementById('candidato-imagen-' + mesa + '-' + id);
 
 	//	Version de cache de las imagenes
-		const version = '1.1.3';
+		const version = '1.1.5';
 
 	//	Construir ruta de la imagen
 		const objeto_imagen = path_imagenes_candidatos + objeto.dataset.objeto + '.webp?v=' + version;

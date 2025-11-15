@@ -58,7 +58,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.3'
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.6'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp?v=2.6'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
