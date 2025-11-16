@@ -58,7 +58,7 @@
         },
         {
             "id": 3011,
-            "nombre": "AYSEN"
+            "nombre": "AYSÉN"
         },
         {
             "id": 3012,
@@ -92,7 +92,7 @@
         },
         {
             "id": 4112,
-            "nombre": "AYSEN",
+            "nombre": "AYSÉN",
             "orden": 5,
             "region": 3011
         },
@@ -170,7 +170,7 @@
         },
         {
             "id": 4031,
-            "nombre": "COPIAPO",
+            "nombre": "COPIAPÓ",
             "orden": 18,
             "region": 3003
         },
@@ -824,7 +824,7 @@
             "provincia": 4112,
             "circunscripcion": 5014,
             "distrito": 6027,
-            "nombre": "AYSEN"
+            "nombre": "AYSÉN"
         },
         {
             "id": 2797,
@@ -1310,7 +1310,7 @@
             "provincia": 4031,
             "circunscripcion": 5004,
             "distrito": 6004,
-            "nombre": "COPIAPO"
+            "nombre": "COPIAPÓ"
         },
         {
             "id": 2527,
