@@ -169,7 +169,8 @@
 			
 		//	Asignar las propiedades del div
 			objeto.id = 'MES' + mesa.mesa_id
-			objeto.className = `mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa G rojo`
+			objeto.className = `mesa mesa-swich bg-blanco box-shadow bordes-radius filtro-mesa ${mesa.mesa_tipo} rojo`
+			
 			objeto.setAttribute('mesa', mesa.mesa_id);
 			objeto.setAttribute('date', mesa.mesa_cambio);
 			objeto.setAttribute('created', mesa.mesa_publicado);
