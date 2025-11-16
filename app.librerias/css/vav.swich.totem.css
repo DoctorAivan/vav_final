@@ -362,6 +362,7 @@ body
 			position: relative;
 			width: 1920px;
 			height: var(--consolidado-candidatos-height);
+			background: var(--color-white);
 		}
 
 /*
