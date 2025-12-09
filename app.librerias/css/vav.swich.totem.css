@@ -303,7 +303,7 @@ body
 						height: 44px;
 						background: linear-gradient( 0deg, var(--consolidado-template-1-bg-b) 0%, var(--consolidado-template-1-bg-a) 100%);
 						color: var(--color-white);
-						font-family: 'Flama_Medium';
+						font-family: 'Flama_Regular';
 						font-size: 1.8rem;
 						line-height: 1.8rem;
 						padding: 8px 0 0 83px;
@@ -401,7 +401,7 @@ body
 						height: 44px;
 						background: linear-gradient( 0deg, var(--consolidado-template-2-bg-b) 0%, var(--consolidado-template-2-bg-a) 100%);
 						color: var(--color-white);
-						font-family: 'Flama_Medium';
+						font-family: 'Flama_Regular';
 						font-size: 1.8rem;
 						line-height: 1.8rem;
 						text-align: right;

@@ -540,7 +540,7 @@
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
 									<div class="votos-totales">
-										<span class="titulo">CONSOLIDADOS CHV</span>
+										<span class="titulo">CONSOLIDADOS CHV</span> - CHILE TÚ DECIDES
 									</div>`;
 
 		//	Dibujar la Mesa en el DOM
@@ -574,7 +574,7 @@
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="up">
 										<div class="votos">
-											&nbsp;
+											${candidato.nombres}
 										</div>
 									</div>
 									<div class="down">
