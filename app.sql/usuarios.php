@@ -319,7 +319,7 @@
 				$USUARIO[$_USUARIO->usuario_id]	=	array(
 					'id'		=>	$_USUARIO->usuario_id,
 					'nombre'	=>	$_USUARIO->usuario_nombre,
-					'password'	=>	md5($_USUARIO->usuario_password),
+					'password'	=>	$_USUARIO->usuario_password,
 					'etiqueta'	=>	$_USUARIO->usuario_etiqueta
 				);
 			}

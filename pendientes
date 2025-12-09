@@ -14,3 +14,5 @@ http://10.236.100.38/phpPgAdmin/
 -   quitar el icono de voto [OK]
 -   agregar candidato ind en el json [OK]
 -   agregar candidato ind al frontend [OK]
+
+-   consulta consolidados, agregar estado de la mesa en el filtro

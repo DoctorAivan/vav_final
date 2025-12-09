@@ -125,7 +125,7 @@
 		//	Obtener la información de las Mesas almacenadas en el Swich
 			$QUERY									=	"
 		
-				SELECT * FROM swich_mesas( $_SWICH_MESAS->swich_mesa_1 , $_SWICH_MESAS->swich_mesa_2 , $_SWICH_MESAS->swich_mesa_3 );
+				SELECT * FROM swich_mesas( $_SWICH_MESAS->swich_mesa_1 , $_SWICH_MESAS->swich_mesa_2 , $_SWICH_MESAS->swich_mesa_3 , $_SWICH_MESAS->swich_mesa_4 );
 		
 			";
 			
@@ -411,7 +411,7 @@
 		//	Obtener el total de votos de candidatos en las mesas
 			$QUERY									=	"
 			
-				SELECT * FROM swich_consolidados_presidenciales_totales('P');
+				SELECT * FROM swich_consolidados_presidenciales_totales();
 
 			";
 			
@@ -433,10 +433,7 @@
 					'orden'							=>	(int) $_MESA_CANDIDATOS->candidato_orden,
 					'nombres'						=>	$_MESA_CANDIDATOS->candidato_nombres,
 					'apellidos'						=>	$_MESA_CANDIDATOS->candidato_apellidos,
-					'ind'							=>	$_MESA_CANDIDATOS->candidato_independiente,
-					'votos'							=>	(int) $_MESA_CANDIDATOS->votos_total,
-					'partido'						=>	(int) $_MESA_CANDIDATOS->partido_id,
-					'pacto'							=>	(int) $_MESA_CANDIDATOS->pacto_id
+					'votos'							=>	(int) $_MESA_CANDIDATOS->votos_total
 				);
 
 			//	Calcular total de votos

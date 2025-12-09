@@ -27,12 +27,12 @@
 		{
 		//	Obtener el ID de la mesa
 			$mesa_id								=	filtrarID($_POST['mesa_id']);
-			$mesa_numero							=	filtrarVAR($_POST['mesa_numero']);
-			
+			$mesa_publicado 						= 	time();
+
 		//	Construir SQL
 			$QUERY									=	"
 			
-				SELECT * FROM mesa_activar( $mesa_id , '$mesa_numero' );
+				SELECT * FROM mesa_activar( $mesa_id , '$mesa_publicado' );
 			
 			";
 
@@ -44,6 +44,33 @@
 			
 		//	Debug
 			echo $_MESA_ACTIVAR->mesa_activar;
+		}
+		break;
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Activar Mesa
+		case "mesaCambiarEstado"					:
+		{
+		//	Obtener el ID de la mesa
+			$mesa_id								=	filtrarID($_POST['mesa_id']);
+			$mesa_estado							=	filtrarID($_POST['mesa_estado']);
+
+		//	Construir SQL
+			$QUERY									=	"
+			
+				SELECT * FROM mesa_cambiar_estado( $mesa_id , $mesa_estado );
+			
+			";
+
+		//	Ejecutar Query
+			$QUERY_MESA_ARCHIVAR					=	pg_query($CONF_DB_CONNECT, $QUERY);
+			
+		//	Respuesta
+			$_MESA_ARCHIVAR							=	pg_fetch_object($QUERY_MESA_ARCHIVAR);
+			
+		//	Debug
+			echo $_MESA_ARCHIVAR->mesa_cambiar_estado;
 		}
 		break;
 
@@ -372,6 +399,88 @@
 			echo json_encode($_OBJETO);
 		}
 		break;
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Mesa Nuevo
+		case "movil_mesa_nueva"							:
+		{
+		//	Obtener ID del Usuario
+			$usuario_id								=	53;
+			$mesa_tipo								=	filtrarVAR($_POST['mesa_tipo']);
+			$mesa_zona								=	filtrarVAR($_POST['mesa_zona']);
+			$mesa_comuna							=	filtrarVAR($_POST['mesa_comuna']);
+			$mesa_local								=	filtrarVAR($_POST['mesa_local']);
+			$mesa_numero							=	filtrarVAR($_POST['mesa_numero']);
+
+		//	Construir SQL
+			$QUERY									=	"
+			
+				SELECT * FROM movil_mesa_nueva(
+					$usuario_id,
+					'$mesa_tipo',
+					$mesa_zona,
+					'$mesa_comuna',
+					'$mesa_comuna',
+					'$mesa_local',
+					'$mesa_numero'
+				);
+			
+			";
+
+		//	Ejecutar Query
+			$QUERY_MESA_NUEVO						=	pg_query($CONF_DB_CONNECT, $QUERY);
+			
+		//	Respuesta
+			$_MESA_NUEVA							=	pg_fetch_object($QUERY_MESA_NUEVO);
+			
+		//	Obtener Nuevo ID
+			$mesa_id								=	$_MESA_NUEVA->movil_mesa_nueva;
+
+			$_OBJETO['id']							=   (int) $mesa_id;
+
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+		//	OBTENER INFORMACIÓN DE LA MESA
+		
+		//	Construir SQL
+			$QUERY									=	"SELECT * FROM mesa_candidatos( $mesa_id );";
+		
+		//	Ejecutar Query
+			$QUERY_MESA_CANDIDATOS					=	pg_query($CONF_DB_CONNECT, $QUERY);
+		
+			$CANDIDATO_ORDEN						=	0;
+
+		//	Obtener listado de candidatos
+			while($_MESA_CANDIDATOS					=	pg_fetch_object($QUERY_MESA_CANDIDATOS))
+			{
+			//	Asignar información del candidato
+				$_OBJETO['ls'][]					=	array	
+				(
+					'ob'							=>	(int) $_MESA_CANDIDATOS->voto_id,
+					'or'							=>	(int) $CANDIDATO_ORDEN,
+					'nb'							=>	$_MESA_CANDIDATOS->candidato_nombres,
+					'ap'							=>	$_MESA_CANDIDATOS->candidato_apellidos
+				);
+
+				$CANDIDATO_ORDEN					=	$CANDIDATO_ORDEN + 1;
+			}
+
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+		//	Encodear Resultados
+			$_JSON									=	json_encode($_OBJETO);
+
+		//	Asignar formato Json
+			header('Content-Type: application/json');
+
+		//	Generar Json con los Datos
+			echo $_JSON;
+
+		}
+		break;
+		
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
 	}
 

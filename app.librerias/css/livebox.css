@@ -204,7 +204,7 @@
 		width: calc(100% - var(--padding-box));
 		padding: 15px 0 0 0;
 		display: grid;
-		grid-template-columns: auto auto auto;
+		grid-template-columns: auto auto;
 		grid-gap: var(--padding-box-interior);
 	}
 		.livebox .tipo-mesa div
@@ -283,7 +283,7 @@
 			width: calc(100% - (var(--padding-box) * 2));
 			padding: 6px var(--padding-box) 6px var(--padding-box);
 			display: grid;
-			grid-template-columns: 550px 1fr;
+			grid-template-columns: 1fr 180px;
 			grid-gap: 20px;
 			color: var(--color-texto-1);
 		}
@@ -360,7 +360,7 @@
 				.livebox .candidato .candidato-nombres
 				{
 					float: left;
-					width: calc(50% - 72px);
+					width: calc(60% - 72px);
 					padding: 0 20px 4px 20px;
 					margin: 0 0 0 60px !important;
 					border-radius: var(--border-radius) 0 0 var(--border-radius) !important;
@@ -368,7 +368,7 @@
 				.livebox .candidato .candidato-apellidos
 				{
 					float: left;
-					width: calc(50% - 72px);
+					width: calc(40% - 72px);
 					padding: 0 20px 4px 20px;
 					margin: 0 0 0 0 !important;
 					border-radius: 0 var(--border-radius) var(--border-radius) 0 !important;

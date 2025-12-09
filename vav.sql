@@ -181,7 +181,9 @@ ALTER FUNCTION public.imagen_nueva(in_imagen_id bigint, in_imagen_objeto bigint,
 -- Name: mesa_activar(bigint, character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
-CREATE FUNCTION mesa_activar(in_mesa_id bigint, in_mesa_numero character varying) RETURNS bigint
+--DROP FUNCTION mesa_activar(in_mesa_id bigint, in_mesa_numero character varying);
+
+CREATE FUNCTION mesa_activar(in_mesa_id bigint, in_mesa_publicado character varying) RETURNS bigint
     LANGUAGE plpgsql
     AS $$
 
@@ -197,7 +199,7 @@ CREATE FUNCTION mesa_activar(in_mesa_id bigint, in_mesa_numero character varying
 
 			mesa_estado = 1,
 
-			mesa_numero = in_mesa_numero,
+			mesa_publicado = in_mesa_publicado,
 
 			mesa_cambio = now()
 
@@ -208,7 +210,34 @@ CREATE FUNCTION mesa_activar(in_mesa_id bigint, in_mesa_numero character varying
 	END $$;
 
 
-ALTER FUNCTION public.mesa_activar(in_mesa_id bigint, in_mesa_numero character varying) OWNER TO postgres;
+ALTER FUNCTION public.mesa_activar(in_mesa_id bigint, in_mesa_publicado character varying) OWNER TO postgres;
+
+--DROP FUNCTION mesa_archivar(in_mesa_id bigint);
+
+CREATE FUNCTION mesa_cambiar_estado(in_mesa_id bigint, in_mesa_estado bigint) RETURNS bigint
+    LANGUAGE plpgsql
+    AS $$
+
+		DECLARE
+
+		BEGIN
+
+		UPDATE
+
+			mesa
+
+		SET
+
+			mesa_estado = in_mesa_estado
+
+		WHERE mesa_id = in_mesa_id;
+
+		return 1;
+
+	END $$;
+
+
+ALTER FUNCTION public.mesa_cambiar_estado(in_mesa_id bigint, in_mesa_estado bigint) OWNER TO postgres;
 
 --
 -- Name: mesa_candidato_guardar(bigint, character varying, character varying); Type: FUNCTION; Schema: public; Owner: app_vav
@@ -863,6 +892,59 @@ CREATE FUNCTION mesa_nuevo(in_usuario_id bigint, in_mesa_tipo character varying,
 
 ALTER FUNCTION public.mesa_nuevo(in_usuario_id bigint, in_mesa_tipo character varying, in_mesa_zona bigint, in_mesa_zona_titulo character varying, in_mesa_comuna character varying) OWNER TO postgres;
 
+--	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+
+CREATE FUNCTION movil_mesa_nueva(
+	in_usuario_id bigint,
+	in_mesa_tipo character varying,
+	in_mesa_zona bigint,
+	in_mesa_zona_titulo character varying,
+	in_mesa_comuna character varying,
+	in_mesa_local character varying,
+	in_mesa_numero character varying
+	)
+	RETURNS bigint
+    LANGUAGE plpgsql
+    AS $$
+		DECLARE
+			in_mesa_id bigint;
+		BEGIN
+        SELECT nextval('mesa_id_seq') INTO in_mesa_id;
+        INSERT INTO mesa
+        (
+        	mesa_id,
+        	usuario_id,
+            mesa_tipo,
+            mesa_zona,
+            mesa_zona_titulo,
+			mesa_comuna,
+			mesa_local,
+			mesa_numero
+        )
+		VALUES
+		(
+			in_mesa_id,
+			in_usuario_id,
+            in_mesa_tipo,
+            in_mesa_zona,
+            in_mesa_zona_titulo,
+			in_mesa_comuna,
+			in_mesa_local,
+			in_mesa_numero
+		);
+
+    --  AGREGAR CANDIDATOS A LA MESA
+		INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo AND candidato_zona = in_mesa_zona;
+	--	INSERT INTO voto (candidato_id, mesa_id, voto_total) SELECT candidato_id, in_mesa_id, 0 FROM candidato WHERE candidato_tipo = in_mesa_tipo;
+
+        RETURN in_mesa_id;
+
+	END $$;
+
+ALTER FUNCTION public.movil_mesa_nueva(in_usuario_id bigint, in_mesa_tipo character varying, in_mesa_zona bigint, in_mesa_zona_titulo character varying, in_mesa_comuna character varying, in_mesa_local character varying, in_mesa_numero character varying ) OWNER TO postgres;
+
+--	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+
 --
 -- Name: mesa_obtener_datos(bigint); Type: FUNCTION; Schema: public; Owner: postgres
 --
@@ -1247,7 +1329,8 @@ ALTER FUNCTION public.objeto_estado(in_objeto_id bigint, in_objeto_tipo characte
 -- Name: swich_actual(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
-CREATE FUNCTION swich_actual() RETURNS TABLE(swich_mesa_1 smallint, swich_mesa_2 smallint, swich_mesa_3 smallint)
+--DROP FUNCTION swich_actual();
+CREATE FUNCTION swich_actual() RETURNS TABLE(swich_mesa_1 smallint, swich_mesa_2 smallint, swich_mesa_3 smallint, swich_mesa_4 smallint)
     LANGUAGE plpgsql
     AS $$
 
@@ -1261,7 +1344,9 @@ CREATE FUNCTION swich_actual() RETURNS TABLE(swich_mesa_1 smallint, swich_mesa_2
 
 		    swich.swich_mesa_2,
 
-		    swich.swich_mesa_3
+		    swich.swich_mesa_3,
+
+			swich.swich_mesa_4
 
 	    FROM
 
@@ -1359,6 +1444,8 @@ ALTER FUNCTION public.swich_consolidados_mesas(in_mesa_tipo character varying, i
 -- Name: swich_consolidados_presidenciales(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
+DROP FUNCTION swich_consolidados_presidenciales();
+
 CREATE FUNCTION swich_consolidados_presidenciales() RETURNS TABLE(total bigint)
     LANGUAGE plpgsql
     AS $$
@@ -1379,6 +1466,8 @@ CREATE FUNCTION swich_consolidados_presidenciales() RETURNS TABLE(total bigint)
 
 					mesa.mesa_tipo = 'P' AND
 
+					mesa.mesa_destacada = 1 AND
+
 					mesa.mesa_estado IN(1,2)
 
 	    ;
@@ -1391,8 +1480,8 @@ ALTER FUNCTION public.swich_consolidados_presidenciales() OWNER TO postgres;
 --
 -- Name: swich_consolidados_presidenciales_totales(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
-
-CREATE FUNCTION swich_consolidados_presidenciales_totales(in_mesa_tipo character varying) RETURNS TABLE(votos_total bigint, candidato_id bigint, candidato_orden smallint, candidato_nombres character varying, candidato_apellidos character varying, candidato_independiente boolean, partido_id bigint, pacto_id bigint)
+DROP FUNCTION swich_consolidados_presidenciales_totales();
+CREATE FUNCTION swich_consolidados_presidenciales_totales() RETURNS TABLE(votos_total bigint, candidato_id bigint, candidato_orden smallint, candidato_nombres character varying, candidato_apellidos character varying)
     LANGUAGE plpgsql
     AS $$
 
@@ -1410,13 +1499,7 @@ CREATE FUNCTION swich_consolidados_presidenciales_totales(in_mesa_tipo character
 
 				candidato.candidato_nombres,
 
-				candidato.candidato_apellidos,
-
-				candidato.candidato_independiente,
-
-				partido.partido_id,
-
-				pacto.pacto_id
+				candidato.candidato_apellidos
 
 			FROM
 
@@ -1424,33 +1507,23 @@ CREATE FUNCTION swich_consolidados_presidenciales_totales(in_mesa_tipo character
 
 				voto,
 
-				candidato,
-
-				partido,
-
-				pacto
+				candidato
 
 			WHERE
 
-				mesa.mesa_tipo = in_mesa_tipo AND
+				mesa.mesa_tipo = 'P' AND
+
+				mesa.mesa_destacada = 1 AND
 
 				mesa.mesa_estado IN(1,2) AND
 
 				voto.mesa_id = mesa.mesa_id AND
 
-				candidato.candidato_id = voto.candidato_id AND
-
-				partido.partido_id = candidato.partido_id AND
-
-				pacto.pacto_id = candidato.pacto_id
+				candidato.candidato_id = voto.candidato_id
 
 			group by
 
-				candidato.candidato_id,
-
-				partido.partido_id,
-
-				pacto.pacto_id
+				candidato.candidato_id
 
 			ORDER BY
 
@@ -1548,8 +1621,9 @@ ALTER FUNCTION public.swich_editar(in_swich_id bigint, in_swich_modo bigint, in_
 --
 -- Name: swich_mesas(bigint, bigint, bigint); Type: FUNCTION; Schema: public; Owner: app_vav
 --
+DROP FUNCTION swich_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint);
 
-CREATE FUNCTION swich_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint) RETURNS TABLE(mesa_id bigint, mesa_tipo character varying, mesa_zona bigint, mesa_zona_titulo character varying, mesa_comuna character varying, mesa_local character varying, mesa_numero character varying)
+CREATE FUNCTION swich_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint, in_mesa_4 bigint) RETURNS TABLE(mesa_id bigint, mesa_tipo character varying, mesa_zona bigint, mesa_zona_titulo character varying, mesa_comuna character varying, mesa_local character varying, mesa_numero character varying)
     LANGUAGE plpgsql
     AS $$
 
@@ -1579,9 +1653,9 @@ CREATE FUNCTION swich_mesas(in_mesa_1 bigint, in_mesa_2 bigint, in_mesa_3 bigint
 
 		WHERE
 
-			mesa.mesa_id IN ( in_mesa_1 , in_mesa_2 , in_mesa_3 )
+			mesa.mesa_id IN ( in_mesa_1 , in_mesa_2 , in_mesa_3, in_mesa_4 )
 
-	    LIMIT 3
+	    LIMIT 4
 
 	    ;
 
@@ -4824,6 +4898,7 @@ INSERT INTO usuario VALUES (49, 'OP', 1, 'n', 'Prensa 48', 'prensa48', 'pwd', 1,
 INSERT INTO usuario VALUES (50, 'OP', 1, 'n', 'Prensa 49', 'prensa49', 'pwd', 1, '2023-05-07 12:22:50.151745', '2023-05-07 12:22:50.151745');
 INSERT INTO usuario VALUES (51, 'OP', 1, 'n', 'Prensa 50', 'prensa50', 'pwd', 1, '2023-05-07 12:22:50.151745', '2023-05-07 12:22:50.151745');
 INSERT INTO usuario VALUES (52, 'VZ', 1, 'n', 'Tv', 'tv', 'tv', 1, '2022-09-02 08:25:13.05714', '2022-09-02 08:25:13.05714');
+INSERT INTO usuario VALUES (53, 'OP', 1, 'n', 'APP Móvil', 'appmobile', 'pwd', 1, '2023-05-07 12:22:50.151745', '2023-05-07 12:22:50.151745');
 
 
 --

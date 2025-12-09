@@ -1,26 +1,86 @@
 
+    .monitor-header
+    {
+        display: grid;
+        grid-template-columns: 180px 280px 220px 320px 170px 1fr;
+        padding: 15px 25px 18px 25px;
+        background: var(--color-bg-box-a);
+        border-bottom: solid 1px var(--color-border-2);
+        color: var(--color-texto-parrafos);
+        font-weight: 300;
+    }
+        .monitor-header i
+        {
+            margin: 0 0 0 10px;
+            opacity: 0.5;
+        }
     .monitor
     {
         display: grid;
-        grid-template-columns: 230px 35px 1fr  1fr;
-        padding: 12px 20px 15px 20px;
+        grid-template-columns: 180px 280px 220px 320px 170px 1fr;
+        padding: 17px 25px 18px 25px;
         border-bottom: solid 1px var(--color-border-2);
+        text-transform: uppercase;
     }
         .monitor:last-child
         {
             border:none;
         }
-        .monitor b
+        .monitor .bold
         {
+            font-weight: 400;
+        }
+        .monitor .azul
+        {
+            color: var(--color-bg-boton-nuevo-a);
+        }
+        .monitor .rojo
+        {
+            color: var(--color-bg-boton-cerrar);
+        }
+        .monitor .verde
+        {
+            color: var(--color-bg-boton-editar);
+        }
+        .monitor .naranja
+        {
+            color: var(--color-bg-boton-preview);
+        }
+        .monitor .usuario
+        {
+            color: var(--color-bg-boton-cancelar);
             font-weight: 400;
         }
         .monitor .hora
         {
             color: var(--color-texto-2);
         }
-        .monitor .hora i
+        .monitor .comuna
         {
-            margin: 0 13px 0 0;
+            color: var(--color-bg-boton-nuevo);
+            font-weight: 400;
+        }
+        .monitor .local
+        {
+            color: var(--color-texto-2);
+            font-weight: 500;
+        }
+        .monitor .mesa
+        {
+            color: var(--color-bg-boton-cancelar);
+            font-weight: 400;
+        }
+        .monitor i
+        {
+            margin: 0 12px 0 0;
+        }
+
+        .debug_vavio
+        {
+            text-align: center;
+            font-weight: 200;
+            padding: 20px 0 23px 0;
+            color: var(--color-texto-2);
         }
 
         .nuevo-dato
@@ -35,7 +95,7 @@
             }
             50% {
                 opacity: 1;
-                background: var(--color-border-1);
+                background: var(--color-border-2);
             }
             100% {
                 opacity: 1;

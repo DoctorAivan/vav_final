@@ -11,9 +11,8 @@
 					<h2>Selecciona el tipo de votación <span>Obligatorio</span></h2>
 				</div>
 				<div class="col-1 tipo-mesa bg-1" id="mesa-tipo">
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('P');" id="mesa-tipo-P">🔴&nbsp;&nbsp;&nbsp;Presidentes</div>
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('S');" id="mesa-tipo-S">🔵&nbsp;&nbsp;&nbsp;Senadores</div>
-					<div class="box-shadow-light" onclick="mesa_nueva_tipo('D');" id="mesa-tipo-D">🟠&nbsp;&nbsp;&nbsp;Diputados</div>
+					<div class="box-shadow-light" onclick="mesa_nueva_tipo('P');" id="mesa-tipo-P">🔴&nbsp;&nbsp;&nbsp;Presidenciales</div>
+					<div class="box-shadow-light off" id="mesa-tipo-S">🔵&nbsp;&nbsp;&nbsp;Senadores</div>
 				</div>
 			</article>
 			<article class="formulario bg-1">
@@ -74,38 +73,36 @@
 					generarSelect( 'usuario_id' , 0 , $_ARRAY_USUARIOS );
 ?>
 				</div>
-				<div class="col-1" style="display:grid; gap: 20px; grid-template-columns: 200px 1fr 150px;">
-					<div class="">
-						<h2>Comuna <span>Obligatorio</span></h2>
-						<input name="mesa_comuna" id="mesa_comuna" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Providencia" />
-					</div>
-					<div class="">
-						<h2>Local de votación <span id="mesa_local_largo"><b>24 Caracteres</b> disponibles</span></h2>
-						<input name="mesa_local" id="mesa_local" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" maxlength="24" />
-					</div>
-					<div class="">
-						<h2>Numero de mesa </h2>
-						<input name="mesa_numero" id="mesa_numero" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="M 115" />
-					</div>
+				<div class="col-2">
+					<h2>Comuna <span>Obligatorio</span></h2>
+					<input name="mesa_comuna" id="mesa_comuna" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Providencia" />
+				</div>
+				<div class="col-2">
+					<h2>Numero de mesa <span>Obligatorio</span></h2>
+					<input name="mesa_numero" id="mesa_numero" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="M 115" />
+				</div>
+				<div class="col-1">
+					<h2>Local de votación <span id="mesa_local_largo"><b>24 Caracteres</b> disponibles</span></h2>
+					<input name="mesa_local" id="mesa_local" type="text" class="uppercase alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Estadio Nacional" maxlength="24" />
 				</div>
 			</article>
 			<article class="formulario candidatos bg-1">
 
-				<!-- <div class="col-1" style="border-top:solid 1px #454757; padding:10px 0 0 var(--padding-box);"> -->
-
-				<div class="col-1" style="border-top:solid 1px #454757; padding:10px 0 0 var(--padding-box);">
-					<div class="tags-input">
-						<i class="icono-fixed fas fa-search"></i>
-						<input style="margin:14px 0 18px 0;" name="candidato_nombre" id="candidato_nombre" type="text" class="alfanumerico input-filtro-candidatos box-shadow-light bordes-radius" autocomplete="off" placeholder="FILTRAR POR NOMBRE" style="margin:14px 0 23px 0;">
+				<noscript>
+					<div class="col-1" style="border-top:solid 1px #454757; padding:10px 0 0 var(--padding-box);">
+						<div class="tags-input">
+							<i class="icono-fixed fas fa-search"></i>
+							<input style="margin:14px 0 18px 0;" name="candidato_nombre" id="candidato_nombre" type="text" class="alfanumerico input-filtro-candidatos box-shadow-light bordes-radius" autocomplete="off" placeholder="FILTRAR POR NOMBRE" style="margin:14px 0 23px 0;">
+						</div>
+						<div class="filtro-boton box-shadow-light" onclick="limpiarFiltro();">
+							<span>VER TODOS</span>
+						</div>
 					</div>
-					<div class="filtro-boton box-shadow-light" onclick="limpiarFiltro();">
-						<span>VER TODOS</span>
-					</div>
-				</div>
+				</noscript>
 
 				<div class="candidato-titulos titulo">
 					<div class="candidato-titulo">Nombre candidato en pantalla <i class="fas fa-chevron-down"></i></div>
-					<div class="candidato-titulo" style="text-align: right;">
+					<div class="candidato-titulo" style="text-align: right; padding-right:9px;">
 						Modificar Votos <i class="fas fa-chevron-down"></i>
 					</div>
 				</div>

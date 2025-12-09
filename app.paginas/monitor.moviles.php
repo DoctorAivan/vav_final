@@ -19,21 +19,24 @@
 		<script type="text/javascript">
 
 		//	Pubnub Monitoreo de Mesas
-		    pubnub				=	new PubNub({
+			pubnub				=	new PubNub({
 				subscribeKey	:	"<?php echo $_PUBNUB_SUS_MESAS; ?>",
-				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>"
-			});
+				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>",
+				secretKey		:	"<?php echo $_PUBNUB_SECRET_KEY; ?>",
+				userId			:	"mobile_monitor"
+		    });
 			
 		//	Pubnub Monitoreo de Mesas
 			pubnubMovil			=	new PubNub({
 				subscribeKey	:	"<?php echo $_PUBNUB_SUS_MESAS; ?>",
-				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>"
+				publishKey		:	"<?php echo $_PUBNUB_PUB_MESAS; ?>",
+				secretKey		:	"<?php echo $_PUBNUB_SECRET_KEY; ?>",
+				userId			:	"mobile_monitor"
 		    });
 
 		</script>
 
 		<!-- Funcionalidad PubNub -->
-		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>pubNub.movil.js<?php echo $_CONF_VERSION; ?>"></script>
 		<script type="text/javascript" src="<?php echo $_LIBRERIAS_JS; ?>pubNub.movil.acciones.js<?php echo $_CONF_VERSION; ?>"></script>
 
 		<!-- Libreria Iconos Fontawesome -->
@@ -68,11 +71,23 @@
 			</section>
 
 			<section class="main-cnt cols x1">
-				<section class="bg-blanco box-shadow bordes-radius crop debug" id="debug">
-					<div class="box vacio">
-						Aun no existen notificaciones
+				<div class="bg-blanco box-shadow bordes-radius">
+					<div class="debug">
+						<div class="box monitor-header">
+							<div class="hora">Usuarios <i class="fas fa-chevron-down"></i></div>
+							<div class="bold verde">Acción <i class="fas fa-chevron-down"></i></div>
+							<div class="comuna">Comuna <i class="fas fa-chevron-down"></i></div>
+							<div class="">Local <i class="fas fa-chevron-down"></i></div>
+							<div class="">Numero <i class="fas fa-chevron-down"></i></div>
+							<div class="hora">Publicación <i class="fas fa-chevron-down"></i></div>
+						</div>
 					</div>
-				</section>
+					<div class="debug" id="debug">
+						<div class="box debug_vavio">
+							Aun no existen notificaciones
+						</div>
+					</div>
+				</div>
 			</section>
 
 		</section>

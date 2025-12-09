@@ -200,23 +200,20 @@
 					<section class="swich-r-cnt cols x2" id="mesas-swich">
 						<div class="swich-r-box box-shadow" id="swich-mesa-1">
 							<div class="swich-r-box-opciones" onclick="vaciarEspacio(1);">
-								<img src="/vav_final/app.imagenes/iconos/icon_m1.png" />
-								<h2>MESA 1</h2>
+								<h2>MESA IZQUIERDA</h2>
 								<h3><i class="fas fa-times-circle"></i></h3>
 							</div>
 							<div class="swich-espacio cols x1 relacionados" id="mesa-1"></div>
 						</div>
 						<div class="swich-r-box box-shadow" id="swich-mesa-2">
 							<div class="swich-r-box-opciones" onclick="vaciarEspacio(2);">
-								<img src="/vav_final/app.imagenes/iconos/icon_m2.png" />
-								<h2>MESA 2</h2>
+								<h2>MESA DERECHA</h2>
 								<h3><i class="fas fa-times-circle"></i></h3>
 							</div>
 							<div class="swich-espacio cols x1 relacionados" id="mesa-2"></div>
 						</div>
 						<div class="swich-r-box box-shadow" id="swich-mesa-3">
 							<div class="swich-r-box-opciones" onclick="vaciarEspacio(3);">
-								<img src="/vav_final/app.imagenes/iconos/icon_m3.png" />
 								<h2>MESA 3</h2>
 								<h3><i class="fas fa-times-circle"></i></h3>
 							</div>
@@ -224,7 +221,6 @@
 						</div>
 						<div class="swich-r-box box-shadow" id="swich-mesa-4">
 							<div class="swich-r-box-opciones" onclick="vaciarEspacio(4);">
-								<img src="/vav_final/app.imagenes/iconos/icon_m4.png" />
 								<h2>MESA 4</h2>
 								<h3><i class="fas fa-times-circle"></i></h3>
 							</div>
@@ -259,7 +255,7 @@
 								<div id="estado-preview-switch" class="preview bordes-radius" onclick="swichPreview();">PREVIEW</div>
 							</div>
 							<div>
-								<div style="margin-top: 10px;" class="swich-consolidados-titulo">Estado Consolidados en pantalla</div>
+								<div class="swich-consolidados-titulo">Estado del modulo en pantalla</div>
 								<div class="swich-consolidados-items">
 									<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');">&nbsp;<i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO&nbsp;</div>
 									<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');">&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE&nbsp;</div>
@@ -269,6 +265,53 @@
 								</div>
 							</div>
 						</div>
+
+						<noscript>
+							<div class="swich-r-box swich-nav box-shadow">
+								
+								
+
+									<div class="swich-mesas" id="swich-opcion-mesas" style="margin: 0px 0px 10px 0px">
+										<h1>Configuración de consolidados</h1>
+										<h2>Selecciona una región para desplegar los resultados</h2>
+										<div id="consolidados-render" class="consolidados bordes-radius" onclick="consolidados_asignar();">
+											<span id="consolidados-render-tipo" class="tipo">🔴&nbsp;&nbsp;GOBERNADOR</span>
+											<hr class="separador"><i class="fas fa-chevron-right"></i></hr>
+											<span id="consolidados-render-zona" class="zona">R. METROPOLITANA</span>
+											<i id="consolidados-render-icon" class="fa fa-highlighter"></i>
+										</div>
+									</div>
+
+									<div>
+										<div class="swich-consolidados-h1">Consolidados Presidenciales</div>
+										<div class="swich-consolidados-titulo">Cantidad de candidatos en pantalla</div>
+										<div class="swich-consolidados-items" id="consolidados-candidad-candidatos">
+											<div id="consolidados-posicion-l" class="item on" onclick="posicionConsolidados('l');">
+											&nbsp;<span style="font-weight: bold;">3</span>&nbsp;&nbsp;MAYORIAS&nbsp;
+											</div>
+											<div id="consolidados-posicion-r" class="item of" onclick="posicionConsolidados('r');">
+												TODOS LOS CANDIDATOS&nbsp;
+											</div>
+										</div>
+									</div>
+
+								</noscript>
+								
+								<div class="swich-consolidados">
+									<div>
+										<div class="swich-consolidados-titulo">Estado del modulo en pantalla</div>
+										<div class="swich-consolidados-items">
+											<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');">&nbsp;<i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO&nbsp;</div>
+											<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');">&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE&nbsp;</div>
+										</div>
+										<div class="swich-controles">
+											<div id="estado-preview-consolidados" class="preview bordes-radius" style="margin: 0 0 0 15px;" onclick="consolidadosPreview();">PREVIEW</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</noscript>
 
 					</section>
 				</section>

@@ -50,8 +50,13 @@
 #	MESAS
 	RewriteRule 	^mesas/activar/																	/vav_final/app.sql/mesas.php?f=mesaActivar												[L]
 	RewriteRule 	^mesas/destacada/																/vav_final/app.sql/mesas.php?f=mesaDestacada											[L]
+	RewriteRule 	^mesas/cambiar-estado/															/vav_final/app.sql/mesas.php?f=mesaCambiarEstado										[L]
 	
 	RewriteRule 	^mesas/nueva/																	/vav_final/app.sql/mesas.php?f=mesa_nueva												[L]
+
+#	MOVILES
+	RewriteRule 	^movil/mesas/nueva/																/vav_final/app.sql/mesas.php?f=movil_mesa_nueva											[L]
+	
 	RewriteRule 	^mesas/guardar/																	/vav_final/app.sql/mesas.php?f=mesa_guardar												[L]
 
 	RewriteRule 	^mesas/candidato/guardar/														/vav_final/app.sql/mesas.php?f=mesa_candidato_guardar									[L]

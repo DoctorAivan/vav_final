@@ -90,6 +90,7 @@
 						<h2 class="icono-on">Administrar Mesas</h2>
 						<h3 class="icono-on">Listado completo de mesas creadas</h3>
 						<div class="opciones">
+						<noscript>
 							<div class="input">
 								<label>
 									<div>Filtrar<br>Mesas</div>
@@ -99,15 +100,8 @@
 							<div class="boton box-shadow-light bordes-radius tipsy-top" id="opcion-voto-S" title="Senadores" onclick="mesa_filtrar('S');">🔵</div>
 							<div class="boton box-shadow-light bordes-radius tipsy-top" id="opcion-voto-D" title="Diputados" onclick="mesa_filtrar('D');">🟠</div>
 							<div class="separador"></div>
+						</noscript>
 							<div class="boton boton-sin-margen editar box-shadow-light bordes-radius" onclick="mesa_nueva();"><i class="fas fa-plus-circle"></i> Nueva Mesa</div>
-							<noscript>
-								<div class="boton activo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-1" title="Gobernadores" onclick="mesa_filtrar(1);"><i class="fas fa-university"></i></div>
-								<div class="boton nuevo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-2" title="Alcaldes" onclick="mesa_filtrar(2);"><i class="fas fa-user"></i></div>
-								<div class="boton nuevo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-3" title="Concejales" onclick="mesa_filtrar(3);"><i class="fas fa-users"></i></div>
-								<div class="boton nuevo box-shadow-light bordes-radius tipsy-top" id="opcion-voto-4" title="Constituyentes" onclick="mesa_filtrar(4);"><i class="fas fa-book"></i></div>
-								<div class="separador"></div>
-								<div class="boton editar box-shadow-light bordes-radius" onclick="mesa_nueva();"><i class="fas fa-plus-circle"></i> Nueva Mesa</div>
-							</noscript>
 						</div>
 					</header>
 				</section>

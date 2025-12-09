@@ -71,7 +71,7 @@ $(function()
 function mesa_nueva()
 {
 //  Cambiar la dimensión
-    liveboxAncho('mesa' , 550 );
+    liveboxAncho('mesa' , 460 );
 
 //	Abrir Funcionalidad Livebox
     liveboxAbrir('mesa');
@@ -522,7 +522,7 @@ function mesa_detalles( id )
         // TAMAÑO CONSTITUYENTES : 650
 
     //  Cambiar la dimensión
-        liveboxAncho('mesa-detalles' , 800 );
+        liveboxAncho('mesa-detalles' , 600 );
 
     //	Abrir Funcionalidad Livebox
         liveboxAbrir('mesa-detalles');
@@ -534,7 +534,7 @@ function mesa_detalles( id )
     //  mesa_autocompletar_comunas();
 
     //  Buscar un candidato en el listado
-        mesa_detalles_buscar_candidato();
+    //  mesa_detalles_buscar_candidato(); 🔴
 
     //  Asignar funcionalidad Tootip
         $('.tipsy-sw').tipsy({gravity: "sw" , title: function() { return this.getAttribute('original-title'); } });
@@ -856,6 +856,9 @@ function mesa_votos( objeto , accion , candidato )
             'valor'         :	voto_total,
             'candidato'     :   candidato
         }
+
+        console.log( pubnub );
+        
 
     //	Enviar Notificación a PubNub
         enviarPubNub( pubnub );

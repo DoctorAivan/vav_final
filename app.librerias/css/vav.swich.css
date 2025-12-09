@@ -100,25 +100,30 @@
 				}
 					.swich-r-box-opciones:hover
 					{
-						color: var(--color-bg-boton-eliminar);
+						color: var(--color-bg-navegacion-texto);
+					}
+					.swich-r-box-opciones img
+					{
+						float: left;
+						padding: 14px 0 0 20px;
 					}
 					.swich-r-box-opciones h2
 					{
 						float: left;
-						font-size: 1rem;
-						line-height: 1rem;
+						font-size: 1.2rem;
+						line-height: 1.2rem;
 						font-weight: 400;
 						letter-spacing: 0.05rem;
-						padding: 10px 15px 0 17px;
+						padding: 12px 17px 0 15px;
 					}
 					.swich-r-box-opciones h3
 					{
 						float: left;
-						padding: 10px 17px 0 0;
+						padding: 11px 20px 0 0;
 					}
 						.swich-r-box-opciones h3 i
 						{
-							font-size: 1.1rem;
+							font-size: 1.2rem;
 						}
 			.swich-espacio
 			{
@@ -551,7 +556,7 @@
 				}
 			.mesa-swich header .importante
 			{
-				font-weight: 700;
+				font-weight: 800;
 				color: #ffd900 !important;
 				animation: animacionDestacado 1s linear infinite;
 			}
