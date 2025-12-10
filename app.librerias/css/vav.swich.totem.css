@@ -137,7 +137,7 @@
 
 	/* CONTENEDOR PRINCIPAL */
 	--contenedor-principal-width : 450px;
-	--contenedor-principal-height : 50px;
+	--contenedor-principal-height : 56px;
 	--contenedor-principal-candidato-height : 143px;
 	--contenedor-principal-margin : 0px;
 
@@ -184,6 +184,7 @@ body
 	/*
 	background: url("/vav_final/app.imagenes/bg_conductores.jpg") no-repeat;
 	background: url("/vav_final/app.imagenes/bg_preview.jpg") no-repeat !important;
+	background: url("/vav_final/app.imagenes/bg_quad_preview.jpg") no-repeat !important;
 	*/
 	background: transparent;
 	overflow: hidden;
@@ -261,7 +262,7 @@ body
 			font-family: 'Flama_Medium';
 			font-size: 1.8rem;
 			line-height: 1.8rem;
-			padding: 8px 0 0 0;
+			padding: 7px 0 0 0;
 			color: var(--color-black);
 		}
 			.consolidados .votos-totales .totales
@@ -306,7 +307,7 @@ body
 						font-family: 'Flama_Regular';
 						font-size: 1.8rem;
 						line-height: 1.8rem;
-						padding: 8px 0 0 83px;
+						padding: 7px 0 0 83px;
 					}
 						.consolidados .candidatos .template-1 .up .votos .decorador
 						{
@@ -333,7 +334,7 @@ body
 						font-size: 5.2rem;
 						line-height: 5.2rem;
 						letter-spacing: 2px;
-						padding: 3px 0 0 83px;
+						padding: 1px 0 0 83px;
 					}
 					.consolidados .candidatos .template-1 .down .imagen
 					{
@@ -354,7 +355,7 @@ body
 						grid-area: porcentaje;
 						text-align: right;
 						color: var(--color-white);
-						padding: 9px 55px 0 0;
+						padding: 6px 55px 0 0;
 					}
 						.consolidados .candidatos .template-1 .down .porcentaje .valor
 						{
@@ -405,7 +406,7 @@ body
 						font-size: 1.8rem;
 						line-height: 1.8rem;
 						text-align: right;
-						padding: 8px 83px 0 0;
+						padding: 7px 83px 0 0;
 					}
 						.consolidados .candidatos .template-2 .up .votos .decorador
 						{
@@ -432,7 +433,7 @@ body
 						font-size: 5.2rem;
 						line-height: 5.2rem;
 						letter-spacing: 2px;
-						padding: 3px 83px 0 0;
+						padding: 1px 83px 0 0;
 					}
 					.consolidados .candidatos .template-2 .down .imagen
 					{
@@ -453,7 +454,7 @@ body
 						grid-area: porcentaje;
 						text-align: left;
 						color: var(--color-white);
-						padding: 9px 0 0 55px;
+						padding: 6px 0 0 55px;
 					}
 						.consolidados .candidatos .template-2 .down .porcentaje .valor
 						{
@@ -494,7 +495,7 @@ body
 			text-align: center;
 			color: var(--color-black);
 			background: linear-gradient( 0deg, var(--color-subtitle) 0%, var(--color-subtitle-2) 100%);
-			padding: 6px 0 6px 0;
+			padding: 7px 0 7px 0;
 		}
 			.tottem .box .titulo .titulo-local
 			{
@@ -513,8 +514,8 @@ body
 			}
 				.tottem .box .titulo .titulo-numero span
 				{
-					font-family: 'panton_extraBold';
-					margin: 0 4px 0 0;
+					font-family: 'panton_regular';
+					margin: 0 0 0 4px;
 				}
 /*
 	CANDIDATOS
@@ -548,7 +549,7 @@ body
 					.tottem .box .candidatos .candidato .imagen img
 					{
 						position: absolute;
-						width: 110px;
+						width: 105px;
 						bottom: -12px;
 					}
 				.tottem .box .candidatos .candidato .votos
@@ -557,10 +558,10 @@ body
 					grid-area: votos;
 					position: relative;
 					text-align: center;
-					font-family: 'Flama_Bold_';
-					font-size: 2.95rem;
-					line-height: 2.95rem;
-					letter-spacing: 0px;
+					font-family: 'Flama_Bold';
+					font-size: 3.1rem;
+					line-height: 3.1rem;
+					letter-spacing: 1px;
 					padding: 2px 0 0 0;
 				}
 				.tottem .box .candidatos .candidato .candidato-votos-animacion
@@ -581,7 +582,7 @@ body
 			}
 				.tottem .box .candidatos .template-1 .imagen img
 				{
-					left: -17px;
+					left: -14px;
 				}
 				.tottem .box .candidatos .template-1 .votos
 				{
@@ -599,7 +600,7 @@ body
 			}
 				.tottem .box .candidatos .template-2 .imagen img
 				{
-					right: -17px;
+					right: -14px;
 				}
 				.tottem .box .candidatos .template-2 .votos
 				{

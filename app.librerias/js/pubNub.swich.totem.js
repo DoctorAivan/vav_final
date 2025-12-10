@@ -1,5 +1,8 @@
+
+	const set_cache = 'v=3.0.0'
+
 //	URL del diccionario de zonas
-	const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.3'
+	const path_app_zonas = path_app + '/app.librerias/zonas.json?' + set_cache;
 
 //	Mode de la Aplicación
 	let app_modo = 0
@@ -540,7 +543,7 @@
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
 									<div class="votos-totales">
-										<span class="titulo">CONSOLIDADOS CHV</span> - CHILE TÚ DECIDES
+										<span class="titulo">CONSOLIDADOS CHV</span>&nbsp;&nbsp;-&nbsp;&nbsp;CHILE TÚ DECIDES
 									</div>`;
 
 		//	Dibujar la Mesa en el DOM
@@ -582,7 +585,7 @@
 											${candidato.apellidos}
 										</div>
 										<div class="imagen">
-											<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}_c.webp" />
+											<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}_c.webp?${set_cache}" />
 										</div>
 										<div class="porcentaje">
 											<span class="valor" id="candidato-${candidato.id}-votos">
@@ -777,11 +780,8 @@
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="titulo">
-										<div class="titulo-local">
-											${mesa.local}
-										</div>
 										<div class="titulo-numero">
-											<span>${mesa.numero}</span> ${mesa.comuna}
+											${mesa.comuna} <span>${mesa.numero}</span>
 										</div>
 									</div>
 									<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>`;
@@ -804,7 +804,7 @@
 
 			//	Asignar los elementos al div
 				objeto.innerHTML = `<div class="imagen">
-										<img src="${path_imagenes_candidatos}${candidato.id}.webp" />
+										<img src="${path_imagenes_candidatos}${candidato.id}.webp?${set_cache}" />
 									</div>
 									<div class="votos" id="candidato-${candidato.objeto}-votos">
 										${candidato.votos}

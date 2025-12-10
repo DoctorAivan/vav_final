@@ -15,4 +15,10 @@ http://10.236.100.38/phpPgAdmin/
 -   agregar candidato ind en el json [OK]
 -   agregar candidato ind al frontend [OK]
 
--   consulta consolidados, agregar estado de la mesa en el filtro
+-   consulta consolidados, agregar estado de la mesa en el filtro [OK]
+
+- Nueva foto para Jara (mesas) [OK]
+- Eliminar el local de votación (confirmado) [OK]
+- Poner primero NombreComuna en Negrita y Número de Mesa abreviado: Ejemplo [OK]
+"San Pedro de la Paz M. 141" Cosa que lograr usar una línea y poder agrandar el texto. [OK]
+- Lo último la tipografía de los contadores por mesas se "apretaron", raro pk siempre lo ví bien será windows? te dejo un pantallazo.
