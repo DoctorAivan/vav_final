@@ -543,7 +543,7 @@
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
 									<div class="votos-totales">
-										<span class="titulo">CONSOLIDADOS CHV</span>&nbsp;&nbsp;-&nbsp;&nbsp;CHILE TÚ DECIDES
+										<span class="titulo">PROYECCIÓN CHV</span>&nbsp;&nbsp;+&nbsp;&nbsp;DECIDE CHILE
 									</div>`;
 
 		//	Dibujar la Mesa en el DOM
@@ -588,10 +588,7 @@
 											<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}_c.webp?${set_cache}" />
 										</div>
 										<div class="porcentaje">
-											<span class="valor" id="candidato-${candidato.id}-votos">
-												${candidato.porcentaje.replace('.',',')}
-											</span>
-											<span class="decorador">%</span>
+											<span class="valor" id="candidato-${candidato.id}-votos">${candidato.porcentaje.replace('.',',')}</span><span class="decorador">%</span>
 										</div>
 										<div class="estrella">
 											<img src="${path_imagenes}star_${candidato.orden == 1 ? 'a' : 'b'}.png" />
