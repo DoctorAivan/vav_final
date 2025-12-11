@@ -300,10 +300,9 @@ body
 			padding: 11px 0 0 0;
 			color: var(--color-white);
 		}
-			.consolidados .votos-totales .totales
+			.consolidados .votos-totales .titulo
 			{
-				font-family: 'Flama_Regular';
-				margin-left: 6px;
+				margin-left: -15px;
 			}
 			.consolidados .votos-totales .subtitulo
 			{
@@ -369,7 +368,7 @@ body
 						font-size: 5.1rem;
 						line-height: 5.1rem;
 						letter-spacing: 1px;
-						padding: 8px 0 0 83px;
+						padding: 10px 0 0 83px;
 					}
 					.consolidados .candidatos .template-1 .down .imagen
 					{
@@ -468,7 +467,7 @@ body
 						font-size: 5.1rem;
 						line-height: 5.1rem;
 						letter-spacing: 1px;
-						padding: 8px 83px 0 0;
+						padding: 10px 83px 0 0;
 					}
 					.consolidados .candidatos .template-2 .down .imagen
 					{
