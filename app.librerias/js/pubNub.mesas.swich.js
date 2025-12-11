@@ -41,12 +41,12 @@
 	function mesa_nueva_iniciar()
 	{
 	//	Validar si la mesa es nueva
-		mesas_ultima_actualizacion();
+		mesas_ultima_actualizacion_switch();
 
 	//	Validar si el timer esta activo
 		if (mesas_timer === null)
 		{
-			mesas_timer = setInterval( mesas_ultima_actualizacion , mesas_nueva_comparacion);
+			mesas_timer = setInterval( mesas_ultima_actualizacion_switch , mesas_nueva_comparacion);
 		}
 	}
 
@@ -105,10 +105,10 @@
 					mesa_voto.classList.add('animacionVotoMesa');
 
 				//	Esperar que la animación termine
-					mesa_voto.addEventListener('animationend' , function()
-					{
+					mesa_voto.addEventListener('animationend', () => {
+					
 					//	Eliminar la animación
-						mesa_voto.classList.remove('animacionVotoMesa');
+						mesa_voto.classList.remove('animacionVotoMesa')
 
 					//	Cambiar el color del estado
 						mesa_voto.parentElement.classList.remove('verde', 'amarillo', 'rojo');
@@ -117,7 +117,9 @@
 					//	Asignar Fecha actual
 						const mesa_voto_date = document.getElementById(mesa_id + '_mesa_cambio');
 						mesa_voto_date.innerHTML = `<time class="timeago line-1" data="${mesa_id}"  datetime="${ Math.floor(message.timetoken / 10000000) }">Hace 1 segundo</time>`
-					});
+
+					}, { once: true }
+					);
 				}
 			}
 		}

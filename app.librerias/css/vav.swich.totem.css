@@ -296,7 +296,7 @@ body
 			font-family: 'NewFrank_Medium';
 			font-size: 1.8rem;
 			line-height: 1.8rem;
-			padding: 7px 0 0 0;
+			padding: 11px 0 0 0;
 			color: var(--color-white);
 		}
 			.consolidados .votos-totales .totales
@@ -341,7 +341,7 @@ body
 						font-family: 'NewFrank_Regular';
 						font-size: 1.8rem;
 						line-height: 1.8rem;
-						padding: 7px 0 0 83px;
+						padding: 11px 0 0 83px;
 					}
 						.consolidados .candidatos .template-1 .up .votos .decorador
 						{
@@ -368,7 +368,7 @@ body
 						font-size: 5.1rem;
 						line-height: 5.1rem;
 						letter-spacing: 1px;
-						padding: 1px 0 0 83px;
+						padding: 6px 0 0 83px;
 					}
 					.consolidados .candidatos .template-1 .down .imagen
 					{
@@ -389,7 +389,7 @@ body
 						grid-area: porcentaje;
 						text-align: right;
 						color: var(--color-white);
-						padding: 6px 50px 0 0;
+						padding: 11px 50px 0 0;
 					}
 						.consolidados .candidatos .template-1 .down .porcentaje .valor
 						{
@@ -440,7 +440,7 @@ body
 						font-size: 1.8rem;
 						line-height: 1.8rem;
 						text-align: right;
-						padding: 7px 83px 0 0;
+						padding: 11px 83px 0 0;
 					}
 						.consolidados .candidatos .template-2 .up .votos .decorador
 						{
@@ -467,7 +467,7 @@ body
 						font-size: 5.1rem;
 						line-height: 5.1rem;
 						letter-spacing: 1px;
-						padding: 1px 83px 0 0;
+						padding: 6px 83px 0 0;
 					}
 					.consolidados .candidatos .template-2 .down .imagen
 					{
@@ -488,7 +488,7 @@ body
 						grid-area: porcentaje;
 						text-align: left;
 						color: var(--color-white);
-						padding: 6px 0 0 50px;
+						padding: 11px 0 0 50px;
 					}
 						.consolidados .candidatos .template-2 .down .porcentaje .valor
 						{
@@ -528,7 +528,7 @@ body
 			text-align: center;
 			color: var(--color-black);
 			background: linear-gradient( 0deg, var(--color-subtitle) 0%, var(--color-subtitle-2) 100%);
-			padding: 6px 0 7px 0;
+			padding: 8px 0 6px 0;
 		}
 			.tottem .box .titulo .titulo-local
 			{
@@ -536,7 +536,7 @@ body
 				font-family: 'NewFrank_Bold';
 				font-size: 1.2rem;
 				line-height: 1.2rem;
-				padding: 0 0 2px 0;
+				padding: 0 0 1px 0;
 			}
 			.tottem .box .titulo .titulo-numero
 			{
@@ -594,7 +594,7 @@ body
 					font-family: 'NewFrank_Bold';
 					font-size: 3.1rem;
 					line-height: 3.1rem;
-					padding: 2px 0 0 0;
+					padding: 7px 0 0 0;
 				}
 				.tottem .box .candidatos .candidato .candidato-votos-animacion
 				{

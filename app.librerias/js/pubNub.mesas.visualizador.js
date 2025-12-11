@@ -62,7 +62,7 @@
 			// Agregar los elementos en el orden deseado
 			elementosOrdenados.forEach(elemento => contenedor.appendChild(elemento));
 */
-		}, 500 );
+		}, 2000 );
 
 	}
 
