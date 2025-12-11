@@ -389,7 +389,7 @@ body
 						grid-area: porcentaje;
 						text-align: right;
 						color: var(--color-white);
-						padding: 13px 50px 0 0;
+						padding: 14px 50px 0 0;
 					}
 						.consolidados .candidatos .template-1 .down .porcentaje .valor
 						{
@@ -488,7 +488,7 @@ body
 						grid-area: porcentaje;
 						text-align: left;
 						color: var(--color-white);
-						padding: 13px 0 0 50px;
+						padding: 14px 0 0 50px;
 					}
 						.consolidados .candidatos .template-2 .down .porcentaje .valor
 						{

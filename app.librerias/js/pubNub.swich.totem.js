@@ -503,7 +503,7 @@
 			{
 			//	Obtener valor del voto
 				const candidato_ancho = document.getElementById(`candidato-${candidato.id}`);
-				candidato_ancho.style.width = candidato.porcentaje + '%';
+				candidato_ancho.style.width = App.validar_porcentaje(candidato.porcentaje) + '%';
 
 			//	Obtener y escribir el total de votos
 			//	const candidato_voto_totales = document.getElementById(`candidato-${candidato.id}-totales`);
@@ -561,7 +561,7 @@
 			//	Crear el div contenedor del candidato
 				const objeto = document.createElement('div');
 				objeto.className = `candidato template-${candidato.orden}`;
-				objeto.style.width = candidato.porcentaje + '%';
+				objeto.style.width = App.validar_porcentaje(candidato.porcentaje) + '%';
 
 			//	Asignar las propiedades del div
 				objeto.id = 'candidato-' + candidato.id
@@ -1102,6 +1102,27 @@
 		},
 
 	//			-			-			-			-			-			-			-			-			-			-			-
+
+		validar_porcentaje : function( valor )
+		{
+			const porcentaje = Number(valor);
+			
+			if( porcentaje > 67 )
+			{
+				return 67;
+			}
+			else
+			{
+				if( porcentaje < 33 )
+				{
+					return 33
+				}
+				else
+				{
+					return porcentaje;
+				}
+			}
+		},
 
 	//	Agregar miles a los numeros
 		numero : function( valor )
