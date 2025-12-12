@@ -844,7 +844,9 @@
 					'modo'          :	swich_modo,
 					'template'		:	swich_mesas,
 					'mesa_1'		:	Number(swich_mesa_1),
-					'mesa_2'		:	Number(swich_mesa_2)
+					'mesa_2'		:	Number(swich_mesa_2),
+					'mesa_3'		:	Number(swich_mesa_3),
+					'mesa_4'		:	Number(swich_mesa_4)
 				}
 
 			//	Enviar Notificación a PubNub

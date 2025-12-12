@@ -38,6 +38,8 @@
 			<div id="no-cursor"></div>
 			<div id="render-mesa-1" class="tottem transition-on"></div>
 			<div id="render-mesa-2" class="tottem transition-on"></div>
+			<div id="render-mesa-3" class="tottem transition-on"></div>
+			<div id="render-mesa-4" class="tottem transition-on"></div>
 			<div id="render-mesa-totales" class="floating transition-on"></div>
 		</div>
 

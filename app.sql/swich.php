@@ -450,7 +450,7 @@
 					$_PORCENTAJE = ($_CANDIDATO['votos'] / $_CANDIDATOS['votos']) * 100;
 
 				//	Asignar el porcentaje al candidato
-					$_CANDIDATO['porcentaje'] = number_format($_PORCENTAJE, 1);
+					$_CANDIDATO['porcentaje'] = number_format($_PORCENTAJE, 2);
 				}
 				else
 				{

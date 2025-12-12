@@ -381,7 +381,7 @@
 					const progress = Math.min(elapsedTime / duration, 1);
 					const currentValue = startValue + increment * progress;
 
-					element.textContent = currentValue.toFixed(1).replace('.',',');
+					element.textContent = currentValue.toFixed(2).replace('.',',');
 					
 					if (progress < 1)
 					{
@@ -389,7 +389,7 @@
 					}
 					else
 					{
-						element.textContent = currentValue.toFixed(1).replace('.',',');
+						element.textContent = currentValue.toFixed(2).replace('.',',');
 						return
 					}
 				}
@@ -1103,19 +1103,23 @@
 
 	//			-			-			-			-			-			-			-			-			-			-			-
 
-		validar_porcentaje : function( valor )
-		{
+	//	Limite del ancho maximo del contenedor
+		validar_porcentaje : function( valor ){
+
+		//	Convertir a entero
 			const porcentaje = Number(valor);
 			
-			if( porcentaje > 67 )
+		//	Validar porcentaje maximo
+			if( porcentaje > 65 )
 			{
-				return 67;
+				return 65;
 			}
 			else
 			{
-				if( porcentaje < 33 )
+			//	Validar porcentaje minimo
+				if( porcentaje < 35 )
 				{
-					return 33
+					return 35
 				}
 				else
 				{

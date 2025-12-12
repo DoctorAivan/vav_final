@@ -22,3 +22,14 @@ http://10.236.100.38/phpPgAdmin/
 - Poner primero NombreComuna en Negrita y Número de Mesa abreviado: Ejemplo [OK]
 "San Pedro de la Paz M. 141" Cosa que lograr usar una línea y poder agrandar el texto. [OK]
 - Lo último la tipografía de los contadores por mesas se "apretaron", raro pk siempre lo ví bien será windows? te dejo un pantallazo.
+
+
+sudo adduser mci_user
+sudo passwd mci_user
+mci_pwd_2025
+sudo vi /etc/ssh/sshd_config
+    PasswordAuthentication yes
+	ChallengeResponseAuthentication no
+sudo usermod -aG wheel mci_user
+sudo systemctl restart sshd
+sudo whoami

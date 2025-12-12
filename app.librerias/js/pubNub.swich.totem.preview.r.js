@@ -1,5 +1,5 @@
 //	URL del diccionario de zonas
-const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
+const path_app_zonas = path_app + '/app.librerias/zonas.json?v=4.3'
 
 //	Mode de la Aplicación
 	let app_modo = 0
@@ -38,8 +38,10 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 	let mesa_totales_iniciado = false
 	let mesa_totales_tipo = ''
 	let mesa_totales_posicion = ''
+	let mesa_totales_cantidad = ''
 	let mesa_totales_zona = 0
 	let mesa_totales_timer = null
+	let mesa_totales_preview = false
 
 //	Cantidad maxima de candidatos por listado
 	const cantidad_maxima_candidatos = 8
@@ -56,7 +58,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 //	URL del repositorio de las imagenes
 	const path_imagenes = path_app + '/app.imagenes/'
 	const path_imagenes_candidatos = path_imagenes + 'candidatos/'
-	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.png?v=2.2'
+	const path_imagenes_candidatos_error = path_imagenes + 'candidatos/000.webp?v=2.6'
 
 //	-			-			-			-			-			-			-			-			-			-			-			-			
 
@@ -75,8 +77,8 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 	const contenedor_tv_alto = 1080;
 
 //	Contenedor de los candidatos
-	const candidato_contenedor_ancho = 290;
-	const candidato_contenedor_separacion_x = 60;
+	const candidato_contenedor_ancho = 295;
+	const candidato_contenedor_separacion_x = 40;
 	const candidato_contenedor_separacion_y = 270; //178
 
 //	Cordenadas de la Mesa 1
@@ -152,12 +154,12 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 		'template_floating' : {
 			'visible' : {
 				'x' : '0px',
-				'y' : '863px',
+				'y' : '885px',
 				'z' : 'unset'
 			},
 			'oculta' : {
 				'x' : '0px',
-				'y' : '1125px',
+				'y' : '1150px',
 				'z' : 'unset'
 			}
 		}
@@ -256,10 +258,17 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 			//	Variables necesarias
 				const estado = datoPubNub.estado
 
+				console.log(datoPubNub);
+				
+			//	Cantidad de candidatos
+				mesa_totales_cantidad = datoPubNub.position
+
 			//	Validar estado del Modulo
-				if( estado == 'on' )
+				if( mesa_totales_preview == false )
 				{
 					App.totales();
+
+					mesa_totales_preview = true
 				}
 				else
 				{
@@ -271,6 +280,22 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 				//	Actualizar el valor
 					mesa_totales_estado = false
+					mesa_totales_preview = false
+				}
+			}
+
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+			//	Accion : Consolidados template
+			if( accion == 'cons_template' )
+			{
+			//	Cantidad de candidatos
+				mesa_totales_cantidad = datoPubNub.position;
+
+			//	Validar que consolidados este activo
+				if( mesa_totales_estado )
+				{
+					App.totales_draw();
 				}
 			}
 		}
@@ -333,7 +358,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 					const progress = Math.min(elapsedTime / duration, 1);
 					const currentValue = startValue + increment * progress;
 
-					element.innerText = currentValue.toFixed(2).replace('.',',');
+					element.innerText = currentValue.toFixed(1).replace('.',',');
 					
 					if (progress < 1)
 					{
@@ -341,7 +366,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 					}
 					else
 					{
-						element.innerText = currentValue.toFixed(2).replace('.',',');
+						element.innerText = currentValue.toFixed(1).replace('.',',');
 						return
 					}
 				}
@@ -453,6 +478,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 	//	Actualizar reloj de consolidados
 		actualizar_reloj : function()
 		{
+		/*
 		//	Construir reloj
 			const now = new Date();
 			const hh = String(now.getHours()).padStart(2, '0');
@@ -460,14 +486,15 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 			const reloj = `${hh}:${mm}`;
 
 			const contenedor_reloj = document.getElementById('candidatos-reloj');
-			contenedor_reloj.innerHTML = reloj			
+			contenedor_reloj.innerHTML = reloj
+		*/
 		},
 
 	//	Ordenar Votos de los candidatos
 		ordenar_votos_totales : function ()
 		{
 		//	Ordenar los candidatos por sus votos
-			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.orden > b.orden) ? 1 : -1) : -1 )
 
 		//	Orden del candidato
 			let id_orden = 1;
@@ -486,13 +513,20 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 				App.totales_actualizacion_votos(candidato_voto_valor , candidato.porcentaje , 1000 );
 
 			//	Validar Posicion de los Objetos
-				if( id_orden < 3 )
+				if( mesa_totales_cantidad == 'l')
 				{
-					id_orden++	
+					if( id_orden < 3 )
+					{
+						id_orden++	
+					}
+					else
+					{
+						id_orden = 4
+					}
 				}
 				else
 				{
-					id_orden = 4
+					id_orden++
 				}
 			});
 		},
@@ -513,8 +547,19 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 		//	Asignar las clases a la mesa
 			div_mesa.className = `consolidados`
 
+			let template_candidatos = ''
+
+			if( mesa_totales_cantidad == 'l' )
+			{
+				template_candidatos = 'tres'
+			}
+			else
+			{
+				template_candidatos = 'ocho'
+			}
+
 		//	Crear elementos en el DIV
-			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
+			div_mesa.innerHTML =   `<div class="candidatos ${template_candidatos}" id="mesa-0-candidatos"></div>
 									<div class="candidatos-detalles">
 										<div class="candidatos-detalles-votos">
 											<span class="candidatos-detalles-votos-border"></span>
@@ -531,12 +576,14 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 												VOTOS
 											</span>
 										</div>
-										<div class="candidatos-detalles-hashtag">#Elecciones2025</div>
-										<div class="candidatos-detalles-reloj" id="candidatos-reloj">16:22</div>
-										<div class="candidatos-detalles-logo">
-											<img src="${path_imagenes}logo-chv-noticias.png?v=2.2" />
-										</div>
 									</div>`;
+/*
+									<div class="candidatos-detalles-hashtag">#Elecciones2025</div>
+									<div class="candidatos-detalles-reloj" id="candidatos-reloj">16:22</div>
+									<div class="candidatos-detalles-logo">
+										<img src="${path_imagenes}logo-chv-noticias.png?v=2.5" />
+									</div>
+*/
 
 		//	Dibujar la Mesa en el DOM
 			render.appendChild(div_mesa);
@@ -544,11 +591,11 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 		//	Render de los candidatos en la mesa
 			const render_candidatos = document.getElementById('mesa-0-candidatos');
 
-		//	Ordenar Candidatos por sus votos
-			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
-
 		//	Indice del orden
 			let id_orden = 1;
+
+		//	Ordenar Candidatos por sus votos
+			mesa_totales_candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.orden > b.orden) ? 1 : -1) : -1 )
 
 		//	Recorrer el listado de candidatos
 			mesa_totales_candidatos.forEach(candidato =>
@@ -565,9 +612,12 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 										<img src="${path_imagenes}icono-electo.png" />
 									</div>
 									<div class="candidato-imagen">
-										<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.png?v=2.2" />
+										<div class="candidato-imagen-cnt">
+											<img class="candidato-imagen-src" src="${path_imagenes_candidatos}${candidato.id}.webp?v=2.5" />
+										</div>
 									</div>
 									<div class="candidato-detalles">
+										<img src="${path_imagenes}bg-candidato-consolidados${ template_candidatos =='tres' ? '' : '-ocho'}.png?v=2.5" />
 										<div class="candidato-detalles-nombre">${candidato.nombres} ${candidato.apellidos}</div>
 										<div class="candidato-votos-valor">
 											<span class="votos" id="candidato-${candidato.id}-votos">${ candidato.porcentaje.replace('.',',') }</span>
@@ -576,22 +626,28 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 									</div>
 									<div class="candidato-votos-animacion"></div>
 									<div class="candidato-fondo">
-										<img src="${path_imagenes}bg-candidato-consolidados.png?v=2.2" />
+										<img src="${path_imagenes}bg-candidato-consolidados${ template_candidatos =='tres' ? '' : '-ocho'}.png?v=2.5" />
 									</div>`
 
 			//	Crear candidato en el listado
 				render_candidatos.appendChild(objeto);
 
 			//	Validar Posicion de los Objetos
-				if( id_orden < 3 )
+				if( mesa_totales_cantidad == 'l')
 				{
-					id_orden++	
+					if( id_orden < 3 )
+					{
+						id_orden++	
+					}
+					else
+					{
+						id_orden = 4
+					}
 				}
 				else
 				{
-					id_orden = 4
+					id_orden++
 				}
-
 			});
 
 		//	Mostrar el pantalla
@@ -773,25 +829,27 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 			let mesa_tipo;
 			let mesa_titulo;
+			let mesa_zona;
 
 		//	Validar tipo de mesa
 			if( mesa.tipo == 'P' )
 			{
 				mesa_tipo = 'PRESIDENCIAL'
+				mesa_zona = mesa.comuna
 			}
 			else if( mesa.tipo == 'S' )
 			{
 				mesa_tipo = 'SENADORES'
-
-				const zona = App.consultar_circunscripcion(mesa.zona_id)
-				console.log( zona );
+				mesa_titulo = ''
+				mesa_zona = App.obtener_region(Number(mesa.zona_id))
 			}
 			else if( mesa.tipo == 'D' )
 			{
 				mesa_tipo = 'DIPUTADOS'
 
 				const zona = App.consultar_distrito(mesa.zona_id)
-				console.log( zona );
+				mesa_titulo = 'D-' + zona.orden
+				mesa_zona = mesa.comuna
 			}
 			else
 			{
@@ -810,12 +868,22 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="header">
-										<h2>${mesa.comuna}</h2>
-										<h3>
-											${mesa.local}
-											<div class="separador"></div>
-											${mesa.numero}
-										</h3>
+										<div class="header-contenedor">
+											${
+												mesa.tipo == 'P' ?
+												`<h1>${mesa_tipo}</h1>`
+												:
+												`<h1>${mesa_tipo} <span>${mesa_titulo}</span></h1>`
+											}
+											<h3>
+												${mesa.local}
+											</h3>
+											<h2>
+												<span>${mesa.numero}</span>
+												${mesa_zona}
+												<div class="separador"></div>
+											</h2>
+										</div>
 									</div>
 									<div class="candidatos-padding">
 										<div class="candidatos" id="mesa-${mesa.id}-candidatos"></div>
@@ -831,7 +899,7 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 			let id_orden = 1;
 
 		//	Ordenar los candidatos por sus votos
-			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.apellidos > b.apellidos) ? 1 : -1) : -1 )
+			mesa.candidatos.sort((a, b) => (b.votos > a.votos) ? 1 : (b.votos === a.votos) ? ((a.orden > b.orden) ? 1 : -1) : -1 )
 
         //	Recorrer el listado de candidatos
 			mesa.candidatos.forEach(candidato =>
@@ -844,22 +912,33 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
                 objeto.id = 'candidato-' + candidato.objeto
 
 			//	Asignar los elementos al div
-			//	<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.2" class="candidato-imagen-src" />
 				objeto.innerHTML = `<div class="candidato-imagen">
-										<img src="${path_imagenes_candidatos}${candidato.id}.png?v=2.2" class="candidato-imagen-src" />
+										<img
+											src="${path_imagenes_candidatos}${candidato.id}.webp"
+											id="candidato-imagen-${mesa.id}-${candidato.id}"
+											class="candidato-imagen-src"
+											data-nombre="${candidato.nombres} ${candidato.apellidos}"
+											data-objeto="${candidato.id}"
+											data-load="false"
+										/>
 									</div>
 									<div class="candidato-info">
 										<div class="candidato-detalles">
-											<div class="candidato-detalles-apellido">${candidato.apellidos}</div>
+											<div class="candidato-detalles-apellido">
+												${
+													mesa.tipo == 'P' ?
+													candidato.apellidos
+													:
+													App.construir_nombre(candidato)
+												}
+											</div>
 											<div class="candidato-detalles-partido">
-												<div class="candidato-detalles-partido-valor">
-													${ App.obtener_partido(candidato.partido_id) }
-												</div>
+												${ candidato.partido }
 											</div>
 										</div>
 										<div class="candidato-votos">
 											<div id="candidato-${candidato.objeto}-votos" class="candidato-votos-valor">
-												${candidato.votos}<img src="" class="candidato-votos-valor-icono" />
+												${candidato.votos}
 											</div>
 										</div>
 										<div id="candidato-${candidato.objeto}-animacion" class="candidato-votos-animacion"></div>
@@ -877,13 +956,10 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 				{
 					id_orden = cantidad_maxima_candidatos + 1;
 				}
-
-			//	Incrementar el ID de la lista
-			//	id_orden++;
             });
 
 		//	Ordenar Votos de los candidatos
-			App.ordenar_votos(mesa.candidatos);
+		//	App.ordenar_votos(mesa.candidatos);
 
 		//	Asignar posición 2 en pantalla
 			if( posicion == 1 )
@@ -902,6 +978,9 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 					App.animar_entrada_mesa_2();
 				}
 			}
+
+		//	Validar imagenes de los candidatos
+			candidato_poster( mesa.id );
 		},
 
 	//	Asignar votos a un candidato
@@ -918,7 +997,8 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 			else
 			{
 			//	Actualizar los votos
-				candidato_votos.innerHTML = votos + '<img src="" class="candidato-votos-valor-icono" />';
+			//	candidato_votos.innerHTML = votos + '<img src="" class="candidato-votos-valor-icono" />';
+				candidato_votos.innerHTML = votos;
 
 			//	Obtener el contenedor de la animación
 				const candidato_animacion = document.getElementById(`candidato-${id}-animacion`);
@@ -984,9 +1064,6 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 				{
 					id_orden = cantidad_maxima_candidatos + 1;
 				}
-
-			//	Incrementar el ID de la lista
-			//	id_orden++
 			});
 		},
 
@@ -1110,6 +1187,14 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 
 	//			-			-			-			-			-			-			-			-			-			-			-
 
+	//	Construir el nombre del candidato
+		construir_nombre : function ( candidato )
+		{
+			const nombre = candidato.nombres.trim().charAt(0);
+			const apellido = candidato.apellidos.trim().split(' ');
+			return `${nombre}.&nbsp;&nbsp;${apellido[0]}`;
+		},
+
 	//	Obtener información del Partido
 		consultar_region : function ( id )
 		{
@@ -1134,6 +1219,14 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 	//			-			-			-			-			-			-			-			-			-			-			-
 
 	//	Obtener información del Partido
+		obtener_region : function ( id )
+		{
+			const circunscripcion = objeto_circunscripciones.find( obj => obj.id === id );
+			const region = objeto_regiones.find( obj => obj.id === circunscripcion.region );
+			return region.nombre
+		},
+
+	//	Obtener información del Partido
 		obtener_partido : function ( id )
 		{
 			const partido = objeto_partidos.find( obj => obj.id === id );
@@ -1152,6 +1245,52 @@ const path_app_zonas = path_app + '/app.librerias/zonas.json?v=3.7'
 		{
 			return new Intl.NumberFormat('en-DE').format(valor);
 		}
+
+	}
+
+//	Validación de las Imagenes
+	const candidato_poster = async ( id ) =>
+	{
+		//	Actualizar votos en el DOM
+		const candidato_voto = document.getElementById(`mesa-${id}-candidatos`);
+
+	//	Recorrer las imagenes de los candidatos
+		Array.from(candidato_voto.querySelectorAll('.candidato-imagen-src')).forEach(function(e)
+		{
+			candidato_poster_crear( id , e.dataset.objeto );
+		});
+	}
+
+//	Validar la imagen del Candidato
+	const candidato_poster_crear = async ( mesa , id ) =>
+	{
+	//	Obtener información del objeto
+		const objeto = document.getElementById('candidato-imagen-' + mesa + '-' + id);
+
+	//	Version de cache de las imagenes
+		const version = '1.1.3';
+
+	//	Construir ruta de la imagen
+		const objeto_imagen = path_imagenes_candidatos + objeto.dataset.objeto + '.webp?v=' + version;
+
+	//	Solicitar la imagen
+		await fetch( objeto_imagen , { method: 'GET' }).then(res =>
+		{
+			if ( res.ok )
+			{
+				objeto.src = objeto_imagen;
+				objeto.style.opacity = 1
+				objeto.dataset.load = true
+			}
+			else
+			{
+				objeto.src = path_imagenes_candidatos_error
+				objeto.style.opacity = 1
+				objeto.dataset.load = false
+
+				console.log( '[404]' , objeto.dataset.objeto , '-' , objeto.dataset.nombre );
+			}
+		});
 	}
 
 //	Iniciar las Zonas
