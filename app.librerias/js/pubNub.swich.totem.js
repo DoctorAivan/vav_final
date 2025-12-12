@@ -543,7 +543,7 @@
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
 									<div class="votos-totales">
-										<span class="titulo">TENDENCIA MESAS CLAVE</span>
+										<span class="titulo">TENDENCIA EN MESAS PREDICTORAS</span>
 									</div>`;
 
 		//	Dibujar la Mesa en el DOM
