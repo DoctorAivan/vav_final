@@ -1,5 +1,5 @@
 
-	const set_cache = 'v=3.0.0'
+	const set_cache = 'v=3.0.1'
 
 //	URL del diccionario de zonas
 	const path_app_zonas = path_app + '/app.librerias/zonas.json?' + set_cache;
@@ -56,6 +56,7 @@
 	let mesa_totales_cantidad = ''
 	let mesa_totales_zona = 0
 	let mesa_totales_timer = null
+	let mesa_totales_titulo = ''
 
 //	Cantidad maxima de candidatos por listado
 	const cantidad_maxima_candidatos = 8
@@ -291,6 +292,7 @@
 
 			//	Cantidad de candidatos
 				mesa_totales_cantidad = datoPubNub.position
+				mesa_totales_titulo	= datoPubNub.titulo
 
 			//	Validar estado del Modulo
 				if( estado == 'on' )
@@ -322,6 +324,24 @@
 				if( mesa_totales_estado )
 				{
 					App.totales_draw();
+				}
+			}
+
+		//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+			// Accion : Actualizar el titulo del consolidado
+			if( accion == 'cons_titulo')
+			{
+			//	Asignar los ID de las Mesas enviadas
+				mesa_totales_titulo	= datoPubNub.titulo;
+
+			//	Buscar en candidato en el DOM
+				const titulo_dom = document.getElementById('titulo-consolidados');
+
+			//	Validar que exista el elemento en el DOM
+				if( titulo_dom )
+				{
+					titulo_dom.innerText = mesa_totales_titulo;
 				}
 			}
 		}
@@ -533,17 +553,10 @@
 		//	Asignar las clases a la mesa
 			div_mesa.className = `consolidados`
 
-/*
-										<span class="totales" id="mesa-0-totales">
-											${ App.numero(mesa_totales_votos) }
-										</span>
-										<span class="subtitulo">VOTOS</span>
-*/
-
 		//	Crear elementos en el DIV
 			div_mesa.innerHTML =   `<div class="candidatos" id="mesa-0-candidatos"></div>
-									<div class="votos-totales">
-										<span class="titulo">TENDENCIA EN MESAS PREDICTORAS</span>
+									<div id="titulo-consolidados" class="votos-totales">
+										${mesa_totales_titulo}
 									</div>`;
 
 		//	Dibujar la Mesa en el DOM

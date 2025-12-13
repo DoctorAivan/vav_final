@@ -66,6 +66,37 @@
 			echo $_SWICH_EDITAR->swich_editar;
 		}
 		break;
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+	//	Swich Titulo
+		case "swichTitulo"							:
+		{
+		//	Obtener Variables
+			$swich_id								=	filtrarID($_POST['swich_id']);
+			$swich_titulo							=	filtrarVAR($_POST['swich_titulo']);
+
+		//	Construir SQL
+			$QUERY									=	"
+			
+				SELECT * FROM
+				swich_titulo
+				(
+					$swich_id,
+					'$swich_titulo'
+				);
+			
+			";
+
+		//	Ejecutar Query
+			$QUERY_SWICH_TITULO						=	pg_query($CONF_DB_CONNECT, $QUERY);
+			
+		//	Respuesta
+			$_SWICH_TITULO							=	pg_fetch_object($QUERY_SWICH_TITULO);
+			
+			echo $_SWICH_TITULO->swich_titulo;
+		}
+		break;
 		
 //	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
 
@@ -397,6 +428,8 @@
 	//	Obtener Mesas Consolidadas
 		case "swichConsolidadosPresidenciales"					:
 		{
+		//	SELECT * FROM swich_obtener_datos( $SWITCH_ID );
+
 		//	Obtener el total de mesas publicadas
 			$QUERY									=	"
 

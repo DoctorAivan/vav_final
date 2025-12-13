@@ -346,6 +346,26 @@
 					padding: 12px 20px 0 20px;
 					margin: 8px 0 0 0;
 				}
+				.swich-controles .titulo
+				{
+					user-select: none;
+					height: 28px;
+					color: var(--color-bg-boton-nuevo);
+					border: solid 1px var(--color-bg-boton-nuevo);
+					cursor: pointer;
+					font-weight: 400;
+					margin: 8px 0 0 15px;
+					padding: 11px 20px 0 20px;
+					-webkit-transition: all .25s ease-out;
+					-moz-transition: all .25s ease-out;
+					-o-transition: all .25s ease-out;
+					transition: all .25s ease-out;
+				}
+					.swich-controles .titulo:hover
+					{
+						color: var(--color-bg-box);
+						background: var(--color-bg-boton-nuevo);
+					}
 				.swich-controles .preview
 				{
 					user-select: none;

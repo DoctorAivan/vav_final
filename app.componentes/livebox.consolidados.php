@@ -38,3 +38,31 @@
 				</div>
 			</footer>
 		</div>
+
+        <!-- Livebox Mesa -->
+        <div class="livebox" id="livebox-consolidados-titulo">
+			<div class="livebox-bloqueado"></div>
+			<div onclick="liveboxCerrar();" class="livebox-cerrar"><i class="fas fa-times"></i></div>
+			<header>
+				<h2>Configuración consolidados</h2>
+				<h3>Edición del título en pantalla en tiempo real</h3>
+			</header>
+			<article class="formulario bg-1">
+				<div class="col-1">
+					<h2>Título en pantalla actual <span>Obligatorio</span></h2>
+					<input name="input_consolidado_titulo" id="input_consolidado_titulo" type="text" class="alfanumerico box-shadow-light bordes-radius" autocomplete="off" placeholder="Consolidados CHV" />
+					<h3 id="input_consolidado_titulo_mensaje"><	/h3>
+				</div>
+			</article>
+			<footer onselectstart="return false">
+				<div class="livebox-cargando">
+					<i class="fas fa-spinner"></i>
+				</div>
+				<div class="of" onclick="liveboxCerrar();">
+					<h2><i class="fas fa-times-circle"></i> Cerrar</h2>
+				</div>
+				<div class="on" onclick="consolidados_asignar_titulo_confirmar();">
+					<h2><i class="fas fa-check-circle"></i> Confirmar</h2>
+				</div>
+			</footer>
+		</div>

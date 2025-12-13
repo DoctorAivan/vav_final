@@ -889,6 +889,7 @@
 			{
 				'accion'		:	'consolidados_preview',
 				'estado'        :	'on',
+				'titulo'        :   swich_titulo,
 				'position'		:	posicion_consolidados,
 				'tipo'          :   $.cookie('consolidado_tipo'),
 				'zona'          :   $.cookie('consolidado_zona')

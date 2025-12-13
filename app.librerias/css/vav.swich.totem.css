@@ -298,6 +298,7 @@ body
 			line-height: 1.8rem;
 			padding: 11px 0 0 0;
 			color: var(--color-white);
+			text-transform: uppercase;
 		}
 			.consolidados .votos-totales .titulo
 			{
@@ -540,13 +541,13 @@ body
 			.tottem .box .titulo .titulo-numero
 			{
 				text-transform: uppercase;
-				font-family: 'NewFrank_Bold';
+				font-family: 'NewFrank_ExtraBold';
 				font-size: 1.2rem;
 				line-height: 1.2rem;
 			}
 				.tottem .box .titulo .titulo-numero span
 				{
-					font-family: 'NewFrank_Regular';
+					font-family: 'NewFrank_Medium';
 					margin: 0 0 0 4px;
 				}
 /*

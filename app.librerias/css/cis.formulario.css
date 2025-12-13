@@ -574,7 +574,7 @@
 		font-size: 0.9rem;
 		letter-spacing: 0.025rem;
 		margin: 14px 0 25px 0;
-		padding: 0 var(--padding-box-interior) 4px var(--padding-box-interior);
+		padding: 1px var(--padding-box-interior) 3px var(--padding-box-interior);
 	    outline: none;
 		text-transform: uppercase;
 		-webkit-appearance: none;

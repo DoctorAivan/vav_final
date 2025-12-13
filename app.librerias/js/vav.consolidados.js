@@ -400,3 +400,74 @@ function consolidados_render_estado(estado)
     }
     */
 }
+
+//	-		-		-		-		-		-		-		-		-		-		-		-		-		-		-		-
+
+// Consolidados Asignar Titulo
+function consolidados_asignar_titulo()
+{
+//  Cambiar la dimensión
+    liveboxAncho('consolidados-titulo' , 550 );
+
+//	Abrir Funcionalidad Livebox
+    liveboxAbrir('consolidados-titulo');
+
+//  Asignar el titulo actual
+    const input_comunas = document.getElementById('input_consolidado_titulo')
+    input_comunas.value = swich_titulo
+
+    const input_consolidado_titulo_mensaje = document.getElementById('input_consolidado_titulo_mensaje')
+    input_consolidado_titulo_mensaje.innerHTML = '<i class="fas fa-info-circle"></i> Al confirmar este cambio será aplicado de inmediato'
+    input_consolidado_titulo_mensaje.style.color = '#82838f'
+}
+
+// Consolidados Asignar Titulo Confirmar
+function consolidados_asignar_titulo_confirmar()
+{
+//	Mostrar Usabilidad Cargando
+    liveboxCargando();
+
+//  Obtener el titulo actual
+    const input_consolidado_titulo = document.getElementById('input_consolidado_titulo')
+    const input_consolidado_titulo_mensaje = document.getElementById('input_consolidado_titulo_mensaje')
+
+	//	Actualizar de las Mesas
+    $.post( path_app + '/swich/titulo/' ,
+    {
+        swich_id				:	swich_id,
+        swich_titulo			:	input_consolidado_titulo.value
+    })
+    .done(function( response )
+    {
+    //  Validar respuesta
+        if( response == 1 )
+        {
+            //	Construir Variable para enviar a PubNub
+            let pubnub       	=
+            {
+                'accion'		:	'cons_titulo',
+                'titulo'        :	input_consolidado_titulo.value,
+            }
+
+        //	Enviar Notificación a PubNub
+            enviarPubNub( pubnub );
+
+        //  Actualizar valor en el DOM
+            swich_titulo            =   input_consolidado_titulo.value
+
+        //	Quitar Usabilidad Cargando
+            liveboxCargandoCompleto();
+
+            input_consolidado_titulo_mensaje.innerHTML = '<i class="fas fa-check-circle"></i> Actualización realizada con éxito'
+            input_consolidado_titulo_mensaje.style.color = '#52c162'
+
+            setTimeout(() => {
+
+                input_consolidado_titulo_mensaje.innerHTML = '<i class="fas fa-info-circle"></i> Al confirmar este cambio será aplicado de inmediato'
+                input_consolidado_titulo_mensaje.style.color = '#82838f'
+
+            }, "3000");
+        }
+    });
+
+}

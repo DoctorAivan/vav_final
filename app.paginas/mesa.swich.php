@@ -43,6 +43,7 @@
 			var swich_id		=	<?php echo $SWITCH_ID; ?>;
 			var swich_modo		=	<?php echo $_SWICH->swich_modo; ?>;
 			var swich_mesas		=	<?php echo $_SWICH->swich_mesas; ?>;
+			var swich_titulo	=	"<?php echo $_SWICH->swich_titulo; ?>";
 			var swich_mesa_1	=	<?php echo $_SWICH->swich_mesa_1; ?>;
 			var swich_mesa_2	=	<?php echo $_SWICH->swich_mesa_2; ?>;
 			var swich_mesa_3	=	<?php echo $_SWICH->swich_mesa_3; ?>;
@@ -230,7 +231,8 @@
 							</div>
 							<div class="swich-espacio cols x1 relacionados" id="mesa-4"></div>
 						</div>
-						<div class="swich-r-box swich-nav box-shadow">
+						<div class="swich-r-box swich-nav box-shadow"
+						style="padding: 17px 23px 24px 23px;">
 							<div class="swich-mesas" id="swich-opcion-modo" style="display:none;">
 								<h2>Template</h2>
 								<div onclick="swichModo(0);" id="swich-opcion-modo-0" class="bordes-radius box-shadow-light of tipsy-top"
@@ -256,10 +258,13 @@
 								<h2>Visualización en pantalla</h2>
 								<div id="cambios-on" class="on bordes-radius" onclick="swichGuardar();">PUBLICAR</div>
 								<div id="cambios-of" class="of bordes-radius">PUBLICAR</div>
-								<div id="estado-preview-switch" class="preview bordes-radius" onclick="swichPreview();">PREVIEW</div>
+								<div id="estado-preview-switch" class="preview bordes-radius" style="margin: 8px 0 0 15px;" onclick="swichPreview();">PREVIEW</div>
 							</div>
 							<div>
-								<div style="margin-top: 10px;" class="swich-consolidados-titulo">Estado Consolidados en pantalla</div>
+								<div style="margin-top: 12px;" class="swich-consolidados-titulo">Configuración de Consolidados</div>
+								<div class="swich-controles">
+									<div class="titulo bordes-radius" style="margin: 0 15px 0 0;" onclick="consolidados_asignar_titulo();"><i class="fas fa-cog"></i>&nbsp;TÍTULO</div>
+								</div>
 								<div class="swich-consolidados-items">
 									<div id="consolidados-estado-of" class="item on" onclick="estadoConsolidados('of');">&nbsp;<i class="far fa-eye-slash"></i>&nbsp;&nbsp;&nbsp;OCULTO&nbsp;</div>
 									<div id="consolidados-estado-on" class="item of" onclick="estadoConsolidados('on');">&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;VISIBLE&nbsp;</div>

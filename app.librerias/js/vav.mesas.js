@@ -1079,6 +1079,7 @@ function estadoConsolidados( estado )
             {
                 'accion'		:	'cons_estado',
                 'estado'        :	estado,
+                'titulo'        :   swich_titulo,
                 'position'		:	posicion_consolidados,
                 'tipo'          :   consolidado_tipo_cookie,
                 'zona'          :   consolidado_zona_cookie
